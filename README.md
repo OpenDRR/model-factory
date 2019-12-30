@@ -1,2 +1,2 @@
-# opendrr-dsra-complier
+# opendrr-dsra-compiler
 OpenQuake compilation and data manipulation scripts
