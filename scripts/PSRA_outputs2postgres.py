@@ -13,8 +13,14 @@ import argparse
 import configparser
 
 '''
-Script to ingest OpenQuake outputs in csv and MS Access format to single PostGreSQL database. The Script can be run in the following form by changing the filepaths as appropriate
-python C:\GitLab\nrcan\scenarios\scripts\PSRA_outputs2postgres.py --avgLossMeanDir="C:\Projects\RiskProfile_Compilation\eRisk_CA\avg_losses-mean" --lossCurveMeanDir="C:\Projects\RiskProfile_Compilation\eRisk_CA\loss_curve-mean" --physExposureCSV="C:\Projects\RiskProfile_Compilation\eRisk_CA\Canada.csv" --damageMDBDir="C:\Projects\RiskProfile_Compilation\eRisk_CA\cDamage_CA" --columnsINI="C:\GitLab\nrcan\scenarios\scripts\PSRA_Metrics_Columns.ini"
+Script to ingest OpenQuake outputs in csv and MS Access format to single PostGreSQL database. The Script can be run in the following form by 
+changing the filepaths as appropriate
+python C:\GitLab\nrcan\scenarios\scripts\PSRA_outputs2postgres.py 
+--avgLossMeanDir="C:\Projects\RiskProfile_Compilation\eRisk_CA\avg_losses-mean" 
+--lossCurveMeanDir="C:\Projects\RiskProfile_Compilation\eRisk_CA\loss_curve-mean" 
+--physExposureCSV="C:\Projects\RiskProfile_Compilation\eRisk_CA\Canada.csv" 
+--damageMDBDir="C:\Projects\RiskProfile_Compilation\eRisk_CA\cDamage_CA" 
+--columnsINI="C:\GitLab\nrcan\scenarios\scripts\PSRA_Metrics_Columns.ini"
 '''
 
 def main():
