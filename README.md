@@ -1,2 +1,2 @@
-# opendrr-dsra-compiler
+# model-factory
 OpenQuake compilation and data manipulation scripts
