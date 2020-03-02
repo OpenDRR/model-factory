@@ -12,6 +12,7 @@ import argparse
 import configparser
 import requests
 import json
+import logging
 
 '''
 Script to ingest OpenQuake outputs in csv format from GtHub to single PostGreSQL database. The Script can be run in the following form by 
@@ -20,6 +21,10 @@ python PSRA_outputs2postgres.py --avgLossMeanDir="https://github.com/OpenDRR/ear
 '''
 
 def main():
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s - %(levelname)s - %(message)s', 
+                        handlers=[logging.FileHandler('{}.log'.format(os.path.splitext(sys.argv[0])[0])),
+                                  logging.StreamHandler()])
     args = parse_args()
     os.system('')
     os.chdir(sys.path[0])
