@@ -18,7 +18,7 @@ import logging
 '''
 Script to ingest OpenQuake outputs in csv format from GtHub to single PostGreSQL database. The Script can be run in the following form by 
 changing the filepaths as appropriate
-python DSRA_outputs2postgres.py --dsraModelDir="https://github.com/OpenDRR/opendrr-data-store/tree/master/sample-datasets/model-outputs/scenario-risk" --columnsINI="C:\github\OpenDRR\model-factory\scripts\DSRA_outputs2postgres.ini"
+python DSRA_outputs2postgres.py --dsraModelDir="https://github.com/OpenDRR/openquake-models/tree/master/deterministic/outputs" --columnsINI="C:\github\OpenDRR\model-factory\scripts\DSRA_outputs2postgres.ini"
 '''
 
 def main():
@@ -26,7 +26,6 @@ def main():
                         format='%(asctime)s - %(levelname)s - %(message)s', 
                         handlers=[logging.FileHandler('{}.log'.format(os.path.splitext(sys.argv[0])[0])),
                                   logging.StreamHandler()])
-    logging.getLogger('sqlalchemy').setLevel(logging.ERROR)
     args = parse_args()
     columnConfigParser = get_config_params(args.columnsINI)
 
@@ -36,7 +35,7 @@ def main():
     listRetrofitPrefix = list(filter(None, (x.strip() for x in columnConfigParser.get('Retrofit', 'listRetrofitPrefix').splitlines())))
     listeqScenario = list(filter(None, (x.strip() for x in columnConfigParser.get('Scenario','listScenario').splitlines())))
     listRealizationFieldnames = list(filter(None, (x.strip() for x in columnConfigParser.get('Realizations','listRealizationFieldnames').splitlines()))) 
-    engine = db.create_engine('postgresql://{}:{}@{}'.format(auth.get('rds', 'postgres_un'), auth.get('rds', 'postgres_pw'), auth.get('rds', 'postgres_address')), echo=False)
+    engine = db.create_engine('postgresql://{}:{}@{}'.format(auth.get('rds', 'postgres_un'), auth.get('rds', 'postgres_pw'), auth.get('rds', 'postgres_address')), echo=True)
 
     url = args.dsraModelDir.replace('https://github.com', 'https://api.github.com/repos').replace('tree/master', 'contents')
     try:
@@ -103,17 +102,16 @@ def main():
 
 def GetDataframeForRealizationForScenario(url, repo_list, retrofitPrefix, realization, eqscenario, columnConfigParser, auth):
     # Get file names. If there is more than one match this should grab the one with the higher increment value
-    consequenceFile = [s for s in repo_list if "s_consequences_{}_{}_00{}".format(eqscenario, retrofitPrefix, realization[0]) in s][-1]
-    damageFile = [s for s in repo_list if "s_dmgbyasset_{}_{}_00{}".format(eqscenario, retrofitPrefix, realization[0]) in s][-1]
-    lossesFile = [s for s in repo_list if "s_lossesbyasset_{}_{}_00{}".format(eqscenario, retrofitPrefix, realization[0]) in s][-1]
+    consequenceFile = [s for s in repo_list if "s_consequences_{}_{}_{}".format(eqscenario, retrofitPrefix, realization[0]) in s][-1]
+    damageFile = [s for s in repo_list if "s_dmgbyasset_{}_{}_{}".format(eqscenario, retrofitPrefix, realization[0]) in s][-1]
+    lossesFile = [s for s in repo_list if "s_lossesbyasset_{}_{}_{}".format(eqscenario, retrofitPrefix, realization[0]) in s][-1]
     
     # Create dataframes
     #Consequence DataFrame
     item_url="{}/{}".format(url, consequenceFile)
-    item_url = item_url.replace('api.github.com/repos', 'raw.githubusercontent.com').replace('/contents/','/master/')
     response = requests.get(item_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
-    # item_dict = json.loads(response.content)
-    # response = requests.get(item_dict['download_url'], headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
+    item_dict = json.loads(response.content)
+    response = requests.get(item_dict['download_url'], headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
     consequenceFieldNames = list(filter(None, [x.strip().split(",") for x in columnConfigParser.get('Consequences', 'consequenceFieldNames').splitlines()]))
     consequenceInputFieldNames, consequenceOutputFieldNames = zip(*consequenceFieldNames)
     dfConsequence = pd.read_csv(StringIO(response.content.decode(response.encoding)),
@@ -123,17 +121,16 @@ def GetDataframeForRealizationForScenario(url, repo_list, retrofitPrefix, realiz
                     low_memory=False,
                     thousands=',')
     [dfConsequence.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(consequenceInputFieldNames, consequenceOutputFieldNames)]
-    #dfConsequence.insert(loc=2, column='BldgCostT', value=dfConsequence['value_structural'] + dfConsequence['value_nonstructural'] + dfConsequence['value_contents'])
-    #dfConsequence.drop(columns=['value_structural','value_nonstructural','value_contents'], inplace=True)
+    dfConsequence.insert(loc=2, column='BldgCostT', value=dfConsequence['value_structural'] + dfConsequence['value_nonstructural'] + dfConsequence['value_contents'])
+    dfConsequence.drop(columns=['value_structural','value_nonstructural','value_contents'], inplace=True)
     dfConsequence = dfConsequence.add_suffix("_{}".format(retrofitPrefix))
-    dfConsequence.rename(columns={"AssetID_{}".format(retrofitPrefix):"AssetID"}, inplace=True)
+    dfConsequence.rename(columns={"asset_ref_{}".format(retrofitPrefix):"asset_ref"}, inplace=True)
 
     #Damage dataframe,
     item_url="{}/{}".format(url, damageFile)
-    item_url = item_url.replace('api.github.com/repos', 'raw.githubusercontent.com').replace('/contents/','/master/')
     response = requests.get(item_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
-    # item_dict = json.loads(response.content)
-    # response = requests.get(item_dict['download_url'], headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
+    item_dict = json.loads(response.content)
+    response = requests.get(item_dict['download_url'], headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
     damageFieldNames = list(filter(None, [x.strip().split(",") for x in columnConfigParser.get('Damage', 'damageFieldNames').splitlines()]))
     damageInputFieldNames, damageOutputFieldNames = zip(*damageFieldNames)
     dfDamage = pd.read_csv(StringIO(response.content.decode(response.encoding)),
@@ -143,16 +140,15 @@ def GetDataframeForRealizationForScenario(url, repo_list, retrofitPrefix, realiz
                     low_memory=False,
                     thousands=',')
     [dfDamage.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(damageInputFieldNames, damageOutputFieldNames)]
-    #dfDamage.insert(loc=4, column='sauid_t', value=dfDamage['sauid_i'])
+    dfDamage.insert(loc=4, column='sauid_t', value=dfDamage['sauid_i'])
     dfDamage = dfDamage.add_suffix("_{}".format(retrofitPrefix))
-    dfDamage.rename(columns={"AssetID_{}".format(retrofitPrefix):"AssetID"}, inplace=True)
+    dfDamage.rename(columns={"asset_ref_{}".format(retrofitPrefix):"asset_ref"}, inplace=True)
 
     #Losses Dataframe
     item_url="{}/{}".format(url, lossesFile)
-    item_url = item_url.replace('api.github.com/repos', 'raw.githubusercontent.com').replace('/contents/','/master/')
     response = requests.get(item_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
-    # item_dict = json.loads(response.content)
-    # response = requests.get(item_dict['download_url'], headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
+    item_dict = json.loads(response.content)
+    response = requests.get(item_dict['download_url'], headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
     lossesFieldNames = list(filter(None, [x.strip().split(",") for x in columnConfigParser.get('Losses', 'lossesFieldNames').splitlines()]))
     lossesInputFieldNames, lossesOutputFieldNames = zip(*lossesFieldNames)
     dfLosses = pd.read_csv(StringIO(response.content.decode(response.encoding)),
@@ -162,36 +158,30 @@ def GetDataframeForRealizationForScenario(url, repo_list, retrofitPrefix, realiz
                     low_memory=False,
                     thousands=',')
     [dfLosses.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(lossesInputFieldNames, lossesOutputFieldNames)]
-    # dfLosses['sl_BldgT'] = dfLosses['sl_Str'] + dfLosses['sl_NStr'] + dfLosses['sl_Cont']  
+    dfLosses['sl_BldgT'] = dfLosses['sl_Str'] + dfLosses['sl_NStr'] + dfLosses['sl_Cont']  
     dfLosses = dfLosses.add_suffix("_{}".format(retrofitPrefix))
-    dfLosses.rename(columns={"AssetID_{}".format(retrofitPrefix):"AssetID"}, inplace=True)
+    dfLosses.rename(columns={"asset_ref_{}".format(retrofitPrefix):"asset_ref"}, inplace=True)
     
     # Merge dataframes
-    dfMerge = reduce(lambda left,right: pd.merge(left,right,on='AssetID'), [dfDamage, dfConsequence, dfLosses])
+    dfMerge = reduce(lambda left,right: pd.merge(left,right,on='asset_ref'), [dfDamage, dfConsequence, dfLosses])
     return dfMerge
 
 def realizationExtras(eqscenario, dfRealizations, realization_no, final_df):
     # rupture value
     idx = 0
-    col = 'Rupture_Abbr'
+    col = 'rupture'
     val = eqscenario
     final_df.insert(loc=idx, column=col, value=val)
-    # Branch Number
+    # realization id value
     idx = 1
-    col = 'Realization'
+    col = 'realizationID'
     val = realization_no
     final_df.insert(loc=idx, column=col, value=val)
-    # Ground Motion Model
+    # realization ref value
     idx = 2
-    col = 'gmpe_Model'
+    col = 'realizationRef'
     val = dfRealizations.loc[dfRealizations['ordinal'] == int(realization_no), 'branch_path'].item()
     final_df.insert(loc=idx, column=col, value=val)
-    # Branch Weighting
-    idx = 3
-    col = 'Weight'
-    val = dfRealizations.loc[dfRealizations['ordinal'] == int(realization_no), 'weight'].item()
-    final_df.insert(loc=idx, column=col, value=val)
-    
     return    
     
    
