@@ -96,7 +96,11 @@ def main():
             
             
             # Output assembled dataframe to CSV file
-            dffinalout.to_sql("dsra_{}_rlz_{}".format(eqscenario.lower(), str(realization[0])), engine,  if_exists='replace', method=psql_insert_copy, schema='dsra')   
+            dffinalout.to_sql("dsra_{}_rlz_{}".format(eqscenario.lower(), str(realization[0])),
+                                engine,
+                                if_exists='replace',
+                                method=psql_insert_copy,
+                                schema='dsra')   
 
     return
 

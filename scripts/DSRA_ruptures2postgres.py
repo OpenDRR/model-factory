@@ -88,7 +88,11 @@ def processRuptureXML(repo_list, engine, auth, url):
         depth = xroot[0].find("{http://openquake.org/xmlns/nrml/0.4}hypocenter").attrib.get('depth')
         rows.append({"source_type": source_type, "rupture_name": rupture_name, "magnitude": magnitude, "rake": rake, "lon": lon, "lat": lat, "depth": depth})
         out_df = pd.DataFrame(rows, columns = df_cols)
-        out_df.to_sql("rupture_table", engine,  if_exists='append', method=psql_insert_copy, schema='ruptures') 
+        out_df.to_sql("rupture_table", 
+                        engine,
+                        if_exists='append',
+                        method=psql_insert_copy,
+                        schema='ruptures') 
     return
 
 def psql_insert_copy(table, conn, keys, data_iter):

@@ -73,11 +73,11 @@ def processSiteMesh(repo_list, engine, auth, url, columnConfigParser):
         sitemeshFieldNames = list(filter(None, [x.strip().split(",") for x in columnConfigParser.get('Site Mesh Fields', 'sitemeshFieldNames').splitlines()]))
         sitemeshInputFieldNames, sitemeshOutputFieldNames = zip(*sitemeshFieldNames)
         dfsitemesh = pd.read_csv(StringIO(response.content.decode(response.encoding)),
-                    sep=',',
-                    index_col=False,
-                    usecols=sitemeshInputFieldNames,
-                    low_memory=False,
-                    thousands=',')
+                            sep=',',
+                            index_col=False,
+                            usecols=sitemeshInputFieldNames,
+                            low_memory=False,
+                            thousands=',')
         [dfsitemesh.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(sitemeshInputFieldNames, sitemeshOutputFieldNames)]
         dfsitemesh.to_sql(os.path.splitext(sitemeshFile)[0].lower(),
                             engine,

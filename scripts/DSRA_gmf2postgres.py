@@ -73,13 +73,17 @@ def processGMF(repo_list, engine, auth, url, columnConfigParser):
         gmfFieldNames = list(filter(None, [x.strip().split(",") for x in columnConfigParser.get('Ground Motion Fields', 'gmfFieldNames').splitlines()]))
         gmfInputFieldNames, gmfOutputFieldNames = zip(*gmfFieldNames)
         dfGmf = pd.read_csv(StringIO(response.content.decode(response.encoding)),
-                    sep=',',
-                    index_col=False,
-                    usecols=gmfInputFieldNames,
-                    low_memory=False,
-                    thousands=',')
+                            sep=',',
+                            index_col=False,
+                            usecols=gmfInputFieldNames,
+                            low_memory=False,
+                            thousands=',')
         [dfGmf.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(gmfInputFieldNames, gmfOutputFieldNames)]
-        dfGmf.to_sql(os.path.splitext(gmfFile)[0].lower(), engine,  if_exists='replace', method=psql_insert_copy, schema='gmf')   
+        dfGmf.to_sql(os.path.splitext(gmfFile)[0].lower(),
+                            engine,
+                            if_exists='replace',
+                            method=psql_insert_copy,
+                            schema='gmf')
     return True
 
 def psql_insert_copy(table, conn, keys, data_iter):
