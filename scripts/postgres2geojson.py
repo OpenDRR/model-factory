@@ -21,8 +21,8 @@ def main ():
     os.chdir(sys.path[0])
     auth = get_config_params('config.ini')
     args = parse_args()
-    view = "dsra_indicators_{dbview}_{eq_scenario}_{retrofit_prefix}".format(**{'eq_scenario':args.eqScenario, 'retrofit_prefix':args.retrofitPrefix, 'dbview':args.dbview})
-    sqlquerystring = 'SELECT * from "results_{}"."{}"'.format(args.eqScenario, view)
+    view = "dsra_{eq_scenario}_{retrofit_prefix}_{dbview}".format(**{'eq_scenario':args.eqScenario, 'retrofit_prefix':args.retrofitPrefix, 'dbview':args.dbview})
+    sqlquerystring = 'SELECT * from "results"."{}"'.format(view)
     connection = None
     try:
         connection = psycopg2.connect(user = auth.get('rds', 'postgres_un'),
@@ -30,7 +30,7 @@ def main ():
                                         host = auth.get('rds', 'postgres_host'),
                                         port = auth.get('rds', 'postgres_port'),
                                         database = auth.get('rds', 'postgres_db'))
-        pgdf = geopandas.GeoDataFrame.from_postgis(sqlquerystring, connection, geom_col='geom')
+        pgdf = geopandas.GeoDataFrame.from_postgis(sqlquerystring, connection, geom_col='geom_poly')
         pgdf.to_file(view+'.json', driver="GeoJSON")
 
     except (Exception, psycopg2.Error) as error :
