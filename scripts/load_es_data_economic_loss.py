@@ -56,88 +56,94 @@ settings = {
             "created_by": "load_es_data_economic_loss.py"
         },
         "properties": {
-            "Sauid": {
-                "type": "text",
-                "fields": {
-                    "keyword": {
-                        "type": "keyword",
-                        "ignore_above": 256
+            "properties": {
+                "properties": {
+                    "Sauid": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "Source_Type": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "Rupture_Name": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "Magnitude": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "Retrofit": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "AssetCostT": {
+                        "type": "long"
+                    },
+                    "BldgCostT": {
+                        "type": "long"
+                    },
+                    "sL_AssetLoss": {
+                        "type": "float"
+                    },
+                    "sL_BldgLoss": {
+                        "type": "float"
+                    },
+                    "sL_ContLoss": {
+                        "type": "long"
+                    },
+                    "sL_LossRatio": {
+                        "type": "long"
+                    },
+                    "sL_NStrLoss": {
+                        "type": "long"
+                    },
+                    "sL_StrLoss": {
+                        "type": "float"
+                    },
+                    "geom_point": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
                     }
                 }
             },
-            "Source_Type": {
-                "type": "text",
-                "fields": {
-                    "keyword": {
-                        "type": "keyword",
-                        "ignore_above": 256
+            "geometry": {
+                "properties":{
+                    "coordinates": {
+                        "type": "geo_shape"
                     }
                 }
-            },
-            "Rupture_Name": {
-                "type": "text",
-                "fields": {
-                    "keyword": {
-                        "type": "keyword",
-                        "ignore_above": 256
-                    }
-                }
-            },
-            "Magnitude": {
-                "type": "text",
-                "fields": {
-                    "keyword": {
-                        "type": "keyword",
-                        "ignore_above": 256
-                    }
-                }
-            },
-            "Retrofit": {
-                "type": "text",
-                "fields": {
-                    "keyword": {
-                        "type": "keyword",
-                        "ignore_above": 256
-                    }
-                }
-            },
-            "AssetCostT": {
-                "type": "long"
-            },
-            "BldgCostT": {
-                "type": "long"
-            },
-            "sL_AssetLoss": {
-                "type": "float"
-            },
-            "sL_BldgLoss": {
-                "type": "float"
-            },
-            "sL_ContLoss": {
-                "type": "long"
-            },
-            "sL_LossRatio": {
-                "type": "long"
-            },
-            "sL_NStrLoss": {
-                "type": "long"
-            },
-            "sL_StrLoss": {
-                "type": "float"
-            },
-            "geom_point": {
-                "type": "text",
-                "fields": {
-                    "keyword": {
-                        "type": "keyword",
-                        "ignore_above": 256
-                    }
-                }
-            }
-        },
-        "geometry": {
-            "coordinates": {
-                "type": "geo_shape"
             }
         }
     }
