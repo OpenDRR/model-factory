@@ -13,7 +13,7 @@ import logging
 Script to convert DSRA indicator views to GeoJSON
 Can be run from the command line with mandatory arguments 
 Run this script with a command like:
-python postgres2geojson.py --eqScenario="idm7p1_jdf_rlz_0" --retrofitPrefix="b0" --dbview=affectedpeople
+python postgres2geojson.py --eqScenario="sim6p8_cr2022_rlz_1" --retrofitPrefix="b0" --dbview=economic_loss
 '''
 
 #Main Function
