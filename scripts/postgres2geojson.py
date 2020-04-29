@@ -1,4 +1,3 @@
-#Template Python Script
 #!/usr/bin/env python
 #Import statements
 import os
@@ -18,6 +17,10 @@ python postgres2geojson.py --eqScenario="idm7p1_jdf_rlz_0" --retrofitPrefix="b0"
 
 #Main Function
 def main ():
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s - %(levelname)s - %(message)s', 
+                        handlers=[logging.FileHandler('{}.log'.format(os.path.splitext(sys.argv[0])[0])),
+                                  logging.StreamHandler()])
     os.chdir(sys.path[0])
     auth = get_config_params('config.ini')
     args = parse_args()
@@ -34,7 +37,7 @@ def main ():
         pgdf.to_file(view+'.json', driver="GeoJSON")
 
     except (Exception, psycopg2.Error) as error :
-        print ("Error while connecting to PostgreSQL", error)
+        logging.error(error)
 
     finally:
         if(connection):
