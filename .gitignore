@@ -1,2 +1,4 @@
 scripts/config.ini
 .vscode/settings.json
+venv
+*.log
