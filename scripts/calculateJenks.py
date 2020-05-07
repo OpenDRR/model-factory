@@ -7,6 +7,7 @@ import configparser
 import jenkspy
 import pandas as pd
 import logging
+import json
 
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
@@ -29,14 +30,34 @@ def main ():
                                   logging.StreamHandler()])
     auth = get_config_params('config.ini')
     args = parse_args()
-    
+    view = "dsra_{eq_scenario}_{retrofit_prefix}_{dbview}".format(**{'eq_scenario':args.eqScenario, 'retrofit_prefix':args.retrofitPrefix, 'dbview':args.dbview})
+    es = Elasticsearch([auth.get('es', 'es_endpoint')], http_auth=(auth.get('es', 'es_un'), auth.get('es', 'es_pw')))
     try:
-        jenks = calculateJenks(auth, args)
+        jenks = calculateJenks(auth, args, es)
     
     except Exception as error :
         logging.error(error)
 
-    return print(jenks)
+    jenksJson = buildJson(args, jenks)
+
+    settings = {
+        'settings': {
+            'number_of_shards': 1,
+            'number_of_replicas': 0
+        },
+        'mappings': {
+            'properties': {
+
+            }
+        }
+    }
+
+    if not es.indices.exists("dsra_break_values"):
+        es.indices.create(index="dsra_break_values", body=settings, request_timeout=90)
+
+    res = es.index(index="dsra_break_values", id=view+'_'+args.field, body=jenksJson)
+    
+    #return print(jenks)
     
 #Support Functions
 def get_config_params(args):
@@ -47,11 +68,9 @@ def get_config_params(args):
     configParseObj.read(args)
     return configParseObj
 
-def calculateJenks(auth, args):
+def calculateJenks(auth, args, es):
     #Build the view string from arguments
     view = "dsra_{eq_scenario}_{retrofit_prefix}_{dbview}".format(**{'eq_scenario':args.eqScenario, 'retrofit_prefix':args.retrofitPrefix, 'dbview':args.dbview})
-    #Connect to ES endpoint and perform a search for the view's corresponding index
-    es = Elasticsearch([auth.get('es', 'es_endpoint')], http_auth=(auth.get('es', 'es_un'), auth.get('es', 'es_pw')))
     response = Search(using=es, index=view)
     #Create a dataframe containing the full series of values from the specified view and field
     df = pd.DataFrame([getattr(hit.properties, args.field) for hit in response.scan()], columns=[args.field])
@@ -60,6 +79,18 @@ def calculateJenks(auth, args):
     
     return breaks
 
+def buildJson(args, jenks):
+    data = {}
+    data['eqScenario'] = args.eqScenario
+    data['retrofitPrefix'] = args.retrofitPrefix
+    data['dbview'] = args.dbview
+    data['field'] = args.field
+    i = 0
+    for breakvalue in jenks:
+        data['break_value_'+str(i)] = breakvalue
+        i+=1
+    return json.dumps(data)                                               
+            
 def parse_args():
     parser = argparse.ArgumentParser(description="Calculate Natural Breaks using the Fisher-Jenks Algorithm")
     parser.add_argument("--eqScenario", type=str, help="Earthquake scenario id")
