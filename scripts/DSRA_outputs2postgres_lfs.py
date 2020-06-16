@@ -18,7 +18,7 @@ import logging
 '''
 Script to ingest OpenQuake outputs in csv format from GtHub to single PostGreSQL database. The Script can be run in the following form by 
 changing the filepaths as appropriate
-python DSRA_outputs2postgres.py --dsraModelDir="https://github.com/OpenDRR/openquake-models/tree/master/deterministic/outputs" --columnsINI="C:\github\OpenDRR\model-factory\scripts\DSRA_outputs2postgres.ini"
+python3 DSRA_outputs2postgres_lfs.py --dsraModelDir="https://github.com/OpenDRR/openquake-models/tree/master/deterministic/outputs" --columnsINI="DSRA_outputs2postgres.ini"
 '''
 
 def main():
@@ -125,10 +125,11 @@ def GetDataframeForRealizationForScenario(url, repo_list, retrofitPrefix, realiz
                     low_memory=False,
                     thousands=',')
     [dfConsequence.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(consequenceInputFieldNames, consequenceOutputFieldNames)]
-    dfConsequence.insert(loc=2, column='BldgCostT', value=dfConsequence['value_structural'] + dfConsequence['value_nonstructural'] + dfConsequence['value_contents'])
-    dfConsequence.drop(columns=['value_structural','value_nonstructural','value_contents'], inplace=True)
+    #print(dfConsequence.columns)
+    #dfConsequence.insert(loc=2, column='BldgCostT', value=dfConsequence['value_structural'] + dfConsequence['value_nonstructural'] + dfConsequence['value_contents'])
+    #dfConsequence.drop(columns=['value_structural','value_nonstructural','value_contents'], inplace=True)
     dfConsequence = dfConsequence.add_suffix("_{}".format(retrofitPrefix))
-    dfConsequence.rename(columns={"asset_ref_{}".format(retrofitPrefix):"asset_ref"}, inplace=True)
+    dfConsequence.rename(columns={"AssetID_{}".format(retrofitPrefix):"AssetID"}, inplace=True)
 
     #Damage dataframe,
     item_url="{}/{}".format(url, damageFile)
@@ -144,9 +145,9 @@ def GetDataframeForRealizationForScenario(url, repo_list, retrofitPrefix, realiz
                     low_memory=False,
                     thousands=',')
     [dfDamage.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(damageInputFieldNames, damageOutputFieldNames)]
-    dfDamage.insert(loc=4, column='sauid_t', value=dfDamage['sauid_i'])
+    #dfDamage.insert(loc=4, column='sauid_t', value=dfDamage['sauid_i'])
     dfDamage = dfDamage.add_suffix("_{}".format(retrofitPrefix))
-    dfDamage.rename(columns={"asset_ref_{}".format(retrofitPrefix):"asset_ref"}, inplace=True)
+    dfDamage.rename(columns={"AssetID_{}".format(retrofitPrefix):"AssetID"}, inplace=True)
 
     #Losses Dataframe
     item_url="{}/{}".format(url, lossesFile)
@@ -160,14 +161,14 @@ def GetDataframeForRealizationForScenario(url, repo_list, retrofitPrefix, realiz
                     index_col=False,
                     usecols=lossesInputFieldNames,
                     low_memory=False,
-                    thousands=',')
+                    thousands=',')              
     [dfLosses.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(lossesInputFieldNames, lossesOutputFieldNames)]
-    dfLosses['sl_BldgT'] = dfLosses['sl_Str'] + dfLosses['sl_NStr'] + dfLosses['sl_Cont']  
+    #dfLosses['sl_BldgT'] = dfLosses['sl_Str'] + dfLosses['sl_NStr'] + dfLosses['sl_Cont']  
     dfLosses = dfLosses.add_suffix("_{}".format(retrofitPrefix))
-    dfLosses.rename(columns={"asset_ref_{}".format(retrofitPrefix):"asset_ref"}, inplace=True)
+    dfLosses.rename(columns={"AssetID_{}".format(retrofitPrefix):"AssetID"}, inplace=True)
     
     # Merge dataframes
-    dfMerge = reduce(lambda left,right: pd.merge(left,right,on='asset_ref'), [dfDamage, dfConsequence, dfLosses])
+    dfMerge = reduce(lambda left,right: pd.merge(left,right,on='AssetID'), [dfDamage, dfConsequence, dfLosses])
     return dfMerge
 
 def realizationExtras(eqscenario, dfRealizations, realization_no, final_df):
@@ -184,7 +185,7 @@ def realizationExtras(eqscenario, dfRealizations, realization_no, final_df):
     # realization ref value
     idx = 2
     col = 'realizationRef'
-    val = dfRealizations.loc[dfRealizations['ordinal'] == int(realization_no), 'branch_path'].item()
+    val = dfRealizations.loc[dfRealizations['rlz_id'] == int(realization_no), 'branch_path'].item()
     final_df.insert(loc=idx, column=col, value=val)
     return    
     
