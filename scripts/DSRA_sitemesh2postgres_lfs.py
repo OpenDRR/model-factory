@@ -16,7 +16,7 @@ from io import StringIO
 '''
 Script to ingest OpenQuake outputs in csv format from GtHub to single PostGreSQL database. The Script can be run in the following form by 
 changing the filepaths as appropriate
-python3 DSRA_sitemesh2postgres.py --sitemeshDir="https://github.com/OpenDRR/openquake-models/tree/master/deterministic/outputs" --eqScenario=AFM7p3_GSM
+python3 DSRA_sitemesh2postgres_lfs.py --sitemeshDir="https://github.com/OpenDRR/openquake-models/tree/master/deterministic/outputs" --eqScenario=AFM7p3_GSM
 '''
 
 #Main Function
@@ -28,11 +28,12 @@ def main ():
     args = parse_args()
     os.chdir(sys.path[0])
     auth = get_config_params('config.ini')
-    columnConfigParser = get_config_params('{}.ini'.format(os.path.splitext(sys.argv[0])[0]))
+    #columnConfigParser = get_config_params('{}.ini'.format(os.path.splitext(sys.argv[0])[0]))
+    columnConfigParser = get_config_params('DSRA_sitemesh2postgres.ini')
     engine = db.create_engine('postgresql://{}:{}@{}'.format(auth.get('rds', 'postgres_un'), auth.get('rds', 'postgres_pw'), auth.get('rds', 'postgres_address')), echo=False)
 
     url = args.sitemeshDir.replace('https://github.com', 'https://api.github.com/repos').replace('tree/master', 'contents')
-
+    
     try:
         response = requests.get(url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
         # logging.info(response.content)
@@ -41,13 +42,13 @@ def main ():
         repo_list = []
 
         for item in repo_dict:
-            if item['type'] == 'file' and 'sitemesh' in item['name'] and args.eqScenario in item['name']:
+            if item['type'] == 'file' and 'sitemesh' in item['name'] and args.eqScenario in         item['name']:
                 repo_list.append(item['name'])
     except requests.exceptions.RequestException as e:
         logging.error(e)
         sys.exit()
     
-    processSiteMesh(repo_list, engine, auth, url, columnConfigParser)
+    processSiteMesh(repo_list, engine, auth, url, columnConfigParser, args)
     return True
 
 #Support Functions
@@ -66,10 +67,11 @@ def parse_args():
     args = parser.parse_args()
     return args
 
-def processSiteMesh(repo_list, engine, auth, url, columnConfigParser):
+def processSiteMesh(repo_list, engine, auth, url, columnConfigParser, args):
     for sitemeshFile in repo_list:
         logging.info("processing: {}".format(sitemeshFile))
-        item_url="{}/{}".format(url, sitemeshFile).replace('api.github.com/repos', 'raw.githubusercontent.com').replace('/contents/','/master/')
+        #item_url="{}/{}".format(url, sitemeshFile).replace('api.github.com/repos', 'raw.githubusercontent.com').replace('/contents/','/master/')
+        item_url="{}/{}".format(url, sitemeshFile)
         response = requests.get(item_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
         item_dict = json.loads(response.content)
         response = requests.get(item_dict['download_url'], headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
@@ -83,7 +85,7 @@ def processSiteMesh(repo_list, engine, auth, url, columnConfigParser):
                             low_memory=False,
                             thousands=',')
         [dfsitemesh.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(sitemeshInputFieldNames, sitemeshOutputFieldNames)]
-        dfsitemesh.to_sql('sitemesh_{}'.format(args.eqScenario),
+        dfsitemesh.to_sql('sitemesh_{}'.format(args.eqScenario.lower()),
                             engine,
                             if_exists='replace',
                             method=psql_insert_copy,

@@ -16,7 +16,7 @@ from io import StringIO
 '''
 Script to ingest OpenQuake outputs in csv format from GtHub to single PostGreSQL database. The Script can be run in the following form by 
 changing the filepaths as appropriate
-python3 DSRA_sitemesh2postgres.py --sitemeshDir="https://github.com/OpenDRR/openquake-models/tree/master/deterministic/outputs" --eqScenario=AFM7p3_GSM
+python3 DSRA_gmf2postgres_lfs.py --gmfDir="https://github.com/OpenDRR/openquake-models/tree/master/deterministic/outputs"  --eqScenario=AFM7p3_GSM
 '''
 
 #Main Function
@@ -28,10 +28,11 @@ def main ():
     args = parse_args()
     os.chdir(sys.path[0])
     auth = get_config_params('config.ini')
-    columnConfigParser = get_config_params('{}.ini'.format(os.path.splitext(sys.argv[0])[0]))
+    #columnConfigParser = get_config_params('{}.ini'.format(os.path.splitext(sys.argv[0])[0]))
+    columnConfigParser = get_config_params('DSRA_gmf2postgres.ini')
     engine = db.create_engine('postgresql://{}:{}@{}'.format(auth.get('rds', 'postgres_un'), auth.get('rds', 'postgres_pw'), auth.get('rds', 'postgres_address')), echo=False)
 
-    url = args.sitemeshDir.replace('https://github.com', 'https://api.github.com/repos').replace('tree/master', 'contents')
+    url = args.gmfDir.replace('https://github.com', 'https://api.github.com/repos').replace('tree/master', 'contents')
 
     try:
         response = requests.get(url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
@@ -41,13 +42,13 @@ def main ():
         repo_list = []
 
         for item in repo_dict:
-            if item['type'] == 'file' and 'sitemesh' in item['name'] and args.eqScenario in item['name']:
+            if item['type'] == 'file' and 'gmfdata' in item['name'] and args.eqScenario in      item['name']:
                 repo_list.append(item['name'])
     except requests.exceptions.RequestException as e:
         logging.error(e)
         sys.exit()
     
-    processSiteMesh(repo_list, engine, auth, url, columnConfigParser)
+    processGMF(repo_list, engine, auth, url, columnConfigParser, args)
     return True
 
 #Support Functions
@@ -60,35 +61,34 @@ def get_config_params(args):
     return configParseObj
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="'Pull Site Mesh input data from Github repository and copy into PostGreSQL on AWS RDS'")
-    parser.add_argument("--sitemeshDir", type=str, help='DSRA Site Mesh Field repo directory address', required=True)
+    parser = argparse.ArgumentParser(description="'Pull GMF input data from Github repository and copy into PostGreSQL on AWS RDS'")
+    parser.add_argument("--gmfDir", type=str, help='DSRA Ground Motion Field repo directory address', required=True)
     parser.add_argument("--eqScenario", type=str, help='Earthquake Scenario Name i.e. (sim6p8_cr2022)', required=True)
     args = parser.parse_args()
     return args
 
-def processSiteMesh(repo_list, engine, auth, url, columnConfigParser):
-    for sitemeshFile in repo_list:
-        logging.info("processing: {}".format(sitemeshFile))
-        item_url="{}/{}".format(url, sitemeshFile).replace('api.github.com/repos', 'raw.githubusercontent.com').replace('/contents/','/master/')
+def processGMF(repo_list, engine, auth, url, columnConfigParser, args):
+    for gmfFile in repo_list:
+        logging.info("processing: {}".format(gmfFile))
+        #item_url="{}/{}".format(url, gmfFile).replace('api.github.com/repos', 'raw.githubusercontent.com').replace('/contents/','/master/')
+        item_url="{}/{}".format(url, gmfFile)
         response = requests.get(item_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
         item_dict = json.loads(response.content)
         response = requests.get(item_dict['download_url'], headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
-        #print(response.content)
-        sitemeshFieldNames = list(filter(None, [x.strip().split(",") for x in columnConfigParser.get('Site Mesh Fields', 'sitemeshFieldNames').splitlines()]))
-        sitemeshInputFieldNames, sitemeshOutputFieldNames = zip(*sitemeshFieldNames)
-        dfsitemesh = pd.read_csv(StringIO(response.content.decode(response.encoding)),
+        gmfFieldNames = list(filter(None, [x.strip().split(",") for x in columnConfigParser.get('Ground Motion Fields', 'gmfFieldNames').splitlines()]))
+        gmfInputFieldNames, gmfOutputFieldNames = zip(*gmfFieldNames)
+        dfGmf = pd.read_csv(StringIO(response.content.decode(response.encoding)),
                             sep=',',
                             index_col=False,
-                            usecols=sitemeshInputFieldNames,
+                            usecols=gmfInputFieldNames,
                             low_memory=False,
                             thousands=',')
-        [dfsitemesh.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(sitemeshInputFieldNames, sitemeshOutputFieldNames)]
-        dfsitemesh.to_sql('sitemesh_{}'.format(args.eqScenario),
+        [dfGmf.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(gmfInputFieldNames, gmfOutputFieldNames)]
+        dfGmf.to_sql('gmfdata_sitemesh_{}'.format(args.eqScenario).lower(),
                             engine,
                             if_exists='replace',
                             method=psql_insert_copy,
-                            index=False,
-                            schema='sitemesh')   
+                            schema='gmf')
     return True
 
 def psql_insert_copy(table, conn, keys, data_iter):
@@ -114,4 +114,5 @@ def psql_insert_copy(table, conn, keys, data_iter):
 
 if __name__ == '__main__':
     main() 
+
 
