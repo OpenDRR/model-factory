@@ -22,11 +22,14 @@ python3 DSRA_outputs2postgres_lfs.py --dsraModelDir="https://github.com/OpenDRR/
 '''
 
 def main():
-    logging.basicConfig(level=logging.INFO,
+    args = parse_args()
+    if args.logging == True:
+        logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s', 
                         handlers=[logging.FileHandler('{}.log'.format(os.path.splitext(sys.argv[0])[0])),
                                   logging.StreamHandler()])
-    args = parse_args()
+    if args.logging == False:
+        logging.disable(sys.maxsize)
     columnConfigParser = get_config_params(args.columnsINI)
 
     os.chdir(sys.path[0])
@@ -217,10 +220,21 @@ def get_config_params(args):
     configParseObj.read(args)
     return configParseObj
 
+def str2bool(v):
+    if isinstance(v, bool):
+       return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
 def parse_args():
     parser = argparse.ArgumentParser(description='Pull DSRA Output data from Github repository and copy into PostGreSQL on AWS RDS')
     parser.add_argument('--dsraModelDir', type=str, help='Path to DSRA Model repo', required=True)
     parser.add_argument('--columnsINI', type=str, help='DSRA_outputs2postgres.ini', required=True, default='DSRA_outputs2postgres.ini')
+    parser.add_argument('--logging', type=str2bool, help='True/False - Logging Enabled by Default. Set to False to disble logging', default=True)
     args = parser.parse_args()
     
     return args
