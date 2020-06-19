@@ -17,5 +17,5 @@ $ python3 DSRA_outputs2postgres.py  --dsraModelDir="https://github.com/OpenDRR/o
 Or ask scripts for help on how to run them:
 
 ```
-$ python3 DSRA_outputs2postgres_lfs.py  --help
+$ python3 DSRA_outputs2postgres.py  --help
 ```
