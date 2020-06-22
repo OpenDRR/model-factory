@@ -26,7 +26,7 @@ def main():
     if args.logging == True:
         logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s', 
-                        handlers=[logging.FileHandler('{}.log'.format(os.path.splitext(sys.argv[0])[0])),
+                        handlers=[logging.FileHandler('/tmp/{}.log'.format(os.path.splitext(sys.argv[0])[0])),
                                   logging.StreamHandler()])
     if args.logging == False:
         logging.disable(sys.maxsize)
