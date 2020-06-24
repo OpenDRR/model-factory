@@ -238,7 +238,7 @@ def parse_args():
     parser.add_argument('--dsraModelDir', type=str, help='Path to DSRA Model repo', required=True)
     parser.add_argument('--columnsINI', type=str, help='DSRA_outputs2postgres.ini', required=True, default='DSRA_outputs2postgres.ini')
     parser.add_argument('--logging', type=str2bool, help='True/False - Logging Enabled by Default. Set to False to disble logging', default=True)
-    parser.add_argument('--eqScenario,', type=str, help='Specify Earthquake Scenario. Use "All" for all scenarios in DSRA_outputs2postgres.ini', required=True, default="All")
+    parser.add_argument('--eqScenario', type=str, help='Specify Earthquake Scenario. Use "All" for all scenarios in DSRA_outputs2postgres.ini', default="All")
     args = parser.parse_args()
     
     return args
