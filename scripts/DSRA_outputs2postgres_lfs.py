@@ -61,6 +61,8 @@ def main():
     
     for eqscenario in listeqScenario:
         listRealization = [s for s in repo_list if "realizations_{}".format(eqscenario) in s]
+        if not listRealization[0]:
+            continue
         item_url="{}/{}".format(url, listRealization[0])
         try:
             response = requests.get(item_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
