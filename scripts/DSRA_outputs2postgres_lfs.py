@@ -40,7 +40,6 @@ def main():
         listeqScenario = list(filter(None, (x.strip() for x in columnConfigParser.get('Scenario','listScenario').splitlines())))
     else:
         listeqScenario = [args.eqScenario]
-    listRealizationFieldnames = list(filter(None, (x.strip() for x in columnConfigParser.get('Realizations','listRealizationFieldnames').splitlines()))) 
     engine = db.create_engine('postgresql://{}:{}@{}'.format(auth.get('rds', 'postgres_un'), auth.get('rds', 'postgres_pw'), auth.get('rds', 'postgres_address')), echo=True)
 
     url = args.dsraModelDir.replace('https://github.com', 'https://api.github.com/repos').replace('tree/master', 'contents')
@@ -58,63 +57,38 @@ def main():
         logging.error(e)
         sys.exit()
 
-    
     for eqscenario in listeqScenario:
-        listRealization = [s for s in repo_list if "realizations_{}".format(eqscenario) in s]
-        item_url="{}/{}".format(url, listRealization[0])
-        try:
-            response = requests.get(item_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
-            item_dict = json.loads(response.content)
-            response = requests.get(item_dict['download_url'], headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
-        except requests.exceptions.RequestException as e:
-            logging.error(e)
-            sys.exit()
-        else:
-            dfRealizations = pd.read_csv(StringIO(response.content.decode(response.encoding)),
-                            sep=',',
-                            index_col=False,
-                            usecols=listRealizationFieldnames,
-                            low_memory=False,
-                            thousands=',')
             
         dfsr ={}
-        for realization in dfRealizations.iterrows():
-            for retrofit, retrofitPrefix in zip(listRetrofit, listRetrofitPrefix):
-                # retrofit Realization dataframe 
-                dfsr[retrofit] = GetDataframeForRealizationForScenario(url, repo_list, retrofitPrefix, realization, eqscenario, columnConfigParser, auth)
-                # Process conditional fields for retrofit realization dataframe
-                #retrofitExtras(dfsr, retrofit, index)
-            
-            # Merge retrofit dataframes for a realization
-            dfs = []
-            for i in listRetrofit:
-                dfs.append(dfsr[i])
-            dffinal = reduce(pd.merge, dfs)
-            
-            # Add calculated fields applicable to the realization
-            realizationExtras(eqscenario, dfRealizations, str(realization[0]), dffinal)
-            
-            # add in ordered output code
-            #listFieldnamesOrdered = CreateOrderedFieldList(len(listScenario))
-            dffinalout = dffinal
-            #dffinalout = dffinal[listFieldnamesOrdered]
-            
-            
-            # Output assembled dataframe to CSV file
-            dffinalout.to_sql("dsra_{}_rlz_{}".format(eqscenario.lower(), str(realization[0])),
-                                engine,
-                                if_exists='replace',
-                                method=psql_insert_copy,
-                                schema='dsra')   
+        for retrofit, retrofitPrefix in zip(listRetrofit, listRetrofitPrefix):
+            # retrofit Realization dataframe 
+            dfsr[retrofit] = GetDataframeForScenario(url, repo_list, retrofitPrefix, eqscenario, columnConfigParser, auth)
+            # Process conditional fields for retrofit realization dataframe
+        
+        # Merge retrofit dataframes for a realization
+        dfs = []
+        for i in listRetrofit:
+            dfs.append(dfsr[i])
+        dffinal = reduce(pd.merge, dfs)
+        
+        # add in ordered output code
+        dffinalout = dffinal
+        
+        # Output assembled dataframe to database
+        dffinalout.to_sql("dsra_{}".format(eqscenario.lower()),
+                            engine,
+                            if_exists='replace',
+                            method=psql_insert_copy,
+                            schema='dsra')   
 
     return
 
 
-def GetDataframeForRealizationForScenario(url, repo_list, retrofitPrefix, realization, eqscenario, columnConfigParser, auth):
+def GetDataframeForScenario(url, repo_list, retrofitPrefix, eqscenario, columnConfigParser, auth):
     # Get file names. If there is more than one match this should grab the one with the higher increment value
-    consequenceFile = [s for s in repo_list if "s_consequences_{}_{}_{}".format(eqscenario, retrofitPrefix, realization[0]) in s][-1]
-    damageFile = [s for s in repo_list if "s_dmgbyasset_{}_{}_{}".format(eqscenario, retrofitPrefix, realization[0]) in s][-1]
-    lossesFile = [s for s in repo_list if "s_lossesbyasset_{}_{}_{}".format(eqscenario, retrofitPrefix, realization[0]) in s][-1]
+    consequenceFile = [s for s in repo_list if "s_consequences_{}_{}".format(eqscenario, retrofitPrefix) in s][-1]
+    damageFile = [s for s in repo_list if "s_dmgbyasset_{}_{}".format(eqscenario, retrofitPrefix) in s][-1]
+    lossesFile = [s for s in repo_list if "s_lossesbyasset_{}_{}".format(eqscenario, retrofitPrefix) in s][-1]
     
     # Create dataframes
     #Consequence DataFrame
@@ -176,24 +150,6 @@ def GetDataframeForRealizationForScenario(url, repo_list, retrofitPrefix, realiz
     # Merge dataframes
     dfMerge = reduce(lambda left,right: pd.merge(left,right,on='AssetID'), [dfDamage, dfConsequence, dfLosses])
     return dfMerge
-
-def realizationExtras(eqscenario, dfRealizations, realization_no, final_df):
-    # rupture value
-    idx = 0
-    col = 'rupture'
-    val = eqscenario
-    final_df.insert(loc=idx, column=col, value=val)
-    # realization id value
-    idx = 1
-    col = 'realizationID'
-    val = realization_no
-    final_df.insert(loc=idx, column=col, value=val)
-    # realization ref value
-    idx = 2
-    col = 'realizationRef'
-    val = dfRealizations.loc[dfRealizations['rlz_id'] == int(realization_no), 'branch_path'].item()
-    final_df.insert(loc=idx, column=col, value=val)
-    return    
     
    
 def psql_insert_copy(table, conn, keys, data_iter):

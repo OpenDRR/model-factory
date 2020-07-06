@@ -1,11 +1,10 @@
-
 -- create schema for new scenario
-CREATE SCHEMA IF NOT EXISTS results_dsra_sim6p8_cr2022;
+CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
 -- create scenario risk building indicators
 
-DROP VIEW IF EXISTS results_dsra_sim6p8_cr2022.dsra_sim6p8_cr2022_rlz_1_scenario_shakemap_intensity_building CASCADE;
-CREATE VIEW results_dsra_sim6p8_cr2022.dsra_sim6p8_cr2022_rlz_1_scenario_shakemap_intensity_building AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_{realization}_scenario_shakemap_intensity_building CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_{realization}_scenario_shakemap_intensity_building AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.1 Earthquake Hazard
@@ -39,25 +38,25 @@ CAST(CAST(ROUND(CAST(e."gmv_SA(0.2)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH
 CAST(CAST(ROUND(CAST(e."gmv_SA(0.3)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa0p3",
 CAST(CAST(ROUND(CAST(e."gmv_SA(0.6)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa0p6",
 CAST(CAST(ROUND(CAST(e."gmv_SA(1.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa1p0",
-CAST(CAST(ROUND(CAST(e."gmv_SA(2.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC)AS "sH_Sa2p0",
+CAST(CAST(ROUND(CAST(e."gmv_SA(2.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC)AS "sH_Sa2p0", 
 
 b.geom AS "geom_point"
 
-FROM dsra.dsra_sim6p8_cr2022_rlz_1 a
+FROM dsra.dsra_{eqScenario}_{realization} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_sim6p8_cr2022_37_xref e ON b.id = e.id
+LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_37_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt;
 
 -- create schema for new scenario
-CREATE SCHEMA IF NOT EXISTS results_dsra_sim6p8_cr2022;
+CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_dsra_sim6p8_cr2022.dsra_sim6p8_cr2022_rlz_1_damage_state_building CASCADE;
-CREATE VIEW results_dsra_sim6p8_cr2022.dsra_sim6p8_cr2022_rlz_1_damage_state_building AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_{realization}_damage_state_building CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_{realization}_damage_state_building AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.2 Building Performance
@@ -117,19 +116,19 @@ CAST(CAST(ROUND(CAST(a."sD_Complete_stdv_r2" * g.collapse_pc AS NUMERIC),6) AS F
 
 b.geom AS "geom_point"
 
-FROM dsra.dsra_sim6p8_cr2022_rlz_1 a
+FROM dsra.dsra_{eqScenario}_{realization} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_sim6p8_cr2022_37_xref e ON b.id = e.id
+LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_37_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt;
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_dsra_sim6p8_cr2022.dsra_sim6p8_cr2022_rlz_1_recovery_time_building CASCADE;
-CREATE VIEW results_dsra_sim6p8_cr2022.dsra_sim6p8_cr2022_rlz_1_recovery_time_building AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_{realization}_recovery_time_building CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_{realization}_recovery_time_building AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.2 Building Performance
@@ -153,21 +152,21 @@ CAST(CAST(ROUND(CAST(a."sC_DebrisC_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "
 
 b.geom AS "geom_point"
 
-FROM dsra.dsra_sim6p8_cr2022_rlz_1 a
+FROM dsra.dsra_{eqScenario}_{realization} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_sim6p8_cr2022_37_xref e ON b.id = e.id
+LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_37_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt;
 
 -- create schema for new scenario
-CREATE SCHEMA IF NOT EXISTS results_dsra_sim6p8_cr2022;
+CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_dsra_sim6p8_cr2022.dsra_sim6p8_cr2022_rlz_1_casualties_building CASCADE;
-CREATE VIEW results_dsra_sim6p8_cr2022.dsra_sim6p8_cr2022_rlz_1_casualties_building AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_{realization}_casualties_building CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_{realization}_casualties_building AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.3 Affected People
@@ -209,18 +208,18 @@ CAST(CAST(ROUND(CAST(a."sC_CasTransitL4_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC)
 
 b.geom AS "geom_point"
 
-FROM dsra.dsra_sim6p8_cr2022_rlz_1 a
+FROM dsra.dsra_{eqScenario}_{realization} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_sim6p8_cr2022_37_xref e ON b.id = e.id
+LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_37_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt;
 
 
-DROP VIEW IF EXISTS results_dsra_sim6p8_cr2022.dsra_sim6p8_cr2022_rlz_1_social_disruption_building CASCADE;
-CREATE VIEW results_dsra_sim6p8_cr2022.dsra_sim6p8_cr2022_rlz_1_social_disruption_building AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_{realization}_social_disruption_building CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_{realization}_social_disruption_building AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.3 Affected People
@@ -399,21 +398,21 @@ CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_360_r2" AS NUMERIC),6) AS FLOAT) AS NUMERI
 
 b.geom AS "geom_point"
 
-FROM dsra.dsra_sim6p8_cr2022_rlz_1 a
+FROM dsra.dsra_{eqScenario}_{realization} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_sim6p8_cr2022_37_xref e ON b.id = e.id
+LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_37_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt;
 
 -- create schema for new scenario
-CREATE SCHEMA IF NOT EXISTS results_dsra_sim6p8_cr2022;
+CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_dsra_sim6p8_cr2022.dsra_sim6p8_cr2022_rlz_1_economic_loss_building CASCADE;
-CREATE VIEW results_dsra_sim6p8_cr2022.dsra_sim6p8_cr2022_rlz_1_economic_loss_building AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_{realization}_economic_loss_building CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_{realization}_economic_loss_building AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.4 Economic Security
@@ -453,11 +452,11 @@ CAST(CAST(ROUND(CAST(a."sL_Cont_stdv_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS
 
 b.geom AS "geom_point"
 
-FROM dsra.dsra_sim6p8_cr2022_rlz_1 a
+FROM dsra.dsra_{eqScenario}_{realization} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_sim6p8_cr2022_37_xref e ON b.id = e.id
+LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_37_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt;
