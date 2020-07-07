@@ -13,7 +13,7 @@ CREATE TABLE vs30.vs30_bc_site_model(
 
 -- import exposure from csv
 COPY vs30.vs30_bc_site_model (lon, lat, vs30)
-    FROM 'D:\workspace\GitHub\opendrr-data-store\sample-datasets\scenario-risk\model-inputs\\vs30_BC_site_model.csv'
+    FROM '/usr/src/app/vs30_BC_site_model.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
