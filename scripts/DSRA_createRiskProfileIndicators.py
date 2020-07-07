@@ -10,7 +10,7 @@ import logging
 Script to create DSRA indicator views 
 Can be run from the command line with mandatory arguments 
 Run this script with a command like:
-python Create_DSRA_risk_profile_indicators.py --eqScenario="idm7p1_jdf" --realization=rlz_1
+python Create_DSRA_risk_profile_indicators.py --eqScenario="idm7p1_jdf"
 '''
 
 #Main Function
@@ -22,7 +22,7 @@ def main ():
     os.chdir(sys.path[0])
     auth = get_config_params('config.ini')
     args = parse_args()
-    sqlquerystring = open('Create_scenario_risk_building_indicators_ALL.sql', 'r').read().format(**{'eq_scenario':args.eqScenario, 'realization':args.realization})
+    sqlquerystring = open('Create_scenario_risk_building_indicators_ALL.sql', 'r').read().format(**{'eq_scenario':args.eqScenario})
     try:
         connection = psycopg2.connect(user = auth.get('rds', 'postgres_un'),
                                         password = auth.get('rds', 'postgres_pw'),
@@ -57,9 +57,9 @@ def parse_args():
     parser = argparse.ArgumentParser(description='''Script to create DSRA indicator views 
     Can be run from the command line with mandatory arguments 
     Run this script with a command like:
-    python Create_DSRA_risk_profile_indicators.py --eqScenario="idm7p1_jdf_rlz_0" --realization="rlz_1"''')
+    python Create_DSRA_risk_profile_indicators.py --eqScenario="idm7p1_jdf_rlz_0" ''')
     parser.add_argument("--eqScenario", type=str, help="Earthquake scenario id")
-    parser.add_argument("--realization", type=str, help="Realization Number formatted like: rlz_1,rlz_2 etc.")
+    #parser.add_argument("--realization", type=str, help="Realization Number formatted like: rlz_1,rlz_2 etc.")
 
     args = parser.parse_args()
     
