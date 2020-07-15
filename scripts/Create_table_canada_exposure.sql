@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS exposure.canada_exposure;
 -- create table
 CREATE TABLE exposure.canada_exposure(
     PRIMARY KEY (id),
-    OID varchar,
+    ---OID varchar,
     id varchar,
     lon float,
     lat float,
