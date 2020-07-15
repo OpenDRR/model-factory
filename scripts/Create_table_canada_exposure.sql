@@ -41,7 +41,8 @@ CREATE TABLE exposure.canada_exposure(
 );
 
 -- import exposure from csv
-COPY exposure.canada_exposure (OID,id, lon, lat, taxonomy, number, structural, nonstructural, contents, day, night, transit, landusetyp, GenOcc, hzOccType, eqOccType, BldgGen, hzTaxon, EqBldgType, EqDesLev, sauid, dauid, adauid, fsauid, csduid, csdname, cduid, cdname, SAC, pruid, prname, ername)
+-- COPY exposure.canada_exposure (OID,id, lon, lat, taxonomy, number, structural, nonstructural, contents, day, night, transit, landusetyp, GenOcc, hzOccType, eqOccType, BldgGen, hzTaxon, EqBldgType, EqDesLev, sauid, dauid, adauid, fsauid, csduid, csdname, cduid, cdname, SAC, pruid, prname, ername)
+COPY exposure.canada_exposure (id, lon, lat, taxonomy, number, structural, nonstructural, contents, day, night, transit, landusetyp, GenOcc, hzOccType, eqOccType, BldgGen, hzTaxon, EqBldgType, EqDesLev, sauid, dauid, adauid, fsauid, csduid, csdname, cduid, cdname, SAC, pruid, prname, ername)
     FROM '/usr/src/app/BldgExp_Canada.csv'
         WITH 
           DELIMITER AS ','
