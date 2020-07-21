@@ -43,7 +43,7 @@ FROM dsra.{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_sim6p8_cr2022_37_xref e ON b.id = e.id
+LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
@@ -123,7 +123,7 @@ FROM dsra.{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_sim6p8_cr2022_37_xref e ON b.id = e.id
+LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
@@ -186,7 +186,7 @@ FROM dsra.{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_sim6p8_cr2022_37_xref e ON b.id = e.id
+LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
@@ -246,7 +246,7 @@ FROM dsra.{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_sim6p8_cr2022_37_xref e ON b.id = e.id
+LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
@@ -482,7 +482,7 @@ FROM dsra.{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_sim6p8_cr2022_37_xref e ON b.id = e.id
+LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
@@ -538,7 +538,7 @@ FROM dsra.{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_sim6p8_cr2022_37_xref e ON b.id = e.id
+LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
