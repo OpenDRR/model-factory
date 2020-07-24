@@ -10,7 +10,7 @@ import logging
 Script to create DSRA indicator views 
 Can be run from the command line with mandatory arguments 
 Run this script with a command like:
-python Create_DSRA_risk_profile_indicators.py --eqScenario="idm7p1_jdf"
+python3 DSRA_createRiskProfileIndicators.py --eqScenario=idm7p1_jdf --aggregation=building
 '''
 
 #Main Function
@@ -22,7 +22,7 @@ def main ():
     os.chdir(sys.path[0])
     auth = get_config_params('config.ini')
     args = parse_args()
-    sqlquerystring = open('Create_scenario_risk_building_indicators_ALL.sql', 'r').read().format(**{'eq_scenario':args.eqScenario})
+    sqlquerystring = open('Create_scenario_risk_{aggregation}_indicators_ALL.sql'.format(*{'aggregation':args.aggregation.lower()}), 'r').read().format(**{'eq_scenario':args.eqScenario})
     try:
         connection = psycopg2.connect(user = auth.get('rds', 'postgres_un'),
                                         password = auth.get('rds', 'postgres_pw'),
@@ -59,6 +59,7 @@ def parse_args():
     Run this script with a command like:
     python Create_DSRA_risk_profile_indicators.py --eqScenario="idm7p1_jdf_rlz_0" ''')
     parser.add_argument("--eqScenario", type=str, help="Earthquake scenario id")
+    parser.add_argument("--aggregation", type=str, help="building or sauid")
     #parser.add_argument("--realization", type=str, help="Realization Number formatted like: rlz_1,rlz_2 etc.")
 
     args = parser.parse_args()
