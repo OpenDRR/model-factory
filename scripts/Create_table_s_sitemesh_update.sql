@@ -3,16 +3,17 @@
 DROP TABLE IF EXISTS gmf.gmfdata_sitemesh_{eqScenario}, gmf.gmfdata_sitemesh_{eqScenario}_xref;
 
 SELECT 
-a."event_id",
+-- a."event_id",
 a."site_id",
 a."gmv_pga",
-a."gmv_pgv",
-a."gmv_SA(0.1)",
-a."gmv_SA(0.2)",
+-- a."gmv_pgv",
+-- a."gmv_SA(0.1)",
+-- a."gmv_SA(0.2)",
 a."gmv_SA(0.3)",
+a."gmv_SA(0.5)",
 a."gmv_SA(0.6)",
 a."gmv_SA(1.0)",
-a."gmv_SA(2.0)",
+-- a."gmv_SA(2.0)",
 b.lon,
 b.lat
 
