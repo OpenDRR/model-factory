@@ -85,7 +85,7 @@ def processSiteMesh(repo_list, engine, auth, url, columnConfigParser, args):
                             low_memory=False,
                             thousands=',')
         [dfsitemesh.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(sitemeshInputFieldNames, sitemeshOutputFieldNames)]
-        dfsitemesh.to_sql('sitemesh_{}'.format(args.eqScenario.lower()),
+        dfsitemesh.to_sql('s_sitemesh_{}'.format(args.eqScenario.lower()),
                             engine,
                             if_exists='replace',
                             method=psql_insert_copy,

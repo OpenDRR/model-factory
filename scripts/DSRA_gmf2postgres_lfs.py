@@ -84,7 +84,7 @@ def processGMF(repo_list, engine, auth, url, columnConfigParser, args):
                             low_memory=False,
                             thousands=',')
         [dfGmf.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(gmfInputFieldNames, gmfOutputFieldNames)]
-        dfGmf.to_sql('gmfdata_sitemesh_{}'.format(args.eqScenario).lower(),
+        dfGmf.to_sql('s_gmfdata_{}'.format(args.eqScenario).lower(),
                             engine,
                             if_exists='replace',
                             method=psql_insert_copy,
