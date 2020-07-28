@@ -22,7 +22,7 @@ def main ():
     os.chdir(sys.path[0])
     auth = get_config_params('config.ini')
     args = parse_args()
-    sqlquerystring = open('Create_scenario_risk_{aggregation}_indicators_ALL.sql'.format(**{'aggregation':args.aggregation.lower()}), 'r').read().format(**{'eq_scenario':args.eqScenario})
+    sqlquerystring = open('Create_scenario_risk_{aggregation}_Indicators_ALL.sql'.format(**{'aggregation':args.aggregation.lower()}), 'r').read().format(**{'eq_scenario':args.eqScenario})
     try:
         connection = psycopg2.connect(user = auth.get('rds', 'postgres_un'),
                                         password = auth.get('rds', 'postgres_pw'),
