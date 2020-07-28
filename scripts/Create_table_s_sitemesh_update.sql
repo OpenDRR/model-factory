@@ -56,16 +56,17 @@ ST_Distance(a.geom,b.geom) AS "distance"
 FROM exposure.canada_exposure a
 CROSS JOIN LATERAL 
 (
-SELECT event_id,
-	site_id,
+SELECT site_id,
+	-- event_id,
 	gmv_pga,
-	gmv_pgv,
-	"gmv_SA(0.1)",
-	"gmv_SA(0.2)",
+	-- gmv_pgv,
+	-- "gmv_SA(0.1)",
+	-- "gmv_SA(0.2)",
 	"gmv_SA(0.3)",
+	"gmv_SA(0.5)",
 	"gmv_SA(0.6)",
 	"gmv_SA(1.0)",
-	"gmv_SA(2.0)",
+	-- "gmv_SA(2.0)",
 	lon,
 	lat,
 	geom
