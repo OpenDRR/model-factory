@@ -149,6 +149,7 @@ def GetDataframeForScenario(url, repo_list, retrofitPrefix, eqscenario, columnCo
     
     # Merge dataframes
     dfMerge = reduce(lambda left,right: pd.merge(left,right,on='AssetID'), [dfDamage, dfConsequence, dfLosses])
+    final_df.insert(loc=0, column='Rupture_Abbr', value=eqscenario)
     return dfMerge
     
    
