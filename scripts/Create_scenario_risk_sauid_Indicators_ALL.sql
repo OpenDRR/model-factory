@@ -19,7 +19,7 @@ CAST(CAST(ROUND(CAST(f.depth AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_HypoDep
 f.rake AS "sH_Rake",
 a."gmpe_Model" AS "sH_GMPE",
 -- a."Realization" AS "sH_Rlz",
-CAST(CAST(ROUND(CAST(a."Weight" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Wght",
+-- CAST(CAST(ROUND(CAST(a."Weight" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Wght",
 e.site_id AS "sH_SiteID",
 CAST(CAST(ROUND(CAST(e.lon AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "SiteID_Lon",
 CAST(CAST(ROUND(CAST(e.lat AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "SiteID_Lat",
@@ -50,9 +50,13 @@ LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
 LEFT JOIN boundaries."Geometry SAUID" i ON b.sauid = i."SAUIDt"
 LEFT JOIN sovi.sovi_census_canada j ON b.sauid = j.sauidt
 LEFT JOIN sovi.sovi_index_canada k ON b.sauid = k.sauidt
-GROUP BY a."Rupture_Abbr",a."gmpe_Model",a."Weight",b.sauid,d.vs30,d.z1pt0,d.z2pt5,d.vs_lon,d.vs_lat,e.site_id,e.lon,e.lat,f.source_type,
+-- GROUP BY a."Rupture_Abbr",a."gmpe_Model",a."Weight",b.sauid,d.vs30,d.z1pt0,d.z2pt5,d.vs_lon,d.vs_lat,e.site_id,e.lon,e.lat,f.source_type,
 f.rupture_name,f.magnitude,f.lon,f.lat,f.depth,f.rake,b.lon,b.lat,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.2)",e."gmv_SA(0.6)",
 e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",h."area_km2",h.area_ha,h.censuspop,h.censusbldg,h.censusdu,i.geom,i.geompoint;
+GROUP BY a."Rupture_Abbr",a."gmpe_Model",b.sauid,d.vs30,d.z1pt0,d.z2pt5,d.vs_lon,d.vs_lat,e.site_id,e.lon,e.lat,f.source_type,
+f.rupture_name,f.magnitude,f.lon,f.lat,f.depth,f.rake,b.lon,b.lat,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.2)",e."gmv_SA(0.6)",
+e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",h."area_km2",h.area_ha,h.censuspop,h.censusbldg,h.censusdu,i.geom,i.geompoint;
+
 
 -- create schema for new scenario
 CREATE SCHEMA IF NOT EXISTS results_{eqScenario};
