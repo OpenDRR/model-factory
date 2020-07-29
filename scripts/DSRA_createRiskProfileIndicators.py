@@ -31,7 +31,7 @@ def main ():
                                         database = auth.get('rds', 'postgres_db'))
         cursor = connection.cursor()
         cursor.execute(sqlquerystring)
-        cursor.commit()
+        connection.commit()
     
     except (Exception, psycopg2.Error) as error :
         logging.error(error)
