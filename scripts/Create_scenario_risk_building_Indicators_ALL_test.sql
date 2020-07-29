@@ -175,7 +175,7 @@ a."AssetID",
 b.sauid AS "Sauid",
 
 -- 3.3.1 Casualties - b0
-Re-- CAST(CAST(ROUND(CAST(a."sL_Fatalities_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Fatality_b0",
+-- CAST(CAST(ROUND(CAST(a."sL_Fatalities_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Fatality_b0",
 -- CAST(CAST(ROUND(CAST(a."sL_Fatalities_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Fatality_b0",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL1_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL1_b0",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL2_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL2_b0",
