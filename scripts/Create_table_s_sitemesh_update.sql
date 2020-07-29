@@ -36,7 +36,7 @@ ON gmf.gmfdata_sitemesh_{eqScenario} using GIST (geom);
 CREATE TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref AS
 
 SELECT
-a."site_id",
+a."id",
 -- b."event_id",
 b."site_id",
 b."gmv_pga",
