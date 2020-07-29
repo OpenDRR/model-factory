@@ -51,8 +51,8 @@ LEFT JOIN boundaries."Geometry SAUID" i ON b.sauid = i."SAUIDt"
 LEFT JOIN sovi.sovi_census_canada j ON b.sauid = j.sauidt
 LEFT JOIN sovi.sovi_index_canada k ON b.sauid = k.sauidt
 -- GROUP BY a."Rupture_Abbr",a."gmpe_Model",a."Weight",b.sauid,d.vs30,d.z1pt0,d.z2pt5,d.vs_lon,d.vs_lat,e.site_id,e.lon,e.lat,f.source_type,
-f.rupture_name,f.magnitude,f.lon,f.lat,f.depth,f.rake,b.lon,b.lat,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.2)",e."gmv_SA(0.6)",
-e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",h."area_km2",h.area_ha,h.censuspop,h.censusbldg,h.censusdu,i.geom,i.geompoint;
+-- f.rupture_name,f.magnitude,f.lon,f.lat,f.depth,f.rake,b.lon,b.lat,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.2)",e."gmv_SA(0.6)",
+-- e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",h."area_km2",h.area_ha,h.censuspop,h.censusbldg,h.censusdu,i.geom,i.geompoint;
 GROUP BY a."Rupture_Abbr",a."gmpe_Model",b.sauid,d.vs30,d.z1pt0,d.z2pt5,d.vs_lon,d.vs_lat,e.site_id,e.lon,e.lat,f.source_type,
 f.rupture_name,f.magnitude,f.lon,f.lat,f.depth,f.rake,b.lon,b.lat,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.2)",e."gmv_SA(0.6)",
 e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",h."area_km2",h.area_ha,h.censuspop,h.censusbldg,h.censusdu,i.geom,i.geompoint;
