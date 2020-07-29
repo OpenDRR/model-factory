@@ -1,9 +1,5 @@
 -- update gmf data and sitemesh data into 1 table incorporating assetID
 
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT 0;
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 0;
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 0;
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 0;
 
 
 DROP TABLE IF EXISTS gmf.gmfdata_sitemesh_{eqScenario}, gmf.gmfdata_sitemesh_{eqScenario}_xref;
@@ -82,3 +78,8 @@ FROM gmf.gmfdata_sitemesh_{eqScenario}
 ORDER BY a.geom <-> geom
 LIMIT 1
 ) AS b;
+
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT 0;
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 0;
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 0;
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 0;
