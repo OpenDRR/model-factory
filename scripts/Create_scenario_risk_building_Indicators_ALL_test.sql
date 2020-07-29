@@ -42,7 +42,7 @@ CAST(CAST(ROUND(CAST(e."gmv_SA(2.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC)AS "sH_
 
 b.geom AS "geom_point"
 
-FROM dsra.afm7p2_lrdmf a
+FROM dsra.dsra_afm7p2_lrdmf a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
@@ -116,7 +116,7 @@ CAST(CAST(ROUND(CAST(a."sD_Complete_stdv_r2" * g.collapse_pc AS NUMERIC),6) AS F
 
 b.geom AS "geom_point"
 
-FROM dsra.afm7p2_lrdmf a
+FROM dsra.dsra_afm7p2_lrdmf a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
@@ -152,7 +152,7 @@ CAST(CAST(ROUND(CAST(a."sC_DebrisC_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "
 
 b.geom AS "geom_point"
 
-FROM dsra.afm7p2_lrdmf a
+FROM dsra.dsra_afm7p2_lrdmf a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
@@ -208,7 +208,7 @@ CAST(CAST(ROUND(CAST(a."sC_CasTransitL4_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC)
 
 b.geom AS "geom_point"
 
-FROM dsra.afm7p2_lrdmf a
+FROM dsra.dsra_afm7p2_lrdmf a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
@@ -398,7 +398,7 @@ CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_360_r2" AS NUMERIC),6) AS FLOAT) AS NUMERI
 
 b.geom AS "geom_point"
 
-FROM dsra.afm7p2_lrdmf a
+FROM dsra.dsra_afm7p2_lrdmf a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
@@ -452,7 +452,7 @@ CAST(CAST(ROUND(CAST(a."sL_Cont_stdv_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS
 
 b.geom AS "geom_point"
 
-FROM dsra.afm7p2_lrdmf a
+FROM dsra.dsra_afm7p2_lrdmf a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id

@@ -39,7 +39,7 @@ CAST(CAST(ROUND(CAST(e."gmv_SA(2.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC)AS "sH_
 i.geom AS "geom_poly",
 i.geompoint AS "geom_point"
 
-FROM dsra.{eqScenario} a
+FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
@@ -119,7 +119,7 @@ CAST(CAST(ROUND(CAST(AVG(a."sD_Complete_stdv_r2" * g.collapse_pc) AS NUMERIC),6)
 i.geom AS "geom_poly",
 i.geompoint AS "geom_point"
 
-FROM dsra.{eqScenario} a
+FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
@@ -182,7 +182,7 @@ CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisC_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC)
 i.geom AS "geom_poly",
 i.geompoint AS "geom_point"
 
-FROM dsra.{eqScenario} a
+FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
@@ -242,7 +242,7 @@ CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL4_r2") AS NUMERIC),6) AS FLOAT) AS NUM
 i.geom AS "geom_poly",
 i.geompoint AS "geom_point"
 
-FROM dsra.{eqScenario} a
+FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
@@ -478,7 +478,7 @@ CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_360_r2") AS NUMERIC),6) AS FLOAT) AS N
 i.geom AS "geom_poly",
 i.geompoint AS "geom_point"
 
-FROM dsra.{eqScenario} a
+FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
@@ -534,7 +534,7 @@ THEN (AVG(((a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0") - (a."sL_Str_r2" + 
 i.geom AS "geom_poly",
 i.geompoint AS "geom_point"
 
-FROM dsra.{eqScenario} a
+FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
