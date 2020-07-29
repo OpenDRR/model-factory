@@ -37,7 +37,7 @@ CAST(CAST(ROUND(CAST(e."gmv_SA(1.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH
 CAST(CAST(ROUND(CAST(e."gmv_SA(2.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC)AS "sH_Sa2p0", 
 
 i.geom AS "geom_poly",
-i.geompoint AS "geom_point"
+-- i.geompoint AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
@@ -121,7 +121,7 @@ CAST(CAST(ROUND(CAST(AVG(a."sD_Collapse_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC
 CAST(CAST(ROUND(CAST(AVG(a."sD_Complete_stdv_r2" * g.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_Collapse_r2",
 
 i.geom AS "geom_poly",
-i.geompoint AS "geom_point"
+-- i.geompoint AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
@@ -184,7 +184,7 @@ CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisC_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC)
 
 
 i.geom AS "geom_poly",
-i.geompoint AS "geom_point"
+-- i.geompoint AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
@@ -244,7 +244,7 @@ CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL3_r2") AS NUMERIC),6) AS FLOAT) AS NUM
 CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL4_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasTrn_crit_r2",
 
 i.geom AS "geom_poly",
-i.geompoint AS "geom_point"
+-- i.geompoint AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
@@ -480,7 +480,7 @@ CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_180_r2") AS NUMERIC),6) AS FLOAT) AS N
 CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_360_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Empl360_r2",
 
 i.geom AS "geom_poly",
-i.geompoint AS "geom_point"
+-- i.geompoint AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
@@ -536,7 +536,7 @@ CAST(CAST(ROUND(CAST(CASE WHEN (AVG(((a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Con
 THEN (AVG(((a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0") - (a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2")) * ((EXP(-0.03*100)/0.03)/(c."CAD_RetrofitCost_Bldg")))) ELSE 1 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLmr2_RoI",
 
 i.geom AS "geom_poly",
-i.geompoint AS "geom_point"
+-- i.geompoint AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
