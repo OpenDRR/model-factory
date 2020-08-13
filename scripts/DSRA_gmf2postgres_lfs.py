@@ -42,7 +42,7 @@ def main ():
         repo_list = []
 
         for item in repo_dict:
-            if item['type'] == 'file' and 'gmfdata' in item['name'] and args.eqScenario.upper() in      item['name']:
+            if item['type'] == 'file' and 'gmfdata' in item['name'] and args.eqScenario in      item['name']:
                 repo_list.append(item['name'])
     except requests.exceptions.RequestException as e:
         logging.error(e)
