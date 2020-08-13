@@ -57,7 +57,7 @@ UPDATE exposure.canada_exposure SET geom = st_setsrid(st_makepoint(lon,lat),4326
 CREATE INDEX Canada_exposure_idx
 ON exposure.canada_exposure using GIST (geom);
 
---remove trailing space from 'manufactured ' in bldggen
-UPDATE exposure.bldgexp_canada 
+--trim leading space from bldgen (manufactured)
+UPDATE exposure.canada_exposure 
 SET bldggen = REPLACE(bldggen,'Manufactured ','Manufactured')
 WHERE bldggen = 'Manufactured '
