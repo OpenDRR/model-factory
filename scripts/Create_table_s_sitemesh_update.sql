@@ -88,3 +88,6 @@ ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv
 ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 0;
 ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 0;
 ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 0;
+
+-- create index
+CREATE INDEX gmfdata_sitemesh_{eqScenario}_xref_idx ON gmf.gmfdata_sitemesh_{eqScenario}_xref (id);
