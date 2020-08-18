@@ -81,7 +81,7 @@ def processRuptureXML(repo_list, engine, auth, url):
         xroot = et.ElementTree(et.fromstring(response.content)).getroot()
         source_type = xroot[0].tag.replace('{http://openquake.org/xmlns/nrml/0.4}','')
         rupture_name = os.path.splitext(ruptureFile)[0].replace('rupture_','')
-        magnitude = xroot[0].find("{http://openquake.org/xmlns/nrml/0.4}magnitude").text
+        magnitude = float(xroot[0].find("{http://openquake.org/xmlns/nrml/0.4}magnitude").text)
         rake = xroot[0].find("{http://openquake.org/xmlns/nrml/0.4}rake").text
         lon = xroot[0].find("{http://openquake.org/xmlns/nrml/0.4}hypocenter").attrib.get('lon')
         lat = xroot[0].find("{http://openquake.org/xmlns/nrml/0.4}hypocenter").attrib.get('lat')
