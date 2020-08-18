@@ -41,15 +41,11 @@ i.geom AS "geom_poly"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
-LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
 LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
 LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
-LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
 LEFT JOIN boundaries."Geometry SAUID" i ON b.sauid = i."SAUIDt"
-LEFT JOIN sovi.sovi_census_canada j ON b.sauid = j.sauidt
-LEFT JOIN sovi.sovi_index_canada k ON b.sauid = k.sauidt
 -- GROUP BY a."Rupture_Abbr",a."gmpe_Model",a."Weight",b.sauid,d.vs30,d.z1pt0,d.z2pt5,d.vs_lon,d.vs_lat,e.site_id,e.lon,e.lat,f.source_type,
 -- f.rupture_name,f.magnitude,f.lon,f.lat,f.depth,f.rake,b.lon,b.lat,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.2)",e."gmv_SA(0.6)",
 -- e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",h."area_km2",h.area_ha,h.censuspop,h.censusbldg,h.censusdu,i.geom,i.geompoint;
@@ -57,9 +53,6 @@ GROUP BY a."Rupture_Abbr",a."gmpe_Model",b.sauid,d.vs30,d.z1pt0,d.z2pt5,d.vs_lon
 f.rupture_name,f.magnitude,f.lon,f.lat,f.depth,f.rake,b.lon,b.lat,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.2)",e."gmv_SA(0.6)",
 e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",h."area_km2",h.area_ha,h.censuspop,h.censusbldg,h.censusdu,i.geom;
 
-
--- create schema for new scenario
-CREATE SCHEMA IF NOT EXISTS results_{eqScenario};
 
 -- create scenario risk building indicators
 DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_damage_state_sauid;
@@ -125,15 +118,8 @@ i.geom AS "geom_poly"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
-LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
-LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_xref e ON b.id = e.id
-LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
-LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
 LEFT JOIN boundaries."Geometry SAUID" i ON b.sauid = i."SAUIDt"
-LEFT JOIN sovi.sovi_census_canada j ON b.sauid = j.sauidt
-LEFT JOIN sovi.sovi_index_canada k ON b.sauid = k.sauidt
 -- GROUP BY b.sauid,i.geom,i.geompoint;
 GROUP BY b.sauid,i.geom;
 
@@ -189,20 +175,10 @@ i.geom AS "geom_poly"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
-LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
-LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_xref e ON b.id = e.id
-LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
-LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
-LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
 LEFT JOIN boundaries."Geometry SAUID" i ON b.sauid = i."SAUIDt"
-LEFT JOIN sovi.sovi_census_canada j ON b.sauid = j.sauidt
-LEFT JOIN sovi.sovi_index_canada k ON b.sauid = k.sauidt
 -- GROUP BY b.sauid,i.geom,i.geompoint;
 GROUP BY b.sauid,i.geom;
 
--- create schema for new scenario
-CREATE SCHEMA IF NOT EXISTS results_{eqScenario};
 
 -- create scenario risk building indicators
 DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_casualties_sauid;
@@ -250,15 +226,7 @@ i.geom AS "geom_poly"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
-LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
-LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_xref e ON b.id = e.id
-LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
-LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
-LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
 LEFT JOIN boundaries."Geometry SAUID" i ON b.sauid = i."SAUIDt"
-LEFT JOIN sovi.sovi_census_canada j ON b.sauid = j.sauidt
-LEFT JOIN sovi.sovi_index_canada k ON b.sauid = k.sauidt
 -- GROUP BY b.sauid,i.geom,i.geompoint;
 GROUP BY b.sauid,i.geom;
 
@@ -487,20 +455,12 @@ i.geom AS "geom_poly"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
-LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
-LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_xref e ON b.id = e.id
-LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
-LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
 LEFT JOIN boundaries."Geometry SAUID" i ON b.sauid = i."SAUIDt"
 LEFT JOIN sovi.sovi_census_canada j ON b.sauid = j.sauidt
-LEFT JOIN sovi.sovi_index_canada k ON b.sauid = k.sauidt
 -- GROUP BY b.sauid,h.censuspop,h.censusdu,h.people_du,j.inc_hshld,j.imm_lt5,j.live_alone,j.no_engfr,j.lonepar3kids,j.indigenous,j.renter,j.age_lt6,j.age_gt65,i.geom,i.geompoint;
 GROUP BY b.sauid,h.censuspop,h.censusdu,h.people_du,j.inc_hshld,j.imm_lt5,j.live_alone,j.no_engfr,j.lonepar3kids,j.indigenous,j.renter,j.age_lt6,j.age_gt65,i.geom;
 
--- create schema for new scenario
-CREATE SCHEMA IF NOT EXISTS results_{eqScenario};
 
 -- create scenario risk building indicators
 DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_economic_loss_sauid;
@@ -545,13 +505,6 @@ i.geom AS "geom_poly"
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.retrofit_costs c ON b.eqbldgtype = c."Eq_BldgType"
-LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
-LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_xref e ON b.id = e.id
-LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
-LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype
-LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
 LEFT JOIN boundaries."Geometry SAUID" i ON b.sauid = i."SAUIDt"
-LEFT JOIN sovi.sovi_census_canada j ON b.sauid = j.sauidt
-LEFT JOIN sovi.sovi_index_canada k ON b.sauid = k.sauidt
--- GROUP BY b.sauid,f.source_type,f.rupture_name,f.magnitude,i.geom,i.geompoint;
-GROUP BY b.sauid,f.source_type,f.rupture_name,f.magnitude,i.geom;
+-- GROUP BY b.sauid,i.geom,i.geompoint;
+GROUP BY b.sauid,i.geom;

@@ -103,3 +103,7 @@ Inc_Hshld, Inc_LowDecile, Unemployed, Work_Parttime, Work_None, Employ_Inc)
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
+
+
+-- create index
+CREATE INDEX census_2016_canada_idx ON census.census_2016_canada (sauidt);
