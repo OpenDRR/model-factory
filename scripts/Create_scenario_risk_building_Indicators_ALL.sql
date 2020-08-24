@@ -3,16 +3,16 @@ CREATE SCHEMA IF NOT EXISTS results_{eqScenario};
 
 -- create scenario risk building indicators
 
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_scenario_shakemap_intensity_building CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_scenario_shakemap_intensity_building AS 
+DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_scenario_hazard_shakemap_intensity_b CASCADE;
+CREATE VIEW results_{eqScenario}.{eqScenario}_scenario_hazard_shakemap_intensity_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
--- 3.1 Earthquake Hazard
+-- 3.1 Scenario Hazard
 SELECT 
 a."AssetID",
 b.sauid AS "Sauid",
 
--- 3.1.1 Scenario Shakemap Intensity
+-- 3.1.1 Shakemap Intensity
 f.rupture_name AS "sH_RupName",
 a."Rupture_Abbr" AS "sH_RupAbbr",
 f.source_type AS "sH_Source",
@@ -50,11 +50,11 @@ LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr";
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_damage_state_building CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_damage_state_building AS 
+DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_building_damage_damage_state_b CASCADE;
+CREATE VIEW results_{eqScenario}.{eqScenario}_building_damage_damage_state_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
--- 3.2 Building Performance
+-- 3.2 Building Damage
 SELECT 
 a."AssetID",
 b.sauid AS "Sauid",
@@ -116,25 +116,24 @@ LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id
 LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype;
 
 
-
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_recovery_time_building CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_recovery_time_building AS 
+DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_building_damage_recovery_b CASCADE;
+CREATE VIEW results_{eqScenario}.{eqScenario}_building_damage_recovery_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
--- 3.2 Building Performance
+-- 3.2 Building Damage
 SELECT 
 a."AssetID",
 b.sauid AS "Sauid",
 
--- 3.2.1 Recovery Time - b0
+-- 3.2.1 Recovery - b0
 CAST(CAST(ROUND(CAST(a."sC_Repair_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Repair_b0",
 CAST(CAST(ROUND(CAST(a."sC_Construxn_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Construxn_b0",
 CAST(CAST(ROUND(CAST(a."sC_Downtime_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Downtime_b0",
 CAST(CAST(ROUND(CAST(a."sC_DebrisBW_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisBW_b0",
 CAST(CAST(ROUND(CAST(a."sC_DebrisC_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisCS_b0",
 
--- 3.2.1 Recovery Time - r2
+-- 3.2.1 Recovery - r2
 CAST(CAST(ROUND(CAST(a."sC_Repair_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Repair_r2",
 CAST(CAST(ROUND(CAST(a."sC_Construxn_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Construxn_r2",
 CAST(CAST(ROUND(CAST(a."sC_Downtime_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Downtime_r2",
@@ -148,8 +147,8 @@ LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id;
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_casualties_building CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_casualties_building AS 
+DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_affected_people_casualties_b CASCADE;
+CREATE VIEW results_{eqScenario}.{eqScenario}_affected_people_casualties_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.3 Affected People
@@ -195,8 +194,8 @@ FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id; 
 
 
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_social_disruption_building CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_social_disruption_building AS 
+DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_affeted_people_social_disruption_b CASCADE;
+CREATE VIEW results_{eqScenario}.{eqScenario}_affeted_people_social_disruption_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.3 Affected People
@@ -381,8 +380,8 @@ LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt;
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_economic_loss_building CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_economic_loss_building AS 
+DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_economic_security_economic_loss_b CASCADE;
+CREATE VIEW results_{eqScenario}.{eqScenario}_economic_security_economic_loss_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.4 Economic Security

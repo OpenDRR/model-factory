@@ -2,13 +2,13 @@
 CREATE SCHEMA IF NOT EXISTS results_{eqScenario};
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_scenario_shakemap_intensity_sauid;
-CREATE VIEW results_{eqScenario}.{eqScenario}_scenario_shakemap_intensity_sauid AS 
+DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_scenario_hazard_shakemap_intensity_s;
+CREATE VIEW results_{eqScenario}.{eqScenario}_scenario_hazard_shakemap_intensity_s AS 
 
 SELECT
 b.sauid AS "Sauid",
 
--- 3.1.1 Scenario Shakemap Intensity
+-- 3.1.1 Shakemap Intensity
 f.rupture_name AS "sH_RupName",
 a."Rupture_Abbr" AS "sH_RupAbbr",
 f.source_type AS "sH_Source",
@@ -55,11 +55,11 @@ e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",h."area_km2",h.area_ha,h.censusp
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_damage_state_sauid;
-CREATE VIEW results_{eqScenario}.{eqScenario}_damage_state_sauid AS 
+DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_building_damage_damage_state_s;
+CREATE VIEW results_{eqScenario}.{eqScenario}_building_damage_damage_state_s AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
--- 3.2 Building Performance
+-- 3.2 Building Damage
 SELECT 
 b.sauid AS "Sauid",
 
@@ -125,15 +125,15 @@ GROUP BY b.sauid,i.geom;
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_recovery_time_sauid;
-CREATE VIEW results_{eqScenario}.{eqScenario}_recovery_time_sauid AS 
+DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_building_damage_recovery_s;
+CREATE VIEW results_{eqScenario}.{eqScenario}_building_damage_recovery_s AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
--- 3.2 Building Performance
+-- 3.2 Building Damage
 SELECT 
 b.sauid AS "Sauid",
 
--- 3.2.1 Recovery Time - b0
+-- 3.2.1 Recovery - b0
 CAST(CAST(ROUND(CAST(SUM(a."sD_None_b0" + a."sD_Slight_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_GreenTag_b_b0",
 CAST(CAST(ROUND(CAST(SUM(a."sD_None_b0" + a."sD_Slight_b0")/5 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_GreenTag_i_b0",
 CAST(CAST(ROUND(CAST(SUM(a."sD_Extensive_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_YellowTag_d_b0",
@@ -151,7 +151,7 @@ CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisBW_b0" + a."sC_DebrisC_b0") AS NUMERIC),6) 
 CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisBW_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_DebrisBW_b0",
 CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisC_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_DebrisCS_b0",
 
--- 3.2.1 Recovery Time - r2
+-- 3.2.1 Recovery - r2
 CAST(CAST(ROUND(CAST(SUM(a."sD_None_r2" + a."sD_Slight_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_GreenTag_b_r2",
 CAST(CAST(ROUND(CAST(SUM(a."sD_None_r2" + a."sD_Slight_r2")/5 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_GreenTag_i_r2",
 CAST(CAST(ROUND(CAST(SUM(a."sD_Extensive_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_YellowTag_d_r2",
@@ -181,8 +181,8 @@ GROUP BY b.sauid,i.geom;
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_casualties_sauid;
-CREATE VIEW results_{eqScenario}.{eqScenario}_casualties_sauid AS 
+DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_affected_people_casualties_s;
+CREATE VIEW results_{eqScenario}.{eqScenario}_affected_people_casualties_s AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.3 Affected People
@@ -232,8 +232,8 @@ GROUP BY b.sauid,i.geom;
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_social_disruption_sauid;
-CREATE VIEW results_{eqScenario}.{eqScenario}_social_disruption_sauid AS 
+DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_affected_people_social_disruption_s;
+CREATE VIEW results_{eqScenario}.{eqScenario}_affected_people_social_disruption_s AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.3 Affected People
@@ -463,8 +463,8 @@ GROUP BY b.sauid,h.censuspop,h.censusdu,h.people_du,j.inc_hshld,j.imm_lt5,j.live
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_economic_loss_sauid;
-CREATE VIEW results_{eqScenario}.{eqScenario}_economic_loss_sauid AS 
+DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_economic_security_economic_loss_s;
+CREATE VIEW results_{eqScenario}.{eqScenario}_economic_security_economic_loss_s AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.4 Economic Security
