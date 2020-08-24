@@ -1,9 +1,9 @@
 -- create schema for new scenario
-CREATE SCHEMA IF NOT EXISTS results_{eqScenario};
+CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_scenario_hazard_shakemap_intensity_s;
-CREATE VIEW results_{eqScenario}.{eqScenario}_scenario_hazard_shakemap_intensity_s AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_scenario_hazard_shakemap_intensity_s;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_scenario_hazard_shakemap_intensity_s AS 
 
 SELECT
 b.sauid AS "Sauid",
@@ -55,8 +55,8 @@ e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",h."area_km2",h.area_ha,h.censusp
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_building_damage_damage_state_s;
-CREATE VIEW results_{eqScenario}.{eqScenario}_building_damage_damage_state_s AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_damage_state_s;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_damage_state_s AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.2 Building Damage
@@ -125,8 +125,8 @@ GROUP BY b.sauid,i.geom;
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_building_damage_recovery_s;
-CREATE VIEW results_{eqScenario}.{eqScenario}_building_damage_recovery_s AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_recovery_s;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_recovery_s AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.2 Building Damage
@@ -181,8 +181,8 @@ GROUP BY b.sauid,i.geom;
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_affected_people_casualties_s;
-CREATE VIEW results_{eqScenario}.{eqScenario}_affected_people_casualties_s AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_casualties_s;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_casualties_s AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.3 Affected People
@@ -232,8 +232,8 @@ GROUP BY b.sauid,i.geom;
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_affected_people_social_disruption_s;
-CREATE VIEW results_{eqScenario}.{eqScenario}_affected_people_social_disruption_s AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_social_disruption_s;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_social_disruption_s AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.3 Affected People
@@ -463,8 +463,8 @@ GROUP BY b.sauid,h.censuspop,h.censusdu,h.people_du,j.inc_hshld,j.imm_lt5,j.live
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_economic_security_economic_loss_s;
-CREATE VIEW results_{eqScenario}.{eqScenario}_economic_security_economic_loss_s AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_economic_security_economic_loss_s;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_economic_security_economic_loss_s AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.4 Economic Security

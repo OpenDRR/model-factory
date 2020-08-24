@@ -1,10 +1,10 @@
 -- create schema for new scenario
-CREATE SCHEMA IF NOT EXISTS results_{eqScenario};
+CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
 -- create scenario risk building indicators
 
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_scenario_hazard_shakemap_intensity_b CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_scenario_hazard_shakemap_intensity_b AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_scenario_hazard_shakemap_intensity_b CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_scenario_hazard_shakemap_intensity_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.1 Scenario Hazard
@@ -50,8 +50,8 @@ LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr";
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_building_damage_damage_state_b CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_building_damage_damage_state_b AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_damage_state_b CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_damage_state_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.2 Building Damage
@@ -117,8 +117,8 @@ LEFT JOIN lut.collapse_probability g ON b.eqbldgtype = g.eqbldgtype;
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_building_damage_recovery_b CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_building_damage_recovery_b AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_recovery_b CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_recovery_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.2 Building Damage
@@ -147,8 +147,8 @@ LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id;
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_affected_people_casualties_b CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_affected_people_casualties_b AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_casualties_b CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_casualties_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.3 Affected People
@@ -194,8 +194,8 @@ FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id; 
 
 
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_affeted_people_social_disruption_b CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_affeted_people_social_disruption_b AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_social_disruption_b CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_social_disruption_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.3 Affected People
@@ -380,8 +380,8 @@ LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt;
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_economic_security_economic_loss_b CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_economic_security_economic_loss_b AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_economic_security_economic_loss_b CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_economic_security_economic_loss_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.4 Economic Security
