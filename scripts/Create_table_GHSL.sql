@@ -3,7 +3,7 @@
 DROP TABLE IF EXISTS ghsl.ghsl_mh_intensity_ghsl;
 
 -- create table
-CREATE TABLE ghsl.mh_intensity_ghsl(
+CREATE TABLE ghsl.ghsl_mh_intensity_ghsl(
 ghslID varchar,
 lon float, 
 lat float, 
