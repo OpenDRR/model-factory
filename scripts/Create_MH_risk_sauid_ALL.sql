@@ -68,31 +68,31 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.m
 AS "MHt_Agr",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
-(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
+(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
 AS "MHt_Wood",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
-(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
+(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
 AS "MHt_Concrete",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
-(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
+(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
 AS "MHt_PreCast",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
-(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
+(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
 AS "MHt_RMasonry",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
-(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
+(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
 AS "MHt_URMasonry",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
-(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
+(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
 AS "MHt_Steel",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
-(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
+(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
 AS "MHt_Manufactured",
 
 d.geom AS "geom_poly",
@@ -132,12 +132,12 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.m
 AS "Mht_TransitPopT",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
-(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
+(SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
 AS "Mht_SFHshlds",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
 (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN (SUM(CASE WHEN a.genocc ='Residential-MD' THEN a.number ELSE 0 END) + 
-SUM(CASE WHEN a.genocc ='Residential-HD' THEN a.number ELSE 0 END)) / c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
+SUM(CASE WHEN a.genocc ='Residential-HD' THEN a.number ELSE 0 END)) / a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
 AS "Mht_MFHshlds",
 
 d.geom AS "geom_poly",
@@ -147,7 +147,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN mh.mh_intensity_canada_mhsum b ON a.sauid = b.sauidt
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
-GROUP BY a.sauid,b.mh_sum,c.censuspop,c.people_du,d.geom,d.geompoint;
+GROUP BY a.sauid,b.mh_sum,c.censuspop,a.popdu,d.geom,d.geompoint;
 
 
 
@@ -241,19 +241,19 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thres
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Agricultural' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Agr",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Wood",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Wood",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Concrete",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Concrete",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_PreCast",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_PreCast",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_RMasonry",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_RMasonry",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_URMasonry",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_URMasonry",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Steel",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Steel",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Manufactured",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Manufactured",
 
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
@@ -282,10 +282,10 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thres
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(a.transit) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_TransitPop",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_SFHshlds",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_SFHshlds",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN (SUM(CASE WHEN a.genocc ='Residential-MD' THEN a.number ELSE 0 END) + SUM(CASE WHEN a.genocc ='Residential-HD' THEN a.number ELSE 0 END)) / 
-c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_MFHshlds",
+a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_MFHshlds",
 
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
@@ -294,7 +294,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,c.censuspop,c.people_du,e.pga,d.geom,d.geompoint;
+GROUP BY a.sauid,c.censuspop,a.popdu,e.pga,d.geom,d.geompoint;
 
 
 
@@ -378,19 +378,19 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Agricultural' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Agr",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Wood",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Wood",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Concrete",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Concrete",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_PreCast",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_PreCast",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_RMasonry",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_RMasonry",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_URMasonry",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_URMasonry",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Steel",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Steel",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Manufactured",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Manufactured",
 
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
@@ -420,20 +420,19 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(a.transit) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_TransitPop",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_SFHshlds",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_SFHshlds",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN (SUM(CASE WHEN a.genocc ='Residential-MD' THEN a.number ELSE 0 END) + SUM(CASE WHEN a.genocc ='Residential-HD' THEN a.number ELSE 0 END)) / 
-c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_MFHshlds",
+a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_MFHshlds",
 
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
 
 FROM exposure.canada_exposure a
---LEFT JOIN mh.mh_intensity_canada_mhsum b ON a.sauid = b.sauidt
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,c.censuspop,c.people_du,e.tsun_ha,d.geom,d.geompoint;
+GROUP BY a.sauid,c.censuspop,a.popdu,e.tsun_ha,d.geom,d.geompoint;
 
 
 
@@ -521,19 +520,19 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_t
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Agricultural' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Agr",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Wood",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Wood",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Concrete",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Concrete",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_PreCast",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_PreCast",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_RMasonry",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_RMasonry",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_URMasonry",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_URMasonry",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Steel",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Steel",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Manufactured",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Manufactured",
 
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
@@ -563,10 +562,10 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_t
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(a.transit) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_TransitPop",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_SFHshlds",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_SFHshlds",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN (SUM(CASE WHEN a.genocc ='Residential-MD' THEN a.number ELSE 0 END) + SUM(CASE WHEN a.genocc ='Residential-HD' THEN a.number ELSE 0 END)) / 
-c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_MFHshlds",
+a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_MFHshlds",
 
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
@@ -575,7 +574,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,c.censuspop,c.people_du,e.fl500,d.geom,d.geompoint;
+GROUP BY a.sauid,c.censuspop,a.popdu,e.fl500,d.geom,d.geompoint;
 
 
 
@@ -623,7 +622,6 @@ CAST(CAST(ROUND(CAST(e.fire AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "WFi",
 COALESCE(CAST(CAST(ROUND(CAST((e.fire - (SELECT fire_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT fire_max FROM mh.mh_intensity_canada_minmax) - (SELECT fire_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFn",
 (SELECT "Firet" FROM mh.mh_thresholds) AS "WFt", -- Wildfire Intensity Threshold
 
-
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
 
@@ -660,19 +658,19 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thr
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Agricultural' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_Agr",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_Wood",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_Wood",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_Concrete",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_Concrete",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_PreCast",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_PreCast",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_RMasonry",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_RMasonry",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_URMasonry",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_URMasonry",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_Steel",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_Steel",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_Manufactured",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_Manufactured",
 
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
@@ -702,10 +700,10 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thr
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(a.transit) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_TransitPop",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_SFHshlds",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_SFHshlds",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN (SUM(CASE WHEN a.genocc ='Residential-MD' THEN a.number ELSE 0 END) + SUM(CASE WHEN a.genocc ='Residential-HD' THEN a.number ELSE 0 END)) / 
-c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_MFHshlds",
+a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_MFHshlds",
 
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
@@ -714,7 +712,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,c.censuspop,c.people_du,e.fire,d.geom,d.geompoint;
+GROUP BY a.sauid,c.censuspop,a.popdu,e.fire,d.geom,d.geompoint;
 
 
 
@@ -798,19 +796,19 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Agricultural' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Agr",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Wood",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Wood",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Concrete",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Concrete",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_PreCast",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_PreCast",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_RMasonry",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_RMasonry",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_URMasonry",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_URMasonry",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Steel",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Steel",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Manufactured",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Manufactured",
 
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
@@ -840,10 +838,10 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(a.transit) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_TransitPop",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_SFHshlds",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_SFHshlds",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN (SUM(CASE WHEN a.genocc ='Residential-MD' THEN a.number ELSE 0 END) + SUM(CASE WHEN a.genocc ='Residential-HD' THEN a.number ELSE 0 END)) / 
-c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_MFHshlds",
+a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_MFHshlds",
 
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
@@ -852,7 +850,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,c.censuspop,c.people_du,e.lndsus,d.geom,d.geompoint;
+GROUP BY a.sauid,c.censuspop,a.popdu,e.lndsus,d.geom,d.geompoint;
 
 
 
@@ -942,19 +940,19 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_t
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Agricultural' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_Agr",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_Wood",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Wood' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_Wood",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_Concrete",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Concrete' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_Concrete",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_PreCast",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Precast' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_PreCast",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_RMasonry",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='RMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_RMasonry",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_URMasonry",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='URMasonry' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_URMasonry",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_Steel",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Steel' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_Steel",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.bldggen ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_Manufactured",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.gentype ='Manufactured' THEN a.number ELSE 0 END) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_Manufactured",
 
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
@@ -984,10 +982,10 @@ COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_t
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(a.transit) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_TransitPop",
 
-COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_SFHshlds",
+COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_SFHshlds",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN (SUM(CASE WHEN a.genocc ='Residential-MD' THEN a.number ELSE 0 END) + SUM(CASE WHEN a.genocc ='Residential-HD' THEN a.number ELSE 0 END)) / 
-c.people_du ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_MFHshlds",
+a.popdu ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_MFHshlds",
 
 d.geom AS "geom_poly",
 d.geompoint AS "geom_point"
@@ -996,7 +994,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,c.censuspop,c.people_du,e.cy500,d.geom,d.geompoint;
+GROUP BY a.sauid,c.censuspop,a.popdu,e.cy500,d.geom,d.geompoint;
 
 
 

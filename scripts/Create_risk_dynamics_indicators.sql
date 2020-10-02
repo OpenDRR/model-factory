@@ -1,8 +1,6 @@
 -- create schema for new scenario
 CREATE SCHEMA IF NOT EXISTS results_nhsl_risk_dynamics;
 
-
-
 -- create risk dynamic indicators
 DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_population_growth_s CASCADE;
 CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_population_growth_s AS 
