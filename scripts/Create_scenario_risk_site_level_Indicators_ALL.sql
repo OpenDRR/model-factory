@@ -1,6 +1,8 @@
 -- create schema for new scenario
 CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
+
+
 -- create scenario risk building indicators
 DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_scenario_hazard_shakemap_intensity_ste CASCADE;
 CREATE VIEW results_dsra_{eqScenario}.{eqScenario}_scenario_hazard_shakemap_intensity_ste AS 
@@ -37,7 +39,7 @@ CAST(CAST(ROUND(CAST(e."gmv_SA(0.6)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH
 CAST(CAST(ROUND(CAST(e."gmv_SA(1.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa1p0",
 CAST(CAST(ROUND(CAST(e."gmv_SA(2.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC)AS "sH_Sa2p0",
 
-b.geom AS "geom_point"
+b.geom_site AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_site_exposure b ON a."AssetID" = b.id 
@@ -107,7 +109,7 @@ CAST(CAST(ROUND(CAST(a."sD_Collapse_r2" * b.number AS NUMERIC),6) AS FLOAT) AS N
 CAST(CAST(ROUND(CAST(a."sD_Collapse_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_Collapse_r2",
 --CAST(CAST(ROUND(CAST(a."sD_Complete_stdv_r2" * g.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_Collapse_r2",
 
-b.geom AS "geom_point"
+b.geom_site AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_site_exposure b ON a."AssetID" = b.id 
@@ -139,7 +141,7 @@ CAST(CAST(ROUND(CAST(a."sC_Downtime_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS 
 CAST(CAST(ROUND(CAST(a."sC_DebrisBW_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisBW_r2",
 CAST(CAST(ROUND(CAST(a."sC_DebrisC_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisCS_r2",
 
-b.geom AS "geom_point"
+b.geom_site AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_site_exposure b ON a."AssetID" = b.id;
@@ -188,7 +190,7 @@ CAST(CAST(ROUND(CAST(a."sC_CasTransitL2_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC)
 CAST(CAST(ROUND(CAST(a."sC_CasTransitL3_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasTransitL3_r2",
 CAST(CAST(ROUND(CAST(a."sC_CasTransitL4_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasTransitL4_r2",
 
-b.geom AS "geom_point"
+b.geom_site AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_site_exposure b ON a."AssetID" = b.id; 
@@ -374,7 +376,7 @@ CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_90_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC
 CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_180_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisrupEmpl_180_r2",
 CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_360_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisrupEmpl_360_r2",
 
-b.geom AS "geom_point"
+b.geom_site AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_site_exposure b ON a."AssetID" = b.id;
@@ -421,7 +423,7 @@ CAST(CAST(ROUND(CAST(a."sL_NStr_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_
 CAST(CAST(ROUND(CAST(a."sL_Cont_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Cont_r2",
 --CAST(CAST(ROUND(CAST(a."sL_Cont_stdv_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Cont_r2",
 
-b.geom AS "geom_point"
+b.geom_site AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_site_exposure b ON a."AssetID" = b.id;

@@ -228,7 +228,7 @@ GROUP BY b.sauid,i.geom,i.geompoint;
 
 
 
--- create scenario risk building indicators
+-- create scenario risk sauid indicators
 DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_social_disruption_s;
 CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_social_disruption_s AS 
 
