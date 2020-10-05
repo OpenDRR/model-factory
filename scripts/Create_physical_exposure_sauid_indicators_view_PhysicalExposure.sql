@@ -22,13 +22,13 @@ CAST(CAST(ROUND(CAST(c.censuspop AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_Cens
 CAST(CAST(ROUND(CAST(c.censusdu AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_CensusDU",
 CAST(CAST(ROUND(CAST(AVG(a.popdu) AS NUMERIC),6) AS FLOAT) AS NUMERIC) as "E_People_DU",
 
-d.geom AS "geom_poly",
-d.geompoint AS "geom_point"
+d.geom AS "geom_poly"
+--d.geompoint AS "geom_point"
 
 FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
-GROUP BY a.sauid,a.sauidlon,a.sauidlat,a.landuse,a.sauid_km2,a.sauid_ha,c.censuspop,c.censusbldg,c.censusdu,c.sactype,c.landuse,d.geom,d.geompoint;
+GROUP BY a.sauid,a.sauidlon,a.sauidlat,a.landuse,a.sauid_km2,a.sauid_ha,c.censuspop,c.censusbldg,c.censusdu,c.sactype,c.landuse,d.geom;
 
 
 
@@ -57,11 +57,11 @@ CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE
 CAST(CAST(ROUND(CAST((SUM(CASE WHEN a.genocc ='Residential-MD' THEN a.number ELSE 0 END) + SUM(CASE WHEN a.genocc ='Residential-HD' THEN a.number ELSE 0 END)) / AVG(a.popdu) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "ET_MFHshlds",
 
 d.geom AS "geom_poly",
-d.geompoint AS "geom_point"
+--d.geompoint AS "geom_point"
 
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
-GROUP BY a.sauid,d.geom,d.geompoint;
+GROUP BY a.sauid,d.geom;
 
 
 
@@ -86,12 +86,12 @@ CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.eqdeslev ='LC' THEN a.number ELSE 0 END) AS
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.eqdeslev ='MC' THEN a.number ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_ModCode",
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.eqdeslev ='HC' THEN a.number ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_HiCode",
 
-d.geom AS "geom_poly",
-d.geompoint AS "geom_point"
+d.geom AS "geom_poly"
+--d.geompoint AS "geom_point"
 
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
-GROUP BY a.sauid,d.geom,d.geompoint;
+GROUP BY a.sauid,d.geom;
 
 
 
@@ -108,12 +108,12 @@ CAST(CAST(ROUND(CAST(SUM(a.day) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PopD
 CAST(CAST(ROUND(CAST(SUM(a.night) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PopNight",
 CAST(CAST(ROUND(CAST(SUM(a.transit) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PopTransit",
 
-d.geom AS "geom_poly",
-d.geompoint AS "geom_point"
+d.geom AS "geom_poly"
+--d.geompoint AS "geom_point"
 
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
-GROUP BY a.sauid,d.geom,d.geompoint;
+GROUP BY a.sauid,d.geom;
 
 
 
@@ -132,9 +132,9 @@ CAST(CAST(ROUND(CAST(SUM(a.structural) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "
 CAST(CAST(ROUND(CAST(SUM(a.nonstructural) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_NStrValue",
 CAST(CAST(ROUND(CAST(SUM(a.contents) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_ContValue",
 
-d.geom AS "geom_poly",
-d.geompoint AS "geom_point"
+d.geom AS "geom_poly"
+--d.geompoint AS "geom_point"
 
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
-GROUP BY a.sauid,d.geom,d.geompoint;
+GROUP BY a.sauid,d.geom;
