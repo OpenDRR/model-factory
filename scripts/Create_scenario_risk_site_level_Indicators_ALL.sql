@@ -159,8 +159,9 @@ a."AssetID",
 b.sauid AS "Sauid",
 
 -- 3.3.1 Casualties - b0
--- CAST(CAST(ROUND(CAST(a."sL_Fatalities_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Fatality_b0",
--- CAST(CAST(ROUND(CAST(a."sL_Fatalities_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Fatality_b0",
+CAST(CAST(ROUND(CAST(a."sC_CasDayL4_b0" + a."sC_CasNightL4_b0" + a."sC_CasTransitL4_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Fatality_b0",
+--CAST(CAST(ROUND(CAST(a."sL_Fatalities_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Fatality_b0",
+--CAST(CAST(ROUND(CAST(a."sL_Fatalities_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Fatality_b0",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL1_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL1_b0",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL2_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL2_b0",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL3_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL3_b0",
@@ -175,8 +176,9 @@ CAST(CAST(ROUND(CAST(a."sC_CasTransitL3_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC)
 CAST(CAST(ROUND(CAST(a."sC_CasTransitL4_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasTransitL4_b0",
 
 -- 3.3.1 Casualties - r2
--- CAST(CAST(ROUND(CAST(a."sL_Fatalities_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Fatality_r2",
--- CAST(CAST(ROUND(CAST(a."sL_Fatalities_stdv_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Fatality_r2",
+CAST(CAST(ROUND(CAST(a."sC_CasDayL4_r2" + a."sC_CasNightL4_r2" + a."sC_CasTransitL4_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Fatality_r2",
+--CAST(CAST(ROUND(CAST(a."sL_Fatalities_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Fatality_r2",
+--CAST(CAST(ROUND(CAST(a."sL_Fatalities_stdv_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Fatality_r2",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL1_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL1_r2",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL2_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL2_r2",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL3_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL3_r2",
@@ -398,7 +400,7 @@ CAST(CAST(ROUND(CAST(a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0" AS NUMERIC)
 CAST(CAST(ROUND(CAST(a."sL_Str_b0" + a."sL_NStr_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Bldg_b0",
 CAST(CAST(ROUND(CAST(COALESCE(((a."sL_Str_b0" + a."sL_NStr_b0")/(b.number))/NULLIF(((a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0")/(b.number)),0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr_Bldg_b0",
 CAST(CAST(ROUND(CAST((((a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0") - (a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2"))/(b.retrofitting)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr2_BCR_b0",
-CAST(CAST(ROUND(CAST((((a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0") - (a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2")) * ((EXP(-0.03*100)/0.03)/(b.retrofitting))) AS NUMERIC),6) AS FLOAT) AS 
+CAST(CAST(ROUND(CAST((((a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0") - (a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2")) * ((EXP(-0.03*100)/0.03)/(b.retrofitting))) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "SLr2_RoI",
 
 CAST(CAST(ROUND(CAST(a."sL_Str_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Str_b0",
 --CAST(CAST(ROUND(CAST(a."sL_Str_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Str_b0",
