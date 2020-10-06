@@ -52,8 +52,8 @@ b."gmv_SA(1.0)",
 -- b."gmv_SA(2.0)",
 b.lon,
 b.lat,
-a.lon AS "asset_lon",
-a.lat AS "asset_lat",
+a.sauidlon AS "asset_lon",
+a.sauidlat AS "asset_lat",
 ST_Distance(a.geom,b.geom) AS "distance"
 
 FROM exposure.canada_exposure a
