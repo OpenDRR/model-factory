@@ -12,7 +12,7 @@ a."gmv_pga",
 -- a."gmv_SA(0.1)",
 -- a."gmv_SA(0.2)",
 a."gmv_SA(0.3)",
-a."gmv_SA(0.5)",
+-- a."gmv_SA(0.5)",
 a."gmv_SA(0.6)",
 a."gmv_SA(1.0)",
 -- a."gmv_SA(2.0)",
@@ -46,7 +46,7 @@ b."gmv_pga",
 -- b."gmv_SA(0.1)",
 -- b."gmv_SA(0.2)",
 b."gmv_SA(0.3)",
-b."gmv_SA(0.5)",
+-- b."gmv_SA(0.5)",
 b."gmv_SA(0.6)",
 b."gmv_SA(1.0)",
 -- b."gmv_SA(2.0)",
@@ -82,11 +82,13 @@ LIMIT 1
 ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT 0;
 ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 0;
 ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 0;
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT 0;
 ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 0;
 
 ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT 0;
 ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 0;
 ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 0;
+ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT 0;
 ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 0;
 
 -- create index
