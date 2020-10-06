@@ -56,7 +56,7 @@ CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc ='Agricultural' THEN a.number ELSE 0
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / AVG(a.popdu) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_SFHshlds",
 CAST(CAST(ROUND(CAST((SUM(CASE WHEN a.genocc ='Residential-MD' THEN a.number ELSE 0 END) + SUM(CASE WHEN a.genocc ='Residential-HD' THEN a.number ELSE 0 END)) / AVG(a.popdu) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "ET_MFHshlds",
 
-d.geom AS "geom_poly",
+d.geom AS "geom_poly"
 --d.geompoint AS "geom_point"
 
 FROM exposure.canada_exposure a
