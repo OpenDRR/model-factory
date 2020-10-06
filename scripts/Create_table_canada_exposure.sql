@@ -59,7 +59,7 @@ CREATE TABLE exposure.canada_exposure(
 
 -- import exposure from csv
 COPY exposure.canada_exposure (OBJECTID,id,SiteID,SiteLon,SiteLat,SauidID,SauidLat,SauidLon,Sauid_km2,Sauid_ha,LandUse,taxonomy,number,structural,nonstructural,contents,business,"limit",deductible,retrofitting,day,night,transit,GenOcc,OccClass1,OccClass2,PopDU,GenType,BldgType,NumFloors,Bldg_ft2,BldYear,BldEpoch,SSC_Zone,EqDesLev,sauid,dauid,adauid,fsauid,csduid,csdname,cduid,cdname,SAC,eruid,ername,pruid,prname,ObjID)
-    FROM '/usr/src/app/bldgexp_ca_v2p5p3_master.csv'
+    FROM '/usr/src/app/BldgExp_CA_v2p5p3_master.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
