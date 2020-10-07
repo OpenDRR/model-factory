@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS vs30.vs30_bc_site_model_xref;
 CREATE TABLE vs30.vs30_bc_site_model_xref AS
 SELECT
 a.id,
-a.lon AS "asset_lon",
-a.lat AS "asset_lat",
+a.sauidlon AS "asset_lon",
+a.sauidlat AS "asset_lat",
 b.vs30,
 b.z1pt0,
 b.z2pt5,
