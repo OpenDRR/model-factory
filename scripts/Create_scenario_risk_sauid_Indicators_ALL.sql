@@ -165,7 +165,7 @@ CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisBW_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC
 CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisC_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_DebrisCS_r2",
 
 
-i.geom AS "geom_poly",
+i.geom AS "geom_poly"
 --i.geompoint AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
