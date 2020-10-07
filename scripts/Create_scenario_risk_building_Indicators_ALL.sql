@@ -48,8 +48,8 @@ LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr";
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.{eqScenario}_damage_state_building CASCADE;
-CREATE VIEW results_{eqScenario}.{eqScenario}_damage_state_building AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.{eqScenario}_damage_state_building CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.{eqScenario}_damage_state_building AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.2 Building Damage
