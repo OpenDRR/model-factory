@@ -3,7 +3,7 @@ CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
 -- create scenario risk building indicators
 DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_scenario_hazard_shakemap_intensity_b CASCADE;
-CREATE VIEW results_dsra_{eqScenario}.{eqScenario}_scenario_hazard_shakemap_intensity_b AS 
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_scenario_hazard_shakemap_intensity_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.1 Scenario Hazard
@@ -48,8 +48,8 @@ LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr";
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_dsra_{eqScenario}.{eqScenario}_damage_state_building CASCADE;
-CREATE VIEW results_dsra_{eqScenario}.{eqScenario}_damage_state_building AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_damage_state_b CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_damage_state_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.2 Building Damage
