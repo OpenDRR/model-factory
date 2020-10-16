@@ -10,6 +10,14 @@ CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_settled_area_s
 -- 1.1.1 Settled Area
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 CAST(CAST(ROUND(CAST(a.sauidlon AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "SauidLon",
 CAST(CAST(ROUND(CAST(a.sauidlat AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "SauidLat",
 c.sactype AS "E_SAC",
@@ -28,7 +36,8 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
-GROUP BY a.sauid,a.sauidlon,a.sauidlat,a.landuse,a.sauid_km2,a.sauid_ha,c.censuspop,c.censusbldg,c.censusdu,c.sactype,c.landuse,d.geom;
+GROUP BY a.sauid,a.sauidlon,a.sauidlat,a.landuse,a.sauid_km2,a.sauid_ha,c.censuspop,c.censusbldg,c.censusdu,c.sactype,c.landuse,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",
+d."CSDNAME",d.geom;
 
 
 
@@ -41,6 +50,14 @@ CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_building_funct
 -- 1.1.2 Building Function
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc IN ('Residential-LD','Residential-MD','Residential-HD') THEN a.bldg_ft2 ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_BldgAreaRes",
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc = 'Commercial' THEN a.bldg_ft2 ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_BldgAreaComm",
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc = 'Industrial' THEN a.bldg_ft2 ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_BldgAreaInd",
@@ -61,7 +78,7 @@ d.geom AS "geom_poly"
 
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
-GROUP BY a.sauid,d.geom;
+GROUP BY a.sauid,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -74,6 +91,14 @@ CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_building_type_
 -- 1.1.3 Building Type
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.gentype ='Wood' THEN a.number ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Wood",
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.gentype ='Concrete' THEN a.number ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Concrete",
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.gentype ='Precast' THEN a.number ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PreCast",
@@ -91,7 +116,7 @@ d.geom AS "geom_poly"
 
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
-GROUP BY a.sauid,d.geom;
+GROUP BY a.sauid,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -104,6 +129,14 @@ CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_people_s AS
 -- 1.1.4 People
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 CAST(CAST(ROUND(CAST(SUM(a.day) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PopDay",
 CAST(CAST(ROUND(CAST(SUM(a.night) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PopNight",
 CAST(CAST(ROUND(CAST(SUM(a.transit) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PopTransit",
@@ -113,7 +146,7 @@ d.geom AS "geom_poly"
 
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
-GROUP BY a.sauid,d.geom;
+GROUP BY a.sauid,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -126,6 +159,14 @@ CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_assets_s AS
 -- 1.1.5 Assets
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 CAST(CAST(ROUND(CAST(SUM(a.structural + a.nonstructural + a.contents) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_AssetValue",
 CAST(CAST(ROUND(CAST(SUM(a.structural + a.nonstructural) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_BldgValue",
 CAST(CAST(ROUND(CAST(SUM(a.structural) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_StrValue",
@@ -137,4 +178,4 @@ d.geom AS "geom_poly"
 
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
-GROUP BY a.sauid,d.geom;
+GROUP BY a.sauid,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
