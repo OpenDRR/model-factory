@@ -12,6 +12,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_mh_mh_intensity_s AS
 -- 4.1.1 Multi-Hazard Intensity
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "MHn_Intensity",
 (SELECT "MHInt_t" FROM mh.mh_thresholds) AS "MHt_Intensity", -- Multi-Hazard Intensity threshold
@@ -22,7 +30,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN mh.mh_intensity_canada_mhsum b ON a.sauid = b.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
-GROUP BY a.sauid,b.mh_sum,d.geom;
+GROUP BY a.sauid,b.mh_sum,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -35,6 +43,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_mh_threat_to_buildings
 -- 4.1.1 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
 (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "MHt_Bldgs",
@@ -101,7 +117,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN mh.mh_intensity_canada_mhsum b ON a.sauid = b.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
-GROUP BY a.sauid,b.mh_sum,d.geom;
+GROUP BY a.sauid,b.mh_sum,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -114,6 +130,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_mh_threat_to_people_s 
 -- 4.1.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
 (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
@@ -147,7 +171,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN mh.mh_intensity_canada_mhsum b ON a.sauid = b.sauidt
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
-GROUP BY a.sauid,b.mh_sum,c.censuspop,a.popdu,d.geom;
+GROUP BY a.sauid,b.mh_sum,c.censuspop,a.popdu,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -160,6 +184,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_mh_threat_to_assets_s 
 -- 4.1.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
 (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
@@ -187,7 +219,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN mh.mh_intensity_canada_mhsum b ON a.sauid = b.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
-GROUP BY a.sauid,b.mh_sum,d.geom;
+GROUP BY a.sauid,b.mh_sum,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -200,6 +232,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_eq_seismic_hazard_inte
 -- 4.2.1 Seismic Hazard Intensity
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST((e.pgv - (SELECT pgv_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT pgv_max FROM mh.mh_intensity_canada_minmax) - (SELECT pgv_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQn_PGVn",
 COALESCE(CAST(CAST(ROUND(CAST((e.pga - (SELECT pga_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT pga_max FROM mh.mh_intensity_canada_minmax) - (SELECT pga_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQn_PGAn",
@@ -211,7 +251,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.pgv,e.pga,d.geom;
+GROUP BY a.sauid,e.pgv,e.pga,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -224,6 +264,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_eq_threat_to_buildings
 -- 4.2.2 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Bldgs",
 
@@ -261,7 +309,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.pga,d.geom;
+GROUP BY a.sauid,e.pga,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -274,6 +322,15 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_eq_threat_to_people_s 
 -- 4.2.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
+
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Pop",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(a.day) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_DayPop",
@@ -294,7 +351,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,c.censuspop,a.popdu,e.pga,d.geom;
+GROUP BY a.sauid,c.censuspop,a.popdu,e.pga,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -307,6 +364,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_eq_threat_to_assets_s 
 -- 4.2.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_AssetCost",
 
@@ -324,7 +389,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.pga,d.geom;
+GROUP BY a.sauid,e.pga,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -337,6 +402,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ts_threat_ts_inundatio
 -- 4.3.1 Tsunami Inundation Hazard
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 CAST(CAST(ROUND(CAST(e.tsun_ha AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "TSn_PGV",
 COALESCE(CAST(CAST(ROUND(CAST((e.tsun_ha - (SELECT tsun_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT tsun_max FROM mh.mh_intensity_canada_minmax) - (SELECT tsun_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "TSn_PGA",
@@ -348,7 +421,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.tsun_ha,d.geom;
+GROUP BY a.sauid,e.tsun_ha,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -361,6 +434,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ts_threat_to_buildings
 -- 4.3.2 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Bldgs",
 
@@ -398,7 +479,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.tsun_ha,d.geom;
+GROUP BY a.sauid,e.tsun_ha,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -411,6 +492,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ts_threat_to_people_s 
 -- 4.3.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Pop",
 
@@ -432,7 +521,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,c.censuspop,a.popdu,e.tsun_ha,d.geom;
+GROUP BY a.sauid,c.censuspop,a.popdu,e.tsun_ha,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -445,6 +534,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ts_threat_to_assets_s 
 -- 4.3.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_AssetCost",
 
@@ -462,7 +559,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.tsun_ha,d.geom;
+GROUP BY a.sauid,e.tsun_ha,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -475,6 +572,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_fl_threat_fl_inundatio
 -- 4.4.1 Flood Inundation Hazard
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 CAST(CAST(ROUND(CAST(e.fl200 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "FL_200",
 COALESCE(CAST(CAST(ROUND(CAST((e.fl200 - (SELECT fl200_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT fl200_max FROM mh.mh_intensity_canada_minmax) - (SELECT fl200_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLn_200",
@@ -490,7 +595,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.fl200,e.fl500,e.fl1000,d.geom;
+GROUP BY a.sauid,e.fl200,e.fl500,e.fl1000,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -503,6 +608,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_fl_threat_to_buildings
 -- 4.4.2 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Bldgs",
 
@@ -540,7 +653,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.fl500,d.geom;
+GROUP BY a.sauid,e.fl500,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -553,6 +666,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_fl_threat_to_people_s 
 -- 4.4.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Pop",
 
@@ -574,7 +695,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,c.censuspop,a.popdu,e.fl500,d.geom;
+GROUP BY a.sauid,c.censuspop,a.popdu,e.fl500,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -587,6 +708,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_fl_threat_to_assets_s 
 -- 4.4.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_AssetCost",
 
@@ -604,7 +733,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.fl500,d.geom;
+GROUP BY a.sauid,e.fl500,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -617,6 +746,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_wf_threat_wf_hazard_s 
 -- 4.5.1 Wildfire Hazard
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 CAST(CAST(ROUND(CAST(e.fire AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "WFi",
 COALESCE(CAST(CAST(ROUND(CAST((e.fire - (SELECT fire_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT fire_max FROM mh.mh_intensity_canada_minmax) - (SELECT fire_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFn",
@@ -628,7 +765,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.fire,d.geom;
+GROUP BY a.sauid,e.fire,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -641,6 +778,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_wf_threat_to_buildings
 -- 4.5.2 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "BldgNumT",
 
@@ -678,7 +823,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.fire,d.geom;
+GROUP BY a.sauid,e.fire,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -691,6 +836,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_wf_threat_to_people_s 
 -- 4.5.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_Pop",
 
@@ -712,7 +865,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,c.censuspop,a.popdu,e.fire,d.geom;
+GROUP BY a.sauid,c.censuspop,a.popdu,e.fire,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -725,6 +878,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_wf_threat_to_assets_s 
 -- 4.5.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_AssetCost",
 
@@ -742,7 +903,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.fire,d.geom;
+GROUP BY a.sauid,e.fire,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -755,6 +916,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ls_threat_debris_flow_
 -- 4.6.1 Debris Flow Hazard
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 CAST(CAST(ROUND(CAST(e.lndsus AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "LSi",
 COALESCE(CAST(CAST(ROUND(CAST((e.lndsus - (SELECT lndsus_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT lndsus_max FROM mh.mh_intensity_canada_minmax) - (SELECT lndsus_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSn",
@@ -766,7 +935,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.lndsus,d.geom;
+GROUP BY a.sauid,e.lndsus,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -779,6 +948,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ls_threat_to_buildings
 -- 4.6.2 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Bldgs",
 
@@ -816,7 +993,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.lndsus,d.geom;
+GROUP BY a.sauid,e.lndsus,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -829,6 +1006,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ls_threat_to_people_s 
 -- 4.6.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Pop",
 
@@ -850,7 +1035,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,c.censuspop,a.popdu,e.lndsus,d.geom;
+GROUP BY a.sauid,c.censuspop,a.popdu,e.lndsus,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -863,6 +1048,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ls_threat_to_assets_s 
 -- 4.6.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_AssetCost",
 
@@ -880,7 +1073,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.lndsus,d.geom;
+GROUP BY a.sauid,e.lndsus,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -893,6 +1086,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_cy_threat_cy_wind_haza
 -- 4.7.1 Cyclone Wind Hazard
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 CAST(CAST(ROUND(CAST(e.cy100 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "CYi_100",
 COALESCE(CAST(CAST(ROUND(CAST((e.cy100 - (SELECT cy100_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT cy100_max FROM mh.mh_intensity_canada_minmax) - (SELECT cy100_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYn_100",
@@ -910,7 +1111,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.cy100,e.cy250,e.cy500,e.cy1000,d.geom;
+GROUP BY a.sauid,e.cy100,e.cy250,e.cy500,e.cy1000,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -923,6 +1124,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_cy_threat_to_buildings
 -- 4.7.2 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_Bldgs",
 
@@ -960,7 +1169,7 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.cy500,d.geom;
+GROUP BY a.sauid,e.cy500,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -973,6 +1182,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_cy_threat_to_people_s 
 -- 4.7.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYtPop",
 
@@ -994,7 +1211,7 @@ FROM exposure.canada_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,c.censuspop,a.popdu,e.cy500,d.geom;
+GROUP BY a.sauid,c.censuspop,a.popdu,e.cy500,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
@@ -1007,6 +1224,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_cy_threat_to_assets_s 
 -- 4.7.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
+d."PRUID",
+d."PRNAME",
+d."ERUID",
+d."ERNAME",
+d."CDUID",
+d."CDNAME",
+d."CSDUID",
+d."CSDNAME",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_AssetCost",
 
@@ -1024,4 +1249,4 @@ d.geom AS "geom_poly"
 FROM exposure.canada_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d ON a.sauid = d."SAUIDt"
 LEFT JOIN mh.mh_intensity_canada e ON a.sauid = e.sauidt
-GROUP BY a.sauid,e.cy500,d.geom;
+GROUP BY a.sauid,e.cy500,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
