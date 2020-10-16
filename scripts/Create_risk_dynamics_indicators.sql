@@ -2,13 +2,21 @@
 CREATE SCHEMA IF NOT EXISTS results_nhsl_risk_dynamics;
 
 -- create risk dynamic indicators
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_population_growth_s CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_population_growth_s AS 
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_population_growth CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_population_growth AS 
 
 -- 1.2 Risk Dynamics
 -- 1.2.1 Population Growth
 SELECT
 ghslid AS "ghslID",
+pruid AS "PRUID",
+prname AS "PRNAME",
+eruid AS "ERUID",
+ername AS "ERNAME",
+cduid AS "CDUID",
+cdname AS "CDNAME",
+csduid AS "CSDUID",
+csdname AS "CSDNAME",
 lon AS "ghs_lon",
 lat AS "ghs_lat",
 ghsl_km2,
@@ -24,13 +32,21 @@ FROM ghsl.ghsl_mh_intensity_ghsl;
 
 
 -- create risk dynamic indicators
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_land_use_change_s CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_land_use_change_s AS 
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_land_use_change CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_land_use_change AS 
 
 -- 1.2 Risk Dynamics
 -- 1.2.2 Land Use Change
 SELECT
 ghslid AS "ghslID",
+pruid AS "PRUID",
+prname AS "PRNAME",
+eruid AS "ERUID",
+ername AS "ERNAME",
+cduid AS "CDUID",
+cdname AS "CDNAME",
+csduid AS "CSDUID",
+csdname AS "CSDNAME",
 SMOD_2015,
 SMOD_2000,
 SMOD_1990,
@@ -42,8 +58,8 @@ FROM ghsl.ghsl_mh_intensity_ghsl;
 
 
 -- create risk dynamic indicators
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_hazard_susceptibility_s CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_hazard_susceptibility_s AS 
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_hazard_susceptibility CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_hazard_susceptibility AS 
 
 -- 1.2 Risk Dynamics
 -- 1.2.2 Land Use Change
