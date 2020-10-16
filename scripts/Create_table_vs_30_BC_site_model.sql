@@ -1,6 +1,6 @@
 -- script to generate Canada exposure table
 
-DROP TABLE IF EXISTS vs30.vs30_bc_site_model;
+DROP TABLE IF EXISTS vs30.vs30_bc_site_model CASCADE;
 
 
 -- create table

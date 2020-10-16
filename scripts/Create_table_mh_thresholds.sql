@@ -1,5 +1,5 @@
 -- create lookup table for multi hazard thresholds value to be used
-DROP TABLE IF EXISTS mh.mh_thresholds;
+DROP TABLE IF EXISTS mh.mh_thresholds CASCADE;
 
 SELECT
 0.028 AS "MHInt_t",

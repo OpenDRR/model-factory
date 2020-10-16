@@ -1,9 +1,5 @@
 -- update gmf data and sitemesh data into 1 table incorporating assetID
-
-
-
-DROP TABLE IF EXISTS gmf.gmfdata_sitemesh_{eqScenario}, gmf.gmfdata_sitemesh_{eqScenario}_xref;
-
+DROP TABLE IF EXISTS gmf.gmfdata_sitemesh_{eqScenario}, gmf.gmfdata_sitemesh_{eqScenario}_xref CASCADE;
 SELECT 
 -- a."event_id",
 a."site_id",

@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS vs30.vs30_bc_site_model_xref;
+DROP TABLE IF EXISTS vs30.vs30_bc_site_model_xref CASCADE;
 
 -- attach vs30 value to assetid based on closest location
 CREATE TABLE vs30.vs30_bc_site_model_xref AS

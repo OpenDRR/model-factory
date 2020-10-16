@@ -1,5 +1,5 @@
 
-DROP TABLE IF EXISTS sovi.sovi_census_canada;
+DROP TABLE IF EXISTS sovi.sovi_census_canada CASCADE;
 
 -- create table
 CREATE TABLE sovi.sovi_census_canada(
