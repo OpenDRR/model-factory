@@ -1,6 +1,6 @@
 -- script to generate Canada exposure table
 
-DROP TABLE IF EXISTS exposure.canada_exposure;
+DROP TABLE IF EXISTS exposure.canada_exposure CASCADE;
 
 -- create table
 CREATE TABLE exposure.canada_exposure(
