@@ -5,12 +5,7 @@ DROP TABLE IF EXISTS exposure.canada_exposure CASCADE;
 -- create table
 CREATE TABLE exposure.canada_exposure(
     PRIMARY KEY (id),
-    OBJECTID varchar,
     id varchar,
-    SiteID varchar,
-    SiteLon float,
-    SiteLat float,
-    SauidID varchar,
     SauidLat float,
     SauidLon float,
     Sauid_km2 float,
@@ -21,15 +16,12 @@ CREATE TABLE exposure.canada_exposure(
     structural float,
     nonstructural float,
     contents float,
-    business float,
-    "limit" float,
-    deductible float,
     retrofitting float,
     day float,
     night float,
     transit float,
     GenOcc varchar,
-     OccClass1 varchar,
+    OccClass1 varchar,
     OccClass2 varchar,
     PopDU float,
     GenType varchar,
@@ -52,14 +44,13 @@ CREATE TABLE exposure.canada_exposure(
     eruid varchar,
     ername varchar,
     pruid varchar,
-    prname varchar,
-    ObjID varchar
+    prname varchar
 
 );
 
 -- import exposure from csv
-COPY exposure.canada_exposure (OBJECTID,id,SiteID,SiteLon,SiteLat,SauidID,SauidLat,SauidLon,Sauid_km2,Sauid_ha,LandUse,taxonomy,number,structural,nonstructural,contents,business,"limit",deductible,retrofitting,day,night,transit,GenOcc,OccClass1,OccClass2,PopDU,GenType,BldgType,NumFloors,Bldg_ft2,BldYear,BldEpoch,SSC_Zone,EqDesLev,sauid,dauid,adauid,fsauid,csduid,csdname,cduid,cdname,SAC,eruid,ername,pruid,prname,ObjID)
-    FROM '/usr/src/app/BldgExp_CA_v2p5p3_master.csv'
+COPY exposure.canada_exposure (id,SauidLat,SauidLon,Sauid_km2,Sauid_ha,LandUse,taxonomy,number,structural,nonstructural,contents,retrofitting,day,night,transit,GenOcc,OccClass1,OccClass2,PopDU,GenType,BldgType,NumFloors,Bldg_ft2,BldYear,BldEpoch,SSC_Zone,EqDesLev,sauid,dauid,adauid,fsauid,csduid,csdname,cduid,cdname,SAC,eruid,ername,pruid,prname)
+    FROM '/usr/src/app/BldgExpRef_CA_master_v3.txt'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
