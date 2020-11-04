@@ -31,8 +31,10 @@ CAST(CAST(ROUND(CAST(d.z1pt0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Vs1p0",
 CAST(CAST(ROUND(CAST(d.z2pt5 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Vs2p5",
 CAST(CAST(ROUND(CAST(e."gmv_pgv" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_PGV",
 CAST(CAST(ROUND(CAST(e."gmv_pga" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_PGA",
+CAST(CAST(ROUND(CAST(e."gmv_SA(0.1)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa0p1",
 CAST(CAST(ROUND(CAST(e."gmv_SA(0.2)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa0p2",
 CAST(CAST(ROUND(CAST(e."gmv_SA(0.3)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa0p3",
+CAST(CAST(ROUND(CAST(e."gmv_SA(0.5)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa0p5",
 CAST(CAST(ROUND(CAST(e."gmv_SA(0.6)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa0p6",
 CAST(CAST(ROUND(CAST(e."gmv_SA(1.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa1p0",
 CAST(CAST(ROUND(CAST(e."gmv_SA(2.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC)AS "sH_Sa2p0",
@@ -46,7 +48,7 @@ LEFT JOIN vs30.vs30_bc_site_model_metrovan_building_exposure_xref d ON c.id = d.
 LEFT JOIN gmf.gmfdata_sitemesh_{eqScenario}_metrovan_building_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 GROUP BY b.id_building,b.sauid,f.rupture_name,a."Rupture_Abbr",f.source_type,f.magnitude,f.lon,f.lat,f.depth,f.rake,a."gmpe_Model",e.site_id,e.lon,e.lat,d.vs_lon,d.vs_lat,
-d.vs30,d.z1pt0,d.z2pt5,e.gmv_pgv,e.gmv_pga,e."gmv_SA(0.2)",e."gmv_SA(0.6)",e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",c.geom_site;
+d.vs30,d.z1pt0,d.z2pt5,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.1)",e."gmv_SA(0.2)",e."gmv_SA(0.3)",e."gmv_SA(0.5)",e."gmv_SA(0.6)",e."gmv_SA(1.0)",e."gmv_SA(2.0)",c.geom_site;
 
 
 
