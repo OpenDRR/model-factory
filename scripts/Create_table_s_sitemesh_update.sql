@@ -1,17 +1,29 @@
+-- add columns to s_gmfdata if missing
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pga" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.3)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.6)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(1.0)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 'NaN';
+
+
 -- update gmf data and sitemesh data into 1 table incorporating assetID
 DROP TABLE IF EXISTS gmf.gmfdata_sitemesh_{eqScenario}, gmf.gmfdata_sitemesh_{eqScenario}_xref CASCADE;
+
 SELECT 
--- a."event_id",
 a."site_id",
+a."gmv_pgv",
 a."gmv_pga",
--- a."gmv_pgv",
--- a."gmv_SA(0.1)",
--- a."gmv_SA(0.2)",
+a."gmv_SA(0.1)",
+a."gmv_SA(0.2)",
 a."gmv_SA(0.3)",
--- a."gmv_SA(0.5)",
+a."gmv_SA(0.5)",
 a."gmv_SA(0.6)",
 a."gmv_SA(1.0)",
--- a."gmv_SA(2.0)",
+a."gmv_SA(2.0)",
 b.lon,
 b.lat
 
@@ -35,17 +47,16 @@ CREATE TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref AS
 
 SELECT
 a."id",
--- b."event_id",
 b."site_id",
+b."gmv_pgv",
 b."gmv_pga",
--- b."gmv_pgv",
--- b."gmv_SA(0.1)",
--- b."gmv_SA(0.2)",
+b."gmv_SA(0.1)",
+b."gmv_SA(0.2)",
 b."gmv_SA(0.3)",
--- b."gmv_SA(0.5)",
+b."gmv_SA(0.5)",
 b."gmv_SA(0.6)",
 b."gmv_SA(1.0)",
--- b."gmv_SA(2.0)",
+b."gmv_SA(2.0)",
 b.lon,
 b.lat,
 a.sauidlon AS "asset_lon",
@@ -56,16 +67,15 @@ FROM exposure.canada_exposure a
 CROSS JOIN LATERAL 
 (
 SELECT site_id,
-	-- event_id,
+	gmv_pgv,
 	gmv_pga,
-	-- gmv_pgv,
-	-- "gmv_SA(0.1)",
-	-- "gmv_SA(0.2)",
+	"gmv_SA(0.1)",
+	"gmv_SA(0.2)",
 	"gmv_SA(0.3)",
-	-- "gmv_SA(0.5)",
+	"gmv_SA(0.5)",
 	"gmv_SA(0.6)",
 	"gmv_SA(1.0)",
-	-- "gmv_SA(2.0)",
+	"gmv_SA(2.0)",
 	lon,
 	lat,
 	geom
@@ -75,17 +85,29 @@ ORDER BY a.geom <-> geom
 LIMIT 1
 ) AS b;
 
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT 0;
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 0;
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 0;
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT 0;
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 0;
+/*
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pga" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.3)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.6)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(1.0)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 'NaN';
 
-ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT 0;
-ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 0;
-ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 0;
-ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT 0;
-ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 0;
+
+ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_pga" float DEFAULT 'NaN';
+ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT 'NaN';
+ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 'NaN';
+ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 'NaN';
+ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.3)" float DEFAULT 'NaN';
+ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT 'NaN';
+ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(0.6)" float DEFAULT 'NaN';
+ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(1.0)" float DEFAULT 'NaN';
+ALTER TABLE gmf.gmfdata_sitemesh_{eqScenario}_xref ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 'NaN';
+
+*/
 
 -- create index
 CREATE INDEX gmfdata_sitemesh_{eqScenario}_xref_idx ON gmf.gmfdata_sitemesh_{eqScenario}_xref (id);
