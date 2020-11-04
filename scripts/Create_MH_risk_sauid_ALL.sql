@@ -12,14 +12,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_mh_mh_intensity_s AS
 -- 4.1.1 Multi-Hazard Intensity
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "MHn_Intensity",
 (SELECT "MHInt_t" FROM mh.mh_thresholds) AS "MHt_Intensity", -- Multi-Hazard Intensity threshold
@@ -43,14 +43,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_mh_threat_to_buildings
 -- 4.1.1 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
 (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "MHt_Bldgs",
@@ -130,14 +130,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_mh_threat_to_people_s 
 -- 4.1.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
 (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
@@ -184,14 +184,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_mh_threat_to_assets_s 
 -- 4.1.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN ((b.mh_sum - (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT mhsum_max FROM mh.mh_intensity_canada_minmax) - 
 (SELECT mhsum_min FROM mh.mh_intensity_canada_minmax),0)) >= (SELECT "MHInt_t" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) 
@@ -232,14 +232,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_eq_seismic_hazard_inte
 -- 4.2.1 Seismic Hazard Intensity
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST((e.pgv - (SELECT pgv_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT pgv_max FROM mh.mh_intensity_canada_minmax) - (SELECT pgv_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQn_PGVn",
 COALESCE(CAST(CAST(ROUND(CAST((e.pga - (SELECT pga_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT pga_max FROM mh.mh_intensity_canada_minmax) - (SELECT pga_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQn_PGAn",
@@ -264,14 +264,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_eq_threat_to_buildings
 -- 4.2.2 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Bldgs",
 
@@ -322,14 +322,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_eq_threat_to_people_s 
 -- 4.2.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_Pop",
 
@@ -364,14 +364,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_eq_threat_to_assets_s 
 -- 4.2.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.pga >= (SELECT "PGAt" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "EQt_AssetCost",
 
@@ -402,14 +402,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ts_threat_ts_inundatio
 -- 4.3.1 Tsunami Inundation Hazard
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 CAST(CAST(ROUND(CAST(e.tsun_ha AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "TSn_PGV",
 COALESCE(CAST(CAST(ROUND(CAST((e.tsun_ha - (SELECT tsun_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT tsun_max FROM mh.mh_intensity_canada_minmax) - (SELECT tsun_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "TSn_PGA",
@@ -434,14 +434,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ts_threat_to_buildings
 -- 4.3.2 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Bldgs",
 
@@ -492,14 +492,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ts_threat_to_people_s 
 -- 4.3.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_Pop",
 
@@ -534,14 +534,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ts_threat_to_assets_s 
 -- 4.3.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.tsun_ha >= (SELECT "Tsun_t" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "Tst_AssetCost",
 
@@ -572,14 +572,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_fl_threat_fl_inundatio
 -- 4.4.1 Flood Inundation Hazard
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 CAST(CAST(ROUND(CAST(e.fl200 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "FL_200",
 COALESCE(CAST(CAST(ROUND(CAST((e.fl200 - (SELECT fl200_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT fl200_max FROM mh.mh_intensity_canada_minmax) - (SELECT fl200_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLn_200",
@@ -608,14 +608,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_fl_threat_to_buildings
 -- 4.4.2 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Bldgs",
 
@@ -666,14 +666,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_fl_threat_to_people_s 
 -- 4.4.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_Pop",
 
@@ -708,14 +708,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_fl_threat_to_assets_s 
 -- 4.4.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fl500 >= (SELECT "Fl500t" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "FLt_AssetCost",
 
@@ -746,14 +746,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_wf_threat_wf_hazard_s 
 -- 4.5.1 Wildfire Hazard
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 CAST(CAST(ROUND(CAST(e.fire AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "WFi",
 COALESCE(CAST(CAST(ROUND(CAST((e.fire - (SELECT fire_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT fire_max FROM mh.mh_intensity_canada_minmax) - (SELECT fire_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFn",
@@ -778,14 +778,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_wf_threat_to_buildings
 -- 4.5.2 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "BldgNumT",
 
@@ -836,14 +836,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_wf_threat_to_people_s 
 -- 4.5.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_Pop",
 
@@ -878,14 +878,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_wf_threat_to_assets_s 
 -- 4.5.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.fire >= (SELECT "Firet" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "WFt_AssetCost",
 
@@ -916,14 +916,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ls_threat_debris_flow_
 -- 4.6.1 Debris Flow Hazard
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 CAST(CAST(ROUND(CAST(e.lndsus AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "LSi",
 COALESCE(CAST(CAST(ROUND(CAST((e.lndsus - (SELECT lndsus_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT lndsus_max FROM mh.mh_intensity_canada_minmax) - (SELECT lndsus_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSn",
@@ -948,14 +948,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ls_threat_to_buildings
 -- 4.6.2 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Bldgs",
 
@@ -1006,14 +1006,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ls_threat_to_people_s 
 -- 4.6.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_Pop",
 
@@ -1048,14 +1048,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_ls_threat_to_assets_s 
 -- 4.6.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.lndsus >= (SELECT "LndSust" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "LSt_AssetCost",
 
@@ -1086,14 +1086,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_cy_threat_cy_wind_haza
 -- 4.7.1 Cyclone Wind Hazard
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 CAST(CAST(ROUND(CAST(e.cy100 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "CYi_100",
 COALESCE(CAST(CAST(ROUND(CAST((e.cy100 - (SELECT cy100_min FROM mh.mh_intensity_canada_minmax))/NULLIF((SELECT cy100_max FROM mh.mh_intensity_canada_minmax) - (SELECT cy100_min FROM mh.mh_intensity_canada_minmax),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYn_100",
@@ -1124,14 +1124,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_cy_threat_to_buildings
 -- 4.7.2 Threat to Buildings
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(a.number) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_Bldgs",
 
@@ -1182,14 +1182,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_cy_threat_to_people_s 
 -- 4.7.3 Threat to People
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN c.censuspop ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYtPop",
 
@@ -1224,14 +1224,14 @@ CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_cy_threat_to_assets_s 
 -- 4.7.4 Threat to Assets
 SELECT 
 a.sauid AS "Sauid",
-d."PRUID",
-d."PRNAME",
-d."ERUID",
-d."ERNAME",
-d."CDUID",
-d."CDNAME",
-d."CSDUID",
-d."CSDNAME",
+d."PRUID" AS "pruid",
+d."PRNAME" AS "prname",
+d."ERUID" AS "eruid",
+d."ERNAME" AS "ername",
+d."CDUID" AS "cduid",
+d."CDNAME" AS "cdname",
+d."CSDUID" AS "csduid",
+d."CSDNAME" AS "csdname",
 
 COALESCE(CAST(CAST(ROUND(CAST(CASE WHEN e.cy500 >= (SELECT "Cy500t" FROM mh.mh_thresholds) THEN SUM(a.structural + a.nonstructural + a.contents) ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC),0) AS "CYt_AssetCost",
 
