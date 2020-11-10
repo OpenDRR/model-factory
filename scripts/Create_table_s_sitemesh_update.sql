@@ -1,13 +1,13 @@
 -- add columns to s_gmfdata if missing
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pga" float DEFAULT 'NaN';
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT 'NaN';
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 'NaN';
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 'NaN';
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.3)" float DEFAULT 'NaN';
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT 'NaN';
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.6)" float DEFAULT 'NaN';
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(1.0)" float DEFAULT 'NaN';
-ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 'NaN';
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pga" float DEFAULT Null;
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT Null;
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT Null;
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT Null;
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.3)" float DEFAULT Null;
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT Null;
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.6)" float DEFAULT Null;
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(1.0)" float DEFAULT Null;
+ALTER TABLE gmf.s_gmfdata_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT Null;
 
 
 -- update gmf data and sitemesh data into 1 table incorporating assetID

@@ -29,5 +29,5 @@ ON vs30.vs30_bc_site_model using GIST (geom);
 
 
 -- add missing columns that does not exist in source sample data but should be included in future datasets.
-ALTER TABLE vs30.vs30_bc_site_model ADD COLUMN IF NOT EXISTS z1pt0 float DEFAULT 'NaN';
-ALTER TABLE vs30.vs30_bc_site_model ADD COLUMN IF NOT EXISTS z2pt5 float DEFAULT 'NaN';
+ALTER TABLE vs30.vs30_bc_site_model ADD COLUMN IF NOT EXISTS z1pt0 float DEFAULT 'Null';
+ALTER TABLE vs30.vs30_bc_site_model ADD COLUMN IF NOT EXISTS z2pt5 float DEFAULT 'Null';
