@@ -1,13 +1,13 @@
 -- add columns to shakemap if missing
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pga" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.3)" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.6)" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(1.0)" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 'NaN';
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pga" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.3)" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.6)" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(1.0)" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT NULL;
 
 
 -- update shakemap table to add geometry and spatial index
@@ -29,7 +29,7 @@ SELECT
 a."id",
 b."site_id",
 b."gmv_pga",
-b."gmv_pga",
+b."gmv_pgv",
 b."gmv_SA(0.1)",
 b."gmv_SA(0.2)",
 b."gmv_SA(0.3)",

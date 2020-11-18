@@ -1,13 +1,13 @@
 -- add columns to shakemap if missing
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pga" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.3)" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.6)" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(1.0)" float DEFAULT 'NaN';
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT 'NaN';
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pga" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.1)" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.2)" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.3)" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.5)" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(0.6)" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(1.0)" float DEFAULT NULL;
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT NULL;
 
 
 -- update shakemap table to add geometry and spatial index
@@ -41,7 +41,7 @@ b.lon,
 b.lat,
 a.sauidlon AS "asset_lon",
 a.sauidlat AS "asset_lat",
-ST_Distance(a.geom,b.geom) AS "distance"
+ST_Distance(a.geom_site,b.geom) AS "distance"
 
 FROM exposure.metrovan_site_exposure a
 CROSS JOIN LATERAL 
@@ -62,7 +62,7 @@ SELECT
 	geom
 	
 FROM gmf.shakemap_{eqScenario}
-ORDER BY a.geom <-> geom
+ORDER BY a.geom_site <-> geom
 LIMIT 1
 ) AS b;
 
@@ -95,7 +95,7 @@ b.lon,
 b.lat,
 a.sauidlon AS "asset_lon",
 a.sauidlat AS "asset_lat",
-ST_Distance(a.geom,b.geom) AS "distance"
+ST_Distance(a.geom_site,b.geom) AS "distance"
 
 FROM exposure.metrovan_building_exposure a
 CROSS JOIN LATERAL 
@@ -116,7 +116,7 @@ SELECT
 	geom
 	
 FROM gmf.shakemap_{eqScenario}
-ORDER BY a.geom <-> geom
+ORDER BY a.geom_site <-> geom
 LIMIT 1
 ) AS b;
 
@@ -135,7 +135,7 @@ DROP TABLE IF EXISTS gmf.shakemap_{eqScenario}_metrovan_sauid_xref CASCADE;
 CREATE TABLE gmf.shakemap_{eqScenario}_metrovan_sauid_xref AS
 
 SELECT
-a."id",
+a.sauid,
 b."site_id",
 b."gmv_pgv",
 b."gmv_pga",
@@ -171,13 +171,13 @@ SELECT
 	geom
 	
 FROM gmf.shakemap_{eqScenario}
-ORDER BY a.geom <-> geom
+ORDER BY a.geom_site <-> geom
 LIMIT 1
 ) AS b;
 
 -- add pkey
 ALTER TABLE gmf.shakemap_{eqScenario}_metrovan_sauid_xref DROP CONSTRAINT IF EXISTS shakemap_{eqScenario}_metrovan_sauid_xref_pkey;
-ALTER TABLE gmf.shakemap_{eqScenario}_metrovan_sauid_xref ADD PRIMARY KEY("id");
+ALTER TABLE gmf.shakemap_{eqScenario}_metrovan_sauid_xref ADD PRIMARY KEY(sauid);
 
 -- create index
-CREATE INDEX shakemap_{eqScenario}_metrovan_sauid_xref_idx ON gmf.shakemap_{eqScenario} (id);
+CREATE INDEX shakemap_{eqScenario}_metrovan_sauid_xref_idx ON gmf.shakemap_{eqScenario} (sauid);
