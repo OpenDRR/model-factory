@@ -36,6 +36,8 @@ a.occclass2 AS "E_BldgOccS2",
 a.gentype AS "E_BldgTypeG",
 a.bldgtype AS "E_BldgTypeS",
 a.eqdeslev AS "E_BldgDesLev",
+a.bldepoch AS "E_BldgEpoch",
+a.ssc_zone AS "SSC_Zone",
 
 a.geom AS "geom_point"
 
