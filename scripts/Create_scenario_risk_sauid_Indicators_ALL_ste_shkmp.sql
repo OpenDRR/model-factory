@@ -8,6 +8,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_scenario_hazard_shakemap
 
 SELECT
 b.sauid AS "Sauid",
+i."PRUID" AS "pruid",
+i."PRNAME" AS "prname",
+i."ERUID" AS "eruid",
+i."ERNAME" AS "ername",
+i."CDUID" AS "cduid",
+i."CDNAME" AS "cdname",
+i."CSDUID" AS "csduid",
+i."CSDNAME" AS "csdname",
 
 -- 3.1.1 Shakemap Intensity
 f.rupture_name AS "sH_RupName",
@@ -42,16 +50,13 @@ i.geom AS "geom_poly"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.metrovan_site_exposure b ON a."AssetID" = b.id 
-LEFT JOIN vs30.vs30_bc_site_model_metrovan_sauid_exposure_xref d ON b.sauid = d.sauid
+LEFT JOIN vs30.vs30_can_site_model_metrovan_sauid_exposure_xref d ON b.sauid = d.sauid
 LEFT JOIN gmf.shakemap_{eqScenario}_metrovan_sauid_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN boundaries."Geometry_SAUID" i ON b.sauid = i."SAUIDt"
---GROUP BY a."Rupture_Abbr",a."gmpe_Model",a."Weight",a."Realization",b.sauid,d.vs30,d.z1pt0,d.z2pt5,d.vs_lon,d.vs_lat,e.site_id,e.lon,e.lat,f.source_type,
---f.rupture_name,f.magnitude,f.lon,f.lat,f.depth,f.rake,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.2)",e."gmv_SA(0.6)",e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",
---i.geom;
 GROUP BY a."Rupture_Abbr",a."gmpe_Model",b.sauid,d.vs30,d.z1pt0,d.z2pt5,d.vs_lon,d.vs_lat,e.site_id,e.lon,e.lat,f.source_type,
 f.rupture_name,f.magnitude,f.lon,f.lat,f.depth,f.rake,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.1)",e."gmv_SA(0.2)",e."gmv_SA(0.3)",e."gmv_SA(0.5)",e."gmv_SA(0.6)",e."gmv_SA(1.0)",e."gmv_SA(2.0)",
-i.geom;
+i."PRUID",i."PRNAME",i."ERUID",i."ERNAME",i."CDUID",i."CDNAME",i."CSDUID",i."CSDNAME",i.geom;
 
 
 
@@ -63,6 +68,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_damage_s
 -- 3.2 Building Damage
 SELECT 
 b.sauid AS "Sauid",
+i."PRUID" AS "pruid",
+i."PRNAME" AS "prname",
+i."ERUID" AS "eruid",
+i."ERNAME" AS "ername",
+i."CDUID" AS "cduid",
+i."CDNAME" AS "cdname",
+i."CSDUID" AS "csduid",
+i."CSDNAME" AS "csdname",
 
 -- 3.2.1 Damage State - b0
 CAST(CAST(ROUND(CAST(SUM(a."sD_None_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_None_b0",
@@ -121,7 +134,7 @@ FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.metrovan_site_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.collapse_probability g ON b.bldgtype = g.eqbldgtype
 LEFT JOIN boundaries."Geometry_SAUID" i ON b.sauid = i."SAUIDt"
-GROUP BY b.sauid,i.geom;
+GROUP BY b.sauid,i."PRUID",i."PRNAME",i."ERUID",i."ERNAME",i."CDUID",i."CDNAME",i."CSDUID",i."CSDNAME",i.geom;
 
 
 
@@ -133,6 +146,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_recovery
 -- 3.2 Building Damage
 SELECT 
 b.sauid AS "Sauid",
+i."PRUID" AS "pruid",
+i."PRNAME" AS "prname",
+i."ERUID" AS "eruid",
+i."ERNAME" AS "ername",
+i."CDUID" AS "cduid",
+i."CDNAME" AS "cdname",
+i."CSDUID" AS "csduid",
+i."CSDNAME" AS "csdname",
 
 -- 3.2.1 Recovery - b0
 CAST(CAST(ROUND(CAST(SUM(a."sD_None_b0" + a."sD_Slight_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_GreenTag_b_b0",
@@ -177,7 +198,7 @@ i.geom AS "geom_poly"
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.metrovan_site_exposure b ON a."AssetID" = b.id 
 LEFT JOIN boundaries."Geometry_SAUID" i ON b.sauid = i."SAUIDt"
-GROUP BY b.sauid,i.geom;
+GROUP BY b.sauid,i."PRUID",i."PRNAME",i."ERUID",i."ERNAME",i."CDUID",i."CDNAME",i."CSDUID",i."CSDNAME",i.geom;
 
 
 
@@ -189,6 +210,15 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_casualti
 -- 3.3 Affected People
 SELECT 
 b.sauid AS "Sauid",
+i."PRUID" AS "pruid",
+i."PRNAME" AS "prname",
+i."ERUID" AS "eruid",
+i."ERNAME" AS "ername",
+i."CDUID" AS "cduid",
+i."CDNAME" AS "cdname",
+i."CSDUID" AS "csduid",
+i."CSDNAME" AS "csdname",
+
 
 -- 3.3.1 Casualties - b0
 --CAST(CAST(ROUND(CAST(SUM(a."sL_Fatalities_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Fatality_b0",
@@ -228,7 +258,7 @@ i.geom AS "geom_poly"
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.metrovan_site_exposure b ON a."AssetID" = b.id 
 LEFT JOIN boundaries."Geometry_SAUID" i ON b.sauid = i."SAUIDt"
-GROUP BY b.sauid,i.geom;
+GROUP BY b.sauid,i."PRUID",i."PRNAME",i."ERUID",i."ERNAME",i."CDUID",i."CDNAME",i."CSDUID",i."CSDNAME",i.geom;
 
 
 
@@ -240,6 +270,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_social_d
 -- 3.3 Affected People
 SELECT 
 b.sauid AS "Sauid",
+i."PRUID" AS "pruid",
+i."PRNAME" AS "prname",
+i."ERUID" AS "eruid",
+i."ERNAME" AS "ername",
+i."CDUID" AS "cduid",
+i."CDNAME" AS "cdname",
+i."CSDUID" AS "csduid",
+i."CSDNAME" AS "csdname",
 
 -- 3.3.2 Social Disruption - b0
 CAST(CAST(ROUND(CAST(((0.73 * COALESCE((CASE WHEN j.inc_hshld <= 15000 THEN 0.62 ELSE 0 END),0) + 
@@ -459,7 +497,8 @@ LEFT JOIN exposure.metrovan_site_exposure b ON a."AssetID" = b.id
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" i ON b.sauid = i."SAUIDt"
 LEFT JOIN sovi.sovi_census_canada j ON b.sauid = j.sauidt
-GROUP BY b.sauid,j.inc_hshld,j.imm_lt5,j.live_alone,j.no_engfr,j.lonepar3kids,j.indigenous,h.censuspop,h.censusdu,j.renter,h.people_du,j.age_gt65,j.age_lt6,i.geom;
+GROUP BY b.sauid,j.inc_hshld,j.imm_lt5,j.live_alone,j.no_engfr,j.lonepar3kids,j.indigenous,h.censuspop,h.censusdu,j.renter,h.people_du,j.age_gt65,j.age_lt6,
+i."PRUID",i."PRNAME",i."ERUID",i."ERNAME",i."CDUID",i."CDNAME",i."CSDUID",i."CSDNAME",i.geom;
 
 
 
@@ -471,6 +510,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_economic_security_econom
 -- 3.4 Economic Security
 SELECT
 b.sauid AS "Sauid",
+i."PRUID" AS "pruid",
+i."PRNAME" AS "prname",
+i."ERUID" AS "eruid",
+i."ERNAME" AS "ername",
+i."CDUID" AS "cduid",
+i."CDNAME" AS "cdname",
+i."CSDUID" AS "csduid",
+i."CSDNAME" AS "csdname",
 
 -- 3.4.1 Economic Loss - b0
 CAST(CAST(ROUND(CAST(SUM(a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Asset_b0",
@@ -506,4 +553,4 @@ i.geom AS "geom_poly"
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.metrovan_site_exposure b ON a."AssetID" = b.id 
 LEFT JOIN boundaries."Geometry_SAUID" i ON b.sauid = i."SAUIDt"
-GROUP BY b.sauid,i.geom;
+GROUP BY b.sauid,i."PRUID",i."PRNAME",i."ERUID",i."ERNAME",i."CDUID",i."CDNAME",i."CSDUID",i."CSDNAME",i.geom;

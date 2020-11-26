@@ -10,6 +10,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_scenario_hazard_shakemap
 SELECT 
 a."AssetID",
 b.sauid AS "Sauid",
+c."PRUID" AS "pruid",
+c."PRNAME" AS "prname",
+c."ERUID" AS "eruid",
+c."ERNAME" AS "ername",
+c."CDUID" AS "cduid",
+c."CDNAME" AS "cdname",
+c."CSDUID" AS "csduid",
+c."CSDNAME" AS "csdname",
 
 -- 3.1.1 Shakemap Intensity
 f.rupture_name AS "sH_RupName",
@@ -43,7 +51,8 @@ b.geom AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
-LEFT JOIN vs30.vs30_bc_site_model_xref d ON a."AssetID" = d.id
+LEFT JOIN boundaries."Geometry_SAUID" c on b.sauid = c."SAUIDt"
+LEFT JOIN vs30.vs30_can_site_model_xref d ON a."AssetID" = d.id
 LEFT JOIN gmf.shakemap_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr";
 
@@ -58,6 +67,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_damage_s
 SELECT 
 a."AssetID",
 b.sauid AS "Sauid",
+c."PRUID" AS "pruid",
+c."PRNAME" AS "prname",
+c."ERUID" AS "eruid",
+c."ERNAME" AS "ername",
+c."CDUID" AS "cduid",
+c."CDNAME" AS "cdname",
+c."CSDUID" AS "csduid",
+c."CSDNAME" AS "csdname",
 
 -- 3.2.1 Damage State - b0
 CAST(CAST(ROUND(CAST(a."sD_None_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_None_b0",
@@ -113,6 +130,7 @@ b.geom AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id 
+LEFT JOIN boundaries."Geometry_SAUID" c on b.sauid = c."SAUIDt"
 LEFT JOIN lut.collapse_probability g ON b.bldgtype = g.eqbldgtype;
 
 
@@ -126,6 +144,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_recovery
 SELECT 
 a."AssetID",
 b.sauid AS "Sauid",
+c."PRUID" AS "pruid",
+c."PRNAME" AS "prname",
+c."ERUID" AS "eruid",
+c."ERNAME" AS "ername",
+c."CDUID" AS "cduid",
+c."CDNAME" AS "cdname",
+c."CSDUID" AS "csduid",
+c."CSDNAME" AS "csdname",
 
 -- 3.2.1 Recovery - b0
 CAST(CAST(ROUND(CAST(a."sC_Repair_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Repair_b0",
@@ -144,7 +170,8 @@ CAST(CAST(ROUND(CAST(a."sC_DebrisC_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "
 b.geom AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
-LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id;
+LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id
+LEFT JOIN boundaries."Geometry_SAUID" c on b.sauid = c."SAUIDt";
 
 
 
@@ -157,6 +184,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_casualti
 SELECT 
 a."AssetID",
 b.sauid AS "Sauid",
+c."PRUID" AS "pruid",
+c."PRNAME" AS "prname",
+c."ERUID" AS "eruid",
+c."ERNAME" AS "ername",
+c."CDUID" AS "cduid",
+c."CDNAME" AS "cdname",
+c."CSDUID" AS "csduid",
+c."CSDNAME" AS "csdname",
 
 -- 3.3.1 Casualties - b0
 --CAST(CAST(ROUND(CAST(a."sL_Fatalities_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Fatality_b0",
@@ -193,7 +228,8 @@ CAST(CAST(ROUND(CAST(a."sC_CasTransitL4_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC)
 b.geom AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
-LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id;
+LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id
+LEFT JOIN boundaries."Geometry_SAUID" c on b.sauid = c."SAUIDt";
 
 
 
@@ -206,6 +242,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_social_d
 SELECT 
 a."AssetID",
 b.sauid AS "Sauid",
+c."PRUID" AS "pruid",
+c."PRNAME" AS "prname",
+c."ERUID" AS "eruid",
+c."ERNAME" AS "ername",
+c."CDUID" AS "cduid",
+c."CDNAME" AS "cdname",
+c."CSDUID" AS "csduid",
+c."CSDNAME" AS "csdname",
 
 -- 3.3.2 Social Disruption - b0
 -- sC_Shelter -- calculated at sauid level only
@@ -379,7 +423,8 @@ CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_360_r2" AS NUMERIC),6) AS FLOAT) AS NUMERI
 b.geom AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
-LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id;
+LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id
+LEFT JOIN boundaries."Geometry_SAUID" c on b.sauid = c."SAUIDt";
 
 
 
@@ -392,6 +437,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_economic_security_econom
 SELECT 
 a."AssetID",
 b.sauid AS "Sauid",
+c."PRUID" AS "pruid",
+c."PRNAME" AS "prname",
+c."ERUID" AS "eruid",
+c."ERNAME" AS "ername",
+c."CDUID" AS "cduid",
+c."CDNAME" AS "cdname",
+c."CSDUID" AS "csduid",
+c."CSDNAME" AS "csdname",
 
 -- 3.4.1 Economic Loss - b0
 CAST(CAST(ROUND(CAST(a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Asset_b0",
@@ -426,4 +479,5 @@ CAST(CAST(ROUND(CAST(a."sL_Cont_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_
 b.geom AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
-LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id;
+LEFT JOIN exposure.canada_exposure b ON a."AssetID" = b.id
+LEFT JOIN boundaries."Geometry_SAUID" c on b.sauid = c."SAUIDt";

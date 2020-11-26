@@ -10,6 +10,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_scenario_hazard_shakemap
 SELECT 
 b.id_building AS "AssetID",
 b.sauid AS "Sauid",
+z."PRUID" AS "pruid",
+z."PRNAME" AS "prname",
+z."ERUID" AS "eruid",
+z."ERNAME" AS "ername",
+z."CDUID" AS "cduid",
+z."CDNAME" AS "cdname",
+z."CSDUID" AS "csduid",
+z."CSDNAME" AS "csdname",
 
 -- 3.1.1 Shakemap Intensity
 f.rupture_name AS "sH_RupName",
@@ -44,11 +52,13 @@ c.geom_site AS "geom_point"
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.metrovan_site_exposure b ON a."AssetID" = b.id
 LEFT JOIN exposure.metrovan_building_exposure c ON c.id = b.id_building 
-LEFT JOIN vs30.vs30_bc_site_model_metrovan_building_exposure_xref d ON c.id = d.id
-LEFT JOIN gmf.shakemap_{eqScenario}_metrovan_building_xref e ON b.id = e.id
+LEFT JOIN vs30.vs30_can_site_model_metrovan_building_exposure_xref d ON c.id = d.id
+LEFT JOIN gmf.shakemap_{eqScenario}_metrovan_building_xref e ON c.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
+LEFT JOIN boundaries."Geometry_SAUID" z ON b.sauidid = z."SAUIDt"
 GROUP BY b.id_building,b.sauid,f.rupture_name,a."Rupture_Abbr",f.source_type,f.magnitude,f.lon,f.lat,f.depth,f.rake,a."gmpe_Model",e.site_id,e.lon,e.lat,d.vs_lon,d.vs_lat,
-d.vs30,d.z1pt0,d.z2pt5,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.1)",e."gmv_SA(0.2)",e."gmv_SA(0.3)",e."gmv_SA(0.5)",e."gmv_SA(0.6)",e."gmv_SA(1.0)",e."gmv_SA(2.0)",c.geom_site;
+d.vs30,d.z1pt0,d.z2pt5,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.1)",e."gmv_SA(0.2)",e."gmv_SA(0.3)",e."gmv_SA(0.5)",e."gmv_SA(0.6)",e."gmv_SA(1.0)",e."gmv_SA(2.0)",c.geom_site,
+z."PRUID",z."PRNAME",z."ERUID",z."ERNAME",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME";
 
 
 
@@ -61,6 +71,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_damage_s
 SELECT 
 b.id_building AS "AssetID",
 b.sauid AS "Sauid",
+z."PRUID" AS "pruid",
+z."PRNAME" AS "prname",
+z."ERUID" AS "eruid",
+z."ERNAME" AS "ername",
+z."CDUID" AS "cduid",
+z."CDNAME" AS "cdname",
+z."CSDUID" AS "csduid",
+z."CSDNAME" AS "csdname",
 
 -- 3.2.1 Damage State - b0
 CAST(CAST(ROUND(CAST(SUM(a."sD_None_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_None_b0",
@@ -118,7 +136,8 @@ FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.metrovan_site_exposure b ON a."AssetID" = b.id 
 LEFT JOIN lut.collapse_probability g ON b.bldgtype = g.eqbldgtype
 LEFT JOIN exposure.metrovan_building_exposure i ON i.id = b.id_building
-GROUP BY b.id_building,b.sauid,i.geom_site;
+LEFT JOIN boundaries."Geometry_SAUID" z ON b.sauidid = z."SAUIDt"
+GROUP BY b.id_building,b.sauid,i.geom_site,z."PRUID",z."PRNAME",z."ERUID",z."ERNAME",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME";
 
 
 
@@ -131,6 +150,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_building_damage_recovery
 SELECT 
 b.id_building AS "AssetID",
 b.sauid AS "Sauid",
+z."PRUID" AS "pruid",
+z."PRNAME" AS "prname",
+z."ERUID" AS "eruid",
+z."ERNAME" AS "ername",
+z."CDUID" AS "cduid",
+z."CDNAME" AS "cdname",
+z."CSDUID" AS "csduid",
+z."CSDNAME" AS "csdname",
 
 -- 3.2.1 Recovery - b0
 CAST(CAST(ROUND(CAST(AVG(a."sC_Repair_b0")/(AVG(b.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Repair_b0",
@@ -151,7 +178,8 @@ i.geom_site AS "geom_point"
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.metrovan_site_exposure b ON a."AssetID" = b.id
 LEFT JOIN exposure.metrovan_building_exposure i ON i.id = b.id_building
-GROUP BY b.id_building,b.sauid,i.geom_site;
+LEFT JOIN boundaries."Geometry_SAUID" z ON b.sauidid = z."SAUIDt"
+GROUP BY b.id_building,b.sauid,i.geom_site,z."PRUID",z."PRNAME",z."ERUID",z."ERNAME",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME";
 
 
 
@@ -164,6 +192,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_casualti
 SELECT 
 b.id_building AS "AssetID",
 b.sauid AS "Sauid",
+z."PRUID" AS "pruid",
+z."PRNAME" AS "prname",
+z."ERUID" AS "eruid",
+z."ERNAME" AS "ername",
+z."CDUID" AS "cduid",
+z."CDNAME" AS "cdname",
+z."CSDUID" AS "csduid",
+z."CSDNAME" AS "csdname",
 
 -- 3.3.1 Casualties - b0
 --CAST(CAST(ROUND(CAST(a."sL_Fatalities_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Fatality_b0",
@@ -202,7 +238,8 @@ i.geom_site AS "geom_point"
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.metrovan_site_exposure b ON a."AssetID" = b.id
 LEFT JOIN exposure.metrovan_building_exposure i ON i.id = b.id_building
-GROUP BY b.id_building,b.sauid,i.geom_site;
+LEFT JOIN boundaries."Geometry_SAUID" z ON b.sauidid = z."SAUIDt"
+GROUP BY b.id_building,b.sauid,i.geom_site,z."PRUID",z."PRNAME",z."ERUID",z."ERNAME",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME";
 
 
 
@@ -215,6 +252,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_affected_people_social_d
 SELECT 
 b.id_building AS "AssetID",
 b.sauid AS "Sauid",
+z."PRUID" AS "pruid",
+z."PRNAME" AS "prname",
+z."ERUID" AS "eruid",
+z."ERNAME" AS "ername",
+z."CDUID" AS "cduid",
+z."CDNAME" AS "cdname",
+z."CSDUID" AS "csduid",
+z."CSDNAME" AS "csdname",
 
 -- 3.3.2 Social Disruption - b0
 -- sC_Shelter -- calculated at sauid level only
@@ -378,7 +423,8 @@ i.geom_site AS "geom_point"
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.metrovan_site_exposure b ON a."AssetID" = b.id
 LEFT JOIN exposure.metrovan_building_exposure i ON i.id = b.id_building
-GROUP BY b.id_building,b.sauid,i.geom_site;
+LEFT JOIN boundaries."Geometry_SAUID" z ON b.sauidid = z."SAUIDt"
+GROUP BY b.id_building,b.sauid,i.geom_site,z."PRUID",z."PRNAME",z."ERUID",z."ERNAME",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME";
 
 
 
@@ -391,6 +437,14 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_economic_security_econom
 SELECT 
 b.id_building AS "AssetID",
 b.sauid AS "Sauid",
+z."PRUID" AS "pruid",
+z."PRNAME" AS "prname",
+z."ERUID" AS "eruid",
+z."ERNAME" AS "ername",
+z."CDUID" AS "cduid",
+z."CDNAME" AS "cdname",
+z."CSDUID" AS "csduid",
+z."CSDNAME" AS "csdname",
 
 -- 3.4.1 Economic Loss - b0
 CAST(CAST(ROUND(CAST(SUM(a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Asset_b0",
@@ -431,4 +485,5 @@ i.geom_site AS "geom_point"
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN exposure.metrovan_site_exposure b ON a."AssetID" = b.id
 LEFT JOIN exposure.metrovan_building_exposure i ON i.id = b.id_building
-GROUP BY b.id_building,b.sauid,i.geom_site;
+LEFT JOIN boundaries."Geometry_SAUID" z ON b.sauidid = z."SAUIDt"
+GROUP BY b.id_building,b.sauid,i.geom_site,z."PRUID",z."PRNAME",z."ERUID",z."ERNAME",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME";
