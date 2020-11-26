@@ -1,3 +1,11 @@
+-- update shakemap table to add geometry and spatial index
+-- add geometries field to enable PostGIS (WGS1984 SRID = 4326)
+ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN geom geometry(Point,4326);
+UPDATE gmf.shakemap_{eqScenario} SET geom = st_setsrid(st_makepoint(lon,lat),4326);
+
+-- create spatial index
+CREATE INDEX shakemap_{eqScenario}_idx
+ON gmf.shakemap_{eqScenario} using GIST (geom);
 -- add columns to shakemap if missing
 ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pga" float DEFAULT NULL;
 ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_pgv" float DEFAULT NULL;
@@ -10,14 +18,20 @@ ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(1.0)" flo
 ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN IF NOT EXISTS "gmv_SA(2.0)" float DEFAULT NULL;
 
 
--- update shakemap table to add geometry and spatial index
--- add geometries field to enable PostGIS (WGS1984 SRID = 4326)
-ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN geom geometry(Point,4326);
-UPDATE gmf.shakemap_{eqScenario} SET geom = st_setsrid(st_makepoint(lon,lat),4326);
+-- create temp table for xref only on ids matching scenario
+DROP TABLE IF EXISTS dsra.exposure_{eqScenario} CASCADE;
 
--- create spatial index
-CREATE INDEX shakemap_{eqScenario}_idx
-ON gmf.shakemap_{eqScenario} using GIST (geom);
+CREATE TABLE dsra.exposure_{eqScenario} AS 
+(
+SELECT
+a.id,
+a.sauidlon,
+a.sauidlat,
+a.geom
+FROM exposure.canada_exposure a
+RIGHT JOIN dsra.dsra_{eqScenario} b ON a.id = b."AssetID"
+);
+
 
 
 DROP TABLE IF EXISTS gmf.shakemap_{eqScenario} CASCADE;
@@ -43,13 +57,13 @@ a.sauidlon AS "asset_lon",
 a.sauidlat AS "asset_lat",
 ST_Distance(a.geom,b.geom) AS "distance"
 
-FROM exposure.canada_exposure a
+FROM dsra.exposure_{eqScenario} a
 CROSS JOIN LATERAL 
 (
 SELECT
 	site_id,
-	gmv_pgv,
 	gmv_pga,
+	gmv_pgv,
 	"gmv_SA(0.1)",
 	"gmv_SA(0.2)",
 	"gmv_SA(0.3)",
@@ -65,6 +79,8 @@ FROM gmf.shakemap_{eqScenario}
 ORDER BY a.geom <-> geom
 LIMIT 1
 ) AS b;
+
+DROP TABLE IF EXISTS dsra.exposure_{eqScenario} CASCADE;
 
 -- add pkey
 ALTER TABLE gmf.shakemap_{eqScenario} DROP CONSTRAINT IF EXISTS shakemap_{eqScenario}_pkey;
