@@ -19,7 +19,7 @@ CREATE TABLE gmf.shakemap_{eqScenario}
 );
 
 -- import exposure from csv
-COPY gmf.shakemap_{eqScenario} (site_id,gmv_PGA,"gmv_SA(0.1)","gmv_SA(0.2)","gmv_SA(0.3)","gmv_SA(0.5)","gmv_SA(0.6)","gmv_SA(1.0)","gmv_SA(2.0)",lon,lat)
+COPY gmf.shakemap_{eqScenario} ({headerFields})
     FROM '/usr/src/app/{shakemapFile}'
         WITH 
           DELIMITER AS ','

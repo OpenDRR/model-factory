@@ -5,6 +5,7 @@ import argparse
 import configparser
 import psycopg2
 import logging
+import csv
 
 '''
 Script to run Create_table_shakemap.sql
@@ -21,7 +22,15 @@ def main ():
     auth = get_config_params('config.ini')
     args = parse_args()
     eqScenario='{}_{}'.format(args.shakemapFile.split('_')[2],args.shakemapFile.split('_')[3])
-    sqlquerystring = open('Create_table_shakemap.sql', 'r').read().format(**{'shakemapFile':args.shakemapFile, 'eqScenario':eqScenario})
+    with open(args.shakemapFile, "r") as f:
+        reader = csv.reader(f)
+        headerFields = reader.next() 
+
+    headerFields = ','.join(headerFields)
+    sqlquerystring = open('Create_table_shakemap.sql', 'r').read().format(**{
+        'shakemapFile':args.shakemapFile,
+        'eqScenario':eqScenario
+        'headerFields':headerFields})
     try:
         connection = psycopg2.connect(user = auth.get('rds', 'postgres_un'),
                                         password = auth.get('rds', 'postgres_pw'),
