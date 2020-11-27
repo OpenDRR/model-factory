@@ -16,7 +16,7 @@ import json
 import logging
 
 '''
-Script to ingest OpenQuake outputs in csv format from GtHub to single PostGreSQL database. The Script can be run in the following form by 
+Script to ingest OpenQuake outputs in csv format from GitHub to single PostGreSQL database. The Script can be run in the following form by 
 changing the filepaths as appropriate
 python3 DSRA_outputs2postgres_lfs.py --dsraModelDir="https://github.com/OpenDRR/openquake-models/tree/master/deterministic/outputs" --columnsINI="DSRA_outputs2postgres.ini"
 '''
