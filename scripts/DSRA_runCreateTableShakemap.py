@@ -20,7 +20,7 @@ def main ():
     os.chdir(sys.path[0])
     auth = get_config_params('config.ini')
     args = parse_args()
-    eqScenario={}_{}.format(args.shakemapFile.split('_')[2],shakemapFile.split('_')[3]))
+    eqScenario='{}_{}'.format(args.shakemapFile.split('_')[2],shakemapFile.split('_')[3]))
     sqlquerystring = open('Create_table_shakemap.sql', 'r').read().format(**{'shakemapFile':args.shakemapFile, 'eqScenario':eqScenario})
     try:
         connection = psycopg2.connect(user = auth.get('rds', 'postgres_un'),
