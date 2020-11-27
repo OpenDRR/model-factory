@@ -449,9 +449,9 @@ c."CSDNAME" AS "csdname",
 -- 3.4.1 Economic Loss - b0
 CAST(CAST(ROUND(CAST(a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Asset_b0",
 CAST(CAST(ROUND(CAST(a."sL_Str_b0" + a."sL_NStr_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Bldg_b0",
-CAST(CAST(ROUND(CAST(COALESCE(((a."sL_Str_b0" + a."sL_NStr_b0")/(b.number))/NULLIF(((a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0")/(b.number)),0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr_Bldg_b0",
-CAST(CAST(ROUND(CAST((((a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0") - (a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2"))/(b.retrofitting)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr2_BCR_b0",
-CAST(CAST(ROUND(CAST((((a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0") - (a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2")) * ((EXP(-0.03*100)/0.03)/(b.retrofitting))) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "SLr2_RoI",
+CAST(CAST(ROUND(CAST(COALESCE(((a."sL_Str_b0" + a."sL_NStr_b0")/(b.number))/NULLIF(((b.structural + b.nonstructural)/(b.number)),0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr_Bldg_b0",
+CAST(CAST(ROUND(CAST((((a."sL_Str_b0" + a."sL_NStr_b0") - (a."sL_Str_r2" + a."sL_NStr_r2"))/(b.number))/((b.retrofitting)/(b.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr2_BCR_b0",
+CAST(CAST(ROUND(CAST((((a."sL_Str_b0" + a."sL_NStr_b0") - (a."sL_Str_r2" + a."sL_NStr_r2"))/(b.number)) * ((EXP(-0.025*50)/0.025))/((b.retrofitting)/(b.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "SLr2_RoI",
 
 CAST(CAST(ROUND(CAST(a."sL_Str_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Str_b0",
 --CAST(CAST(ROUND(CAST(a."sL_Str_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Str_b0",
@@ -465,7 +465,7 @@ CAST(CAST(ROUND(CAST(a."sL_Cont_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_
 -- 3.4.1 Economic Loss - r2
 CAST(CAST(ROUND(CAST(a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Asset_r2",
 CAST(CAST(ROUND(CAST(a."sL_Str_r2" + a."sL_NStr_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Bldg_r2",
-CAST(CAST(ROUND(CAST(COALESCE(((a."sL_Str_r2" + a."sL_NStr_r2")/(b.number))/NULLIF(((a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2")/(b.number)),0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr_Bldg_r2",
+CAST(CAST(ROUND(CAST(COALESCE(((a."sL_Str_r2" + a."sL_NStr_r2")/(b.number))/NULLIF(((b.structural + b.nonstructural)/(b.number)),0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr_Bldg_r2",
 
 CAST(CAST(ROUND(CAST(a."sL_Str_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Str_r2",
 --CAST(CAST(ROUND(CAST(a."sL_Str_stdv_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Str_r2",
