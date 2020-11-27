@@ -15,7 +15,7 @@ python3 DSRA_runCreateTableShakemap.py --shakemapFile=s_shakemap_IDM6p8_Sidney_2
 #Main Function
 def main ():
     logging.basicConfig(level=logging.INFO,
-                format='%(asctime)s - %(levelname)s - %(message)s', 
+                format='%(asctime)s - %(levelname)s - %(message)s',
                 handlers=[logging.FileHandler('/tmp/{}.log'.format(os.path.splitext(sys.argv[0])[0])),
                             logging.StreamHandler()])
     os.chdir(sys.path[0])
@@ -24,12 +24,17 @@ def main ():
     eqScenario='{}_{}'.format(args.shakemapFile.split('_')[2],args.shakemapFile.split('_')[3])
     with open(args.shakemapFile, "r") as f:
         reader = csv.reader(f)
-        headerFields = reader.next() 
+        headerFields = next(reader)
 
-    headerFields = ','.join(headerFields)
-    sqlquerystring = open('Create_tablegit puh_shakemap.sql', 'r').read().format(**{
+    headerFields = ','.join('"{0}"'.format(w) for w in header)
+    headerFields.replace('"site_id"','site_id')
+    headerFields.replace('"gmv_PGA"','gmv_PGA')
+    headerFields.replace('"lon"','lon')
+    headerFields.replace('"lat"','lat')
+
+    sqlquerystring = open('Create_table_shakemap.sql', 'r').read().format(**{
         'shakemapFile':args.shakemapFile,
-        'eqScenario':eqScenario
+        'eqScenario':eqScenario,
         'headerFields':headerFields})
     try:
         connection = psycopg2.connect(user = auth.get('rds', 'postgres_un'),
@@ -41,7 +46,7 @@ def main ():
         cursor.execute(sqlquerystring)
         #cursor.commit()
         connection.commit()
-    
+
     except (Exception, psycopg2.Error) as error :
         logging.error(error)
 
@@ -70,7 +75,7 @@ def parse_args():
     python3 DSRA_runCreateTableShakemap.py --shakemapFile=s_shakemap_IDM6p8_Sidney_221.csv ''')
     parser.add_argument("--shakemapFile", type=str, help="Shakemap CSV File")
     args = parser.parse_args()
-    
+
     return args
 
 if __name__ == '__main__':
