@@ -27,7 +27,7 @@ def main ():
         headerFields = reader.next() 
 
     headerFields = ','.join(headerFields)
-    sqlquerystring = open('Create_table_shakemap.sql', 'r').read().format(**{
+    sqlquerystring = open('Create_tablegit puh_shakemap.sql', 'r').read().format(**{
         'shakemapFile':args.shakemapFile,
         'eqScenario':eqScenario
         'headerFields':headerFields})
