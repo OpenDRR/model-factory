@@ -20,8 +20,14 @@ def main ():
     os.chdir(sys.path[0])
     auth = get_config_params('config.ini')
     args = parse_args()
-    eqScenario='{}_{}'.format(args.shakemapFile.split('_')[2],args.shakemapFile.split('_')[3])
-    sqlquerystring = open('Create_table_shakemap.sql', 'r').read().format(**{'shakemapFile':args.shakemapFile, 'eqScenario':eqScenario})
+    if args.exposureAgg == 'b':
+        sqlquerystring = open('Create_table_shakemap_update.sql', 'r').read().format(**{'eqScenario':args.eqScenario})
+    elif args.exposureAgg == 's':
+        sqlquerystring = open('Create_table_shakemap_update_ste.sql', 'r').read().format(**{'eqScenario':args.eqScenario})
+    else:
+        logging.error("Exposure Model Aggregation not recognized - Bad input")
+        exit()  
+      
     try:
         connection = psycopg2.connect(user = auth.get('rds', 'postgres_un'),
                                         password = auth.get('rds', 'postgres_pw'),
@@ -59,7 +65,8 @@ def parse_args():
     Can be run from the command line with mandatory arguments 
     Run this script with a command like:
     python3 DSRA_runCreateTableShakemap.py --shakemapFile=s_shakemap_IDM6p8_Sidney_221.csv ''')
-    parser.add_argument("--shakemapFile", type=str, help="Shakemap CSV File")
+    parser.add_argument("--eqScenario", type=str, help="Earthquake Scenario Name")
+    parser.add_argument("--exposureAgg", type=str, help="Exposure Model Aggregatio (b or s)")
     args = parser.parse_args()
     
     return args
