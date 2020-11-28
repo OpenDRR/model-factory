@@ -34,10 +34,10 @@ RIGHT JOIN dsra.dsra_{eqScenario} b ON a.id = b."AssetID"
 
 
 
-DROP TABLE IF EXISTS gmf.shakemap_{eqScenario} CASCADE;
+DROP TABLE IF EXISTS gmf.shakemap_{eqScenario}_xref CASCADE;
 
 -- attach assetID to gmfdata_sitemesh based on closest location
-CREATE TABLE gmf.shakemap_{eqScenario} AS
+CREATE TABLE gmf.shakemap_{eqScenario}_xref AS
 
 SELECT
 a."id",
@@ -83,8 +83,8 @@ LIMIT 1
 DROP TABLE IF EXISTS dsra.exposure_{eqScenario} CASCADE;
 
 -- add pkey
-ALTER TABLE gmf.shakemap_{eqScenario} DROP CONSTRAINT IF EXISTS shakemap_{eqScenario}_pkey;
-ALTER TABLE gmf.shakemap_{eqScenario} ADD PRIMARY KEY("id");
+ALTER TABLE gmf.shakemap_{eqScenario}_xref DROP CONSTRAINT IF EXISTS shakemap_{eqScenario}_pkey;
+ALTER TABLE gmf.shakemap_{eqScenario}_xref ADD PRIMARY KEY("id");
 
 -- create index
-CREATE INDEX shakemap_{eqScenario}_idx ON gmf.shakemap_{eqScenario} (id);
+CREATE INDEX shakemap_{eqScenario}_xref_idx ON gmf.shakemap_{eqScenario}_xref (id);

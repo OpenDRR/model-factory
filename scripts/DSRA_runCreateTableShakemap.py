@@ -26,11 +26,11 @@ def main ():
         reader = csv.reader(f)
         headerFields = next(reader)
 
-    headerFields = ','.join('"{0}"'.format(w) for w in header)
-    headerFields.replace('"site_id"','site_id')
-    headerFields.replace('"gmv_PGA"','gmv_PGA')
-    headerFields.replace('"lon"','lon')
-    headerFields.replace('"lat"','lat')
+    headerFields = ','.join('"{0}"'.format(w) for w in headerFields)
+    headerFields = headerFields.replace('"site_id"','site_id')
+    headerFields = headerFields.replace('"gmv_PGA"','gmv_PGA')
+    headerFields = headerFields.replace('"lon"','lon')
+    headerFields = headerFields.replace('"lat"','lat')
 
     sqlquerystring = open('Create_table_shakemap.sql', 'r').read().format(**{
         'shakemapFile':args.shakemapFile,
