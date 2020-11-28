@@ -23,9 +23,9 @@ def main ():
     auth = get_config_params('config.ini')
     args = parse_args()
     if args.exposureModel == 'site':
-        sqlquerystring = open('Create_scenario_risk_{aggregation}_Indicators_ALL_ste.sql'.format(**{'aggregation':args.aggregation.lower()}), 'r').read().format(**{'eqScenario':args.eqScenario})
+        sqlquerystring = open('Create_scenario_risk_{aggregation}_Indicators_ALL_ste_shkmp.sql'.format(**{'aggregation':args.aggregation.lower()}), 'r').read().format(**{'eqScenario':args.eqScenario})
     elif args.exposureModel == 'building':
-        sqlquerystring = open('Create_scenario_risk_{aggregation}_Indicators_ALL.sql'.format(**{'aggregation':args.aggregation.lower()}), 'r').read().format(**{'eqScenario':args.eqScenario})
+        sqlquerystring = open('Create_scenario_risk_{aggregation}_Indicators_ALL_shkmp.sql'.format(**{'aggregation':args.aggregation.lower()}), 'r').read().format(**{'eqScenario':args.eqScenario})
 
     
     try:
