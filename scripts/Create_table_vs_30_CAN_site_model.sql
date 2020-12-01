@@ -14,8 +14,8 @@ CREATE TABLE vs30.vs30_can_site_model(
 );
 
 -- import exposure from csv
-COPY vs30.vs30_can_site_model (lon, lat, vs30)
-    FROM '/usr/src/app/site-vgrid_CA.txt'
+COPY vs30.vs30_can_site_model (lon, lat, vs30, z1pt0, z2pt5)
+    FROM '/usr/src/app/site-vgrid_CA.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
