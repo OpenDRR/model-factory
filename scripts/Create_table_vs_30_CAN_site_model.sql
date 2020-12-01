@@ -7,13 +7,15 @@ DROP TABLE IF EXISTS vs30.vs30_can_site_model;
 CREATE TABLE vs30.vs30_can_site_model(
     lon float,
     lat float,
-    vs30 float
+    vs30 float,
+    z1pt0 float,
+    z2pt5 float
     
 );
 
 -- import exposure from csv
 COPY vs30.vs30_can_site_model (lon, lat, vs30)
-    FROM '/usr/src/app/vs30_CAN_site_model.txt'
+    FROM '/usr/src/app/site-vgrid_CA.txt'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
