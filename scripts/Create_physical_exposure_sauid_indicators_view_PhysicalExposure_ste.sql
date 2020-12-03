@@ -1,9 +1,9 @@
 -- create schema for new scenario
-CREATE SCHEMA IF NOT EXISTS results_nhsl_physical_exposure;
+CREATE SCHEMA IF NOT EXISTS results_nhsl_metrovan_physical_exposure;
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_settled_area_s CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_settled_area_s AS 
+DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_settled_area_s CASCADE;
+CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_settled_area_s AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -33,7 +33,7 @@ CAST(CAST(ROUND(CAST(AVG(a.popdu) AS NUMERIC),6) AS FLOAT) AS NUMERIC) as "E_Peo
 d.geom AS "geom_poly"
 --d.geompoint AS "geom_point"
 
-FROM exposure.canada_exposure a
+FROM exposure.metrovan_building_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
 GROUP BY a.sauid,a.sauidlon,a.sauidlat,a.landuse,a.sauid_km2,a.sauid_ha,c.censuspop,c.censusbldg,c.censusdu,c.sactype,c.landuse,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",
@@ -42,8 +42,8 @@ d."CSDNAME",d.geom;
 
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_building_function_s CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_building_function_s AS 
+DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_building_function_s CASCADE;
+CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_building_function_s AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -76,15 +76,15 @@ CAST(CAST(ROUND(CAST((SUM(CASE WHEN a.genocc ='Residential-MD' THEN a.number ELS
 d.geom AS "geom_poly"
 --d.geompoint AS "geom_point"
 
-FROM exposure.canada_exposure a
+FROM exposure.metrovan_building_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
 GROUP BY a.sauid,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_building_type_s CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_building_type_s AS 
+DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_building_type_s CASCADE;
+CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_building_type_s AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -114,15 +114,15 @@ CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.eqdeslev ='HC' THEN a.number ELSE 0 END) AS
 d.geom AS "geom_poly"
 --d.geompoint AS "geom_point"
 
-FROM exposure.canada_exposure a
+FROM exposure.metrovan_building_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
 GROUP BY a.sauid,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_people_s CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_people_s AS 
+DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_people_s CASCADE;
+CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_people_s AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -144,15 +144,15 @@ CAST(CAST(ROUND(CAST(SUM(a.transit) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_
 d.geom AS "geom_poly"
 --d.geompoint AS "geom_point"
 
-FROM exposure.canada_exposure a
+FROM exposure.metrovan_building_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
 GROUP BY a.sauid,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_assets_s CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_assets_s AS 
+DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_assets_s CASCADE;
+CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_assets_s AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -176,15 +176,15 @@ CAST(CAST(ROUND(CAST(SUM(a.contents) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et
 d.geom AS "geom_poly"
 --d.geompoint AS "geom_point"
 
-FROM exposure.canada_exposure a
+FROM exposure.metrovan_building_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
 GROUP BY a.sauid,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
 
 
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_s CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_s AS 
+DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_all_indicators_s CASCADE;
+CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_all_indicators_s AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -264,8 +264,8 @@ CAST(CAST(ROUND(CAST(SUM(a.contents) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et
 d.geom AS "geom_poly"
 --d.geompoint AS "geom_point"
 
-FROM exposure.canada_exposure a
+FROM exposure.metrovan_building_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" d on a.sauid = d."SAUIDt"
-GROUP BY a.sauid,a.sauidlon,a.sauidlat,a.landuse,a.sauid_km2,a.sauid_ha,c.censuspop,c.censusbldg,c.censusdu,c.sactype,c.landuse,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",
-d."CDUID",d."CDNAME",d."CSDUID",d."CSDNAME",d.geom;
+GROUP BY a.sauid,a.sauidlon,a.sauidlat,a.landuse,a.sauid_km2,a.sauid_ha,c.censuspop,c.censusbldg,c.censusdu,c.sactype,c.landuse,d."PRUID",d."PRNAME",d."ERUID",d."ERNAME",d."CDUID",d."CDNAME",d."CSDUID",
+d."CSDNAME",d.geom;

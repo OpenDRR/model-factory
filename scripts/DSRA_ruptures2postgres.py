@@ -44,7 +44,7 @@ def main ():
         repo_list = []
 
         for item in repo_dict:
-            if item['type'] == 'file' and 'rupture' in item['name']:
+            if item['type'] == 'file' and 'rupture' in item['name'] and 'xml' in item['name']:
                 repo_list.append(item['name'])
         logging.info(repo_list)
     except requests.exceptions.RequestException as e:

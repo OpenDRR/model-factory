@@ -1,6 +1,6 @@
 -- script to generate retrofit costs table
 
-DROP TABLE IF EXISTS lut.retrofit_costs;
+DROP TABLE IF EXISTS lut.retrofit_costs CASCADE;
 
 -- create table
 CREATE TABLE lut.retrofit_costs(

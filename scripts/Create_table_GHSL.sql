@@ -1,6 +1,6 @@
 -- script to generate GHSL table
 
-DROP TABLE IF EXISTS ghsl.ghsl_mh_intensity_ghsl;
+DROP TABLE IF EXISTS ghsl.ghsl_mh_intensity_ghsl CASCADE;
 
 -- create table
 CREATE TABLE ghsl.ghsl_mh_intensity_ghsl(

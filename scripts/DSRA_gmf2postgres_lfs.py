@@ -80,10 +80,10 @@ def processGMF(repo_list, engine, auth, url, columnConfigParser, args):
         dfGmf = pd.read_csv(StringIO(response.content.decode(response.encoding)),
                             sep=',',
                             index_col=False,
-                            usecols=gmfInputFieldNames,
+                            #usecols=gmfInputFieldNames,
                             low_memory=False,
                             thousands=',')
-        [dfGmf.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(gmfInputFieldNames, gmfOutputFieldNames)]
+        #[dfGmf.rename(columns={oldcol:newcol}, inplace=True) for oldcol, newcol in zip(gmfInputFieldNames, gmfOutputFieldNames)]
         dfGmf.to_sql('s_gmfdata_{}'.format(args.eqScenario).lower(),
                             engine,
                             if_exists='replace',

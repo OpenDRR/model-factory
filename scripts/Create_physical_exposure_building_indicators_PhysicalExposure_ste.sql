@@ -1,9 +1,9 @@
 -- create schema for new scenario
-CREATE SCHEMA IF NOT EXISTS results_nhsl_physical_exposure;
+CREATE SCHEMA IF NOT EXISTS results_nhsl_metrovan_physical_exposure;
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_building_b CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_building_b AS 
+DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_building_b CASCADE;
+CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_building_b AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -39,16 +39,16 @@ a.eqdeslev AS "E_BldgDesLev",
 a.bldepoch AS "E_BldgEpoch",
 a.ssc_zone AS "SSC_Zone",
 
-a.geom AS "geom_point"
+a.geom_site AS "geom_point"
 
-FROM exposure.canada_exposure a
+FROM exposure.metrovan_building_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" b on a.sauid = b."SAUIDt";
 
 
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_people_b CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_people_b AS 
+DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_people_b CASCADE;
+CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_people_b AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -68,16 +68,16 @@ CAST(CAST(ROUND(CAST(a.day AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_PopDay",
 CAST(CAST(ROUND(CAST(a.night AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_PopNight",
 CAST(CAST(ROUND(CAST(a.transit AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_PopTransit",
 
-a.geom AS "geom_point"
+a.geom_site AS "geom_point"
 
-FROM exposure.canada_exposure a
+FROM exposure.metrovan_building_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" b on a.sauid = b."SAUIDt";
 
 
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_assets_b CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_assets_b AS 
+DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_assets_b CASCADE;
+CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_assets_b AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -100,16 +100,16 @@ CAST(CAST(ROUND(CAST(a.nonstructural AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_
 CAST(CAST(ROUND(CAST(a.contents AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_ContValue",
 CAST(CAST(ROUND(CAST(a.retrofitting AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_RetrofitCost",
 
-a.geom AS "geom_point"
+a.geom_site AS "geom_point"
 
-FROM exposure.canada_exposure a
+FROM exposure.metrovan_building_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" b on a.sauid = b."SAUIDt";
 
 
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b AS 
+DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_all_indicators_b CASCADE;
+CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_all_indicators_b AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -162,7 +162,7 @@ CAST(CAST(ROUND(CAST(a.nonstructural AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_
 CAST(CAST(ROUND(CAST(a.contents AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_ContValue",
 CAST(CAST(ROUND(CAST(a.retrofitting AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_RetrofitCost",
 
-a.geom AS "geom_point"
+a.geom_site AS "geom_point"
 
-FROM exposure.canada_exposure a
+FROM exposure.metrovan_building_exposure a
 LEFT JOIN boundaries."Geometry_SAUID" b on a.sauid = b."SAUIDt";

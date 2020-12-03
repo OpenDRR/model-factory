@@ -1,7 +1,7 @@
 
 -- version 2 replaces old version with updated references, old column names are retained from v1 to keep scripts running correctly.
 
-DROP TABLE IF EXISTS mh.mh_intensity_canada;
+DROP TABLE IF EXISTS mh.mh_intensity_canada CASCADE;
 
 -- create table
 CREATE TABLE mh.mh_intensity_canada(

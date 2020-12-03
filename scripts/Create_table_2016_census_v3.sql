@@ -1,6 +1,6 @@
 -- script to generate Canada exposure table
 
-DROP TABLE IF EXISTS census.census_2016_canada;
+DROP TABLE IF EXISTS census.census_2016_canada CASCADE;
 
 -- create table
 CREATE TABLE census.census_2016_canada(

@@ -7,10 +7,8 @@ import psycopg2
 import logging
 
 '''
-Script to create DSRA indicator views 
-Can be run from the command line with mandatory arguments 
-Run this script with a command like:
-python3 DSRA_createRiskProfileIndicators.py --eqScenario=idm7p1_jdf --aggregation=building --exposureModel=building
+Script to run Create_table_shakemap.sql
+python3 DSRA_runCreateTableShakemap.py --shakemapFile=s_shakemap_IDM6p8_Sidney_221.csv
 '''
 
 #Main Function
@@ -22,12 +20,14 @@ def main ():
     os.chdir(sys.path[0])
     auth = get_config_params('config.ini')
     args = parse_args()
-    if args.exposureModel == 'site':
-        sqlquerystring = open('Create_scenario_risk_{aggregation}_Indicators_ALL_ste_shkmp.sql'.format(**{'aggregation':args.aggregation.lower()}), 'r').read().format(**{'eqScenario':args.eqScenario})
-    elif args.exposureModel == 'building':
-        sqlquerystring = open('Create_scenario_risk_{aggregation}_Indicators_ALL_shkmp.sql'.format(**{'aggregation':args.aggregation.lower()}), 'r').read().format(**{'eqScenario':args.eqScenario})
-
-    
+    if args.exposureAgg == 'b':
+        sqlquerystring = open('Create_table_shakemap_update.sql', 'r').read().format(**{'eqScenario':args.eqScenario})
+    elif args.exposureAgg == 's':
+        sqlquerystring = open('Create_table_shakemap_update_ste.sql', 'r').read().format(**{'eqScenario':args.eqScenario})
+    else:
+        logging.error("Exposure Model Aggregation not recognized - Bad input")
+        exit()  
+      
     try:
         connection = psycopg2.connect(user = auth.get('rds', 'postgres_un'),
                                         password = auth.get('rds', 'postgres_pw'),
@@ -36,6 +36,7 @@ def main ():
                                         database = auth.get('rds', 'postgres_db'))
         cursor = connection.cursor()
         cursor.execute(sqlquerystring)
+        #cursor.commit()
         connection.commit()
     
     except (Exception, psycopg2.Error) as error :
@@ -59,14 +60,13 @@ def get_config_params(args):
     return configParseObj
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='''Script to create DSRA indicator views 
+    parser = argparse.ArgumentParser(description='''Script to create DSRA shakemap 
+    table in PostGIS database from raw CSV file
     Can be run from the command line with mandatory arguments 
     Run this script with a command like:
-    python3 DSRA_createRiskProfileIndicators.py --eqScenario=idm7p1_jdf --aggregation=building --exposureModel=building ''')
-    parser.add_argument("--eqScenario", type=str, help="Earthquake scenario id")
-    parser.add_argument("--aggregation", type=str, help="building, sauid or site_level")
-    parser.add_argument("--exposureModel", type=str, help="Exposure Model which scenario is based on (building or site)")
-
+    python3 DSRA_runCreateTableShakemap.py --shakemapFile=s_shakemap_IDM6p8_Sidney_221.csv ''')
+    parser.add_argument("--eqScenario", type=str, help="Earthquake Scenario Name")
+    parser.add_argument("--exposureAgg", type=str, help="Exposure Model Aggregatio (b or s)")
     args = parser.parse_args()
     
     return args
