@@ -150,7 +150,7 @@ b.lon,
 b.lat,
 a.sauidlon AS "asset_lon",
 a.sauidlat AS "asset_lat",
-ST_Distance(a.geom,b.geom) AS "distance"
+ST_Distance(a.geom_site,b.geom) AS "distance"
 
 FROM exposure.metrovan_sauid_exposure a
 CROSS JOIN LATERAL 
