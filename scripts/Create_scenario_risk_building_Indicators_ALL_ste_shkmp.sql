@@ -1,6 +1,29 @@
 -- create schema for new scenario
 CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
+
+
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_shakemap_{eqScenario};
+
+CREATE VIEW results_dsra_{eqScenario}.dsra_shakemap_{eqScenario} AS
+(
+SELECT 
+site_id,
+"gmv_SA(0.1)",
+"gmv_SA(0.2)",
+"gmv_SA(0.3)",
+"gmv_SA(0.5)",
+"gmv_SA(1.0)",
+"gmv_SA(2.0)",
+lon,
+lat,
+geom,
+gmv_pgv
+FROM gmf.shakemap_{eqScenario}
+);
+
+
+
 -- create scenario risk building indicators
 DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_scenario_hazard_shakemap_intensity_b CASCADE;
 CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_scenario_hazard_shakemap_intensity_b AS 
