@@ -180,4 +180,4 @@ ALTER TABLE gmf.shakemap_{eqScenario}_metrovan_sauid_xref DROP CONSTRAINT IF EXI
 ALTER TABLE gmf.shakemap_{eqScenario}_metrovan_sauid_xref ADD PRIMARY KEY(sauid);
 
 -- create index
-CREATE INDEX shakemap_{eqScenario}_metrovan_sauid_xref_idx ON gmf.shakemap_{eqScenario} (sauid);
+CREATE INDEX shakemap_{eqScenario}_metrovan_sauid_xref_idx ON gmf.shakemap_{eqScenario}_metrovan_sauid_xref (sauid);
