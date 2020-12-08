@@ -3,9 +3,9 @@ CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
 
 
-DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_shakemap_{eqScenario};
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap;
 
-CREATE VIEW results_dsra_{eqScenario}.dsra_shakemap_{eqScenario} AS
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap AS
 (
 SELECT 
 site_id,
