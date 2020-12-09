@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS exposure.canada_exposure CASCADE;
 -- create table
 CREATE TABLE exposure.canada_exposure(
     PRIMARY KEY (id),
+    objectid varchar,
     id varchar,
     SauidLat float,
     SauidLon float,
@@ -49,8 +50,8 @@ CREATE TABLE exposure.canada_exposure(
 );
 
 -- import exposure from csv
-COPY exposure.canada_exposure (id,SauidLat,SauidLon,Sauid_km2,Sauid_ha,LandUse,taxonomy,number,structural,nonstructural,contents,retrofitting,day,night,transit,GenOcc,OccClass1,OccClass2,PopDU,GenType,BldgType,NumFloors,Bldg_ft2,BldYear,BldEpoch,SSC_Zone,EqDesLev,sauid,dauid,adauid,fsauid,csduid,csdname,cduid,cdname,SAC,eruid,ername,pruid,prname)
-    FROM '/usr/src/app/BldgExpRef_CA_master_v3.csv'
+COPY exposure.canada_exposure (varchar,id,SauidLat,SauidLon,Sauid_km2,Sauid_ha,LandUse,taxonomy,number,structural,nonstructural,contents,retrofitting,day,night,transit,GenOcc,OccClass1,OccClass2,PopDU,GenType,BldgType,NumFloors,Bldg_ft2,BldYear,BldEpoch,SSC_Zone,EqDesLev,sauid,dauid,adauid,fsauid,csduid,csdname,cduid,cdname,SAC,eruid,ername,pruid,prname)
+    FROM '/usr/src/app/BldgExpRef_CA_master_v3p1.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
