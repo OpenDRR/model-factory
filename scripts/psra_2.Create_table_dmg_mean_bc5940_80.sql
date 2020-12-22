@@ -178,7 +178,7 @@ structural_complete float
 -- import exposure from csv
 COPY psra_bc.psra_bc5940_80_ed_dmg_mean_b0(asset_id,"BldEpoch","BldgType","EqDesLev","GenOcc","GenType","LandUse","OccClass","SAC","SSC_Zone","SauidID",adauid,cdname,cduid,csdname,csduid,dauid,ername,eruid,fsauid,prname,
 pruid,sauid,taxonomy,lon,lat,structural_no_damage,structural_slight,structural_moderate,structural_extensive,structural_complete)
-    FROM '/usr/src/app/eDamage/BC/eD_bc5940-80_damages-mean_b0.csv'
+    FROM '/usr/src/app/eDamage/BC/eD_BC5940-80_damages-mean_b0.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
@@ -223,7 +223,7 @@ structural_complete float
 -- import exposure from csv
 COPY psra_bc.psra_bc5940_80_ed_dmg_mean_r2(asset_id,"BldEpoch","BldgType","EqDesLev","GenOcc","GenType","LandUse","OccClass","SAC","SSC_Zone","SauidID",adauid,cdname,cduid,csdname,csduid,dauid,ername,eruid,fsauid,prname,
 pruid,sauid,taxonomy,lon,lat,structural_no_damage,structural_slight,structural_moderate,structural_extensive,structural_complete)
-    FROM '/usr/src/app/eDamage/BC/eD_bc5940-80_damages-mean_r2.csv'
+    FROM '/usr/src/app/eDamage/BC/eD_BC5940-80_damages-mean_r2.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
