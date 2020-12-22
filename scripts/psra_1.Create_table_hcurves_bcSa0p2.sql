@@ -35,7 +35,7 @@ depth float,
 COPY psra_bc.psra_bc_hcurves_sa0p2(lon,lat,depth,"poe_0.0500000" ,"poe_0.0637137" ,"poe_0.0811888" ,"poe_0.1034569" ,"poe_0.1318325" ,"poe_0.1679909" ,
 "poe_0.2140666" ,"poe_0.2727797" ,"poe_0.3475964" ,"poe_0.4429334" ,"poe_0.5644189" ,"poe_0.7192249" ,"poe_0.9164904","poe_1.1678607" ,
 "poe_1.4881757" ,"poe_1.8963451" ,"poe_2.4164651" ,"poe_3.0792411" ,"poe_3.9237999" ,"poe_5.0000000" )
-    FROM '/usr/src/app/cHazard/BC/cH_BC_hcurves_sa0p2.csv'
+    FROM '/usr/src/app/cHazard/BC/cH_BC_hcurves_Sa0p2.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
