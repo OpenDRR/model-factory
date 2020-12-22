@@ -37,7 +37,7 @@ structural float
 
 -- import exposure from csv
 COPY psra_bc.psra_bc5920a2_avg_losses_stats_b0(asset_id,"BldEpoch","BldgType","EqDesLev","GenOcc","GenType","LandUse","OccClass","SAC","SSC_Zone","SauidID",adauid,cdname,cduid,csdname,csduid,dauid,ername,eruid,fsauid,prname,pruid,sauid,taxonomy,lon,lat,contents,nonstructural,structural)
-    FROM '/usr/src/app/ebrisk/bc/ebR_BC5920a2_avg_losses-stats_b0.csv'
+    FROM '/usr/src/app/ebRisk/BC/ebR_BC5920A2_avg_losses-stats_b0.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
@@ -80,7 +80,7 @@ structural float
 
 -- import exposure from csv
 COPY psra_bc.psra_bc5920a2_avg_losses_stats_r2(asset_id,"BldEpoch","BldgType","EqDesLev","GenOcc","GenType","LandUse","OccClass","SAC","SSC_Zone","SauidID",adauid,cdname,cduid,csdname,csduid,dauid,ername,eruid,fsauid,prname,pruid,sauid,taxonomy,lon,lat,contents,nonstructural,structural)
-    FROM '/usr/src/app/ebrisk/bc/ebR_BC5920a2_avg_losses-stats_r2.csv'
+    FROM '/usr/src/app/ebRisk/BC/ebR_BC5920A2_avg_losses-stats_r2.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;

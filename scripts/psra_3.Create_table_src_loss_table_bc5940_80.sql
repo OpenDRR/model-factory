@@ -11,7 +11,7 @@ trt varchar
 
 -- import exposure from csv
 COPY psra_bc.psra_bc5940_80_src_loss_b0(source,loss_type,loss_value,trt)
-    FROM '/usr/src/app/ebrisk/bc/ebR_BC5940-80_src_loss_table_b0.csv'
+    FROM '/usr/src/app/ebRisk/BC/ebR_BC5940-80_src_loss_table_b0.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
@@ -28,7 +28,7 @@ trt varchar
 
 -- import exposure from csv
 COPY psra_bc.psra_bc5940_80_src_loss_r2(source,loss_type,loss_value,trt)
-    FROM '/usr/src/app/ebrisk/bc/ebR_BC5940-80_src_loss_table_r2.csv'
+    FROM '/usr/src/app/ebRisk/BC/ebR_BC5940-80_src_loss_table_r2.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
