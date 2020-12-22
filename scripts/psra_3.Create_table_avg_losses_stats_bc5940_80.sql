@@ -80,7 +80,7 @@ structural float
 
 -- import exposure from csv
 COPY psra_bc.psra_bc5940_80_avg_losses_stats_r2(asset_id,"BldEpoch","BldgType","EqDesLev","GenOcc","GenType","LandUse","OccClass","SAC","SSC_Zone","SauidID",adauid,cdname,cduid,csdname,csduid,dauid,ername,eruid,fsauid,prname,pruid,sauid,taxonomy,lon,lat,contents,nonstructural,structural)
-    FROM '/usr/src/app/ebRisk/BCc/ebR_BC5940-80_avg_losses-stats_r2.csv'
+    FROM '/usr/src/app/ebRisk/BC/ebR_BC5940-80_avg_losses-stats_r2.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
