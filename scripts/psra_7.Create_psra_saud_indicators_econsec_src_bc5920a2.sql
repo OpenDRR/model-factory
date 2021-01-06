@@ -46,46 +46,26 @@ GROUP BY a.sauid,z."PRUID",z."PRNAME",z."ERUID",z."ERNAME",z."CDUID",z."CDNAME",
 
 
 -- create psra indicators
-DROP VIEW IF EXISTS results_psra_bc.psra_bc5920a2_economic_security_pml_b0_s CASCADE;
-CREATE VIEW results_psra_bc.psra_bc5920a2_economic_security_pml_b0_s AS
+DROP VIEW IF EXISTS results_psra_bc.psra_bc5920a2_economic_security_pml_s CASCADE;
+CREATE VIEW results_psra_bc.psra_bc5920a2_economic_security_pml_s AS
 
 -- 2.0 Seismic Risk (PSRA)
 -- 2.4 Economic Security
 SELECT
 a.fsauid,
 
--- 2.4.2 Probable Maximum Loss - b0
-a.loss_value AS "ePML",
-a.loss_ratio AS "ePMLr",
+-- 2.4.2 Probable Maximum Loss
+a.loss_value_b0 AS "ePML_b0",
+a.loss_ratio_b0 AS "ePMLr_b0",
+a.loss_value_r2 AS "ePML_r2",
+a.loss_ratio_r2 AS "ePMLr_r2",
 a.loss_type AS "ePML_type",
 a.return_period AS "ePML_Period",
 a.annual_frequency_of_exceedence AS "ePML_Probability",
 a."GenOcc" AS "ePML_OccGen",
 a."GenType" AS "ePML_BldgType"
 
-FROM psra_bc.psra_bc5920a2_agg_curves_stats_b0 a;
-
-
-
--- create psra indicators
-DROP VIEW IF EXISTS results_psra_bc.psra_bc5920a2_economic_security_pml_r2_s CASCADE;
-CREATE VIEW results_psra_bc.psra_bc5920a2_economic_security_pml_r2_s AS
-
--- 2.0 Seismic Risk (PSRA)
--- 2.4 Economic Security
-SELECT
-a.fsauid,
-
--- 2.4.2 Probable Maximum Loss - r2
-a.loss_value AS "ePML",
-a.loss_ratio AS "ePMLr",
-a.loss_type AS "ePML_type",
-a.return_period AS "ePML_Period",
-a.annual_frequency_of_exceedence AS "ePML_Probability",
-a."GenOcc" AS "ePML_OccGen",
-a."GenType" AS "ePML_BldgType"
-
-FROM psra_bc.psra_bc5920a2_agg_curves_stats_r2 a;
+FROM psra_bc.psra_bc5920a2_agg_curves_stats a;
 
 
 
