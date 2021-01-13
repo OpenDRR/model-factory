@@ -19,11 +19,11 @@ CREATE TABLE gmf.shakemap_{eqScenario}
 );
 
 -- import exposure from csv
-COPY gmf.shakemap_{eqScenario} ({headerFields})
-    FROM '/usr/src/app/{shakemapFile}'
-        WITH 
-          DELIMITER AS ','
-          CSV HEADER ;
+-- \copy gmf.shakemap_{eqScenario} ({headerFields})
+--     FROM '/usr/src/app/{shakemapFile}'
+--         WITH 
+--           DELIMITER AS ','
+--           CSV HEADER ;
 
 /*
 -- add geometries field to enable PostGIS (WGS1984 SRID = 4326)

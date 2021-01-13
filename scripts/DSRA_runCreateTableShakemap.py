@@ -31,6 +31,13 @@ def main ():
     headerFields = headerFields.replace('"gmv_PGA"','gmv_PGA')
     headerFields = headerFields.replace('"lon"','lon')
     headerFields = headerFields.replace('"lat"','lat')
+    # headerFields = headerFields.replace('"gmv_SA(0.1)"', 'gmv_SA(0.1)')
+    # headerFields = headerFields.replace('"gmv_SA(0.2)"', 'gmv_SA(0.2)')
+    # headerFields = headerFields.replace('"gmv_SA(0.3)"', 'gmv_SA(0.3)')
+    # headerFields = headerFields.replace('"gmv_SA(0.5)"', 'gmv_SA(0.5)')
+    # headerFields = headerFields.replace('"gmv_SA(0.6)"', 'gmv_SA(0.6)')
+    # headerFields = headerFields.replace('"gmv_SA(1.0)"', 'gmv_SA(1.0)')
+    # headerFields = headerFields.replace('"gmv_SA(2.0)"', 'gmv_SA(2.0)')
 
     sqlquerystring = open('Create_table_shakemap.sql', 'r').read().format(**{
         'shakemapFile':args.shakemapFile,
@@ -54,6 +61,23 @@ def main ():
         if(connection):
             cursor.close()
             connection.close()
+            
+    systemCall='''psql -h  db-opendrr
+                -U  ${{POSTGRES_USER}} 
+                -d ${{DB_NAME}} 
+                -a 
+                -c "\copy gmf.shakemap_{eqScenario} ({headerFields}) 
+                        FROM '/usr/src/app/{shakemapFile}' 
+                            WITH 
+                                DELIMITER AS ',' 
+                                CSV HEADER ;"'''.format(**{
+                                    'shakemapFile':args.shakemapFile,
+                                    'eqScenario':eqScenario,
+                                    'headerFields':headerFields})
+    systemCall = ' '.join(systemCall.split())
+    systemCall = systemCall.replace('PGA,"gmv', r'PGA,\"gmv')
+    systemCall = systemCall.replace(')","gmv', r')\",\"gmv')
+    systemCall = systemCall.replace(')",lon', r')\",lon')
 
     return
 
