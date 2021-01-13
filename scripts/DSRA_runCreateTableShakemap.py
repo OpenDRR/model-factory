@@ -78,7 +78,7 @@ def main ():
     systemCall = systemCall.replace('PGA,"gmv', r'PGA,\"gmv')
     systemCall = systemCall.replace(')","gmv', r')\",\"gmv')
     systemCall = systemCall.replace(')",lon', r')\",lon')
-
+    os.system(systemCall)
     return
 
 
