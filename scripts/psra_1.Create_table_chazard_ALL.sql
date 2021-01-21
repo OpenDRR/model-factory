@@ -383,7 +383,7 @@ lat float,
 
 -- import exposure from csv
 COPY psra_{prov}.psra_{prov}_hmaps(lon,lat,"PGA_0.02","PGA_0.1","SA(0.1)_0.02","SA(0.1)_0.1","SA(0.2)_0.02","SA(0.2)_0.1","SA(0.3)_0.02","SA(0.3)_0.1","SA(0.5)_0.02","SA(0.5)_0.1","SA(0.6)_0.02","SA(0.6)_0.1","SA(1.0)_0.02","SA(1.0)_0.1","SA(10.0)_0.02","SA(10.0)_0.1","SA(2.0)_0.02","SA(2.0)_0.1","SA(5.0)_0.02","SA(5.0)_0.1")
-    FROM 'D:\Workspace\data\psra_new_datasets\1_cHazard\{prov}\cH_{prov}_hmaps.csv'
+    FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
