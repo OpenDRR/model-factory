@@ -1,52 +1,64 @@
 #!/usr/bin/env python
-import sqlalchemy as db
-import sqlalchemy.orm as orm
+
 import pandas as pd
 import numpy as np
-from io import StringIO
 import csv
 import glob 
 import os
+import re
 import sys
 import argparse
 import configparser
-import requests
-import json
 import logging
 
 '''
-python 
+python script to merge source loss tables for Provinces and territories
+where PSRA runs have een split up by economic region or sub regions
+can be run from the command line with mandatory arguments like:
+python3 PSRA_combineSrcLossTable.py --srcLossDir=/usr/src/app/ebRisk/AB/
 '''
 
 def main():
     args = parse_args()
     os.chdir(args.srcLossDir)
-    erFileList = glob.glob('*src_loss_table_*.csv')
-dfFinal = pd.read_csv(erFileList[0], usecols = ['source', 'loss_type', 'trt'])
-aggregateLossList=[]
 
-for erFile in erFileList:
-    dfTemp = pd.read_csv(erFile)
-    er = erFile.split('_')[1]
-    retrofit = erFile.split('_')[-1].split('.')[0]
-    dfTemp = dfTemp.rename(columns={"loss_value": "loss_value_{er}_{retrofit}".format(**{'er':er,
-                                                                                            'retrofit':retrofit})})
-    aggregateLossList.append("loss_value_{er}_{retrofit}".format(**{'er':er,
-                                                                    'retrofit':retrofit}))
-    dfFinal = pd.merge(dfFinal,
-                        dfTemp,
-                        how='left',
-                        left_on=['source', 'loss_type', 'trt'],
-                        right_on=['source', 'loss_type', 'trt'])
+    for retrofit in 'b0', 'r2':
+        erFileList = glob.glob('*src_loss_table_{}.csv'.format(retrofit))
+        erFileList.sort()
+        
+        with open(erFileList[0], newline='') as f:
+            reader = csv.reader(f)
+            columns = next(reader)
 
-dfFinal['loss_value'] = dfFinal[aggregateLossList].sum(axis=1)
-dfFinal.to_csv('test.csv', index_col=False)
+        columns.append('region')
+
+        dfFinal = pd.DataFrame(columns=columns)
+
+        for erFile in erFileList:
+            dfTemp = pd.read_csv(erFile)
+            er = erFile.split('_')[1]
+            #Remove the split econmic region identifiers 
+            #handle subregions and combined regions differently 
+            # For example 'QC2445-55' should remain the same
+            # NB1330 should remain the same 
+            # BC5920A2 should be changed to BC5920  
+            if len(re.split('(\d+)',er)) == 1 or re.split('(\d+)',er)[2] == '-':
+                er = ''.join(re.split('(\d+)',er)[0:4])
+            else :
+                er = ''.join(re.split('(\d+)',er)[0:2])
+
+            dfTemp['region'] = er
+            dfFinal = dfFinal.append(dfTemp)
+        outFileName = 'ebR_{er}_src_loss_table_{retrofit}.csv'.format(**{'er':er[0:2], 'retrofit':retrofit})
+
+        if not os.path.isfile(outFileName): 
+            #Check if the file already exists, it should for 
+            #Provs/Territories that were process with a single 
+            #Economic region
+            dfFinal.to_csv(outFileName, index=False)
+        else: # else it exists, do nothing
+            print('File ({}) already exists'.format(outFileName))
     return
-
-
-
-
-
 
 def get_config_params(args):
     """
