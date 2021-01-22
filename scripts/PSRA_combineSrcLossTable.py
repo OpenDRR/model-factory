@@ -57,7 +57,9 @@ def main():
             #Economic region
             dfFinal.to_csv(outFileName, index=False)
         else: # else it exists, do nothing
-            print('File ({}) already exists'.format(outFileName))
+            print('File ({}) already exists renaming original file'.format(outFileName))
+            os.rename(outFileName, '{}_orginal.csv'.format(os.path.splitext(outFileName)[0]))
+            dfFinal.to_csv(outFileName, index=False)
     return
 
 def get_config_params(args):
