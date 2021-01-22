@@ -50,7 +50,7 @@ COPY psra_{prov}.psra_{prov}_src_loss_r2(source,loss_type,loss_value,trt,region)
     FROM '/usr/src/app/ebRisk/{prov}/ebR_{prov}_src_loss_table_r2.csv'
         WITH 
           DELIMITER AS ','
-          CSV ;
+          CSV HEADER;
 
 
 
