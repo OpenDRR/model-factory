@@ -62,8 +62,9 @@ SELECT
 source,
 loss_type,
 trt,
+SUM(loss_value) AS "loss_value",
 region
-SUM(loss_value) AS "loss_value"
+
 
 FROM psra_{prov}.psra_{prov}_src_loss_r2
 GROUP BY source,loss_type,trt,region);
