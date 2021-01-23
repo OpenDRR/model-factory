@@ -1,7 +1,6 @@
 -- create schema for new scenario
 CREATE SCHEMA IF NOT EXISTS results_nhsl_risk_dynamics;
 
-
 -- create risk dynamic indicators
 DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators CASCADE;
 CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators AS 
@@ -49,31 +48,23 @@ ccsuid,
 ccsname,
 eruid,
 ername,
-saccode AS "SACCODE",
-sactype AS "SACTYPE",
+saccode,
+sactype,
 
 geom AS "geom_point"
 
 FROM ghsl.ghsl_mh_intensity_ghsl;
 
 
-/*
+
 -- create risk dynamic indicators
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_population_growth CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_population_growth AS 
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nl CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nl AS 
 
 -- 1.2 Risk Dynamics
 -- 1.2.1 Population Growth
 SELECT
 ghslid AS "ghslID",
-pruid,
-prname,
-eruid,
-ername,
-cduid,
-cdname,
-csduid,
-csdname,
 lon AS "ghs_lon",
 lat AS "ghs_lat",
 ghsl_km2,
@@ -82,48 +73,17 @@ pop_2015 AS "ghs_Pop2015",
 pop_2000 AS "ghs_Pop2000",
 pop_1990 AS "ghs_Pop1990",
 pop_1975 AS "ghs_Pop1975",
-geom AS "geom_point"
-
-FROM ghsl.ghsl_mh_intensity_ghsl;
-
-
-
--- create risk dynamic indicators
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_land_use_change CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_land_use_change AS 
 
 -- 1.2 Risk Dynamics
 -- 1.2.2 Land Use Change
-SELECT
-ghslid AS "ghslID",
-pruid,
-prname,
-eruid,
-ername,
-cduid,
-cdname,
-csduid,
-csdname,
 SMOD_2015,
 SMOD_2000,
 SMOD_1990,
 SMOD_1975,
-geom AS "geom_point"
-
-FROM ghsl.ghsl_mh_intensity_ghsl;
-
-
-
--- create risk dynamic indicators
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_hazard_susceptibility CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_hazard_susceptibility AS 
 
 -- 1.2 Risk Dynamics
 -- 1.2.2 Land Use Change
 -- 1.2.3 Hazard Susceptibility
-
-SELECT
-ghslid AS "ghslID",
 pgv AS "ghs_PGV",
 pga AS "ghs_PGA",
 mmi7 AS "ghs_MMI7",
@@ -134,7 +94,7 @@ lndsus AS "ghs_LndSus",
 cy500 AS "ghs_Cy500",
 csduid,
 csdname,
-csdtype,
+csdtype, 
 pruid,
 prname,
 cduid,
@@ -144,9 +104,694 @@ ccsuid,
 ccsname,
 eruid,
 ername,
-saccode AS "SACCODE",
-sactype AS "SACTYPE",
+saccode,
+sactype,
+
 geom AS "geom_point"
 
-FROM ghsl.ghsl_mh_intensity_ghsl;
-*/
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '10';
+
+
+
+-- create risk dynamic indicators
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_pe CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_pe AS 
+
+-- 1.2 Risk Dynamics
+-- 1.2.1 Population Growth
+SELECT
+ghslid AS "ghslID",
+lon AS "ghs_lon",
+lat AS "ghs_lat",
+ghsl_km2,
+ghsl_ha,
+pop_2015 AS "ghs_Pop2015",
+pop_2000 AS "ghs_Pop2000",
+pop_1990 AS "ghs_Pop1990",
+pop_1975 AS "ghs_Pop1975",
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+SMOD_2015,
+SMOD_2000,
+SMOD_1990,
+SMOD_1975,
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+-- 1.2.3 Hazard Susceptibility
+pgv AS "ghs_PGV",
+pga AS "ghs_PGA",
+mmi7 AS "ghs_MMI7",
+tsunami AS "ghs_Tsunami",
+fld500 AS "ghs_Fld500",
+wildfire AS "ghs_Wildfire",
+lndsus AS "ghs_LndSus",
+cy500 AS "ghs_Cy500",
+csduid,
+csdname,
+csdtype, 
+pruid,
+prname,
+cduid,
+cdname,
+cdtype,
+ccsuid,
+ccsname,
+eruid,
+ername,
+saccode,
+sactype,
+
+geom AS "geom_point"
+
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '11';
+
+
+
+-- create risk dynamic indicators
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_ns CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_ns AS 
+
+-- 1.2 Risk Dynamics
+-- 1.2.1 Population Growth
+SELECT
+ghslid AS "ghslID",
+lon AS "ghs_lon",
+lat AS "ghs_lat",
+ghsl_km2,
+ghsl_ha,
+pop_2015 AS "ghs_Pop2015",
+pop_2000 AS "ghs_Pop2000",
+pop_1990 AS "ghs_Pop1990",
+pop_1975 AS "ghs_Pop1975",
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+SMOD_2015,
+SMOD_2000,
+SMOD_1990,
+SMOD_1975,
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+-- 1.2.3 Hazard Susceptibility
+pgv AS "ghs_PGV",
+pga AS "ghs_PGA",
+mmi7 AS "ghs_MMI7",
+tsunami AS "ghs_Tsunami",
+fld500 AS "ghs_Fld500",
+wildfire AS "ghs_Wildfire",
+lndsus AS "ghs_LndSus",
+cy500 AS "ghs_Cy500",
+csduid,
+csdname,
+csdtype, 
+pruid,
+prname,
+cduid,
+cdname,
+cdtype,
+ccsuid,
+ccsname,
+eruid,
+ername,
+saccode,
+sactype,
+
+geom AS "geom_point"
+
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '12';
+
+
+
+-- create risk dynamic indicators
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nb CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nb AS 
+
+-- 1.2 Risk Dynamics
+-- 1.2.1 Population Growth
+SELECT
+ghslid AS "ghslID",
+lon AS "ghs_lon",
+lat AS "ghs_lat",
+ghsl_km2,
+ghsl_ha,
+pop_2015 AS "ghs_Pop2015",
+pop_2000 AS "ghs_Pop2000",
+pop_1990 AS "ghs_Pop1990",
+pop_1975 AS "ghs_Pop1975",
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+SMOD_2015,
+SMOD_2000,
+SMOD_1990,
+SMOD_1975,
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+-- 1.2.3 Hazard Susceptibility
+pgv AS "ghs_PGV",
+pga AS "ghs_PGA",
+mmi7 AS "ghs_MMI7",
+tsunami AS "ghs_Tsunami",
+fld500 AS "ghs_Fld500",
+wildfire AS "ghs_Wildfire",
+lndsus AS "ghs_LndSus",
+cy500 AS "ghs_Cy500",
+csduid,
+csdname,
+csdtype, 
+pruid,
+prname,
+cduid,
+cdname,
+cdtype,
+ccsuid,
+ccsname,
+eruid,
+ername,
+saccode,
+sactype,
+
+geom AS "geom_point"
+
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '13';
+
+
+
+-- create risk dynamic indicators
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_qc CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_qc AS 
+
+-- 1.2 Risk Dynamics
+-- 1.2.1 Population Growth
+SELECT
+ghslid AS "ghslID",
+lon AS "ghs_lon",
+lat AS "ghs_lat",
+ghsl_km2,
+ghsl_ha,
+pop_2015 AS "ghs_Pop2015",
+pop_2000 AS "ghs_Pop2000",
+pop_1990 AS "ghs_Pop1990",
+pop_1975 AS "ghs_Pop1975",
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+SMOD_2015,
+SMOD_2000,
+SMOD_1990,
+SMOD_1975,
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+-- 1.2.3 Hazard Susceptibility
+pgv AS "ghs_PGV",
+pga AS "ghs_PGA",
+mmi7 AS "ghs_MMI7",
+tsunami AS "ghs_Tsunami",
+fld500 AS "ghs_Fld500",
+wildfire AS "ghs_Wildfire",
+lndsus AS "ghs_LndSus",
+cy500 AS "ghs_Cy500",
+csduid,
+csdname,
+csdtype, 
+pruid,
+prname,
+cduid,
+cdname,
+cdtype,
+ccsuid,
+ccsname,
+eruid,
+ername,
+saccode,
+sactype,
+
+geom AS "geom_point"
+
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '24';
+
+
+
+-- create risk dynamic indicators
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_on CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_on AS 
+
+-- 1.2 Risk Dynamics
+-- 1.2.1 Population Growth
+SELECT
+ghslid AS "ghslID",
+lon AS "ghs_lon",
+lat AS "ghs_lat",
+ghsl_km2,
+ghsl_ha,
+pop_2015 AS "ghs_Pop2015",
+pop_2000 AS "ghs_Pop2000",
+pop_1990 AS "ghs_Pop1990",
+pop_1975 AS "ghs_Pop1975",
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+SMOD_2015,
+SMOD_2000,
+SMOD_1990,
+SMOD_1975,
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+-- 1.2.3 Hazard Susceptibility
+pgv AS "ghs_PGV",
+pga AS "ghs_PGA",
+mmi7 AS "ghs_MMI7",
+tsunami AS "ghs_Tsunami",
+fld500 AS "ghs_Fld500",
+wildfire AS "ghs_Wildfire",
+lndsus AS "ghs_LndSus",
+cy500 AS "ghs_Cy500",
+csduid,
+csdname,
+csdtype, 
+pruid,
+prname,
+cduid,
+cdname,
+cdtype,
+ccsuid,
+ccsname,
+eruid,
+ername,
+saccode,
+sactype,
+
+geom AS "geom_point"
+
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '35';
+
+
+
+-- create risk dynamic indicators
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_mb CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_mb AS 
+
+-- 1.2 Risk Dynamics
+-- 1.2.1 Population Growth
+SELECT
+ghslid AS "ghslID",
+lon AS "ghs_lon",
+lat AS "ghs_lat",
+ghsl_km2,
+ghsl_ha,
+pop_2015 AS "ghs_Pop2015",
+pop_2000 AS "ghs_Pop2000",
+pop_1990 AS "ghs_Pop1990",
+pop_1975 AS "ghs_Pop1975",
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+SMOD_2015,
+SMOD_2000,
+SMOD_1990,
+SMOD_1975,
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+-- 1.2.3 Hazard Susceptibility
+pgv AS "ghs_PGV",
+pga AS "ghs_PGA",
+mmi7 AS "ghs_MMI7",
+tsunami AS "ghs_Tsunami",
+fld500 AS "ghs_Fld500",
+wildfire AS "ghs_Wildfire",
+lndsus AS "ghs_LndSus",
+cy500 AS "ghs_Cy500",
+csduid,
+csdname,
+csdtype, 
+pruid,
+prname,
+cduid,
+cdname,
+cdtype,
+ccsuid,
+ccsname,
+eruid,
+ername,
+saccode,
+sactype,
+
+geom AS "geom_point"
+
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '46';
+
+
+
+-- create risk dynamic indicators
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_sk CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_sk AS 
+
+-- 1.2 Risk Dynamics
+-- 1.2.1 Population Growth
+SELECT
+ghslid AS "ghslID",
+lon AS "ghs_lon",
+lat AS "ghs_lat",
+ghsl_km2,
+ghsl_ha,
+pop_2015 AS "ghs_Pop2015",
+pop_2000 AS "ghs_Pop2000",
+pop_1990 AS "ghs_Pop1990",
+pop_1975 AS "ghs_Pop1975",
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+SMOD_2015,
+SMOD_2000,
+SMOD_1990,
+SMOD_1975,
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+-- 1.2.3 Hazard Susceptibility
+pgv AS "ghs_PGV",
+pga AS "ghs_PGA",
+mmi7 AS "ghs_MMI7",
+tsunami AS "ghs_Tsunami",
+fld500 AS "ghs_Fld500",
+wildfire AS "ghs_Wildfire",
+lndsus AS "ghs_LndSus",
+cy500 AS "ghs_Cy500",
+csduid,
+csdname,
+csdtype, 
+pruid,
+prname,
+cduid,
+cdname,
+cdtype,
+ccsuid,
+ccsname,
+eruid,
+ername,
+saccode,
+sactype,
+
+geom AS "geom_point"
+
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '47';
+
+
+
+-- create risk dynamic indicators
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_ab CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_ab AS 
+
+-- 1.2 Risk Dynamics
+-- 1.2.1 Population Growth
+SELECT
+ghslid AS "ghslID",
+lon AS "ghs_lon",
+lat AS "ghs_lat",
+ghsl_km2,
+ghsl_ha,
+pop_2015 AS "ghs_Pop2015",
+pop_2000 AS "ghs_Pop2000",
+pop_1990 AS "ghs_Pop1990",
+pop_1975 AS "ghs_Pop1975",
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+SMOD_2015,
+SMOD_2000,
+SMOD_1990,
+SMOD_1975,
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+-- 1.2.3 Hazard Susceptibility
+pgv AS "ghs_PGV",
+pga AS "ghs_PGA",
+mmi7 AS "ghs_MMI7",
+tsunami AS "ghs_Tsunami",
+fld500 AS "ghs_Fld500",
+wildfire AS "ghs_Wildfire",
+lndsus AS "ghs_LndSus",
+cy500 AS "ghs_Cy500",
+csduid,
+csdname,
+csdtype, 
+pruid,
+prname,
+cduid,
+cdname,
+cdtype,
+ccsuid,
+ccsname,
+eruid,
+ername,
+saccode,
+sactype,
+
+geom AS "geom_point"
+
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '48';
+
+
+
+-- create risk dynamic indicators
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_bc CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_bc AS 
+
+-- 1.2 Risk Dynamics
+-- 1.2.1 Population Growth
+SELECT
+ghslid AS "ghslID",
+lon AS "ghs_lon",
+lat AS "ghs_lat",
+ghsl_km2,
+ghsl_ha,
+pop_2015 AS "ghs_Pop2015",
+pop_2000 AS "ghs_Pop2000",
+pop_1990 AS "ghs_Pop1990",
+pop_1975 AS "ghs_Pop1975",
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+SMOD_2015,
+SMOD_2000,
+SMOD_1990,
+SMOD_1975,
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+-- 1.2.3 Hazard Susceptibility
+pgv AS "ghs_PGV",
+pga AS "ghs_PGA",
+mmi7 AS "ghs_MMI7",
+tsunami AS "ghs_Tsunami",
+fld500 AS "ghs_Fld500",
+wildfire AS "ghs_Wildfire",
+lndsus AS "ghs_LndSus",
+cy500 AS "ghs_Cy500",
+csduid,
+csdname,
+csdtype, 
+pruid,
+prname,
+cduid,
+cdname,
+cdtype,
+ccsuid,
+ccsname,
+eruid,
+ername,
+saccode,
+sactype,
+
+geom AS "geom_point"
+
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '59';
+
+
+
+-- create risk dynamic indicators
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_yt CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_yt AS 
+
+-- 1.2 Risk Dynamics
+-- 1.2.1 Population Growth
+SELECT
+ghslid AS "ghslID",
+lon AS "ghs_lon",
+lat AS "ghs_lat",
+ghsl_km2,
+ghsl_ha,
+pop_2015 AS "ghs_Pop2015",
+pop_2000 AS "ghs_Pop2000",
+pop_1990 AS "ghs_Pop1990",
+pop_1975 AS "ghs_Pop1975",
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+SMOD_2015,
+SMOD_2000,
+SMOD_1990,
+SMOD_1975,
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+-- 1.2.3 Hazard Susceptibility
+pgv AS "ghs_PGV",
+pga AS "ghs_PGA",
+mmi7 AS "ghs_MMI7",
+tsunami AS "ghs_Tsunami",
+fld500 AS "ghs_Fld500",
+wildfire AS "ghs_Wildfire",
+lndsus AS "ghs_LndSus",
+cy500 AS "ghs_Cy500",
+csduid,
+csdname,
+csdtype, 
+pruid,
+prname,
+cduid,
+cdname,
+cdtype,
+ccsuid,
+ccsname,
+eruid,
+ername,
+saccode,
+sactype,
+
+geom AS "geom_point"
+
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '60';
+
+
+
+-- create risk dynamic indicators
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nt CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nt AS 
+
+-- 1.2 Risk Dynamics
+-- 1.2.1 Population Growth
+SELECT
+ghslid AS "ghslID",
+lon AS "ghs_lon",
+lat AS "ghs_lat",
+ghsl_km2,
+ghsl_ha,
+pop_2015 AS "ghs_Pop2015",
+pop_2000 AS "ghs_Pop2000",
+pop_1990 AS "ghs_Pop1990",
+pop_1975 AS "ghs_Pop1975",
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+SMOD_2015,
+SMOD_2000,
+SMOD_1990,
+SMOD_1975,
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+-- 1.2.3 Hazard Susceptibility
+pgv AS "ghs_PGV",
+pga AS "ghs_PGA",
+mmi7 AS "ghs_MMI7",
+tsunami AS "ghs_Tsunami",
+fld500 AS "ghs_Fld500",
+wildfire AS "ghs_Wildfire",
+lndsus AS "ghs_LndSus",
+cy500 AS "ghs_Cy500",
+csduid,
+csdname,
+csdtype, 
+pruid,
+prname,
+cduid,
+cdname,
+cdtype,
+ccsuid,
+ccsname,
+eruid,
+ername,
+saccode,
+sactype,
+
+geom AS "geom_point"
+
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '61';
+
+
+
+-- create risk dynamic indicators
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nu CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nu AS 
+
+-- 1.2 Risk Dynamics
+-- 1.2.1 Population Growth
+SELECT
+ghslid AS "ghslID",
+lon AS "ghs_lon",
+lat AS "ghs_lat",
+ghsl_km2,
+ghsl_ha,
+pop_2015 AS "ghs_Pop2015",
+pop_2000 AS "ghs_Pop2000",
+pop_1990 AS "ghs_Pop1990",
+pop_1975 AS "ghs_Pop1975",
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+SMOD_2015,
+SMOD_2000,
+SMOD_1990,
+SMOD_1975,
+
+-- 1.2 Risk Dynamics
+-- 1.2.2 Land Use Change
+-- 1.2.3 Hazard Susceptibility
+pgv AS "ghs_PGV",
+pga AS "ghs_PGA",
+mmi7 AS "ghs_MMI7",
+tsunami AS "ghs_Tsunami",
+fld500 AS "ghs_Fld500",
+wildfire AS "ghs_Wildfire",
+lndsus AS "ghs_LndSus",
+cy500 AS "ghs_Cy500",
+csduid,
+csdname,
+csdtype, 
+pruid,
+prname,
+cduid,
+cdname,
+cdtype,
+ccsuid,
+ccsname,
+eruid,
+ername,
+saccode,
+sactype,
+
+geom AS "geom_point"
+
+FROM ghsl.ghsl_mh_intensity_ghsl
+WHERE pruid = '62';
