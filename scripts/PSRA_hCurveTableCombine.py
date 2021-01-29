@@ -23,9 +23,11 @@ def main():
     subPT = [elem.split('_')[1] for elem in subPT]
 
     hCurveFileList = glob.glob('*{}*'.format(subPT[0]))
-    hCurveFileList = [filename.replace(subPT[0], '{{}}') for filename in hCurveFileList]
+    hCurveFileList = [filename.replace(subPT[0], '{}') for filename in hCurveFileList]
 
     for fileName in hCurveFileList:    
+        print(subPT[0])
+        print(fileName.format(subPT[0]))
         with open(fileName.format(subPT[0]), newline='') as f:
             reader = csv.reader(f)
             columns = next(reader)
