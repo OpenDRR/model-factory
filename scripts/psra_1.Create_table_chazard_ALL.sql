@@ -359,30 +359,30 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_hmaps CASCADE;
 CREATE TABLE psra_{prov}.psra_{prov}_hmaps(
 lon float,
 lat float,
-"PGA-0.02" float,
-"PGA-0.1" float,
-"SA(0.1)-0.02" float,
-"SA(0.1)-0.1" float,
-"SA(0.2)-0.02" float,
-"SA(0.2)-0.1" float,
-"SA(0.3)-0.02" float,
-"SA(0.3)-0.1" float,
-"SA(0.5)-0.02" float,
-"SA(0.5)-0.1" float,
-"SA(0.6)-0.02" float,
-"SA(0.6)-0.1" float,
-"SA(1.0)-0.02" float,
-"SA(1.0)-0.1" float,
-"SA(10.0)-0.02" float,
-"SA(10.0)-0.1" float,
-"SA(2.0)-0.02" float,
-"SA(2.0)-0.1" float,
-"SA(5.0)-0.02" float,
-"SA(5.0)-0.1" float
+"PGA_0.02" float,
+"PGA_0.1" float,
+"SA(0.1)_0.02" float,
+"SA(0.1)_0.1" float,
+"SA(0.2)_0.02" float,
+"SA(0.2)_0.1" float,
+"SA(0.3)_0.02" float,
+"SA(0.3)_0.1" float,
+"SA(0.5)_0.02" float,
+"SA(0.5)_0.1" float,
+"SA(0.6)_0.02" float,
+"SA(0.6)_0.1" float,
+"SA(1.0)_0.02" float,
+"SA(1.0)_0.1" float,
+"SA(10.0)_0.02" float,
+"SA(10.0)_0.1" float,
+"SA(2.0)_0.02" float,
+"SA(2.0)_0.1" float,
+"SA(5.0)_0.02" float,
+"SA(5.0)_0.1" float
 );
 
 -- import exposure from csv
-COPY psra_{prov}.psra_{prov}_hmaps(lon,lat,"PGA-0.02","PGA-0.1","SA(0.1)-0.02","SA(0.1)-0.1","SA(0.2)-0.02","SA(0.2)-0.1","SA(0.3)-0.02","SA(0.3)-0.1","SA(0.5)-0.02","SA(0.5)-0.1","SA(0.6)-0.02","SA(0.6)-0.1","SA(1.0)-0.02","SA(1.0)-0.1","SA(2.0)-0.02","SA(2.0)-0.1")
+COPY psra_{prov}.psra_{prov}_hmaps(lon,lat,"PGA_0.02","PGA_0.1","SA(0.1)_0.02","SA(0.1)_0.1","SA(0.2)_0.02","SA(0.2)_0.1","SA(0.3)_0.02","SA(0.3)_0.1","SA(0.5)_0.02","SA(0.5)_0.1","SA(0.6)_0.02","SA(0.6)_0.1","SA(1.0)_0.02","SA(1.0)_0.1","SA(10.0)_0.02","SA(10.0)_0.1","SA(2.0)_0.02","SA(2.0)_0.1","SA(5.0)_0.02","SA(5.0)_0.1")
     FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps.csv'
         WITH 
           DELIMITER AS ','
