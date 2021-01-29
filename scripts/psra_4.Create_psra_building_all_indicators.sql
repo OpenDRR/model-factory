@@ -18,6 +18,11 @@ b."CDUID" AS "cduid",
 b."CDNAME" AS "cdname",
 b."CSDUID" AS "csduid",
 b."CSDNAME" AS "csdname",
+b."CFSAUID" AS "fsauid",
+b."DAUIDt" AS "dauid",
+b."SACCODE" AS "saccode",
+b."SACTYPE" AS "sactype",
+a.landuse,
 
 -- 2.1.1 500yr Hazard Intensity
 CAST(CAST(ROUND(CAST(d."PGA_0.02" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "pH500_PGA",
