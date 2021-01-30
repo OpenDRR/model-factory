@@ -382,7 +382,7 @@ lat float,
 );
 
 -- import exposure from csv
-COPY psra_{prov}.psra_{prov}_hmaps(lon,lat,"PGA_0.02","PGA_0.1","SA(0.1)_0.02","SA(0.1)_0.1","SA(0.2)_0.02","SA(0.2)_0.1","SA(0.3)_0.02","SA(0.3)_0.1","SA(0.5)_0.02","SA(0.5)_0.1","SA(0.6)_0.02","SA(0.6)_0.1","SA(1.0)_0.02","SA(1.0)_0.1","SA(10.0)_0.02","SA(10.0)_0.1","SA(2.0)_0.02","SA(2.0)_0.1","SA(5.0)_0.02","SA(5.0)_0.1")
+COPY psra_{prov}.psra_{prov}_hmaps({hmapColumns})
     FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps.csv'
         WITH 
           DELIMITER AS ','
@@ -518,9 +518,7 @@ lat float,
 );
 
 -- import exposure from csv
-COPY psra_{prov}.psra_{prov}_uhs(lon,lat,"0.02_PGA","0.02_SA(0.1)","0.02_SA(0.2)","0.02_SA(0.3)","0.02_SA(0.5)","0.02_SA(0.6)","0.02_SA(1.0)","0.02_SA(10.0)",
-"0.02_SA(2.0)","0.02_SA(5.0)","0.1_PGA","0.1_SA(0.1)","0.1_SA(0.2)","0.1_SA(0.3)","0.1_SA(0.5)","0.1_SA(0.6)","0.1_SA(1.0)","0.1_SA(10.0)","0.1_SA(2.0)",
-"0.1_SA(5.0)" )
+COPY psra_{prov}.psra_{prov}_uhs({uhsColumns})
     FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_uhs.csv'
         WITH 
           DELIMITER AS ','
