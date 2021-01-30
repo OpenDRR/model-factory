@@ -184,33 +184,33 @@ CREATE TABLE psra_{prov}.psra_{prov}_hcurves_sa0p5(
 lon float,
 lat float,
 depth float,
-"poe-0.0500000" float,
-"poe-0.0658662" float,
-"poe-0.0867671" float,
-"poe-0.1143003" float,
-"poe-0.1505706" float,
-"poe-0.1983502" float,
-"poe-0.2612914" float,
-"poe-0.3442054" float,
-"poe-0.4534299" float,
-"poe-0.5973140" float,
-"poe-0.7868559" float,
-"poe-1.0365439" float,
-"poe-1.3654639" float,
-"poe-1.7987580" float,
-"poe-2.3695466" float,
-"poe-3.1214600" float,
-"poe-4.1119734" float,
-"poe-5.4168002" float,
-"poe-7.1356795" float,
-"poe-9.4000000" float
+"poe_0.0500000" float,
+"poe_0.0658662" float,
+"poe_0.0867671" float,
+"poe_0.1143003" float,
+"poe_0.1505706" float,
+"poe_0.1983502" float,
+"poe_0.2612914" float,
+"poe_0.3442054" float,
+"poe_0.4534299" float,
+"poe_0.5973140" float,
+"poe_0.7868559" float,
+"poe_1.0365439" float,
+"poe_1.3654639" float,
+"poe_1.7987580" float,
+"poe_2.3695466" float,
+"poe_3.1214600" float,
+"poe_4.1119734" float,
+"poe_5.4168002" float,
+"poe_7.1356795" float,
+"poe_9.4000000" float
 
 );
 
 -- import exposure from csv
-COPY psra_{prov}.psra_{prov}_hcurves_sa0p5(lon,lat,depth,"poe-0.0500000","poe-0.0658662","poe-0.0867671","poe-0.1143003","poe-0.1505706","poe-0.1983502",
-"poe-0.2612914","poe-0.3442054","poe-0.4534299","poe-0.5973140","poe-0.7868559","poe-1.0365439","poe-1.3654639","poe-1.7987580","poe-2.3695466",
-"poe-3.1214600","poe-4.1119734","poe-5.4168002","poe-7.1356795","poe-9.4000000" )
+COPY psra_{prov}.psra_{prov}_hcurves_sa0p5(lon,lat,depth,"poe_0.0500000","poe_0.0658662","poe_0.0867671","poe_0.1143003","poe_0.1505706","poe_0.1983502",
+"poe_0.2612914","poe_0.3442054","poe_0.4534299","poe_0.5973140","poe_0.7868559","poe_1.0365439","poe_1.3654639","poe_1.7987580","poe_2.3695466",
+"poe_3.1214600","poe_4.1119734","poe_5.4168002","poe_7.1356795","poe_9.4000000" )
     FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p5.csv'
         WITH 
           DELIMITER AS ','
@@ -228,33 +228,33 @@ CREATE TABLE psra_{prov}.psra_{prov}_hcurves_sa0p6(
 lon float,
 lat float,
 depth float,
-"poe-0.0500000" float,
-"poe-0.0658662" float,
-"poe-0.0867671" float,
-"poe-0.1143003" float,
-"poe-0.1505706" float,
-"poe-0.1983502" float,
-"poe-0.2612914" float,
-"poe-0.3442054" float,
-"poe-0.4534299" float,
-"poe-0.5973140" float,
-"poe-0.7868559" float,
-"poe-1.0365439" float,
-"poe-1.3654639" float,
-"poe-1.7987580" float,
-"poe-2.3695466" float,
-"poe-3.1214600" float,
-"poe-4.1119734" float,
-"poe-5.4168002" float,
-"poe-7.1356795" float,
-"poe-9.4000000" float
+"poe_0.0500000" float,
+"poe_0.0658662" float,
+"poe_0.0867671" float,
+"poe_0.1143003" float,
+"poe_0.1505706" float,
+"poe_0.1983502" float,
+"poe_0.2612914" float,
+"poe_0.3442054" float,
+"poe_0.4534299" float,
+"poe_0.5973140" float,
+"poe_0.7868559" float,
+"poe_1.0365439" float,
+"poe_1.3654639" float,
+"poe_1.7987580" float,
+"poe_2.3695466" float,
+"poe_3.1214600" float,
+"poe_4.1119734" float,
+"poe_5.4168002" float,
+"poe_7.1356795" float,
+"poe_9.4000000" float
 
 );
 
 -- import exposure from csv
-COPY psra_{prov}.psra_{prov}_hcurves_sa0p6(lon,lat,depth,"poe-0.0500000","poe-0.0658662","poe-0.0867671","poe-0.1143003","poe-0.1505706","poe-0.1983502",
-"poe-0.2612914","poe-0.3442054","poe-0.4534299","poe-0.5973140","poe-0.7868559","poe-1.0365439","poe-1.3654639","poe-1.7987580","poe-2.3695466",
-"poe-3.1214600","poe-4.1119734","poe-5.4168002","poe-7.1356795","poe-9.4000000" )
+COPY psra_{prov}.psra_{prov}_hcurves_sa0p6(lon,lat,depth,"poe_0.0500000","poe_0.0658662","poe_0.0867671","poe_0.1143003","poe_0.1505706","poe_0.1983502",
+"poe_0.2612914","poe_0.3442054","poe_0.4534299","poe_0.5973140","poe_0.7868559","poe_1.0365439","poe_1.3654639","poe_1.7987580","poe_2.3695466",
+"poe_3.1214600","poe_4.1119734","poe_5.4168002","poe_7.1356795","poe_9.4000000" )
     FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p6.csv'
         WITH 
           DELIMITER AS ','
