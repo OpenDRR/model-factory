@@ -28,17 +28,17 @@ def main ():
     hmapColumns = hmapColumns.replace('-','_')
     hmapColumns = hmapColumns.replace('"lon"','lon')
     hmapColumns = hmapColumns.replace('"lat"','lat')
-    hmapColumns = hmapColumns.replace('"PGA_0.02"','PGA_0.02')
-    hmapColumns = hmapColumns.replace('"PGA_0.1"','PGA_0.02')
+    # hmapColumns = hmapColumns.replace('"PGA_0.02"','PGA_0.02')
+    # hmapColumns = hmapColumns.replace('"PGA_0.1"','PGA_0.02')
 
     with open("/usr/src/app/cHazard/{prov}/cH_{prov}_uhs.csv".format(**{'prov':args.province}), "r") as f:
         reader = csv.reader(f)
         uhsColumns = next(reader)
-    uhsColumns = ','.join('"{0}"'.format(w) for w in hmapColumns)
+    uhsColumns = ','.join('"{0}"'.format(w) for w in uhsColumns)
     uhsColumns = uhsColumns.replace('~','_')
     uhsColumns = uhsColumns.replace('"lon"','lon')
     uhsColumns = uhsColumns.replace('"lat"','lat')
-    hmapColumns = hmapColumns.replace('"0.2_PGA"','0.2_PGA')
+    # uhsColumns = uhsColumns.replace('"0.2_PGA"','0.2_PGA')
 
     sqlquerystring = open(args.sqlScript, 'r').read().format(**{
         'prov':args.province, 
