@@ -93,6 +93,7 @@ CREATE TABLE census.census_2016_canada(
     
 );
 
+/*
 -- import exposure from csv
 COPY census.census_2016_canada (OBJECTID, SAUIDt, SAUIDi, DAUIDt, DAUIDi, Fsauid, Csdname, Cdname, Ername, Prname, Lon, Lat, BldgNum, CostAsset, CostBldg, PopDay, PopNight, PopTrnst, Concrete, Manufactured, 
 Precast, RMasonry, Steel, URMasonry, Wood, Agr, Comm, Ind, Civic, Res_HD, Res_MD, Res_LD, CensusPop, CensusBldg, CensusDU, CensusRESLD, CensusResMD, CensusRESHD, CensusCOMM, CensusIND, CensusCIVIC, 
@@ -104,6 +105,6 @@ Inc_Hshld, Inc_LowDecile, Unemployed, Work_Parttime, Work_None, Employ_Inc)
           DELIMITER AS ','
           CSV HEADER ;
 
-
 -- create index
 CREATE INDEX census_2016_canada_idx ON census.census_2016_canada (sauidt);
+*/

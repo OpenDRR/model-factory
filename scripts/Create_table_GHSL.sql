@@ -42,6 +42,7 @@ SACTYPE varchar,
 NEAR_FID varchar
 );
 
+/*
 -- import exposure from csv
 COPY ghsl.ghsl_mh_intensity_ghsl (ghslID,lon,lat,ghsl_km2,ghsl_ha,Pop_2015,Pop_2000,Pop_1990,Pop_1975,SMOD_2015,SMOD_2000,SMOD_1990,SMOD_1975,PGV,PGA,MMI7,Tsunami,Fld500,Wildfire,LndSus,Cy500,CSDUID,CSDNAME,CSDTYPE,PRUID,PRNAME,CDUID,CDNAME,CDTYPE,CCSUID,CCSNAME,ERUID,ERNAME,SACCODE,SACTYPE,NEAR_FID)
     FROM '/usr/src/app/mh-intensity-ghsl.csv'
@@ -63,3 +64,4 @@ DELETE FROM ghsl.ghsl_mh_intensity_ghsl WHERE ghslid IS NULL;
 -- add pkey
 ALTER TABLE ghsl.ghsl_mh_intensity_ghsl DROP CONSTRAINT IF EXISTS ghsl_mh_intensity_ghsl_pkey;
 ALTER TABLE ghsl.ghsl_mh_intensity_ghsl ADD PRIMARY KEY(ghslID);
+*/

@@ -17,7 +17,7 @@ CREATE TABLE gmf.shakemap_{eqScenario}
     lat float
     
 );
-
+/*
 -- import exposure from csv
 COPY gmf.shakemap_{eqScenario} ({headerFields})
     FROM '/usr/src/app/{shakemapFile}'
@@ -25,7 +25,7 @@ COPY gmf.shakemap_{eqScenario} ({headerFields})
           DELIMITER AS ','
           CSV HEADER ;
 
-/*
+
 -- add geometries field to enable PostGIS (WGS1984 SRID = 4326)
 ALTER TABLE gmf.shakemap_{eqScenario} ADD COLUMN geom geometry(Point,4326);
 UPDATE gmf.shakemap_{eqScenario} SET geom = st_setsrid(st_makepoint(lon,lat),4326);
