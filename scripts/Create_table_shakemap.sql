@@ -6,6 +6,7 @@ CREATE TABLE gmf.shakemap_{eqScenario}
 (
     site_id varchar,
     gmv_PGA float,
+    gmv_PGV float,
     "gmv_SA(0.1)" float,
     "gmv_SA(0.2)" float,
     "gmv_SA(0.3)" float,
