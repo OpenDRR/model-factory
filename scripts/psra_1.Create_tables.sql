@@ -495,6 +495,55 @@ DROP TABLE IF EXISTS psra_{prov}.exposure_{prov};
 */
 
 
+/*  incorporate after xref tables are pushed on github
+-- script to create xref table
+CREATE SCHEMA IF NOT EXISTS psra_{prov};
+
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_hmaps_xref;
+
+-- create table
+CREATE TABLE psra_{prov}.psra_{prov}_hmaps_xref(
+PRIMARY KEY(id),
+id varchar,
+sauid varchar,
+asset_lon float,
+asset_lat float,
+lon float,
+lat float,
+distance float,
+"PGA_0.02" float,
+"PGA_0.1" float,
+"SA(0.1)_0.02" float,
+"SA(0.1)_0.1" float,
+"SA(0.2)_0.02" float,
+"SA(0.2)_0.1" float,
+"SA(0.3)_0.02" float,
+"SA(0.3)_0.1" float,
+"SA(0.5)_0.02" float,
+"SA(0.5)_0.1" float,
+"SA(0.6)_0.02" float,
+"SA(0.6)_0.1" float,
+"SA(1.0)_0.02" float,
+"SA(1.0)_0.1" float,
+"SA(10.0)_0.02" float,
+"SA(10.0)_0.1" float,
+"SA(2.0)_0.02" float,
+"SA(2.0)_0.1" float,
+"SA(5.0)_0.02" float,
+"SA(5.0)_0.1" float
+);
+
+-- import exposure from csv
+COPY psra_{prov}.psra_{prov}_hmaps(id,sauid,asset_lon,asset_lat,lon,lat,distance,"PGA_0.02","PGA_0.1","SA(0.1)_0.02","SA(0.1)_0.1","SA(0.2)_0.02","SA(0.2)_0.1","SA(0.3)_0.02","SA(0.3)_0.1","SA(0.5)_0.02","SA(0.5)_0.1","SA(0.6)_0.02",
+"SA(0.6)_0.1","SA(1.0)_0.02","SA(1.0)_0.1","SA(10.0)_0.02","SA(10.0)_0.1","SA(2.0)_0.02","SA(2.0)_0.1","SA(5.0)_0.02","SA(5.0)_0.1")
+    FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps_xref.csv'
+        WITH 
+          DELIMITER AS ','
+          CSV HEADER ;
+*/
+
+
+
 -- script to generate hazard map mean
 CREATE SCHEMA IF NOT EXISTS psra_{prov};
 
