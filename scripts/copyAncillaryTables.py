@@ -161,7 +161,7 @@ def main ():
                         FROM '/usr/src/app/PhysExpRef_MetroVan_v4.csv'
                             WITH 
                             DELIMITER AS ','
-                            CSV HEADER ;'''
+                            CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
