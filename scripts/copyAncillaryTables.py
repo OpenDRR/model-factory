@@ -24,10 +24,10 @@ def main ():
 
 
     systemCall='''psql -h  db-opendrr
-                    -U  ${{POSTGRES_USER}} 
-                    -d ${{DB_NAME}} 
+                    -U ${POSTGRES_USER}
+                    -d ${DB_NAME}
                     -a 
-                    -c \copy exposure.canada_exposure (objectid,
+                    -c "\copy exposure.canada_exposure (objectid,
                                                         id,
                                                         SauidLat,
                                                         SauidLon,
@@ -70,7 +70,8 @@ def main ():
                         FROM '/usr/src/app/BldgExpRef_CA_master_v3p1.csv'
                             WITH 
                             DELIMITER AS ','
-                            CSV HEADER ; '''
+                            CSV HEADER ;" '''
+    systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
     # systemCall='''psql -h  db-opendrr
