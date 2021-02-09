@@ -56,8 +56,8 @@ def main ():
             connection.close()
 
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy gmf.shakemap_{eqScenario} ({headerFields})
                         FROM '/usr/src/app/{shakemapFile}'

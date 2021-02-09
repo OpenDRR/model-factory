@@ -22,8 +22,8 @@ def main ():
 
     #Copy hcurve Table PGA
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_hcurves_pga(lon,
                                                             lat,
@@ -57,8 +57,8 @@ def main ():
     
     #Copy hcurve table Sa0p1
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_hcurves_Sa0p1(lon,
                                                                 lat,
@@ -92,8 +92,8 @@ def main ():
 
     #Copy hcurve table Sa0p2
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_hcurves_sa0p2(lon,
                                                                 lat,
@@ -127,8 +127,8 @@ def main ():
 
     #Copy hcurve table Sa0p3
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_hcurves_sa0p3(lon,
                                                                 lat,
@@ -162,8 +162,8 @@ def main ():
 
     #Copy hcurve table Sa0p5
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_hcurves_sa0p5(lon,
                                                                 lat,
@@ -197,8 +197,8 @@ def main ():
     
     #Copy hcurve table Sa0p6
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_hcurves_sa0p6(lon,
                                                                 lat,
@@ -232,8 +232,8 @@ def main ():
     
     #Copy hcurve table Sa1p0
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_hcurves_sa1p0(lon,
                                                                 lat,
@@ -267,8 +267,8 @@ def main ():
     
     #Copy hcurve table Sa2p0
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_hcurves_sa2p0(lon,
                                                                 lat,
@@ -310,8 +310,8 @@ def main ():
     hmapColumns = hmapColumns.replace('"lat"','lat')
 
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_hmaps({hmapColumns})
                         FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps.csv'
@@ -331,8 +331,8 @@ def main ():
     uhsColumns = uhsColumns.replace('"lat"','lat')
 
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_uhs({uhsColumns})
                         FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_uhs.csv'
@@ -344,8 +344,8 @@ def main ():
 
     #Copy dmg mean b0 table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_cd_dmg_mean_b0(asset_id,
                                                                     "BldEpoch",
@@ -387,8 +387,8 @@ def main ():
 
     #Copy dmg mean r2 table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_cd_dmg_mean_r2(asset_id,
                                                                     "BldEpoch",
@@ -430,8 +430,8 @@ def main ():
 
     #Copy ed dmg mean b0 table 
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_ed_dmg_mean_b0(asset_id,
                                                                     "BldEpoch",
@@ -473,8 +473,8 @@ def main ():
 
     #Copy ed dmg mean r2 table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_ed_dmg_mean_r2(asset_id,
                                                                     "BldEpoch",
@@ -516,8 +516,8 @@ def main ():
 
     #Copy agg curves stats b0 table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_agg_curves_stats_b0(return_period,
                                                                         stat,
@@ -537,8 +537,8 @@ def main ():
     
     #Copy agg curves stats r2 table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_agg_curves_stats_r2(return_period,
                                                                         stat,
@@ -558,8 +558,8 @@ def main ():
     
     #Copy avg losses b0 table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_avg_losses_stats_b0(asset_id,
                                                                         "BldEpoch",
@@ -599,8 +599,8 @@ def main ():
     
     #Copy avg losses r2 table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_avg_losses_stats_r2(asset_id,
                                                                         "BldEpoch",
@@ -640,8 +640,8 @@ def main ():
     
     #Copy source loss b0 table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_src_loss_b0(source,
                                                                 loss_type,
@@ -657,8 +657,8 @@ def main ():
     
     #Copy source loss r2 table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
-                -d ${DB_NAME}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
                 -a 
                 -c "\copy psra_{prov}.psra_{prov}_src_loss_r2(source,
                                                                 loss_type,
