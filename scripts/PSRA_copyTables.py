@@ -21,81 +21,79 @@ def main ():
     args = parse_args()
 
     #Copy hcurve Table PGA
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_hcurves_pga(lon,
-                                                            lat,
-                                                            depth,
-                                                            "poe_0.0500000" ,
-                                                            "poe_0.0637137" ,
-                                                            "poe_0.0811888" ,
-                                                            "poe_0.1034569" ,
-                                                            "poe_0.1318325" ,
-                                                            "poe_0.1679909" ,
-                                                            "poe_0.2140666" ,
-                                                            "poe_0.2727797" ,
-                                                            "poe_0.3475964" ,
-                                                            "poe_0.4429334" ,
-                                                            "poe_0.5644189" ,
-                                                            "poe_0.7192249" ,
-                                                            "poe_0.9164904",
-                                                            "poe_1.1678607" ,
-                                                            "poe_1.4881757" ,
-                                                            "poe_1.8963451" ,
-                                                            "poe_2.4164651" ,
-                                                            "poe_3.0792411" ,
-                                                            "poe_3.9237999" ,
-                                                            "poe_5.0000000" )
-                    FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_PGA.csv'
+                -c '\copy psra_{prov}.psra_{prov}_hcurves_pga(lon,
+                                                                lat,
+                                                                depth,
+                                                                "poe_0.0500000",
+                                                                "poe_0.0637137",
+                                                                "poe_0.0811888",
+                                                                "poe_0.1034569",
+                                                                "poe_0.1318325",
+                                                                "poe_0.1679909",
+                                                                "poe_0.2140666",
+                                                                "poe_0.2727797",
+                                                                "poe_0.3475964",
+                                                                "poe_0.4429334",
+                                                                "poe_0.5644189",
+                                                                "poe_0.7192249",
+                                                                "poe_0.9164904",
+                                                                "poe_1.1678607",
+                                                                "poe_1.4881757",
+                                                                "poe_1.8963451",
+                                                                "poe_2.4164651",
+                                                                "poe_3.0792411",
+                                                                "poe_3.9237999",
+                                                                "poe_5.0000000")
+                    FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_PGA.csv
                         WITH 
-                        DELIMITER AS ','
-                        CSV HEADER ;"'''.format(**{'prov':args.province})
+                        CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
     #Copy hcurve table Sa0p1
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_hcurves_Sa0p1(lon,
+                -c '\copy psra_{prov}.psra_{prov}_hcurves_Sa0p1(lon,
                                                                 lat,
                                                                 depth,
-                                                                "poe_0.0500000" ,
-                                                                "poe_0.0637137" ,
-                                                                "poe_0.0811888" ,
-                                                                "poe_0.1034569" ,
-                                                                "poe_0.1318325" ,
-                                                                "poe_0.1679909" ,
-                                                                "poe_0.2140666" ,
-                                                                "poe_0.2727797" ,
-                                                                "poe_0.3475964" ,
-                                                                "poe_0.4429334" ,
-                                                                "poe_0.5644189" ,
-                                                                "poe_0.7192249" ,
+                                                                "poe_0.0500000",
+                                                                "poe_0.0637137",
+                                                                "poe_0.0811888",
+                                                                "poe_0.1034569",
+                                                                "poe_0.1318325",
+                                                                "poe_0.1679909",
+                                                                "poe_0.2140666",
+                                                                "poe_0.2727797",
+                                                                "poe_0.3475964",
+                                                                "poe_0.4429334",
+                                                                "poe_0.5644189",
+                                                                "poe_0.7192249",
                                                                 "poe_0.9164904",
-                                                                "poe_1.1678607" ,
-                                                                "poe_1.4881757" ,
-                                                                "poe_1.8963451" ,
-                                                                "poe_2.4164651" ,
-                                                                "poe_3.0792411" ,
-                                                                "poe_3.9237999" ,
+                                                                "poe_1.1678607",
+                                                                "poe_1.4881757",
+                                                                "poe_1.8963451",
+                                                                "poe_2.4164651",
+                                                                "poe_3.0792411",
+                                                                "poe_3.9237999",
                                                                 "poe_5.0000000" )
-                    FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p1.csv'
+                    FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p1.csv
                         WITH 
-                        DELIMITER AS ','
-                        CSV HEADER ;"'''.format(**{'prov':args.province})
+                        CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
     #Copy hcurve table Sa0p2
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_hcurves_sa0p2(lon,
+                -c '\copy psra_{prov}.psra_{prov}_hcurves_sa0p2(lon,
                                                                 lat,
                                                                 depth,
                                                                 "poe_0.0500000" ,
@@ -118,19 +116,18 @@ def main ():
                                                                 "poe_3.0792411" ,
                                                                 "poe_3.9237999" ,
                                                                 "poe_5.0000000" )
-                    FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p2.csv'
+                    FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p2.csv
                         WITH 
-                        DELIMITER AS ','
-                        CSV HEADER ;"'''.format(**{'prov':args.province})
+                        CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
     #Copy hcurve table Sa0p3
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_hcurves_sa0p3(lon,
+                -c '\copy psra_{prov}.psra_{prov}_hcurves_sa0p3(lon,
                                                                 lat,
                                                                 depth,
                                                                 "poe_0.0500000" ,
@@ -153,19 +150,18 @@ def main ():
                                                                 "poe_3.0792411" ,
                                                                 "poe_3.9237999" ,
                                                                 "poe_5.0000000" )
-                    FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p3.csv'
+                    FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p3.csv
                         WITH 
-                        DELIMITER AS ','
-                        CSV HEADER ; "'''.format(**{'prov':args.province})
+                        CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
     #Copy hcurve table Sa0p5
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_hcurves_sa0p5(lon,
+                -c '\copy psra_{prov}.psra_{prov}_hcurves_sa0p5(lon,
                                                                 lat,
                                                                 depth,
                                                                 "poe_0.0500000",
@@ -188,19 +184,18 @@ def main ():
                                                                 "poe_5.4168002",
                                                                 "poe_7.1356795",
                                                                 "poe_9.4000000" )
-                        FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p5.csv'
+                        FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p5.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV HEADER ;"'''.format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
     #Copy hcurve table Sa0p6
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_hcurves_sa0p6(lon,
+                -c '\copy psra_{prov}.psra_{prov}_hcurves_sa0p6(lon,
                                                                 lat,
                                                                 depth,
                                                                 "poe_0.0500000",
@@ -223,19 +218,18 @@ def main ():
                                                                 "poe_5.4168002",
                                                                 "poe_7.1356795",
                                                                 "poe_9.4000000" )
-                        FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p6.csv'
+                        FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p6.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV HEADER ;"'''.format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
     #Copy hcurve table Sa1p0
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_hcurves_sa1p0(lon,
+                -c '\copy psra_{prov}.psra_{prov}_hcurves_sa1p0(lon,
                                                                 lat,
                                                                 depth,
                                                                 "poe_0.0500000" ,
@@ -258,19 +252,18 @@ def main ():
                                                                 "poe_3.0792411" ,
                                                                 "poe_3.9237999" ,
                                                                 "poe_5.0000000" )
-                        FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa1p0.csv'
+                        FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa1p0.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV HEADER ;"'''.format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
     #Copy hcurve table Sa2p0
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_hcurves_sa2p0(lon,
+                -c '\copy psra_{prov}.psra_{prov}_hcurves_sa2p0(lon,
                                                                 lat,
                                                                 depth,
                                                                 "poe_0.0500000" ,
@@ -293,10 +286,9 @@ def main ():
                                                                 "poe_3.0792411" ,
                                                                 "poe_3.9237999" ,
                                                                 "poe_5.0000000" )
-                        FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa2p0.csv'
+                        FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa2p0.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV HEADER ; "'''.format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
@@ -309,15 +301,14 @@ def main ():
     hmapColumns = hmapColumns.replace('"lon"','lon')
     hmapColumns = hmapColumns.replace('"lat"','lat')
 
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_hmaps({hmapColumns})
-                        FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps.csv'
+                -c '\copy psra_{prov}.psra_{prov}_hmaps({hmapColumns})
+                        FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hmaps.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV HEADER ;"'''.format(**{'prov':args.province, 'hmapColumns':hmapColumns})
+                            CSV HEADER ;'""".format(**{'prov':args.province, 'hmapColumns':hmapColumns})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
@@ -330,24 +321,23 @@ def main ():
     uhsColumns = uhsColumns.replace('"lon"','lon')
     uhsColumns = uhsColumns.replace('"lat"','lat')
 
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_uhs({uhsColumns})
-                        FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_uhs.csv'
+                -c '\copy psra_{prov}.psra_{prov}_uhs({uhsColumns})
+                        FROM /usr/src/app/cHazard/{prov}/cH_{prov}_uhs.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV HEADER ;"'''.format(**{'prov':args.province, 'uhsColumns':uhsColumns})
+                            CSV HEADER ;'""".format(**{'prov':args.province, 'uhsColumns':uhsColumns})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
     #Copy dmg mean b0 table
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_cd_dmg_mean_b0(asset_id,
+                -c '\copy psra_{prov}.psra_{prov}_cd_dmg_mean_b0(asset_id,
                                                                     "BldEpoch",
                                                                     "BldgType",
                                                                     "EqDesLev",
@@ -378,19 +368,18 @@ def main ():
                                                                     structural_moderate,
                                                                     structural_extensive,
                                                                     structural_complete)
-                        FROM '/usr/src/app/cDamage/{prov}/cD_{prov}_dmg-mean_b0.csv'
+                        FROM /usr/src/app/cDamage/{prov}/cD_{prov}_dmg-mean_b0.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV ;"'''.format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
     #Copy dmg mean r2 table
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_cd_dmg_mean_r2(asset_id,
+                -c '\copy psra_{prov}.psra_{prov}_cd_dmg_mean_r2(asset_id,
                                                                     "BldEpoch",
                                                                     "BldgType",
                                                                     "EqDesLev",
@@ -421,19 +410,18 @@ def main ():
                                                                     structural_moderate,
                                                                     structural_extensive,
                                                                     structural_complete)
-                        FROM '/usr/src/app/cDamage/{prov}/cD_{prov}_dmg-mean_r2.csv'
+                        FROM /usr/src/app/cDamage/{prov}/cD_{prov}_dmg-mean_r2.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV ;"'''.format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
     #Copy ed dmg mean b0 table 
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_ed_dmg_mean_b0(asset_id,
+                -c '\copy psra_{prov}.psra_{prov}_ed_dmg_mean_b0(asset_id,
                                                                     "BldEpoch",
                                                                     "BldgType",
                                                                     "EqDesLev",
@@ -464,19 +452,18 @@ def main ():
                                                                     structural_moderate,
                                                                     structural_extensive,
                                                                     structural_complete)
-                        FROM '/usr/src/app/eDamage/{prov}/eD_{prov}_damages-mean_b0.csv'
+                        FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-mean_b0.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV ;"'''.format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
     #Copy ed dmg mean r2 table
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_ed_dmg_mean_r2(asset_id,
+                -c '\copy psra_{prov}.psra_{prov}_ed_dmg_mean_r2(asset_id,
                                                                     "BldEpoch",
                                                                     "BldgType",
                                                                     "EqDesLev",
@@ -507,19 +494,18 @@ def main ():
                                                                     structural_moderate,
                                                                     structural_extensive,
                                                                     structural_complete)
-                        FROM '/usr/src/app/eDamage/{prov}/eD_{prov}_damages-mean_r2.csv'
+                        FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-mean_r2.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV ;"'''.format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
     #Copy agg curves stats b0 table
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_agg_curves_stats_b0(return_period,
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves_stats_b0(return_period,
                                                                         stat,
                                                                         loss_type,
                                                                         fsauid,
@@ -528,19 +514,18 @@ def main ():
                                                                         loss_value,
                                                                         loss_ratio,
                                                                         annual_frequency_of_exceedence)
-                        FROM '/usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-stats_b0.csv'
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-stats_b0.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV ;"'''.format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
     #Copy agg curves stats r2 table
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_agg_curves_stats_r2(return_period,
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves_stats_r2(return_period,
                                                                         stat,
                                                                         loss_type,
                                                                         fsauid,
@@ -549,19 +534,18 @@ def main ():
                                                                         loss_value,
                                                                         loss_ratio,
                                                                         annual_frequency_of_exceedence)
-                        FROM '/usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-stats_r2.csv'
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-stats_r2.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV ;"'''.format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
     #Copy avg losses b0 table
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_avg_losses_stats_b0(asset_id,
+                -c '\copy psra_{prov}.psra_{prov}_avg_losses_stats_b0(asset_id,
                                                                         "BldEpoch",
                                                                         "BldgType",
                                                                         "EqDesLev",
@@ -590,19 +574,18 @@ def main ():
                                                                         contents,
                                                                         nonstructural,
                                                                         structural)
-                        FROM '/usr/src/app/ebRisk/{prov}/ebR_{prov}_avg_losses-stats_b0.csv'
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_avg_losses-stats_b0.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV ;"'''.format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
     #Copy avg losses r2 table
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_avg_losses_stats_r2(asset_id,
+                -c '\copy psra_{prov}.psra_{prov}_avg_losses_stats_r2(asset_id,
                                                                         "BldEpoch",
                                                                         "BldgType",
                                                                         "EqDesLev",
@@ -631,44 +614,41 @@ def main ():
                                                                         contents,
                                                                         nonstructural,
                                                                         structural)
-                        FROM '/usr/src/app/ebRisk/{prov}/ebR_{prov}_avg_losses-stats_r2.csv'
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_avg_losses-stats_r2.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV ;"'''.format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
     #Copy source loss b0 table
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_src_loss_b0(source,
+                -c '\copy psra_{prov}.psra_{prov}_src_loss_b0(source,
                                                                 loss_type,
                                                                 loss_value,
                                                                 trt,
                                                                 region)
-                        FROM '/usr/src/app/ebRisk/{prov}/ebR_{prov}_src_loss_table_b0.csv'
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_src_loss_table_b0.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV HEADER;"'''.format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
     #Copy source loss r2 table
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy psra_{prov}.psra_{prov}_src_loss_r2(source,
+                -c '\copy psra_{prov}.psra_{prov}_src_loss_r2(source,
                                                                 loss_type,
                                                                 loss_value,
                                                                 trt,
                                                                 region)
-                        FROM '/usr/src/app/ebRisk/{prov}/ebR_{prov}_src_loss_table_r2.csv'
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_src_loss_table_r2.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV HEADER;"'''.format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
