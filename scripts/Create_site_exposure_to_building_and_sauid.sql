@@ -54,9 +54,10 @@ eqdeslev,dauid,adauid,fsauid,csduid,csdname,cduid,cdname,sac,eruid,ername,pruid,
 ORDER BY sauid,taxonomy ASC);
 
 
--- create spatial index
-CREATE INDEX metrovan_building_exposure_idx
-ON exposure.metrovan_building_exposure USING GIST (geom_site);
+-- create indexes
+CREATE INDEX IF NOT EXISTS metrovan_building_exposure_idx ON exposure.metrovan_building_exposure USING GIST (geom_site);
+CREATE INDEX IF NOT EXISTS metrovan_building_exposure_id_idx ON exposure.metrovan_building_exposure("id");
+CREATE INDEX IF NOT EXISTS metrovan_building_exposure_sauid_idx ON exposure.metrovan_building_exposure("sauid");
 
 
 -- add missing columns
@@ -195,3 +196,7 @@ st_centroid(st_union(geom_site)) AS "geom_site"
 
 FROM exposure.metrovan_building_exposure
 GROUP BY sauid,sauidlat,sauidlon);
+
+-- create indexes
+CREATE INDEX IF NOT EXISTS metrovan_sauid_exposure_sauid_idx ON exposure.metrovan_sauid_exposure("sauid");
+CREATE INDEX IF NOT EXISTS metrovan_sauid_exposure_geom_site_idx ON exposure.metrovan_sauid_exposure USING gist("geom_site");

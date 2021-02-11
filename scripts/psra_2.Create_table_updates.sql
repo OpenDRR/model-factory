@@ -5,9 +5,8 @@
 ALTER TABLE psra_{prov}.psra_{prov}_hmaps ADD COLUMN geom geometry(Point,4326);
 UPDATE psra_{prov}.psra_{prov}_hmaps SET geom = st_setsrid(st_makepoint(lon,lat),4326);
 
--- create spatial index
-CREATE INDEX {prov}_hmaps_idx
-ON psra_{prov}.psra_{prov}_hmaps using GIST (geom);
+-- create index
+CREATE INDEX IF NOT EXISTS {prov}_hmaps_idx ON psra_{prov}.psra_{prov}_hmaps using GIST(geom);
 
 
 
@@ -79,7 +78,7 @@ LIMIT 1
 ) AS b;
 
 -- create index
-CREATE INDEX psra_{prov}_hmaps_xref_idx ON psra_{prov}.psra_{prov}_hmaps_xref(id);
+CREATE INDEX IF NOT EXISTS psra_{prov}_hmaps_xref_id_idx ON psra_{prov}.psra_{prov}_hmaps_xref(id);
 
 DROP TABLE IF EXISTS psra_{prov}.exposure_{prov};
 
@@ -131,6 +130,9 @@ INNER JOIN psra_{prov}.psra_{prov}_ed_dmg_mean_r2 b ON a.asset_id = b.asset_id
 );
 
 ALTER TABLE psra_{prov}.psra_{prov}_ed_dmg_mean ADD PRIMARY KEY (asset_id);
+
+-- create index
+CREATE INDEX IF NOT EXISTS psra_{prov}_ed_dmg_mean_asset_id_idx ON psra_{prov}.psra_{prov}_ed_dmg_mean(asset_id);
 
 DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_cd_dmg_mean_b0, psra_{prov}.psra_{prov}_cd_dmg_mean_r2, psra_{prov}.psra_{prov}_ed_dmg_mean_b0, psra_{prov}.psra_{prov}_ed_dmg_mean_r2 CASCADE;
 
@@ -198,6 +200,9 @@ b.structural AS "structural_r2"
 
 FROM psra_{prov}.psra_{prov}_avg_losses_stats_b0 a
 INNER JOIN psra_{prov}.psra_{prov}_avg_losses_stats_r2 b ON a.asset_id = b.asset_id);
+
+-- create index
+CREATE INDEX IF NOT EXISTS psra_{prov}_avg_losses_stats_asset_id_idx ON psra_{prov}.psra_{prov}_avg_losses_stats(asset_id);
 
 DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_avg_losses_stats_b0, psra_{prov}.psra_{prov}_avg_losses_stats_r2;
 

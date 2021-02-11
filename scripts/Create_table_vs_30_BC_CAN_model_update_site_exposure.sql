@@ -82,3 +82,8 @@ FROM vs30.vs30_can_site_model
 ORDER BY a.geom_site <-> geom
 LIMIT 1
 ) AS b;
+
+-- create indexes
+CREATE INDEX IF NOT EXISTS vs30_can_site_model_metrovan_site_exposure_xref_id_idx ON vs30.vs30_can_site_model_metrovan_site_exposure_xref("id");
+CREATE INDEX IF NOT EXISTS vs30_can_site_model_metrovan_building_exposure_xref_id_idx ON vs30.vs30_can_site_model_metrovan_building_exposure_xref("id");
+CREATE INDEX IF NOT EXISTS vs30_can_site_model_metrovan_sauid_exposure_xref_sauid_idx ON vs30.vs30_can_site_model_metrovan_sauid_exposure_xref("sauid");

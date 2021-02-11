@@ -1,13 +1,43 @@
 -- update tables in one script
 
+-- create index on geometries tables
+CREATE INDEX IF NOT EXISTS geometry_aduid_pruid_idx ON boundaries."Geometry_ADAUID"("ADAUID");
+
+CREATE INDEX IF NOT EXISTS geometry_canada_fid_idx ON boundaries."Geometry_ADAUID"("fid");
+
+CREATE INDEX IF NOT EXISTS geometry_cduid_cduid_idx ON boundaries."Geometry_CDUID"("CDUID");
+
+CREATE INDEX IF NOT EXISTS geometry_csduid_csduid_idx ON boundaries."Geometry_CSDUID"("CSDUID");
+
+CREATE INDEX IF NOT EXISTS geometry_dauid_dauid_idx ON boundaries."Geometry_DAUID"("DAUID");
+
+CREATE INDEX IF NOT EXISTS geometry_eruid_eruid_idx ON boundaries."Geometry_ERUID"("ERUID");
+
+CREATE INDEX IF NOT EXISTS geometry_fsauid_fsauid_idx ON boundaries."Geometry_FSAUID"("CFSAUID");
+
+CREATE INDEX IF NOT EXISTS geometry_pruid_pruid_idx ON boundaries."Geometry_PRUID"("PRUID");
+
+CREATE INDEX IF NOT EXISTS geometry_sauid_sauid_idx ON boundaries."Geometry_SAUID"("SAUIDt");
+CREATE INDEX IF NOT EXISTS geometry_sauid_dauid_idx ON boundaries."Geometry_SAUID"("DAUIDt");
+CREATE INDEX IF NOT EXISTS geometry_sauid_cfsauid_idx ON boundaries."Geometry_SAUID"("CFSAUID");
+CREATE INDEX IF NOT EXISTS geometry_sauid_csduid_idx ON boundaries."Geometry_SAUID"("CSDUID");
+CREATE INDEX IF NOT EXISTS geometry_sauid_adauid_idx ON boundaries."Geometry_SAUID"("ADAUID");
+CREATE INDEX IF NOT EXISTS geometry_sauid_cduid_idx ON boundaries."Geometry_SAUID"("CDUID");
+CREATE INDEX IF NOT EXISTS geometry_sauid_eruid_idx ON boundaries."Geometry_SAUID"("ERUID");
+CREATE INDEX IF NOT EXISTS geometry_sauid_pruid_idx ON boundaries."Geometry_SAUID"("PRUID");
+
+
+
 /* Create_table_canada_exposure.psql */
 -- add geometries field to enable PostGIS (WGS1984 SRID = 4326)
 ALTER TABLE exposure.canada_exposure ADD COLUMN geom geometry(Point,4326);
 UPDATE exposure.canada_exposure SET geom = st_setsrid(st_makepoint(SauidLon,SauidLat),4326);
 
--- create spatial index
-CREATE INDEX canada_exposure_idx
-ON exposure.canada_exposure using GIST (geom);
+-- create index on canada exposure
+CREATE INDEX IF NOT EXISTS canada_exposure_idx ON exposure.canada_exposure using GIST (geom);
+CREATE INDEX IF NOT EXISTS canada_exposure_id_idx ON exposure.canada_exposure("id");
+CREATE INDEX IF NOT EXISTS canada_exposure_sauid_idx ON exposure.canada_exposure("sauid");
+
 
 --remove trailing space from 'manufactured ' in gentype
 UPDATE exposure.canada_exposure 
@@ -25,9 +55,12 @@ UPDATE exposure.metrovan_site_exposure SET geom_site = st_setsrid(st_makepoint(s
 ALTER TABLE exposure.metrovan_site_exposure ADD COLUMN geom_sauid geometry(Point,4326);
 UPDATE exposure.metrovan_site_exposure SET geom_sauid = st_setsrid(st_makepoint(sauidlon,sauidlat),4326);
 
--- create spatial index
-CREATE INDEX metrovan_site_exposure_idx
-ON exposure.metrovan_site_exposure using GIST (geom_site,geom_sauid);
+-- create indexes on site exposure tables
+CREATE INDEX IF NOT EXISTS metrovan_site_exposure_id_idx ON exposure.metrovan_site_exposure("id");
+CREATE INDEX IF NOT EXISTS metrovan_site_exposure_id_building_idx ON exposure.metrovan_site_exposure("id_building");
+CREATE INDEX IF NOT EXISTS metrovan_site_exposure_sauid_idx ON exposure.metrovan_site_exposure("sauidid");
+CREATE INDEX IF NOT EXISTS metrovan_site_exposure_geom_site_idx ON exposure.metrovan_site_exposure USING GIST("geom_site");
+CREATE INDEX IF NOT EXISTS metrovan_site_exposure_geom_sauid_idx ON exposure.metrovan_site_exposure USING GIST("geom_sauid");
 
 -- drop columns that are not needed
 ALTER TABLE exposure.metrovan_site_exposure
@@ -72,21 +105,22 @@ DROP COLUMN shape_area;
 ALTER TABLE vs30.vs30_can_site_model ADD COLUMN geom geometry(Point,4326);
 UPDATE vs30.vs30_can_site_model SET geom = st_setsrid(st_makepoint(lon,lat),4326);
 
--- create spatial index
-CREATE INDEX vs30_can_site_model_idx
-ON vs30.vs30_can_site_model using GIST (geom);
+-- create index
+CREATE INDEX IF NOT EXISTS vs30_can_site_model_idx ON vs30.vs30_can_site_model using GIST(geom);
+
 
 
 
 /* Create_table_vs_30_CAN_site_model_xref.sql */
--- create index
-CREATE INDEX vs30_can_site_model_xref_idx ON vs30.vs30_can_site_model_xref (id);
+-- create indexes 
+CREATE INDEX IF NOT EXISTS vs30_can_site_model_xref_idx ON vs30.vs30_can_site_model_xref (id);
+CREATE INDEX IF NOT EXISTS vs_30_can_site_model_xref_id_idx ON vs30.vs30_can_site_model_xref("id");
 
 
 
 /* Create_table_2016_census_v3.sql */
 -- create index
-CREATE INDEX census_2016_canada_idx ON census.census_2016_canada (sauidt);
+CREATE INDEX IF NOT EXISTS census_2016_canada_sauid_idx ON census.census_2016_canada("sauidt");
 
 
 
@@ -97,8 +131,26 @@ CREATE INDEX sovi_index_canada_idx ON sovi.sovi_index_canada (sauidt);
 
 
 /* Create_table_sovi_census_canada.sql */
--- create index
-CREATE INDEX sovi_census_canada_idx ON sovi.sovi_census_canada (sauidt);
+-- create indexes
+CREATE INDEX IF NOT EXISTS sovi_census_canada_sauid_idx ON sovi.sovi_census_canada(sauidt);
+CREATE INDEX IF NOT EXISTS sovi_census_canada_dauid_idx ON sovi.sovi_census_canada(dauidt);
+CREATE INDEX IF NOT EXISTS sovi_census_canada_cfsauid_idx ON sovi.sovi_census_canada(cfsauid);
+CREATE INDEX IF NOT EXISTS sovi_census_canada_csduid_idx ON sovi.sovi_census_canada(csduid);
+CREATE INDEX IF NOT EXISTS sovi_census_canada_adauid_idx ON sovi.sovi_census_canada(adauid);
+CREATE INDEX IF NOT EXISTS sovi_census_canada_cduid_idx ON sovi.sovi_census_canada(cduid);
+CREATE INDEX IF NOT EXISTS sovi_census_canada_eruid_idx ON sovi.sovi_census_canada(eruid);
+CREATE INDEX IF NOT EXISTS sovi_census_canada_pruid_idx ON sovi.sovi_census_canada(pruid);
+
+/* sovi_index */
+-- create indexes
+CREATE INDEX IF NOT EXISTS sovi_index_canada_sauid_idx ON sovi.sovi_index_canada(sauidt);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_dauid_idx ON sovi.sovi_index_canada(dauidt);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_cfsauid_idx ON sovi.sovi_index_canada(cfsauid);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_csduid_idx ON sovi.sovi_index_canada(csduid);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_adauid_idx ON sovi.sovi_index_canada(adauid);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_cduid_idx ON sovi.sovi_index_canada(cduid);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_eruid_idx ON sovi.sovi_index_canada(eruid);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_pruid_idx ON sovi.sovi_index_canada(pruid);
 
 
 
@@ -107,9 +159,13 @@ CREATE INDEX sovi_census_canada_idx ON sovi.sovi_census_canada (sauidt);
 ALTER TABLE ghsl.ghsl_mh_intensity_ghsl ADD COLUMN geom geometry(Point,4326);
 UPDATE ghsl.ghsl_mh_intensity_ghsl SET geom = st_setsrid(st_makepoint(lon,lat),4326);
 
--- create spatial index
-CREATE INDEX ghsl_mh_intensity_ghsl_idx
-ON ghsl.ghsl_mh_intensity_ghsl using GIST (geom);
+-- create indexes
+CREATE INDEX IF NOT EXISTS ghsl_mh_intensity_ghsl_idx ON ghsl.ghsl_mh_intensity_ghsl using GIST(geom);
+CREATE INDEX IF NOT EXISTS ghsl_mh_intensity_ghsl_ghslid_idx ON ghsl.ghsl_mh_intensity_ghsl("ghslid");
+CREATE INDEX IF NOT EXISTS ghsl_mh_intensity_ghsl_pruid_idx ON ghsl.ghsl_mh_intensity_ghsl("pruid");
+CREATE INDEX IF NOT EXISTS ghsl_mh_intensity_ghsl_cduid_idx ON ghsl.ghsl_mh_intensity_ghsl("cduid");
+CREATE INDEX IF NOT EXISTS ghsl_mh_intensity_ghsl_csduid_idx ON ghsl.ghsl_mh_intensity_ghsl("csduid");
+CREATE INDEX IF NOT EXISTS ghsl_mh_intensity_ghsl_eruid_idx ON ghsl.ghsl_mh_intensity_ghsl("eruid");
 
 -- some issue with the original source dataset, nulll values are present in ghslid. erase all null ghslid. 
 DELETE FROM ghsl.ghsl_mh_intensity_ghsl WHERE ghslid IS NULL;
@@ -125,9 +181,10 @@ ALTER TABLE ghsl.ghsl_mh_intensity_ghsl ADD PRIMARY KEY(ghslID);
 ALTER TABLE mh.mh_intensity_canada ADD COLUMN geom geometry(Point,4326);
 UPDATE mh.mh_intensity_canada SET geom = st_setsrid(st_makepoint(lon,lat),4326);
 
--- create spatial index
-CREATE INDEX mh_intensity_canada_idx
-ON mh.mh_intensity_canada using GIST (geom);
+-- create indexes
+CREATE INDEX IF NOT EXISTS mh_intensity_canada_idx ON mh.mh_intensity_canada using GIST(geom);
+CREATE INDEX IF NOT EXISTS mh_intensity_canada_sauid_idx ON mh.mh_intensity_canada("sauidt");
+
 
 -- this table contains 460170 rows.  Reduce the empty sauid to 359129 by using physical exposure table.
 SELECT sauid
@@ -213,5 +270,8 @@ ADD COLUMN mhsum_max float;
 
 UPDATE mh.mh_intensity_canada_minmax SET mhsum_min = (SELECT mhsum_min FROM mh.mh_intensity_canada_mhsum_temp);
 UPDATE mh.mh_intensity_canada_minmax SET mhsum_max = (SELECT mhsum_max FROM mh.mh_intensity_canada_mhsum_temp);
+
+-- create index
+CREATE INDEX IF NOT EXISTS mh_intensity_canada_mhsum_sauid_idx ON mh.mh_intensity_canada_mhsum("sauidt");
 
 DROP TABLE IF EXISTS mh.mh_intensity_canada_mhsum_temp, mh.valid_sauid_temp;
