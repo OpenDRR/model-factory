@@ -21,6 +21,8 @@ gmv_pgv
 FROM gmf.shakemap_{eqScenario}
 );
 
+-- create index
+CREATE INDEX IF NOT EXISTS {eqScenario}_assetid_idx ON dsra.{eQScenario}("AssetID");
 
 
 -- create scenario risk building indicators
