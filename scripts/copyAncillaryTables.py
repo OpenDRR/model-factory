@@ -470,11 +470,11 @@ def main ():
     os.system(systemCall)
     
     #Copy Retrofit costs table
-    systemCall='''psql -h  db-opendrr
+    systemCall="""psql -h  db-opendrr
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
-                -c "\copy  lut.retrofit_costs ("Eq_BldgType",
+                -c '\copy  lut.retrofit_costs ("Eq_BldgType",
                                                 "Description",
                                                 "BldgArea_ft2",
                                                 "USD_ft2__pre1917",
@@ -483,10 +483,9 @@ def main ():
                                                 "RetrofitCost_pc_Total",
                                                 "USD_RetrofitCost_Bldg",
                                                 "CAD_RetrofitCost_Bldg")
-                        FROM '/usr/src/app/retrofit_costs.csv'
+                        FROM /usr/src/app/retrofit_costs.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV HEADER ;"'''
+                            CSV HEADER ;'"""
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
