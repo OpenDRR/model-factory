@@ -54,12 +54,6 @@ eqdeslev,dauid,adauid,fsauid,csduid,csdname,cduid,cdname,sac,eruid,ername,pruid,
 ORDER BY sauid,taxonomy ASC);
 
 
--- create indexes
-CREATE INDEX IF NOT EXISTS metrovan_building_exposure_idx ON exposure.metrovan_building_exposure USING GIST (geom_site);
-CREATE INDEX IF NOT EXISTS metrovan_building_exposure_id_idx ON exposure.metrovan_building_exposure("id");
-CREATE INDEX IF NOT EXISTS metrovan_building_exposure_sauid_idx ON exposure.metrovan_building_exposure("sauid");
-
-
 -- add missing columns
 ALTER TABLE exposure.metrovan_building_exposure
 ADD COLUMN id varchar,
@@ -71,6 +65,11 @@ ADD COLUMN objid serial;
 UPDATE exposure.metrovan_building_exposure
 SET id = sauid||'-'||taxonomy;
 
+
+-- create indexes
+CREATE INDEX IF NOT EXISTS metrovan_building_exposure_idx ON exposure.metrovan_building_exposure USING GIST (geom_site);
+CREATE INDEX IF NOT EXISTS metrovan_building_exposure_sauid_idx ON exposure.metrovan_building_exposure("sauid");
+CREATE INDEX IF NOT EXISTS metrovan_building_exposure_id_idx ON exposure.metrovan_building_exposure("id");
 
 -- create temp table to create partition by id
 SELECT id,

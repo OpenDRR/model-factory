@@ -42,7 +42,7 @@ CREATE INDEX IF NOT EXISTS canada_exposure_sauid_idx ON exposure.canada_exposure
 --remove trailing space from 'manufactured ' in gentype
 UPDATE exposure.canada_exposure 
 SET gentype = REPLACE(gentype,'Manufactured ','Manufactured')
-WHERE gentype = 'Manufactured '
+WHERE gentype = 'Manufactured ';
 
 
 
