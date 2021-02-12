@@ -73,11 +73,11 @@ def main ():
     os.system(systemCall)
 
     # Copy Site exposure model
-    systemCall='''psql -h  db-opendrr
-                -U  ${{POSTGRES_USER}} 
-                -d ${{DB_NAME}} 
+    systemCall="""psql -h  db-opendrr
+                -U ${POSTGRES_USER} 
+                -d ${DB_NAME}
                 -a 
-                -c "\copy  exposure.metrovan_site_exposure (OBJECTID,
+                -c '\copy  exposure.metrovan_site_exposure (OBJECTID,
                                                             id,
                                                             SiteID,
                                                             SiteLon,
@@ -158,16 +158,15 @@ def main ():
                                                             Shape_Leng,
                                                             Shape_Length,
                                                             Shape_Area)
-                        FROM '/usr/src/app/PhysExpRef_MetroVan_v4.csv'
+                        FROM /usr/src/app/PhysExpRef_MetroVan_v4.csv
                             WITH 
-                            DELIMITER AS ','
-                            CSV HEADER ;"'''
+                            CSV HEADER ;'"""
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
     #Copy VS30 Canada Site Model
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
+                -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
                 -c "\copy vs30.vs30_can_site_model (objectid,
@@ -185,7 +184,7 @@ def main ():
 
     #Copy VS30 Canada Site Model xref
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
+                -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
                 -c "\copy vs30.vs30_can_site_model_xref (id,
@@ -206,7 +205,7 @@ def main ():
 
     #Copy 2016 Censuse Table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
+                -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
                 -c "\copy census.census_2016_canada (OBJECTID,
@@ -303,7 +302,7 @@ def main ():
 
     #Copy Table SOVI Index
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
+                -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
                 -c "\copy  sovi.sovi_index_canada (OBJECTID,
@@ -380,7 +379,7 @@ def main ():
 
     #Copy Table SOVI Census
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
+                -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
                 -c "\copy  sovi.sovi_census_canada (OBJECTID,
@@ -457,7 +456,7 @@ def main ():
     
     #Copy table collapse probability
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
+                -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
                 -c "\copy  lut.collapse_probability ("typology",
@@ -472,7 +471,7 @@ def main ():
     
     #Copy Retrofit costs table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
+                -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
                 -c "\copy  lut.retrofit_costs ("Eq_BldgType",
@@ -493,7 +492,7 @@ def main ():
     
     #Copy GHSL Table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
+                -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
                 -c "\copy  ghsl.ghsl_mh_intensity_ghsl (ghslID,
@@ -541,7 +540,7 @@ def main ():
     
     #Copy MH Intensity Table
     systemCall='''psql -h  db-opendrr
-                -U  ${POSTGRES_USER}
+                -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
                 -c "\copy  mh.mh_intensity_canada (OBJECTID,
