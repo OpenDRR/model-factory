@@ -684,6 +684,7 @@ pruid,sauid,taxonomy,lon,lat,structural_no_damage,structural_slight,structural_m
           CSV ;
 */
 
+/*
 -- combine cd b0 and r2 table
 CREATE TABLE psra_{prov}.psra_{prov}_cd_dmg_mean AS
 (SELECT
@@ -729,7 +730,7 @@ INNER JOIN psra_{prov}.psra_{prov}_cd_dmg_mean_r2 b ON a.asset_id = b.asset_id
 );
 
 ALTER TABLE psra_{prov}.psra_{prov}_cd_dmg_mean ADD PRIMARY KEY (asset_id);
-
+*/
 
 -- create ed table b0
 CREATE TABLE psra_{prov}.psra_{prov}_ed_dmg_mean_b0(
