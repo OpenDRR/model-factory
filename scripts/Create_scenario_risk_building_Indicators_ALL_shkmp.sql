@@ -22,7 +22,7 @@ FROM gmf.shakemap_{eqScenario}
 );
 
 -- create index
-CREATE INDEX IF NOT EXISTS {eqScenario}_assetid_idx ON dsra.{eQScenario}("AssetID");
+CREATE INDEX IF NOT EXISTS {eqScenario}_assetid_idx ON dsra.{eqScenario}("AssetID");
 
 
 -- create scenario risk building indicators
