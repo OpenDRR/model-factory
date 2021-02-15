@@ -484,7 +484,7 @@ def main ():
                                                 "USD_RetrofitCost_Bldg",
                                                 "CAD_RetrofitCost_Bldg")
                         FROM /usr/src/app/retrofit_costs.csv
-                            WITH 
+                            WITH
                             CSV HEADER ;'"""
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
