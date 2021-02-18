@@ -76,7 +76,7 @@ CREATE TABLE sovi.sovi_index_canada(
 -- import exposure from csv
 COPY sovi.sovi_index_canada (OBJECTID, SAUIDt, SAUIDi, Lon, Lat, Area_km2, Area_ha, DAUIDt, DAUIDi, ADAUID, CFSAUID, PRUID, PRNAME, CSDUID, CSDNAME, CSDTYPE, CDUID, CDNAME, CDTYPE, CCSUID, CCSNAME, ERUID, ERNAME, SACCODE, SACTYPE, CMAUID, CMAPUID, CMANAME, CMATYPE, Shape_Length, Shape_Area, DAUID, Pop_Density, Pop_Ha, Bus_Ha, Pre_1975, Renter, Hshld_NSuit, Hshld_Mntn1, Hshld_MntnAge, Pub_Trans, Vis_Min, Imm_LT5, Indigenous, Age_GT65, Age_LT6, Age_Median, NoSec_School, Retail_Job, Health_Job, Fam_GT5, LonePar3Kids, Live_Alone, No_EngFr, Moved_LT1, NoWrkPlace, Shltr_GT30, Inc_Indv, Inc_Hshld, Inc_LowDecile, Unemployed, Work_Parttime, Work_None, Employ_Inc, MH_Index)
 
-    FROM '/usr/src/app/social-vulnerability-index.csv'
+    FROM '/usr/src/app/social-vulnerability-index_2021.csv'
         WITH 
           DELIMITER AS ','
           CSV HEADER ;
