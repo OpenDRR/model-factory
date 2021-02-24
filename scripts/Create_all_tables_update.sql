@@ -185,7 +185,7 @@ UPDATE mh.mh_intensity_canada SET geom = st_setsrid(st_makepoint(lon,lat),4326);
 CREATE INDEX IF NOT EXISTS mh_intensity_canada_idx ON mh.mh_intensity_canada using GIST(geom);
 CREATE INDEX IF NOT EXISTS mh_intensity_canada_sauid_idx ON mh.mh_intensity_canada("sauidt");
 
-
+/*
 -- this table contains 460170 rows.  Reduce the empty sauid to 359129 by using physical exposure table.
 SELECT sauid
 INTO mh.valid_sauid_temp
@@ -275,3 +275,4 @@ UPDATE mh.mh_intensity_canada_minmax SET mhsum_max = (SELECT mhsum_max FROM mh.m
 CREATE INDEX IF NOT EXISTS mh_intensity_canada_mhsum_sauid_idx ON mh.mh_intensity_canada_mhsum("sauidt");
 
 DROP TABLE IF EXISTS mh.mh_intensity_canada_mhsum_temp, mh.valid_sauid_temp;
+*/
