@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS vs30.vs30_can_site_model;
 
 -- create table
 CREATE TABLE vs30.vs30_can_site_model(
+    objectid varchar,
     lon float,
     lat float,
     vs30 float,
@@ -13,8 +14,9 @@ CREATE TABLE vs30.vs30_can_site_model(
     
 );
 
+/*
 -- import exposure from csv
-COPY vs30.vs30_can_site_model (lon, lat, vs30, z1pt0, z2pt5)
+COPY vs30.vs30_can_site_model (objectid, lon, lat, vs30, z1pt0, z2pt5)
     FROM '/usr/src/app/site-vgrid_CA.csv'
         WITH 
           DELIMITER AS ','
@@ -36,3 +38,4 @@ ON vs30.vs30_can_site_model using GIST (geom);
 
 ALTER TABLE vs30.vs30_can_site_model ADD COLUMN IF NOT EXISTS z1pt0 float DEFAULT NULL;
 ALTER TABLE vs30.vs30_can_site_model ADD COLUMN IF NOT EXISTS z2pt5 float DEFAULT NULL;
+*/

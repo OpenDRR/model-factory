@@ -43,6 +43,7 @@ CREATE TABLE mh.mh_intensity_canada(
     MHIn_MMI7 float
 );
 
+/*
 -- import exposure from csv
 COPY mh.mh_intensity_canada (OBJECTID, SAUIDt, lon, lat, PGV, PGA, Sa0p1, Sa0p3, Sa1p0, Sa2p0, Vs30, MMI6, MMI7, MMI8, Tsun_ha, Fl200, Fl500, Fl1000, Fire, Lndsus, Cy100, Cy250, Cy500, Cy1000, PGVn, MMI7n, Tsun_n, Fl500n, Firen, Lndn, Cy500n, MHn_TPGV, MHn_TMMI7, MHIn_PGV, MHIn_MMI7)
 
@@ -151,3 +152,4 @@ UPDATE mh.mh_intensity_canada_minmax SET mhsum_min = (SELECT mhsum_min FROM mh.m
 UPDATE mh.mh_intensity_canada_minmax SET mhsum_max = (SELECT mhsum_max FROM mh.mh_intensity_canada_mhsum_temp);
 
 DROP TABLE IF EXISTS mh.mh_intensity_canada_mhsum_temp, mh.valid_sauid_temp;
+*/
