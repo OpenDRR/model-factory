@@ -7,41 +7,30 @@ CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_expos
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
--- 1.1.1 Building
+-- 1.1.1 Buildings
 SELECT 
 a.id AS "BldgID",
-a.sauid AS "Sauid",
-b."PRUID" AS "pruid",
-b."PRNAME" AS "prname",
-b."ERUID" AS "eruid",
-b."ERNAME" AS "ername",
-b."CDUID" AS "cduid",
-b."CDNAME" AS "cdname",
-b."CSDUID" AS "csduid",
-b."CSDNAME" AS "csdname",
-b."CFSAUID" AS "fsauid",
-b."DAUIDt" AS "dauid",
-b."SACCODE" AS "saccode",
-b."SACTYPE" AS "sactype",
 CAST(CAST(ROUND(CAST(a.sauidlon AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "BldgLon",
 CAST(CAST(ROUND(CAST(a.sauidlat AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "BldgLat",
+a.sauid AS "Sauid",
 CAST(CAST(ROUND(CAST(a.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgNum",
-CAST(CAST(ROUND(CAST(a.bldg_ft2 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "EBldgArea",
-CAST(CAST(ROUND(CAST(CASE WHEN a.genocc IN ('Residential-LD','Residential-MD','Residential-HD') THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaRes",
-CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Commercial' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaComm",
-CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Industrial' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaInd",
-CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Civic' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaCivic",
-CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Agricultural' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaAgr",
-
+a.taxonomy AS "E_BldgTaxon",
+CAST(CAST(ROUND(CAST(a.bldg_ft2 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgArea",
+--CAST(CAST(ROUND(CAST(CASE WHEN a.genocc IN ('Residential-LD','Residential-MD','Residential-HD') THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaRes",
+--CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Commercial' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaComm",
+--CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Industrial' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaInd",
+--CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Civic' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaCivic",
+--CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Agricultural' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaAgr",
 a.landuse AS "E_LandUse",
 a.genocc AS "E_BldgOccG",
 a.occclass1 AS "E_BldgOccS1",
 a.occclass2 AS "E_BldgOccS2",
 a.gentype AS "E_BldgTypeG",
 a.bldgtype AS "E_BldgTypeS",
-a.eqdeslev AS "E_BldgDesLev",
+CAST(CAST(ROUND(CAST(a.numfloors AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_NumFloors",
 a.bldepoch AS "E_BldgEpoch",
 a.ssc_zone AS "SSC_Zone",
+a.eqdeslev AS "E_BldgDesLev",
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -60,6 +49,18 @@ CAST(CAST(ROUND(CAST(a.nonstructural AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_
 CAST(CAST(ROUND(CAST(a.contents AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_ContValue",
 CAST(CAST(ROUND(CAST(a.retrofitting AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_RetrofitCost",
 
+b."PRUID" AS "pruid",
+b."PRNAME" AS "prname",
+b."ERUID" AS "eruid",
+b."ERNAME" AS "ername",
+b."CDUID" AS "cduid",
+b."CDNAME" AS "cdname",
+b."CSDUID" AS "csduid",
+b."CSDNAME" AS "csdname",
+b."CFSAUID" AS "fsauid",
+b."DAUIDt" AS "dauid",
+b."SACCODE" AS "saccode",
+b."SACTYPE" AS "sactype",
 a.geom_site AS "geom_point"
 
 FROM exposure.metrovan_building_exposure a
