@@ -9,7 +9,7 @@ UPDATE psra_{prov}.psra_{prov}_hmaps SET geom = st_setsrid(st_makepoint(lon,lat)
 CREATE INDEX IF NOT EXISTS {prov}_hmaps_idx ON psra_{prov}.psra_{prov}_hmaps using GIST(geom);
 
 
-
+/*
 -- attach assetID to hazard mean map based on closest location, comment out section after processed xrefs are pushed on github
 DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_hmaps_xref CASCADE;
 
@@ -76,6 +76,7 @@ FROM psra_{prov}.psra_{prov}_hmaps
 ORDER BY a.geom <-> geom
 LIMIT 1
 ) AS b;
+*/
 
 -- create index
 CREATE INDEX IF NOT EXISTS psra_{prov}_hmaps_xref_id_idx ON psra_{prov}.psra_{prov}_hmaps_xref(id);
