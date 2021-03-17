@@ -352,6 +352,14 @@ FROM psra_{prov}.psra_{prov}_hmaps_xref
 );
 
 
+-- add geom to uhs
+-- add geometries field to enable PostGIS (WGS1984 SRID = 4326)
+ALTER TABLE psra_{prov}.psra_{prov}_uhs ADD COLUMN geom geometry(Point,4326);
+UPDATE psra_{prov}.psra_{prov}_uhs SET geom = st_setsrid(st_makepoint(lon,lat),4326);
+
+-- create spatial index
+CREATE INDEX psra_{prov}_uhs_geom_idx ON psra_{prov}.psra_{prov}_uhs using GIST (geom);
+
 CREATE VIEW results_psra_{prov}.psra_{prov}_uhs AS
 (
 SELECT
@@ -374,9 +382,10 @@ lat,
 "0.1_SA(0.5)",
 "0.1_SA(0.6)",
 "0.1_SA(1.0)",
-"0.1_SA(10.0)"
+"0.1_SA(10.0)",
 "0.1_SA(2.0)",
-"0.1_SA(5.0)"
+"0.1_SA(5.0)",
+geom
 
 FROM psra_{prov}.psra_{prov}_uhs
 );
