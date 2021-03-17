@@ -70,8 +70,8 @@ CAST(CAST(ROUND(CAST(AVG(c.structural_extensive_b0/a.number) AS NUMERIC),6) AS F
 CAST(CAST(ROUND(CAST(SUM(c.structural_complete_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Complete_b0",
 CAST(CAST(ROUND(CAST(AVG(c.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Complete_b0",
 
-CAST(CAST(ROUND(CAST(AVG(f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDr_Collapse",
 CAST(CAST(ROUND(CAST(SUM(c.structural_complete_b0 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Collapse_b0",
+CAST(CAST(ROUND(CAST(AVG(f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Collapse_b0",
 CAST(CAST(ROUND(CAST(AVG((c.structural_complete_b0/a.number) * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtp_Collapse_b0",
 
 -- 2.2.1 Classical Damage - r2
@@ -91,6 +91,7 @@ CAST(CAST(ROUND(CAST(SUM(c.structural_complete_r2) AS NUMERIC),6) AS FLOAT) AS N
 CAST(CAST(ROUND(CAST(AVG(c.structural_complete_r2/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Complete_r2",
 
 CAST(CAST(ROUND(CAST(SUM(c.structural_complete_r2 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Collapse_r2",
+CAST(CAST(ROUND(CAST(AVG(f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Collapse_r2",
 CAST(CAST(ROUND(CAST(AVG((c.structural_complete_r2/a.number) * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtp_Collapse_r2",
 
 -- 2.2.2 Event-Based Damage - b0
@@ -213,5 +214,7 @@ a.return_period AS "ePML_Period",
 a.annual_frequency_of_exceedence AS "ePML_Probability",
 a."GenOcc" AS "ePML_OccGen",
 a."GenType" AS "ePML_BldgType"
+--b.geom  -in case fsa geom is needed
 
-FROM psra_{prov}.psra_{prov}_agg_curves_stats a;
+FROM psra_{prov}.psra_{prov}_agg_curves_stats a
+LEFT JOIN boundaries."Geometry_FSAUID" b ON a.fsauid = b."CFSAUID";
