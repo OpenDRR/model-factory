@@ -305,72 +305,87 @@ def main ():
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
-                -c "\copy  sovi.sovi_index_canada (OBJECTID,
-                                                    SAUIDt,
-                                                    SAUIDi,
-                                                    Lon,
-                                                    Lat,
-                                                    Area_km2,
-                                                    Area_ha,
-                                                    DAUIDt,
-                                                    DAUIDi,
-                                                    ADAUID,
-                                                    CFSAUID,
-                                                    PRUID,
-                                                    PRNAME,
-                                                    CSDUID,
-                                                    CSDNAME,
-                                                    CSDTYPE,
-                                                    CDUID,
-                                                    CDNAME,
-                                                    CDTYPE,
-                                                    CCSUID,
-                                                    CCSNAME,
-                                                    ERUID,
-                                                    ERNAME,
-                                                    SACCODE,
-                                                    SACTYPE,
-                                                    CMAUID,
-                                                    CMAPUID,
-                                                    CMANAME,
-                                                    CMATYPE,
-                                                    Shape_Length,
-                                                    Shape_Area,
-                                                    DAUID,
-                                                    Pop_Density,
-                                                    Pop_Ha,
-                                                    Bus_Ha,
-                                                    Pre_1975,
-                                                    Renter,
-                                                    Hshld_NSuit,
-                                                    Hshld_Mntn1,
-                                                    Hshld_MntnAge,
-                                                    Pub_Trans,
-                                                    Vis_Min,
-                                                    Imm_LT5,
-                                                    Indigenous,
-                                                    Age_GT65,
-                                                    Age_LT6,
-                                                    Age_Median,
-                                                    NoSec_School,
-                                                    Retail_Job,
-                                                    Health_Job,
-                                                    Fam_GT5,
-                                                    LonePar3Kids,
-                                                    Live_Alone,
-                                                    No_EngFr,
-                                                    Moved_LT1,
-                                                    NoWrkPlace,
-                                                    Shltr_GT30,
-                                                    Inc_Indv,
-                                                    Inc_Hshld,
-                                                    Inc_LowDecile,
-                                                    Unemployed,
-                                                    Work_Parttime,
-                                                    Work_None,
-                                                    Employ_Inc,
-                                                    MH_Index)
-                        FROM '/usr/src/app/social-vulnerability-index.csv'
+                -c "\copy  sovi.sovi_index_canada (sauidt,
+                                                    sauidi,
+                                                    dauidt,
+                                                    dauidi,
+                                                    fsauid,
+                                                    csdname,
+                                                    cdname,
+                                                    ername,
+                                                    prname,
+                                                    lon,
+                                                    lat,
+                                                    bldgnum,
+                                                    costasset,
+                                                    costbldg,
+                                                    popday,
+                                                    popnight,
+                                                    poptrnst,
+                                                    censuspop,
+                                                    censusbldg,
+                                                    censusdu,
+                                                    area_km2,
+                                                    area_ha,
+                                                    shape_length,
+                                                    shape_area,
+                                                    sauid_pc,
+                                                    landuse,
+                                                    dauid_i,
+                                                    dauid_lon,
+                                                    dauid_lat,
+                                                    adauid,
+                                                    ctuid,
+                                                    ctname,
+                                                    cfsauid,
+                                                    csduid,
+                                                    csdtype,
+                                                    saccode,
+                                                    sactype,
+                                                    cduid,
+                                                    cdtype,
+                                                    ccsuid,
+                                                    ccsname,
+                                                    cmauid,
+                                                    cmapuid,
+                                                    cmaname,
+                                                    cmatype,
+                                                    eruid,
+                                                    pruid,
+                                                    sauid_km2,
+                                                    age_gt65,
+                                                    age_lt6,
+                                                    age_median,
+                                                    health_job,
+                                                    indigenous,
+                                                    no_engfr,
+                                                    nosec_school,
+                                                    vis_min,
+                                                    pub_trans,
+                                                    inc_hshld,
+                                                    inc_indv,
+                                                    inc_lowdecile,
+                                                    retail_job,
+                                                    shltr_gt30,
+                                                    unemployed,
+                                                    work_none,
+                                                    work_parttime,
+                                                    employ_inc,
+                                                    fam_gt5,
+                                                    imm_lt5,
+                                                    live_alone,
+                                                    lonepar3kids,
+                                                    moved_lt1,
+                                                    nowrkplace,
+                                                    bus_ha,
+                                                    hshld_mntn1,
+                                                    hshld_mntnage,
+                                                    hshld_nsuit,
+                                                    pop_ha,
+                                                    pre_1975,
+                                                    renter,
+                                                    dauid_text)
+                        FROM '/usr/src/app/social-vulnerability-index_2021.csv'
                             WITH 
                             DELIMITER AS ','
                             CSV HEADER ;"'''
@@ -382,78 +397,138 @@ def main ():
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
-                -c "\copy  sovi.sovi_census_canada (OBJECTID,
-                                                    SAUIDt,
-                                                    SAUIDi,
-                                                    Lon,
-                                                    Lat,
-                                                    Area_km2,
-                                                    Area_ha,
-                                                    DAUIDt,
-                                                    DAUIDi,
-                                                    ADAUID,
-                                                    CFSAUID,
-                                                    PRUID,
-                                                    PRNAME,
-                                                    CSDUID,
-                                                    CSDNAME,
-                                                    CSDTYPE,
-                                                    CDUID,
-                                                    CDNAME,
-                                                    CDTYPE,
-                                                    CCSUID,
-                                                    CCSNAME,
-                                                    ERUID,
-                                                    ERNAME,
-                                                    SACCODE,
-                                                    SACTYPE,
-                                                    CMAUID,
-                                                    CMAPUID,
-                                                    CMANAME,
-                                                    CMATYPE,
-                                                    Shape_Length,
-                                                    Shape_Area,
-                                                    DAUID,
-                                                    Pop_Dens,
-                                                    Pop_Ha,
-                                                    Bus_Ha,
-                                                    Pre_1975,
-                                                    Renter,
-                                                    Hshld_NSuit,
-                                                    Hshld_Mntn1,
-                                                    Hshld_MntnAge,
-                                                    Pub_Trans,
-                                                    Vis_Min,
-                                                    Imm_LT5,
-                                                    Indigenous,
-                                                    Age_GT65,
-                                                    Age_LT6,
-                                                    Age_Median,
-                                                    NoSec_School,
-                                                    Retail_Job,
-                                                    Health_Job,
-                                                    Fam_GT5,
-                                                    LonePar3Kids,
-                                                    Live_Alone,
-                                                    No_EngFr,
-                                                    Moved_LT1,
-                                                    NoWrkPlace,
-                                                    Shltr_GT30,
-                                                    Inc_Indv,
-                                                    Inc_Hshld,
-                                                    Inc_LowDecile,
-                                                    Unemployed,
-                                                    Work_Parttime,
-                                                    Work_None,
-                                                    Employ_Inc)
-
-                        FROM '/usr/src/app/social-vulnerability-census.csv'
+                -c "\copy  sovi.sovi_census_canada (sauidt,
+                                                    sauidi,
+                                                    dauidt,
+                                                    dauidi,
+                                                    fsauid,
+                                                    csdname,
+                                                    cdname,
+                                                    ername,
+                                                    prname,
+                                                    lon,
+                                                    lat,
+                                                    bldgnum,
+                                                    costasset,
+                                                    costbldg,
+                                                    popday,
+                                                    popnight,
+                                                    poptrnst,
+                                                    censuspop,
+                                                    censusbldg,
+                                                    censusdu,
+                                                    area_km2,
+                                                    area_ha,
+                                                    shape_length,
+                                                    shape_area,
+                                                    sauid_pc,
+                                                    landuse,
+                                                    dauidt_1,
+                                                    dauid_i,
+                                                    dauid_lon,
+                                                    dauid_lat,
+                                                    adauid,
+                                                    ctuid,
+                                                    ctname,
+                                                    cfsauid,
+                                                    csduid,
+                                                    csdtype,
+                                                    saccode,
+                                                    sactype,
+                                                    cduid,
+                                                    cdtype,
+                                                    ccsuid,
+                                                    ccsname,
+                                                    cmauid,
+                                                    cmapuid,
+                                                    cmaname,
+                                                    cmatype,
+                                                    eruid,
+                                                    pruid,
+                                                    sauid_km2,
+                                                    age_gt65,
+                                                    age_lt6,
+                                                    age_median,
+                                                    health_job,
+                                                    indigenous,
+                                                    no_engfr,
+                                                    nosec_school,
+                                                    vis_min,
+                                                    pub_trans,
+                                                    inc_hshld,
+                                                    inc_indv,
+                                                    inc_lowdecile,
+                                                    retail_job,
+                                                    shltr_gt30,
+                                                    unemployed,
+                                                    work_none,
+                                                    work_parttime,
+                                                    employ_inc,
+                                                    fam_gt5,
+                                                    imm_lt5,
+                                                    live_alone,
+                                                    lonepar3kids,
+                                                    moved_lt1,
+                                                    nowrkplace,
+                                                    bus_ha,
+                                                    hshld_mntn1,
+                                                    hshld_mntnage,
+                                                    hshld_nsuit,
+                                                    pop_ha,
+                                                    pre_1975,
+                                                    renter,
+                                                    dauid_text)
+                        FROM '/usr/src/app/social-vulnerability-census_2021.csv'
                             WITH 
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
+
+    #Copy Table SOVI Threshold
+    systemCall='''psql -h  db-opendrr
+                -U ${POSTGRES_USER}
+                -d ${DB_NAME}
+                -a 
+                -c "\copy  sovi.sovi_thresholds (sactype,
+                                                    pop_ha_t,
+                                                    bus_ha_t,
+                                                    pre_1975_t,
+                                                    hshld_nsuit_t,
+                                                    hshld_mntnage_t,
+                                                    hshld_mntn1_t,
+                                                    renter_t,
+                                                    live_alone_t,
+                                                    lonepar3kids_t,
+                                                    fam_gt5_t,
+                                                    moved_lt1_t,
+                                                    imm_lt5_t,
+                                                    nowrkplace_t,
+                                                    no_engfr_t,
+                                                    nosec_school_t,
+                                                    age_gt65_t,
+                                                    age_lt6_t,
+                                                    indigenous_t,
+                                                    vis_min_t,
+                                                    shltr_gt30_t,
+                                                    inc_lowdecile_t,
+                                                    unemployed_t,
+                                                    work_none_t,
+                                                    work_parttime_t,
+                                                    employ_inc_t,
+                                                    inc_indv_t,
+                                                    inc_hshld_t,
+                                                    agemedian_t,
+                                                    health_t,
+                                                    pubtrans_t,
+                                                    retail_t)
+                        FROM '/usr/src/app/sovi_thresholds_2021.csv'
+                            WITH 
+                            DELIMITER AS ','
+                            CSV HEADER ;"'''
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
     #Copy table collapse probability
     systemCall='''psql -h  ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
@@ -468,7 +543,7 @@ def main ():
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
+
     #Copy Retrofit costs table
     systemCall="""psql -h  ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
@@ -488,7 +563,7 @@ def main ():
                             CSV HEADER ;'"""
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
+
     #Copy GHSL Table
     systemCall='''psql -h  ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
@@ -536,54 +611,67 @@ def main ():
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
+
     #Copy MH Intensity Table
     systemCall='''psql -h  ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
-                -c "\copy  mh.mh_intensity_canada (OBJECTID,
-                                                    SAUIDt,
+                -c "\copy   mh.mh_intensity_canada(sauidt,
+                                                    sauidi,
                                                     lon,
                                                     lat,
-                                                    PGV,
-                                                    PGA,
-                                                    Sa0p1,
-                                                    Sa0p3,
-                                                    Sa1p0,
-                                                    Sa2p0,
-                                                    Vs30,
-                                                    MMI6,
-                                                    MMI7,
-                                                    MMI8,
-                                                    Tsun_ha,
-                                                    Fl200,
-                                                    Fl500,
-                                                    Fl1000,
-                                                    Fire,
-                                                    Lndsus,
-                                                    Cy100,
-                                                    Cy250,
-                                                    Cy500,
-                                                    Cy1000,
-                                                    PGVn,
-                                                    MMI7n,
-                                                    Tsun_n,
-                                                    Fl500n,
-                                                    Firen,
-                                                    Lndn,
-                                                    Cy500n,
-                                                    MHn_TPGV,
-                                                    MHn_TMMI7,
-                                                    MHIn_PGV,
-                                                    MHIn_MMI7)
-                        FROM '/usr/src/app/mh-intensity-sauid.csv'
+                                                    pgv2500,
+                                                    pgv500,
+                                                    pga2500,
+                                                    pga500,
+                                                    vs30,
+                                                    mmi6,
+                                                    mmi7,
+                                                    mmi8,
+                                                    tsun500,
+                                                    fld50_jrc,
+                                                    fld100_jrc,
+                                                    fld200_jrc,
+                                                    fld500_jrc,
+                                                    fld200_unep,
+                                                    fld500_unep,
+                                                    fld1000_unep,
+                                                    wildfire,
+                                                    wui_type,
+                                                    lndsus,
+                                                    cy100,
+                                                    cy250,
+                                                    cy500,
+                                                    cy1000,
+                                                    svlt_score)
+                        FROM '/usr/src/app/HTi_sauid_2021.csv'
                             WITH 
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
+
+    #Copy MH Threshold Table
+    systemCall='''psql -h  db-opendrr
+                -U ${POSTGRES_USER}
+                -d ${DB_NAME}
+                -a 
+                -c "\copy   mh.mh_thresholds(threat,
+                                                htt_exposure,
+                                                hti_pgv500,
+                                                hti_pga500,
+                                                hti_tsun500,
+                                                hti_fld500,
+                                                hti_wildfire,
+                                                hti_lndsus,
+                                                hti_cy500)
+                    FROM '/usr/src/app/hazard-threat_thresholds.csv'
+                            WITH 
+                            DELIMITER AS ','
+                            CSV HEADER ;"'''
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
     return
 
 
