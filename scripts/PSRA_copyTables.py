@@ -21,7 +21,7 @@ def main ():
     args = parse_args()
 
     #Copy hcurve Table PGA
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -55,7 +55,7 @@ def main ():
     os.system(systemCall)
     
     #Copy hcurve table Sa0p1
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -89,7 +89,7 @@ def main ():
     os.system(systemCall)
 
     #Copy hcurve table Sa0p2
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -123,7 +123,7 @@ def main ():
     os.system(systemCall)
 
     #Copy hcurve table Sa0p3
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -157,7 +157,7 @@ def main ():
     os.system(systemCall)
 
     #Copy hcurve table Sa0p5
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -191,7 +191,7 @@ def main ():
     os.system(systemCall)
     
     #Copy hcurve table Sa0p6
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -225,7 +225,7 @@ def main ():
     os.system(systemCall)
     
     #Copy hcurve table Sa1p0
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -259,7 +259,7 @@ def main ():
     os.system(systemCall)
     
     #Copy hcurve table Sa2p0
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -301,7 +301,7 @@ def main ():
     hmapColumns = hmapColumns.replace('"lon"','lon')
     hmapColumns = hmapColumns.replace('"lat"','lat')
 
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -321,7 +321,7 @@ def main ():
     uhsColumns = uhsColumns.replace('"lon"','lon')
     uhsColumns = uhsColumns.replace('"lat"','lat')
 
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -333,7 +333,7 @@ def main ():
     os.system(systemCall)
 
     #Copy dmg mean b0 table
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -375,7 +375,7 @@ def main ():
     os.system(systemCall)
 
     #Copy dmg mean r2 table
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -417,7 +417,7 @@ def main ():
     os.system(systemCall)
 
     #Copy ed dmg mean b0 table 
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -459,7 +459,7 @@ def main ():
     os.system(systemCall)
 
     #Copy ed dmg mean r2 table
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -501,7 +501,7 @@ def main ():
     os.system(systemCall)
 
     #Copy agg curves stats b0 table
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -521,7 +521,7 @@ def main ():
     os.system(systemCall)
     
     #Copy agg curves stats r2 table
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -541,7 +541,7 @@ def main ():
     os.system(systemCall)
     
     #Copy avg losses b0 table
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -581,7 +581,7 @@ def main ():
     os.system(systemCall)
     
     #Copy avg losses r2 table
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -621,7 +621,7 @@ def main ():
     os.system(systemCall)
     
     #Copy source loss b0 table
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -637,7 +637,7 @@ def main ():
     os.system(systemCall)
     
     #Copy source loss r2 table
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
