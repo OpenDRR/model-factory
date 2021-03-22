@@ -1,5 +1,7 @@
 -- update tables in one script
 
+/*
+-- moved to Update_boundaries_SAUID_table.sql
 -- create index on geometries tables
 CREATE INDEX IF NOT EXISTS geometry_aduid_pruid_idx ON boundaries."Geometry_ADAUID"("ADAUID");
 
@@ -25,7 +27,7 @@ CREATE INDEX IF NOT EXISTS geometry_sauid_adauid_idx ON boundaries."Geometry_SAU
 CREATE INDEX IF NOT EXISTS geometry_sauid_cduid_idx ON boundaries."Geometry_SAUID"("CDUID");
 CREATE INDEX IF NOT EXISTS geometry_sauid_eruid_idx ON boundaries."Geometry_SAUID"("ERUID");
 CREATE INDEX IF NOT EXISTS geometry_sauid_pruid_idx ON boundaries."Geometry_SAUID"("PRUID");
-
+*/
 
 
 /* Create_table_canada_exposure.psql */
