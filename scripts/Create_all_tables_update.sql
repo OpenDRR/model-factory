@@ -1,5 +1,31 @@
 -- update tables in one script
 
+-- create master dsra table
+DROP TABLE IF EXISTS dsra.dsra_all_scenarios_tbl CASCADE;
+CREATE TABLE dsra.dsra_all_scenarios_tbl(
+assetid varchar,
+sauid varchar,
+dauid varchar,
+csduid varchar,
+csdname varchar,
+fsauid varchar,
+cduid varchar,
+cdname varchar,
+eruid varchar,
+ername varchar,
+pruid varchar,
+prname varchar,
+sh_rupname varchar,
+sh_rupabbr varchar,
+sh_mag varchar,
+sh_hypolon float,
+sh_hypolat float,
+sh_hypodepth float,
+sh_rake varchar,
+geom_point geometry
+); 
+
+
 /*
 -- moved to Update_boundaries_SAUID_table.sql
 -- create index on geometries tables
