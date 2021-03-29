@@ -114,7 +114,7 @@ CAST(CAST(ROUND(CAST(g.structural_complete_b0 AS NUMERIC),6) AS FLOAT) AS NUMERI
 -- eDsd_Complete_b0
 CAST(CAST(ROUND(CAST((g.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_Complete_b0",
 
-CAST(CAST(ROUND(CAST(f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "EDr_Collapse_b0",
+CAST(CAST(ROUND(CAST(f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_Collapse_b0",
 CAST(CAST(ROUND(CAST(g.structural_complete_b0 * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_Collapse_b0",
 -- eDsd_Collapse_b0
 CAST(CAST(ROUND(CAST((g.structural_complete_b0/a.number) * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_Collapse_b0",
@@ -140,7 +140,7 @@ CAST(CAST(ROUND(CAST(g.structural_complete_r2 AS NUMERIC),6) AS FLOAT) AS NUMERI
 -- eDsd_Complete_r2
 CAST(CAST(ROUND(CAST((g.structural_complete_r2/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_Complete_r2",
 
-CAST(CAST(ROUND(CAST(f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "EDr_Collapse_r2",
+CAST(CAST(ROUND(CAST(f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_Collapse_r2",
 CAST(CAST(ROUND(CAST(g.structural_complete_r2 * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_Collapse_r2",
 -- eDsd_Collapse_r2
 CAST(CAST(ROUND(CAST((g.structural_complete_r2/a.number) * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_Collapse_r2",
