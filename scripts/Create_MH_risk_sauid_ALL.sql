@@ -7,9 +7,8 @@ CREATE SCHEMA IF NOT EXISTS results_nhsl_hazard_threat;
 DROP VIEW IF EXISTS results_nhsl_hazard_threat.nhsl_hazard_threat_all_indicators_s CASCADE;
 CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_all_indicators_s AS 
 
--- 4.0 Multi-Hazard Risk
--- 4.1 Multi-Hazard Threat
--- 4.1.1 Multi-Hazard Intensity
+-- 1.0 Human Settlement
+-- 1.2 Hazard Threat
 SELECT 
 a.sauid AS "Sauid",
 CAST(CAST(ROUND(CAST(a.sauidlon AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_SauidLon",

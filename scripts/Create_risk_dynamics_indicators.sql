@@ -5,8 +5,8 @@ CREATE SCHEMA IF NOT EXISTS results_nhsl_risk_dynamics;
 DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators CASCADE;
 CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators AS 
 
--- 1.2 Risk Dynamics
--- 1.2.1 Population Growth
+-- 1.3 Risk Dynamics
+-- 1.3.1 Population Growth
 SELECT
 ghslid AS "ghslID",
 lon AS "ghs_lon",
@@ -18,8 +18,8 @@ pop_2000 AS "ghs_Pop2000",
 pop_1990 AS "ghs_Pop1990",
 pop_1975 AS "ghs_Pop1975",
 
--- 1.2 Risk Dynamics
--- 1.2.2 Land Use Change
+-- 1.3 Risk Dynamics
+-- 1.3.2 Land Use Change
 SMOD_2015 AS "ghs_LndUse2015",
 SMOD_2000 AS "ghs_LndUse2000",
 SMOD_1990 AS "ghs_LndUse1990",
