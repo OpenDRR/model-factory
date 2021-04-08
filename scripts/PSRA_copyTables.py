@@ -313,7 +313,7 @@ def main ():
     os.system(systemCall)
 
     #Copy hmaps_xref table
-    systemCall="""psql -h  db-opendrr
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
