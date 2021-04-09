@@ -21,7 +21,7 @@ def main ():
     args = parse_args()
 
     # Copy Canada Exposure Model
-    systemCall='''psql - h ${POSTGRES_HOST}
+    systemCall='''psql -h ${POSTGRES_HOST}
                     -U ${POSTGRES_USER}
                     -d ${DB_NAME}
                     -a 
@@ -73,7 +73,7 @@ def main ():
     os.system(systemCall)
 
     # Copy Site exposure model
-    systemCall="""psql - h ${POSTGRES_HOST}
+    systemCall="""psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER} 
                 -d ${DB_NAME}
                 -a 
@@ -165,7 +165,7 @@ def main ():
     os.system(systemCall)
 
     #Copy VS30 Canada Site Model
-    systemCall='''psql - h ${POSTGRES_HOST}
+    systemCall='''psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
@@ -183,7 +183,7 @@ def main ():
     os.system(systemCall)
 
     #Copy VS30 Canada Site Model xref
-    systemCall='''psql - h ${POSTGRES_HOST}
+    systemCall='''psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
@@ -204,7 +204,7 @@ def main ():
     os.system(systemCall)
 
     #Copy 2016 Censuse Table
-    systemCall='''psql - h ${POSTGRES_HOST}
+    systemCall='''psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
@@ -301,7 +301,7 @@ def main ():
     os.system(systemCall)
 
     #Copy Table SOVI Index
-    systemCall='''psql - h ${POSTGRES_HOST}
+    systemCall='''psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
@@ -393,7 +393,7 @@ def main ():
     os.system(systemCall)
 
     #Copy Table SOVI Census
-    systemCall='''psql - h ${POSTGRES_HOST}
+    systemCall='''psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
@@ -486,7 +486,7 @@ def main ():
     os.system(systemCall)
 
     #Copy Table SOVI Threshold
-    systemCall='''psql - h ${POSTGRES_HOST}
+    systemCall='''psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
@@ -530,7 +530,7 @@ def main ():
     os.system(systemCall)
 
     #Copy table collapse probability
-    systemCall='''psql - h ${POSTGRES_HOST}
+    systemCall='''psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
@@ -545,7 +545,7 @@ def main ():
     os.system(systemCall)
 
     #Copy Retrofit costs table
-    systemCall="""psql - h ${POSTGRES_HOST}
+    systemCall="""psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
@@ -565,7 +565,7 @@ def main ():
     os.system(systemCall)
 
     #Copy GHSL Table
-    systemCall='''psql - h ${POSTGRES_HOST}
+    systemCall='''psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
@@ -613,7 +613,7 @@ def main ():
     os.system(systemCall)
 
     #Copy MH Intensity Table
-    systemCall='''psql - h ${POSTGRES_HOST}
+    systemCall='''psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
@@ -653,7 +653,7 @@ def main ():
     os.system(systemCall)
 
     #Copy MH Threshold Table
-    systemCall='''psql - h ${POSTGRES_HOST}
+    systemCall='''psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
