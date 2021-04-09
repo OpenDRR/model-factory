@@ -55,15 +55,16 @@ def main ():
             cursor.close()
             connection.close()
 
-    systemCall='''psql -h  db-opendrr
-                -U  ${{POSTGRES_USER}}
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c "\copy gmf.shakemap_{eqScenario} ({headerFields})
-                        FROM '/usr/src/app/{shakemapFile}'
-                            WITH 
-                            DELIMITER AS ','
-                            CSV HEADER ;"'''
+                -c '\copy gmf.shakemap_{eqScenario} ({headerFields})
+                        FROM /usr/src/app/{shakemapFile}
+                            WITH
+                            CSV HEADER ;'""".format(**{'shakemapFile':args.shakemapFile,
+                                                        'eqScenario':eqScenario,
+                                                        'headerFields':headerFields})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     return
