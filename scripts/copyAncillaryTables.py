@@ -666,7 +666,7 @@ def main ():
                                                 hti_wildfire,
                                                 hti_lndsus,
                                                 hti_cy500)
-                    FROM '/usr/src/app/hazard-threat_thresholds.csv'
+                    FROM '/usr/src/app/HTi_thresholds_2021.csv'
                             WITH 
                             DELIMITER AS ','
                             CSV HEADER ;"'''
