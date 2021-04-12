@@ -63,30 +63,30 @@ CAST(CAST(ROUND(CAST(SUM(a."sD_Collapse_b0" * b.number) AS NUMERIC),6) AS FLOAT)
 CAST(CAST(ROUND(CAST(AVG(a."sD_Collapse_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_Collapse_b0",
 --CAST(CAST(ROUND(CAST(AVG(a."sD_Complete_stdv_b0" * g.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_Collapse_b0",
 
--- 3.2.1 Damage State - r2
-CAST(CAST(ROUND(CAST(SUM(a."sD_None_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_None_r2",
-CAST(CAST(ROUND(CAST(AVG(a."sD_None_r2" / b.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_None_r2",
---CAST(CAST(ROUND(CAST(AVG(a."sD_None_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_None_r2",
+-- 3.2.1 Damage State - r1
+CAST(CAST(ROUND(CAST(SUM(a."sD_None_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_None_r1",
+CAST(CAST(ROUND(CAST(AVG(a."sD_None_r2" / b.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_None_r1",
+--CAST(CAST(ROUND(CAST(AVG(a."sD_None_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_None_r1",
 
-CAST(CAST(ROUND(CAST(SUM(a."sD_Slight_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Slight_r2",
-CAST(CAST(ROUND(CAST(AVG(a."sD_Slight_r2" / b.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_Slight_r2",
---CAST(CAST(ROUND(CAST(AVG(a."sD_Slight_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_Slight_r2",
+CAST(CAST(ROUND(CAST(SUM(a."sD_Slight_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Slight_r1",
+CAST(CAST(ROUND(CAST(AVG(a."sD_Slight_r2" / b.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_Slight_r1",
+--CAST(CAST(ROUND(CAST(AVG(a."sD_Slight_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_Slight_r1",
 
-CAST(CAST(ROUND(CAST(SUM(a."sD_Moderate_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Moderate_r2",
-CAST(CAST(ROUND(CAST(AVG(a."sD_Moderate_r2" / b.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_Moderate_r2",
---CAST(CAST(ROUND(CAST(AVG(a."sD_Moderate_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_Moderate_r2",
+CAST(CAST(ROUND(CAST(SUM(a."sD_Moderate_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Moderate_r1",
+CAST(CAST(ROUND(CAST(AVG(a."sD_Moderate_r2" / b.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_Moderate_r1",
+--CAST(CAST(ROUND(CAST(AVG(a."sD_Moderate_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_Moderate_r1",
 
-CAST(CAST(ROUND(CAST(SUM(a."sD_Extensive_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Extensive_r2",
-CAST(CAST(ROUND(CAST(AVG(a."sD_Extensive_r2" / b.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_Extensive_r2",
---CAST(CAST(ROUND(CAST(AVG(a."sD_Extensive_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_Extensive_r2",
+CAST(CAST(ROUND(CAST(SUM(a."sD_Extensive_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Extensive_r1",
+CAST(CAST(ROUND(CAST(AVG(a."sD_Extensive_r2" / b.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_Extensive_r1",
+--CAST(CAST(ROUND(CAST(AVG(a."sD_Extensive_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_Extensive_r1",
 
-CAST(CAST(ROUND(CAST(SUM(a."sD_Complete_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Complete_r2",
-CAST(CAST(ROUND(CAST(AVG(a."sD_Complete_r2" / b.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_Complete_r2",
---CAST(CAST(ROUND(CAST(AVG(a."sD_Complete_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_Complete_r2",
+CAST(CAST(ROUND(CAST(SUM(a."sD_Complete_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Complete_r1",
+CAST(CAST(ROUND(CAST(AVG(a."sD_Complete_r2" / b.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_Complete_r1",
+--CAST(CAST(ROUND(CAST(AVG(a."sD_Complete_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_Complete_r1",
 
-CAST(CAST(ROUND(CAST(SUM(a."sD_Collapse_r2" * b.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_Collapse_r2",
-CAST(CAST(ROUND(CAST(AVG(a."sD_Collapse_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_Collapse_r2",
---CAST(CAST(ROUND(CAST(AVG(a."sD_Complete_stdv_r2" * g.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_Collapse_r2",
+CAST(CAST(ROUND(CAST(SUM(a."sD_Collapse_r2" * b.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_Collapse_r1",
+CAST(CAST(ROUND(CAST(AVG(a."sD_Collapse_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtr_Collapse_r1",
+--CAST(CAST(ROUND(CAST(AVG(a."sD_Complete_stdv_r2" * g.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDtsd_Collapse_r1",
 
 -- 3.2.1 Recovery - b0
 --CAST(CAST(ROUND(CAST(SUM(a."sD_None_b0" + a."sD_Slight_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_GreenTag_b_b0",
@@ -106,23 +106,23 @@ CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisBW_b0" + a."sC_DebrisC_b0") AS NUMERIC),6) 
 CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisBW_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_DebrisBW_b0",
 CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisC_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_DebrisCS_b0",
 
--- 3.2.1 Recovery - r2
---CAST(CAST(ROUND(CAST(SUM(a."sD_None_r2" + a."sD_Slight_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_GreenTag_b_r2",
---CAST(CAST(ROUND(CAST(SUM(a."sD_None_r2" + a."sD_Slight_r2")/5 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_GreenTag_i_r2",
---CAST(CAST(ROUND(CAST(SUM(a."sD_Extensive_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_YellowTag_d_r2",
---CAST(CAST(ROUND(CAST(SUM(a."sD_Extensive_r2")/2.5 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_YellowTag_i_r2",
---CAST(CAST(ROUND(CAST(SUM(a."sD_Complete_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_RedTag_b_r2",
+-- 3.2.1 Recovery - r1
+--CAST(CAST(ROUND(CAST(SUM(a."sD_None_r2" + a."sD_Slight_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_GreenTag_b_r1",
+--CAST(CAST(ROUND(CAST(SUM(a."sD_None_r2" + a."sD_Slight_r2")/5 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_GreenTag_i_r1",
+--CAST(CAST(ROUND(CAST(SUM(a."sD_Extensive_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_YellowTag_d_r1",
+--CAST(CAST(ROUND(CAST(SUM(a."sD_Extensive_r2")/2.5 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_YellowTag_i_r1",
+--CAST(CAST(ROUND(CAST(SUM(a."sD_Complete_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_RedTag_b_r1",
 --CAST(CAST(ROUND(CAST(SUM(a."sD_Complete_r2")/5 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_RedTag_i_r2" ,
---CAST(CAST(ROUND(CAST(SUM(a."sD_None_r2" + (a."sD_Slight_r2"*0.2) +(a."sD_Moderate_r2"*0.05)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Operational_r2",
---CAST(CAST(ROUND(CAST(SUM((a."sD_Slight_r2"*0.8) + (a."sD_Moderate_r2"*0.75) + (a."sD_Extensive_r2"*0.2)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Functional_r2",
---CAST(CAST(ROUND(CAST(SUM((a."sD_Moderate_r2"*0.2) + (a."sD_Extensive_r2"*0.4)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Repairable_r2",
---CAST(CAST(ROUND(CAST(SUM((a."sD_Extensive_r2"*0.3) + (a."sD_Complete_r2"*0.2)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Failure_r2",
-CAST(CAST(ROUND(CAST(AVG(a."sC_Downtime_r2")/(AVG(b.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCm_Downtime_r2",
-CAST(CAST(ROUND(CAST(AVG(a."sC_Repair_r2")/(AVG(b.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCm_Repair_r2",
-CAST(CAST(ROUND(CAST(AVG(a."sC_Construxn_r2")/(AVG(b.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "SCm_Recovery_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisBW_r2" + a."sC_DebrisC_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_DebrisTotal_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisBW_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_DebrisBW_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisC_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_DebrisCS_r2",
+--CAST(CAST(ROUND(CAST(SUM(a."sD_None_r2" + (a."sD_Slight_r2"*0.2) +(a."sD_Moderate_r2"*0.05)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Operational_r1",
+--CAST(CAST(ROUND(CAST(SUM((a."sD_Slight_r2"*0.8) + (a."sD_Moderate_r2"*0.75) + (a."sD_Extensive_r2"*0.2)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Functional_r1",
+--CAST(CAST(ROUND(CAST(SUM((a."sD_Moderate_r2"*0.2) + (a."sD_Extensive_r2"*0.4)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Repairable_r1",
+--CAST(CAST(ROUND(CAST(SUM((a."sD_Extensive_r2"*0.3) + (a."sD_Complete_r2"*0.2)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDt_Failure_r1",
+CAST(CAST(ROUND(CAST(AVG(a."sC_Downtime_r2")/(AVG(b.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCm_Downtime_r1",
+CAST(CAST(ROUND(CAST(AVG(a."sC_Repair_r2")/(AVG(b.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCm_Repair_r1",
+CAST(CAST(ROUND(CAST(AVG(a."sC_Construxn_r2")/(AVG(b.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "SCm_Recovery_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisBW_r2" + a."sC_DebrisC_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_DebrisTotal_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisBW_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_DebrisBW_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_DebrisC_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_DebrisCS_r1",
 
 -- 3.3 Affected People
 -- 3.3.1 Casualties - b0
@@ -141,21 +141,21 @@ CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL2_b0") AS NUMERIC),6) AS FLOAT) AS NUM
 CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL3_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasTransitL3_b0",
 CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL4_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasTransitL4_b0",
 
--- 3.3.1 Casualties - r2
---CAST(CAST(ROUND(CAST(SUM(a."sL_Fatalities_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Fatality_r2",
---CAST(CAST(ROUND(CAST(AVG(a."sL_Fatalities_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLtsd_Fatality_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_CasDayL1_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasDayL1_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_CasDayL2_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasDayL2_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_CasDayL3_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasDayL3_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_CasDayL4_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasDayL4_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_CasNightL1_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasNightL1_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_CasNightL2_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasNightL2_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_CasNightL3_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasNightL3_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_CasNightL4_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasNightL4_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL1_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasTransitL1_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL2_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasTransitL2_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL3_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasTransitL3_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL4_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasTransitL4_r2",
+-- 3.3.1 Casualties - r1
+--CAST(CAST(ROUND(CAST(SUM(a."sL_Fatalities_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Fatality_r1",
+--CAST(CAST(ROUND(CAST(AVG(a."sL_Fatalities_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLtsd_Fatality_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_CasDayL1_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasDayL1_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_CasDayL2_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasDayL2_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_CasDayL3_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasDayL3_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_CasDayL4_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasDayL4_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_CasNightL1_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasNightL1_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_CasNightL2_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasNightL2_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_CasNightL3_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasNightL3_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_CasNightL4_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasNightL4_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL1_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasTransitL1_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL2_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasTransitL2_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL3_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasTransitL3_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_CasTransitL4_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_CasTransitL4_r1",
 
 -- 3.3.2 Social Disruption - b0
 CAST(CAST(ROUND(CAST(((0.73 * COALESCE((CASE WHEN j.inc_hshld <= 15000 THEN 0.62 ELSE 0 END),0) + 
@@ -279,7 +279,7 @@ CAST(CAST(ROUND(CAST(AVG(COALESCE(a."sC_DisrupEmpl_90_b0"/NULLIF((b.day),0),0)) 
 CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_180_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Empl180_b0",
 CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_360_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Empl360_b0",
 
--- 3.3.2 Social Disruption - r2
+-- 3.3.2 Social Disruption - r1
 CAST(CAST(ROUND(CAST(((0.73 * COALESCE((CASE WHEN j.inc_hshld <= 15000 THEN 0.62 ELSE 0 END),0) + 
 COALESCE((CASE WHEN j.inc_hshld > 15000 AND j.inc_hshld <= 20000 THEN 0.42 ELSE 0 END),0) + 
 COALESCE((CASE WHEN j.inc_hshld > 20000 AND j.inc_hshld <= 35000 THEN 0.29 ELSE 0 END),0) + 
@@ -305,14 +305,14 @@ COALESCE((CASE WHEN j.inc_hshld > 50000 THEN 0.13 ELSE 0 END),0)) *
 (COALESCE(j.imm_lt5 * 0.24,0) + COALESCE(j.live_alone * 0.48,0) + COALESCE(j.no_engfr * 0.47,0) + COALESCE(j.lonepar3kids * 0.26,0) +
 COALESCE(j.indigenous * 0.26,0)) * 
 (COALESCE(j.renter * 0.40,0) + COALESCE(((h.censusdu * h.people_du) - j.renter) * 0.40,0)) * 
-(COALESCE(j.age_gt65 * 0.40,0) + COALESCE(j.age_lt6 * 0.40,0)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Shelter_r2",
+(COALESCE(j.age_gt65 * 0.40,0) + COALESCE(j.age_lt6 * 0.40,0)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Shelter_r1",
 
-CAST(CAST(ROUND(CAST(SUM(a."sC_DisplRes_3_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Res3_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_DisplRes_30_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Res30_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_DisplRes_90_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Res90_r2",
-CAST(CAST(ROUND(CAST(AVG(COALESCE(a."sC_DisplRes_90_r2"/NULLIF((b.night),0),0)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCr_DisplRes90_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_DisplRes_180_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Res180_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_DisplRes_360_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Res360_r2",
+CAST(CAST(ROUND(CAST(SUM(a."sC_DisplRes_3_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Res3_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_DisplRes_30_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Res30_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_DisplRes_90_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Res90_r1",
+CAST(CAST(ROUND(CAST(AVG(COALESCE(a."sC_DisplRes_90_r2"/NULLIF((b.night),0),0)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCr_DisplRes90_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_DisplRes_180_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Res180_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_DisplRes_360_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Res360_r1",
 
 /*
 CAST(CAST(ROUND(CAST(SUM(COALESCE((((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END)  * 
@@ -324,7 +324,7 @@ CAST(CAST(ROUND(CAST(SUM(COALESCE((((CASE WHEN b.genocc ='Residential-LD' THEN b
 (0.9 * (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN a."sD_Extensive_r2" / b.number ELSE 0 END)) + 
 (1 * (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN a."sD_Complete_r2" / b.number ELSE 0 END))))) * 
 ((CASE WHEN b.genocc ='Residential-LD' OR b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END) / NULLIF((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) + 
-(CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Hshld_r2",
+(CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Hshld_r1",
 */
 
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a."sC_Downtime_r2" > 3 THEN (COALESCE((((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) * 
@@ -336,7 +336,7 @@ CAST(CAST(ROUND(CAST(SUM(CASE WHEN a."sC_Downtime_r2" > 3 THEN (COALESCE((((CASE
 (0.9 * (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN a."sD_Extensive_r2" / b.number ELSE 0 END)) + 
 (1 * (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN a."sD_Complete_r2" / b.number ELSE 0 END))))) * 
 ((CASE WHEN b.genocc ='Residential-LD' OR b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END) / NULLIF((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) + 
-(CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Hshld3_r2",
+(CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Hshld3_r1",
 
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a."sC_Downtime_r2" > 30 THEN (COALESCE((((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) * 
 ((0 * (CASE WHEN b.genocc ='Residential-LD' THEN a."sD_Moderate_r2" / b.number ELSE 0 END)) + 
@@ -347,7 +347,7 @@ CAST(CAST(ROUND(CAST(SUM(CASE WHEN a."sC_Downtime_r2" > 30 THEN (COALESCE((((CAS
 (0.9 * (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN a."sD_Extensive_r2" / b.number ELSE 0 END)) + 
 (1 * (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN a."sD_Complete_r2" / b.number ELSE 0 END))))) * 
 ((CASE WHEN b.genocc ='Residential-LD' OR b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END) / NULLIF((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) + 
-(CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Hshld30_r2",
+(CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Hshld30_r1",
 
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a."sC_Downtime_r2" > 90 THEN (COALESCE((((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) * 
 ((0 * (CASE WHEN b.genocc ='Residential-LD' THEN a."sD_Moderate_r2" / b.number ELSE 0 END)) + 
@@ -358,7 +358,7 @@ CAST(CAST(ROUND(CAST(SUM(CASE WHEN a."sC_Downtime_r2" > 90 THEN (COALESCE((((CAS
 (0.9 * (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN a."sD_Extensive_r2" / b.number ELSE 0 END)) + 
 (1 * (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN a."sD_Complete_r2" / b.number ELSE 0 END))))) * 
 ((CASE WHEN b.genocc ='Residential-LD' OR b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END) / NULLIF((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) + 
-(CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Hshld90_r2",
+(CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Hshld90_r1",
 
 CAST(CAST(ROUND(CAST((SUM(CASE WHEN a."sC_Downtime_r2" > 90 THEN (COALESCE((((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) * 
 ((0 * (CASE WHEN b.genocc ='Residential-LD' THEN a."sD_Moderate_r2" / b.number ELSE 0 END)) + 
@@ -371,7 +371,7 @@ CAST(CAST(ROUND(CAST((SUM(CASE WHEN a."sC_Downtime_r2" > 90 THEN (COALESCE((((CA
 ((CASE WHEN b.genocc ='Residential-LD' OR b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END) / NULLIF((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) + 
 (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) ELSE 0 END)) / 
 NULLIF(((SUM(CASE WHEN b.genocc ='Residential-LD' THEN b.number ELSE 0 END) / AVG(b.popdu)) + 
-((SUM(CASE WHEN b.genocc ='Residential-MD' THEN b.number ELSE 0 END) + SUM(CASE WHEN b.genocc ='Residential-HD' THEN b.number ELSE 0 END)) / AVG(b.popdu))),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCr_Hshld90_r2",
+((SUM(CASE WHEN b.genocc ='Residential-MD' THEN b.number ELSE 0 END) + SUM(CASE WHEN b.genocc ='Residential-HD' THEN b.number ELSE 0 END)) / AVG(b.popdu))),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCr_Hshld90_r1",
 
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a."sC_Downtime_r2" > 180 THEN (COALESCE((((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) * 
 ((0 * (CASE WHEN b.genocc ='Residential-LD' THEN a."sD_Moderate_r2" / b.number ELSE 0 END)) + 
@@ -382,7 +382,7 @@ CAST(CAST(ROUND(CAST(SUM(CASE WHEN a."sC_Downtime_r2" > 180 THEN (COALESCE((((CA
 (0.9 * (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN a."sD_Extensive_r2" / b.number ELSE 0 END)) + 
 (1 * (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN a."sD_Complete_r2" / b.number ELSE 0 END))))) * 
 ((CASE WHEN b.genocc ='Residential-LD' OR b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END) / NULLIF((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) + 
-(CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Hshld180_r2",
+(CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Hshld180_r1",
 
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a."sC_Downtime_r2" > 360 THEN (COALESCE((((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) * 
 ((0 * (CASE WHEN b.genocc ='Residential-LD' THEN a."sD_Moderate_r2" / b.number ELSE 0 END)) + 
@@ -393,13 +393,13 @@ CAST(CAST(ROUND(CAST(SUM(CASE WHEN a."sC_Downtime_r2" > 360 THEN (COALESCE((((CA
 (0.9 * (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN a."sD_Extensive_r2" / b.number ELSE 0 END)) + 
 (1 * (CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN a."sD_Complete_r2" / b.number ELSE 0 END))))) * 
 ((CASE WHEN b.genocc ='Residential-LD' OR b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END) / NULLIF((CASE WHEN b.genocc ='Residential-LD' THEN b.night/b.popdu ELSE 0 END) + 
-(CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Hshld360_r2",
+(CASE WHEN b.genocc ='Residential-MD' OR b.genocc ='Residential-HD' THEN b.night/b.popdu ELSE 0 END),0)),0)) ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Hshld360_r1",
 
-CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_30_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Empl30_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_90_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Empl90_r2",
-CAST(CAST(ROUND(CAST(AVG(COALESCE(a."sC_DisrupEmpl_90_r2"/NULLIF((b.day),0),0)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCr_Empl90_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_180_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Empl180_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_360_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Empl360_r2",
+CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_30_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Empl30_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_90_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Empl90_r1",
+CAST(CAST(ROUND(CAST(AVG(COALESCE(a."sC_DisrupEmpl_90_r2"/NULLIF((b.day),0),0)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCr_Empl90_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_180_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Empl180_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sC_DisrupEmpl_360_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCt_Empl360_r1",
 
 -- 3.4 Economic Security
 -- 3.4.1 Economic Loss - b0
@@ -414,17 +414,17 @@ CAST(CAST(ROUND(CAST(SUM(a."sL_NStr_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS
 CAST(CAST(ROUND(CAST(SUM(a."sL_Cont_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Cont_b0",
 --CAST(CAST(ROUND(CAST(SUM(a."sL_Cont_stdv_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLmsd_Cont_b0",
 
--- 3.4.1 Economic Loss - r2
-CAST(CAST(ROUND(CAST(SUM(a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Asset_r2",
-CAST(CAST(ROUND(CAST(COALESCE(AVG((a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2")/(NULLIF((b.number),0))),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLm_Asset_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sL_Str_r2" + a."sL_NStr_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Bldg_r2",
-CAST(CAST(ROUND(CAST((COALESCE((AVG(a."sL_Str_r2" + a."sL_NStr_r2"))/ NULLIF(AVG((a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2")),0),0)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLmr_Bldg_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sL_Str_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Str_r2",
---CAST(CAST(ROUND(CAST(SUM(a."sL_Str_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLmsd_Str_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sL_NStr_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_NStr_r2",
---CAST(CAST(ROUND(CAST(SUM(a."sL_NStr_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLmsd_NStr_r2",
-CAST(CAST(ROUND(CAST(SUM(a."sL_Cont_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Cont_r2",
---CAST(CAST(ROUND(CAST(SUM(a."sL_Cont_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLmsd_Cont_r2",
+-- 3.4.1 Economic Loss - r1
+CAST(CAST(ROUND(CAST(SUM(a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Asset_r1",
+CAST(CAST(ROUND(CAST(COALESCE(AVG((a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2")/(NULLIF((b.number),0))),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLm_Asset_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sL_Str_r2" + a."sL_NStr_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Bldg_r1",
+CAST(CAST(ROUND(CAST((COALESCE((AVG(a."sL_Str_r2" + a."sL_NStr_r2"))/ NULLIF(AVG((a."sL_Str_r2" + a."sL_NStr_r2" + a."sL_Cont_r2")),0),0)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLmr_Bldg_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sL_Str_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Str_r1",
+--CAST(CAST(ROUND(CAST(SUM(a."sL_Str_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLmsd_Str_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sL_NStr_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_NStr_r1",
+--CAST(CAST(ROUND(CAST(SUM(a."sL_NStr_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLmsd_NStr_r1",
+CAST(CAST(ROUND(CAST(SUM(a."sL_Cont_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLt_Cont_r1",
+--CAST(CAST(ROUND(CAST(SUM(a."sL_Cont_stdv_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLmsd_Cont_r1",
 
 /*
 CAST(CAST(ROUND(CAST(CASE WHEN (AVG((((a."sL_Str_b0" + a."sL_NStr_b0") - (a."sL_Str_r2" + a."sL_NStr_r2"))/(b.number))/((b.retrofitting)/(b.number)))) > 0 
