@@ -26,7 +26,7 @@ CREATE INDEX IF NOT EXISTS {eqScenario}_assetid_idx ON dsra.dsra_{eqScenario}("A
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_{eqScenario}.dsra_{eqScenario}_all_indicators_b CASCADE;
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_all_indicators_b CASCADE;
 CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_all_indicators_b AS 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
@@ -411,4 +411,4 @@ LEFT JOIN lut.collapse_probability g ON b.bldgtype = g.eqbldgtype;
 -- insert dsra info into master dsra table per scenario
 INSERT INTO dsra.dsra_all_scenarios_tbl(assetid,sauid,pruid,prname,eruid,cduid,cdname,csduid,csdname,fsauid,dauid,sh_rupname,sh_rupabbr,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake,geom_point)
 SELECT "AssetID","Sauid",pruid,prname,eruid,ername,cduid,cdname,csduid,csdname,fsauid,dauid,"sH_RupName","sH_RupAbbr","sH_Mag","sH_HypoLon","sH_HypoLat","sH_HypoDepth",geom_point
-FROM results_{eqScenario}.dsra_{eqScenario}_all_indicators_b;
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_all_indicators_b;
