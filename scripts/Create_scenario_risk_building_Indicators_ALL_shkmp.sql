@@ -17,6 +17,7 @@ site_id,
 lon,
 lat,
 geom,
+gmv_pga
 gmv_pgv
 FROM gmf.shakemap_{eqScenario}
 );
