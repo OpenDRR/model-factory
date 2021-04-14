@@ -25,6 +25,11 @@ sh_rake varchar,
 geom_point geometry
 ); 
 
+-- create gmf scenario extents table temp
+DROP TABLE IF EXISTS gmf.shakemap_scenario_extents_temp CASCADE;
+CREATE TABLE gmf.shakemap_scenario_extents_temp(
+scenario varchar,
+geom geometry);
 
 /*
 -- moved to Update_boundaries_SAUID_table.sql
