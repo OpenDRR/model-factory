@@ -24,7 +24,7 @@ FROM gmf.shakemap_{eqScenario}
 
 -- add polygon extents with smoothing scenario extents table for each scenario
 INSERT INTO gmf.shakemap_scenario_extents_temp(scenario,geom)
-SELECT '{eqScenario}',st_astext(st_chaikinsmoothing(st_concavehull(st_collect(geom),0.99))) FROM gmf.{eqScenario} WHERE "gmv_SA(0.3)" >= 0.03;
+SELECT '{eqScenario}',st_astext(st_chaikinsmoothing(st_concavehull(st_collect(geom),0.99))) FROM gmf.shakemap_{eqScenario} WHERE "gmv_SA(0.3)" >= 0.03;
 
 -- create index
 CREATE INDEX IF NOT EXISTS {eqScenario}_assetid_idx ON dsra.dsra_{eqScenario}("AssetID");
