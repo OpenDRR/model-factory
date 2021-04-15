@@ -41,7 +41,7 @@ CREATE INDEX IF NOT EXISTS dsra_all_scenarios_geom_idx ON dsra.dsra_all_scenario
 
 -- create master dsra building view
 DROP VIEW IF EXISTS dsra.dsra_all_scenarios_building CASCADE;
-CREATE VIEW dsra.dsra_all_scenarios AS 
+CREATE VIEW dsra.dsra_all_scenarios_building AS 
 SELECT * FROM dsra.dsra_all_scenarios_tbl ORDER BY assetid,sh_rupname;
 
 
