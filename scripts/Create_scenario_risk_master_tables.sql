@@ -11,7 +11,7 @@ a.geom
 
 INTO gmf.shakemap_scenario_extents_tbl
 FROM gmf.shakemap_scenario_extents_temp a
-LEFT JOIN ruptures.rupture_table b on a.scenario = LOWER(b.rupture_name);
+LEFT JOIN ruptures.rupture_table b on a.scenario = b.rupture_name;
 
 -- fix invalid projection
 ALTER TABLE gmf.shakemap_scenario_extents_tbl
