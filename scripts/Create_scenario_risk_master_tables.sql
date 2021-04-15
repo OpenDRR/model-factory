@@ -1,7 +1,7 @@
 -- attach ruptures info to shakemap extents table
 SELECT 
 a.scenario,
-b.rupture_name,
+--b.rupture_name,
 b.magnitude,
 CAST(b.rake AS NUMERIC),
 CAST(b.lon AS NUMERIC),
