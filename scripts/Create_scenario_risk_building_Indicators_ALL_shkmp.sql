@@ -416,5 +416,5 @@ WHERE e."gmv_SA(0.3)" >=0.03;
 
 -- insert dsra info into master dsra table per scenario
 INSERT INTO dsra.dsra_all_scenarios_tbl(assetid,sauid,pruid,prname,eruid,ername,cduid,cdname,csduid,csdname,fsauid,dauid,sh_rupname,sh_rupabbr,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake,geom_point)
-SELECT "AssetID","Sauid",pruid,prname,eruid,ername,cduid,cdname,csduid,csdname,fsauid,dauid,"sH_RupName","sH_RupAbbr","sH_Mag","sH_HypoLon","sH_HypoLat","sH_HypoDepth",geom_point
+SELECT "AssetID","Sauid",pruid,prname,eruid,ername,cduid,cdname,csduid,csdname,fsauid,dauid,"sH_RupName","sH_RupAbbr","sH_Mag","sH_HypoLon","sH_HypoLat","sH_HypoDepth","sH_Rake",geom_point
 FROM results_dsra_{eqScenario}.dsra_{eqScenario}_all_indicators_b;
