@@ -459,6 +459,7 @@ LEFT JOIN lut.collapse_probability g ON b.bldgtype = g.eqbldgtype
 LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" i ON b.sauid = i."SAUIDt"
 LEFT JOIN sovi.sovi_census_canada j ON b.sauid = j.sauidt
+WHERE e."gmv_SA(0.3)" >=0.02
 GROUP BY a."Rupture_Abbr",a."gmpe_Model",b.sauid,b.landuse,d.vs30,d.z1pt0,d.z2pt5,d.vs_lon,d.vs_lat,e.site_id,e.lon,e.lat,f.source_type,
 f.rupture_name,f.magnitude,f.lon,f.lat,f.depth,f.rake,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.1)",e."gmv_SA(0.2)",e."gmv_SA(0.3)",e."gmv_SA(0.5)",e."gmv_SA(0.6)",e."gmv_SA(1.0)",e."gmv_SA(2.0)",
 i."PRUID",i."PRNAME",i."ERUID",i."ERNAME",i."CDUID",i."CDNAME",i."CSDUID",i."CSDNAME",i."CFSAUID",i."DAUIDt",i."SACCODE",i."SACTYPE",j.inc_hshld,j.imm_lt5,j.live_alone,j.no_engfr,j.lonepar3kids,j.indigenous,h.censuspop,h.censusdu,j.renter,h.people_du,j.age_gt65,j.age_lt6,i.geom;

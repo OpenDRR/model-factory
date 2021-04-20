@@ -20,6 +20,7 @@ geom,
 gmv_pgv,
 gmv_pga
 FROM gmf.shakemap_{eqScenario}
+WHERE "gmv_SA(0.3)" >= 0.02
 );
 
 
@@ -388,6 +389,7 @@ LEFT JOIN gmf.shakemap_{eqScenario}_metrovan_building_xref e ON c.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.bldgtype = g.eqbldgtype
 LEFT JOIN boundaries."Geometry_SAUID" z ON b.sauidid = z."SAUIDt"
+WHERE e."gmv_SA(0.3)" >=0.02
 GROUP BY b.id_building,b.sauid,b.landuse,f.rupture_name,a."Rupture_Abbr",f.source_type,f.magnitude,f.lon,f.lat,f.depth,f.rake,a."gmpe_Model",e.site_id,e.lon,e.lat,d.vs_lon,d.vs_lat,
 d.vs30,d.z1pt0,d.z2pt5,e."gmv_pgv",e."gmv_pga",e."gmv_SA(0.1)",e."gmv_SA(0.2)",e."gmv_SA(0.3)",e."gmv_SA(0.5)",e."gmv_SA(0.6)",e."gmv_SA(1.0)",e."gmv_SA(2.0)",c.geom_site,
 z."PRUID",z."PRNAME",z."ERUID",z."ERNAME",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME",z."CFSAUID",z."DAUIDt",z."SACCODE",z."SACTYPE";
