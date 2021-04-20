@@ -20,11 +20,12 @@ geom,
 gmv_pga,
 gmv_pgv
 FROM gmf.shakemap_{eqScenario}
+WHERE "gmv_SA(0.3)" >= 0.02
 );
 
 -- add polygon extents with smoothing scenario extents table for each scenario
 INSERT INTO gmf.shakemap_scenario_extents_temp(scenario,geom)
-SELECT '{eqScenario}',st_astext(st_chaikinsmoothing(st_concavehull(st_collect(geom),0.98))) FROM gmf.shakemap_{eqScenario} WHERE "gmv_SA(0.3)" >= 0.03;
+SELECT '{eqScenario}',st_astext(st_chaikinsmoothing(st_concavehull(st_collect(geom),0.98))) FROM gmf.shakemap_{eqScenario} WHERE "gmv_SA(0.3)" >= 0.02;
 
 -- create index
 CREATE INDEX IF NOT EXISTS {eqScenario}_assetid_idx ON dsra.dsra_{eqScenario}("AssetID");
@@ -410,7 +411,7 @@ LEFT JOIN boundaries."Geometry_SAUID" c on b.sauid = c."SAUIDt"
 LEFT JOIN gmf.shakemap_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN lut.collapse_probability g ON b.bldgtype = g.eqbldgtype
-WHERE e."gmv_SA(0.3)" >=0.03;
+WHERE e."gmv_SA(0.3)" >=0.02;
 
 
 
