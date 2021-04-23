@@ -56,7 +56,7 @@ def main ():
             connection.close()
 
     systemCall="""psql -h  ${{POSTGRES_HOST}}
-                -U  ${{POSTGRES_USER}}
+                -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
                 -c '\copy gmf.shakemap_{eqScenario} ({headerFields})

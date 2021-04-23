@@ -18,7 +18,26 @@ ORDER BY source,trt,region ASC;
 
 
 DROP VIEW IF EXISTS results_psra_{prov}.psra_{prov}_hcurves_pga,results_psra_{prov}.psra_{prov}_hcurves_sa0p1,results_psra_{prov}.psra_{prov}_hcurves_sa0p2,results_psra_{prov}.psra_{prov}_hcurves_sa0p3,results_psra_{prov}.psra_{prov}_hcurves_sa0p5,
-results_psra_{prov}.psra_{prov}_hcurves_sa0p6,results_psra_{prov}.psra_{prov}_hcurves_sa1p0,results_psra_{prov}.psra_{prov}_hcurves_sa2p0,results_psra_{prov}.psra_{prov}_hmaps,results_psra_{prov}.psra_{prov}_uhs CASCADE;
+results_psra_{prov}.psra_{prov}_hcurves_sa0p6,results_psra_{prov}.psra_{prov}_hcurves_sa1p0,results_psra_{prov}.psra_{prov}_hcurves_sa2p0,results_psra_{prov}.psra_{prov}_hmaps,results_psra_{prov}.psra_{prov}_uhs,
+results_psra_{prov}.psra_{prov}_hmaps_xref CASCADE;
+
+CREATE VIEW results_psra_{prov}.psra_{prov}_agg_curves_stats AS
+(
+SELECT
+return_period,
+stat,
+loss_type,
+fsauid,
+"GenOcc",
+"GenType",
+loss_value_b0,
+loss_ratio_b0,
+loss_value_r2,
+loss_ratio_r2,
+annual_frequency_of_exceedence
+FROM psra_{prov}.psra_{prov}_agg_curves_stats
+);
+
 
 CREATE VIEW results_psra_{prov}.psra_{prov}_hcurves_pga AS
 (
@@ -299,6 +318,48 @@ FROM psra_{prov}.psra_{prov}_hmaps
 
 
 
+CREATE VIEW results_psra_{prov}.psra_{prov}_hmaps_xref AS
+(
+SELECT
+id,
+sauid,
+asset_lon,
+asset_lat,
+lon,
+lat,
+distance,
+"PGA_0.02",
+"PGA_0.1",
+"SA(0.1)_0.02",
+"SA(0.1)_0.1",
+"SA(0.2)_0.02",
+"SA(0.2)_0.1",
+"SA(0.3)_0.02",
+"SA(0.3)_0.1",
+"SA(0.5)_0.02",
+"SA(0.5)_0.1",
+"SA(0.6)_0.02",
+"SA(0.6)_0.1",
+"SA(1.0)_0.02",
+"SA(1.0)_0.1",
+"SA(10.0)_0.02",
+"SA(10.0)_0.1",
+"SA(2.0)_0.02",
+"SA(2.0)_0.1",
+"SA(5.0)_0.02",
+"SA(5.0)_0.1"
+FROM psra_{prov}.psra_{prov}_hmaps_xref
+);
+
+
+-- add geom to uhs
+-- add geometries field to enable PostGIS (WGS1984 SRID = 4326)
+ALTER TABLE psra_{prov}.psra_{prov}_uhs ADD COLUMN geom geometry(Point,4326);
+UPDATE psra_{prov}.psra_{prov}_uhs SET geom = st_setsrid(st_makepoint(lon,lat),4326);
+
+-- create spatial index
+CREATE INDEX psra_{prov}_uhs_geom_idx ON psra_{prov}.psra_{prov}_uhs using GIST (geom);
+
 CREATE VIEW results_psra_{prov}.psra_{prov}_uhs AS
 (
 SELECT
@@ -321,9 +382,10 @@ lat,
 "0.1_SA(0.5)",
 "0.1_SA(0.6)",
 "0.1_SA(1.0)",
-"0.1_SA(10.0)"
+"0.1_SA(10.0)",
 "0.1_SA(2.0)",
-"0.1_SA(5.0)"
+"0.1_SA(5.0)",
+geom
 
 FROM psra_{prov}.psra_{prov}_uhs
 );

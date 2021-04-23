@@ -312,6 +312,44 @@ def main ():
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
+    #Copy hmaps_xref table
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_hmaps_xref(id,
+                                                             sauid,
+                                                             asset_lon,
+                                                             asset_lat,
+                                                             lon,
+                                                             lat,
+                                                             distance,
+                                                             "PGA_0.02",
+                                                             "PGA_0.1",
+                                                             "SA(0.1)_0.02",
+                                                             "SA(0.1)_0.1",
+                                                             "SA(0.2)_0.02",
+                                                             "SA(0.2)_0.1",
+                                                             "SA(0.3)_0.02",
+                                                             "SA(0.3)_0.1",
+                                                             "SA(0.5)_0.02",
+                                                             "SA(0.5)_0.1",
+                                                             "SA(0.6)_0.02",
+                                                             "SA(0.6)_0.1",
+                                                             "SA(1.0)_0.02",
+                                                             "SA(1.0)_0.1",
+                                                             "SA(10.0)_0.02",
+                                                             "SA(10.0)_0.1",
+                                                             "SA(2.0)_0.02",
+                                                             "SA(2.0)_0.1",
+                                                             "SA(5.0)_0.02",
+                                                             "SA(5.0)_0.1")
+                        FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps_xref.csv'
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
     #Copy uhs table
     with open("/usr/src/app/cHazard/{prov}/cH_{prov}_uhs.csv".format(**{'prov':args.province}), "r") as f:
         reader = csv.reader(f)
