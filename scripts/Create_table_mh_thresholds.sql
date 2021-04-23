@@ -14,12 +14,3 @@ CREATE TABLE mh.mh_thresholds(
     hti_lndsus float,
     hti_cy500 float
 );
-
-/*
--- import exposure from csv
-COPY mh.mh_thresholds(threat,htt_exposure,hti_pgv500,hti_pga500,hti_tsun500,hti_fld500,hti_wildfire,hti_lndsus,hti_cy500)
-    FROM 'D:\Workspace\data\source datasets\mh\hazard-threat_thresholds.csv'
-        WITH 
-          DELIMITER AS ','
-          CSV HEADER ;
-*/

@@ -85,18 +85,3 @@ pre_1975 float,
 renter float,
 dauid_text varchar
 );
-
-/*
--- import exposure from csv
-COPY sovi.sovi_index_canada (sauidt,sauidi,dauidt,dauidi,fsauid,csdname,cdname,ername,prname,lon,lat,bldgnum,costasset,costbldg,popday,popnight,poptrnst,censuspop,censusbldg,censusdu,area_km2,area_ha,shape_length,shape_area,
-sauid_pc,landuse,dauid_i,dauid_lon,dauid_lat,adauid,ctuid,ctname,cfsauid,csduid,csdtype,saccode,sactype,cduid,cdtype,ccsuid,ccsname,cmauid,cmapuid,cmaname,cmatype,eruid,pruid,sauid_km2,age_gt65,age_lt6,age_median,health_job,
-indigenous,no_engfr,nosec_school,vis_min,pub_trans,inc_hshld,inc_indv,inc_lowdecile,retail_job,shltr_gt30,unemployed,work_none,work_parttime,employ_inc,fam_gt5,imm_lt5,live_alone,lonepar3kids,moved_lt1,nowrkplace,bus_ha,hshld_mntn1,
-hshld_mntnage,hshld_nsuit,pop_ha,pre_1975,renter,dauid_text)
-    FROM '/usr/src/app/social-vulnerability-index_2021.csv'
-        WITH 
-          DELIMITER AS ','
-          CSV HEADER ;
-
--- create index
-CREATE INDEX sovi_index_canada_idx ON sovi.sovi_index_canada (sauidt);
-*/
