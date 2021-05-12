@@ -1,4 +1,4 @@
-#Import statements
+# Import statements
 import argparse
 import configparser
 import csv
@@ -10,18 +10,41 @@ Script to copy Ancillary tables into PostGIS
 python3 copyAncillaryTables.py
 '''
 
-#Main Function
-def main ():
+my_dict = {
+    'cHazard': ['hcurves_PGA',
+                'hcurves_Sa0p1', 'hcurves_Sa0p2', 'hcurves_Sa0p3', 'hcurves_Sa0p5', 'hcurves_Sa0p6',
+                'hcurves_Sa1p0', 'hcurves_Sa2p0',
+                'hmaps', 'hmaps_xref',
+                'uhs'],
+    'cDamage': ['dmg-mean_b0', 'dmg-mean_r2'],
+    'eDamage': ['damages-mean_b0', 'damages-mean_r2'],
+    'ebRisk':  ['agg_curves-stats_b0', 'agg_curves-stats_r2',
+                'avg_losses-stats_b0', 'avg_losses-stats_r2',
+                'src_loss_table_b0', 'src_loss_table_r2']
+}
+
+# print(my_dict)
+
+for k in my_dict:
+    for x in my_dict[k]:
+        print(k, x)
+
+exit(0)
+
+# Main Function
+
+
+def main():
     logging.basicConfig(level=logging.INFO,
-                format='%(asctime)s - %(levelname)s - %(message)s',
-                handlers=[logging.FileHandler('/tmp/{}.log'.format(os.path.splitext(sys.argv[0])[0])),
-                            logging.StreamHandler()])
+                        format='%(asctime)s - %(levelname)s - %(message)s',
+                        handlers=[logging.FileHandler('/tmp/{}.log'.format(os.path.splitext(sys.argv[0])[0])),
+                                  logging.StreamHandler()])
     os.chdir(sys.path[0])
     auth = get_config_params('config.ini')
     args = parse_args()
 
-    #Copy hcurve Table PGA
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+    # Copy hcurve Table PGA
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -50,12 +73,12 @@ def main ():
                                                                 "poe_5.0000000")
                     FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_PGA.csv
                         WITH 
-                        CSV HEADER ;'""".format(**{'prov':args.province})
+                        CSV HEADER ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
-    #Copy hcurve table Sa0p1
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+
+    # Copy hcurve table Sa0p1
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -84,12 +107,12 @@ def main ():
                                                                 "poe_5.0000000" )
                     FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p1.csv
                         WITH 
-                        CSV HEADER ;'""".format(**{'prov':args.province})
+                        CSV HEADER ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
-    #Copy hcurve table Sa0p2
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+    # Copy hcurve table Sa0p2
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -118,12 +141,12 @@ def main ():
                                                                 "poe_5.0000000" )
                     FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p2.csv
                         WITH 
-                        CSV HEADER ;'""".format(**{'prov':args.province})
+                        CSV HEADER ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
-    #Copy hcurve table Sa0p3
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+    # Copy hcurve table Sa0p3
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -152,12 +175,12 @@ def main ():
                                                                 "poe_5.0000000" )
                     FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p3.csv
                         WITH 
-                        CSV HEADER ;'""".format(**{'prov':args.province})
+                        CSV HEADER ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
-    #Copy hcurve table Sa0p5
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+    # Copy hcurve table Sa0p5
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -186,12 +209,12 @@ def main ():
                                                                 "poe_9.4000000" )
                         FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p5.csv
                             WITH 
-                            CSV HEADER ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
-    #Copy hcurve table Sa0p6
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+
+    # Copy hcurve table Sa0p6
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -220,12 +243,12 @@ def main ():
                                                                 "poe_9.4000000" )
                         FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa0p6.csv
                             WITH 
-                            CSV HEADER ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
-    #Copy hcurve table Sa1p0
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+
+    # Copy hcurve table Sa1p0
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -254,12 +277,12 @@ def main ():
                                                                 "poe_5.0000000" )
                         FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa1p0.csv
                             WITH 
-                            CSV HEADER ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
-    #Copy hcurve table Sa2p0
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+
+    # Copy hcurve table Sa2p0
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -288,32 +311,35 @@ def main ():
                                                                 "poe_5.0000000" )
                         FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa2p0.csv
                             WITH 
-                            CSV HEADER ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
-    #Copy hmaps table
-    with open("/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps.csv".format(**{'prov':args.province}), "r") as f:
+
+    # Copy hmaps table
+    with open("/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps.csv".format(**{'prov': args.province}), "r") as f:
         reader = csv.reader(f)
         hmapColumns = next(reader)
     hmapColumns = ','.join('"{0}"'.format(w) for w in hmapColumns)
-    hmapColumns = hmapColumns.replace('-','_')
-    hmapColumns = hmapColumns.replace('"lon"','lon')
-    hmapColumns = hmapColumns.replace('"lat"','lat')
+    hmapColumns = hmapColumns.replace('-', '_')
+    hmapColumns = hmapColumns.replace('"lon"', 'lon')
+    hmapColumns = hmapColumns.replace('"lat"', 'lat')
 
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
                 -c '\copy psra_{prov}.psra_{prov}_hmaps({hmapColumns})
                         FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hmaps.csv
                             WITH 
-                            CSV HEADER ;'""".format(**{'prov':args.province, 'hmapColumns':hmapColumns})
+                            CSV HEADER ;'""".format(**{'prov': args.province, 'hmapColumns': hmapColumns})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
-    #Copy hmaps_xref table
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+    # Copy hmaps_xref table
+
+    expected_headers = 1
+
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -346,32 +372,32 @@ def main ():
                                                              "SA(5.0)_0.1")
                         FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps_xref.csv'
                             WITH 
-                            CSV HEADER ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
-    #Copy uhs table
-    with open("/usr/src/app/cHazard/{prov}/cH_{prov}_uhs.csv".format(**{'prov':args.province}), "r") as f:
+    # Copy uhs table
+    with open("/usr/src/app/cHazard/{prov}/cH_{prov}_uhs.csv".format(**{'prov': args.province}), "r") as f:
         reader = csv.reader(f)
         uhsColumns = next(reader)
     uhsColumns = ','.join('"{0}"'.format(w) for w in uhsColumns)
-    uhsColumns = uhsColumns.replace('~','_')
-    uhsColumns = uhsColumns.replace('"lon"','lon')
-    uhsColumns = uhsColumns.replace('"lat"','lat')
+    uhsColumns = uhsColumns.replace('~', '_')
+    uhsColumns = uhsColumns.replace('"lon"', 'lon')
+    uhsColumns = uhsColumns.replace('"lat"', 'lat')
 
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
                 -c '\copy psra_{prov}.psra_{prov}_uhs({uhsColumns})
                         FROM /usr/src/app/cHazard/{prov}/cH_{prov}_uhs.csv
                             WITH 
-                            CSV HEADER ;'""".format(**{'prov':args.province, 'uhsColumns':uhsColumns})
+                            CSV HEADER ;'""".format(**{'prov': args.province, 'uhsColumns': uhsColumns})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
-    #Copy dmg mean b0 table
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+    # Copy dmg mean b0 table
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -408,12 +434,12 @@ def main ():
                                                                     structural_complete)
                         FROM /usr/src/app/cDamage/{prov}/cD_{prov}_dmg-mean_b0.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
-    #Copy dmg mean r2 table
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+    # Copy dmg mean r2 table
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -450,12 +476,12 @@ def main ():
                                                                     structural_complete)
                         FROM /usr/src/app/cDamage/{prov}/cD_{prov}_dmg-mean_r2.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
-    #Copy ed dmg mean b0 table 
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+    # Copy ed dmg mean b0 table
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -492,12 +518,12 @@ def main ():
                                                                     structural_complete)
                         FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-mean_b0.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
-    #Copy ed dmg mean r2 table
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+    # Copy ed dmg mean r2 table
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -534,12 +560,12 @@ def main ():
                                                                     structural_complete)
                         FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-mean_r2.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
-    #Copy agg curves stats b0 table
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+    # Copy agg curves stats b0 table
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -554,12 +580,12 @@ def main ():
                                                                         annual_frequency_of_exceedence)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-stats_b0.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
-    #Copy agg curves stats r2 table
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+
+    # Copy agg curves stats r2 table
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -574,12 +600,12 @@ def main ():
                                                                         annual_frequency_of_exceedence)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-stats_r2.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
-    #Copy avg losses b0 table
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+
+    # Copy avg losses b0 table
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -614,12 +640,12 @@ def main ():
                                                                         structural)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_avg_losses-stats_b0.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
-    #Copy avg losses r2 table
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+
+    # Copy avg losses r2 table
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -654,12 +680,12 @@ def main ():
                                                                         structural)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_avg_losses-stats_r2.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
-    #Copy source loss b0 table
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+
+    # Copy source loss b0 table
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -670,12 +696,12 @@ def main ():
                                                                 region)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_src_loss_table_b0.csv
                             WITH 
-                            CSV HEADER ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
-    #Copy source loss r2 table
-    systemCall="""psql -h  ${{POSTGRES_HOST}}
+
+    # Copy source loss r2 table
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
@@ -686,14 +712,14 @@ def main ():
                                                                 region)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_src_loss_table_r2.csv
                             WITH 
-                            CSV HEADER ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov': args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
     return
 
 
-#Support Functions
+# Support Functions
 def get_config_params(args):
     """
     Parse Input/Output columns from supplied *.ini file
@@ -702,15 +728,18 @@ def get_config_params(args):
     configParseObj.read(args)
     return configParseObj
 
+
 def parse_args():
     parser = argparse.ArgumentParser(description='''Script to run \\copy statements 
     for PSRA datasets Can be run from the command line with out arguments like:
     Run this script with a command like:
     python3 PSRA_copyTables.py''')
-    parser.add_argument("--province", type=str, help="Two letter province/territory identifier")
+    parser.add_argument("--province", type=str,
+                        help="Two letter province/territory identifier")
     args = parser.parse_args()
 
     return args
+
 
 if __name__ == '__main__':
     main()
