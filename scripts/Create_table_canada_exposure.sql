@@ -45,6 +45,7 @@ CREATE TABLE exposure.canada_exposure(
     eruid varchar,
     ername varchar,
     pruid varchar,
-    prname varchar
-
+    prname varchar,
+    ss_region varchar,
+    nation varchar
 );
