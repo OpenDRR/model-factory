@@ -30,6 +30,7 @@ a.bldgtype AS "E_BldgTypeS",
 CAST(CAST(ROUND(CAST(a.numfloors AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_NumFloors",
 a.bldepoch AS "E_BldgEpoch",
 a.ssc_zone AS "SSC_Zone",
+a.ss_region AS "E_SSRegion",
 a.eqdeslev AS "E_BldgDesLev",
 
 -- 1.0 Human Settlement
