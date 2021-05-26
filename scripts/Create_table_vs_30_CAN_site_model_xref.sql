@@ -15,17 +15,3 @@ CREATE TABLE vs30.vs30_can_site_model_xref(
     vs_lat float,
     distance float 
 );
-
-/*
--- import exposure from csv
-COPY vs30.vs30_can_site_model_xref (id, asset_lon, asset_lat, vs30, z1pt0, z2pt5, vs_lon, vs_lat, distance)
-    FROM '/usr/src/app/vs30_CAN_site_model_xref.csv'
-        WITH 
-          DELIMITER AS ','
-          CSV HEADER ;
-
--- create index
-CREATE INDEX vs30_can_site_model_xref_idx ON vs30.vs30_can_site_model_xref (id);
-
-
-*/
