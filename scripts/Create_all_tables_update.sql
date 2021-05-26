@@ -123,6 +123,10 @@ CREATE INDEX IF NOT EXISTS vs_30_can_site_model_xref_id_idx ON vs30.vs30_can_sit
 
 
 /* Create_table_2016_census_v3.sql */
+-- add missing sauid that is new in exposure model but missing in census
+INSERT INTO census.census_2016_canada(sauidt)
+VALUES(62000215);
+
 -- create index
 CREATE INDEX IF NOT EXISTS census_2016_canada_sauid_idx ON census.census_2016_canada("sauidt");
 
