@@ -22,6 +22,7 @@ CREATE TABLE exposure.canada_exposure(
     night float,
     transit float,
     GenOcc varchar,
+    OccType varchar,
     OccClass1 varchar,
     OccClass2 varchar,
     PopDU float,
