@@ -408,7 +408,7 @@ def main ():
                                                                     structural_complete)
                         FROM /usr/src/app/cDamage/{prov}/cD_{prov}_dmg-mean_b0.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
@@ -450,7 +450,7 @@ def main ():
                                                                     structural_complete)
                         FROM /usr/src/app/cDamage/{prov}/cD_{prov}_dmg-mean_r2.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
@@ -492,7 +492,7 @@ def main ():
                                                                     structural_complete)
                         FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-mean_b0.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
@@ -534,7 +534,7 @@ def main ():
                                                                     structural_complete)
                         FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-mean_r2.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
@@ -554,7 +554,7 @@ def main ():
                                                                         annual_frequency_of_exceedence)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-stats_b0.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
@@ -574,7 +574,7 @@ def main ():
                                                                         annual_frequency_of_exceedence)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-stats_r2.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
@@ -614,7 +614,7 @@ def main ():
                                                                         structural)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_avg_losses-stats_b0.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
@@ -654,7 +654,7 @@ def main ():
                                                                         structural)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_avg_losses-stats_r2.csv
                             WITH 
-                            CSV ;'""".format(**{'prov':args.province})
+                            CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
