@@ -172,15 +172,14 @@ def main ():
     systemCall='''psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
-                -a 
-                -c "\copy vs30.vs30_can_site_model (objectid,
-                                                    lon,
+                -a
+                -c "\copy vs30.vs30_can_site_model (lon,
                                                     lat,
                                                     vs30,
                                                     z1pt0,
                                                     z2pt5)
                         FROM '/usr/src/app/site-vgrid_CA.csv'
-                            WITH 
+                            WITH
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
@@ -201,7 +200,7 @@ def main ():
                                                         vs_lat,
                                                         distance)
                         FROM '/usr/src/app/vs30_CAN_site_model_xref.csv'
-                            WITH 
+                            WITH
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
