@@ -171,6 +171,9 @@ SET id_building = t2.id_building
 FROM exposure.metrovan_site_exposure_id_building t2
 WHERE t1.id = t2.id;
 
+-- add index
+CREATE INDEX IF NOT EXISTS metrovan_site_exposure_id_building_idx ON exposure.metrovan_site_exposure("id_building");
+
 DROP TABLE IF EXISTS exposure.metrovan_site_exposure_id_building CASCADE;
 
 
