@@ -388,7 +388,7 @@ def main ():
                                                     pre_1975,
                                                     renter,
                                                     dauid_text)
-                        FROM '/usr/src/app/social-vulnerability-index_2021.csv'
+                        FROM '/usr/src/app/social-vulnerability-index.csv'
                             WITH 
                             DELIMITER AS ','
                             CSV HEADER ;"'''
@@ -481,7 +481,7 @@ def main ():
                                                     pre_1975,
                                                     renter,
                                                     dauid_text)
-                        FROM '/usr/src/app/social-vulnerability-census_2021.csv'
+                        FROM '/usr/src/app/social-vulnerability-census.csv'
                             WITH 
                             DELIMITER AS ','
                             CSV HEADER ;"'''
@@ -548,24 +548,25 @@ def main ():
     os.system(systemCall)
 
     #Copy Retrofit costs table
-    systemCall="""psql -h ${POSTGRES_HOST}
-                -U ${POSTGRES_USER}
-                -d ${DB_NAME}
-                -a 
-                -c '\copy  lut.retrofit_costs ("Eq_BldgType",
-                                                "Description",
-                                                "BldgArea_ft2",
-                                                "USD_ft2__pre1917",
-                                                "USD_ft2_1917_1975",
-                                                "USD_ft2_1975_2019",
-                                                "RetrofitCost_pc_Total",
-                                                "USD_RetrofitCost_Bldg",
-                                                "CAD_RetrofitCost_Bldg")
-                        FROM /usr/src/app/retrofit_costs.csv
-                            WITH
-                            CSV HEADER ;'"""
-    systemCall = ' '.join(systemCall.split())
-    os.system(systemCall)
+    # Retrofit costs depricated
+    # systemCall="""psql -h ${POSTGRES_HOST}
+    #             -U ${POSTGRES_USER}
+    #             -d ${DB_NAME}
+    #             -a 
+    #             -c '\copy  lut.retrofit_costs ("Eq_BldgType",
+    #                                             "Description",
+    #                                             "BldgArea_ft2",
+    #                                             "USD_ft2__pre1917",
+    #                                             "USD_ft2_1917_1975",
+    #                                             "USD_ft2_1975_2019",
+    #                                             "RetrofitCost_pc_Total",
+    #                                             "USD_RetrofitCost_Bldg",
+    #                                             "CAD_RetrofitCost_Bldg")
+    #                     FROM /usr/src/app/retrofit_costs.csv
+    #                         WITH
+    #                         CSV HEADER ;'"""
+    # systemCall = ' '.join(systemCall.split())
+    # os.system(systemCall)
 
     #Copy GHSL Table
     systemCall='''psql -h ${POSTGRES_HOST}
@@ -648,7 +649,7 @@ def main ():
                                                     cy500,
                                                     cy1000,
                                                     svlt_score)
-                        FROM '/usr/src/app/HTi_sauid_2021.csv'
+                        FROM '/usr/src/app/HTi_sauid.csv'
                             WITH 
                             DELIMITER AS ','
                             CSV HEADER ;"'''
@@ -669,7 +670,7 @@ def main ():
                                                 hti_wildfire,
                                                 hti_lndsus,
                                                 hti_cy500)
-                    FROM '/usr/src/app/HTi_thresholds_2021.csv'
+                    FROM '/usr/src/app/HTi_thresholds.csv'
                             WITH 
                             DELIMITER AS ','
                             CSV HEADER ;"'''
