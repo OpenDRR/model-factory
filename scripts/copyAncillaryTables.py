@@ -6,7 +6,7 @@ import configparser
 import logging
 
 '''
-Script to copy Ancillary tables into PostGIS 
+Script to copy Ancillary tables into PostGIS
 python3 copyAncillaryTables.py
 '''
 
@@ -24,7 +24,7 @@ def main ():
     systemCall='''psql -h ${POSTGRES_HOST}
                     -U ${POSTGRES_USER}
                     -d ${DB_NAME}
-                    -a 
+                    -a
                     -c "\copy exposure.canada_exposure (objectid,
                                                         id,
                                                         SauidLat,
@@ -65,8 +65,8 @@ def main ():
                                                         ername,
                                                         pruid,
                                                         prname)
-                        FROM '/usr/src/app/BldgExpRef_CA_master_v3p1.csv'
-                            WITH 
+                        FROM '/usr/src/app/BldgExpRef_CA_master_v3p2.csv'
+                            WITH
                             DELIMITER AS ','
                             CSV HEADER ;" '''
     systemCall = ' '.join(systemCall.split())
