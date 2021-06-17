@@ -61,7 +61,7 @@ UPDATE exposure.metrovan_site_exposure SET geom_sauid = st_setsrid(st_makepoint(
 
 -- create indexes on site exposure tables
 CREATE INDEX IF NOT EXISTS metrovan_site_exposure_id_idx ON exposure.metrovan_site_exposure("id");
-CREATE INDEX IF NOT EXISTS metrovan_site_exposure_id_building_idx ON exposure.metrovan_site_exposure("id_building");
+--CREATE INDEX IF NOT EXISTS metrovan_site_exposure_id_building_idx ON exposure.metrovan_site_exposure("id_building");
 CREATE INDEX IF NOT EXISTS metrovan_site_exposure_sauid_idx ON exposure.metrovan_site_exposure("sauidid");
 CREATE INDEX IF NOT EXISTS metrovan_site_exposure_geom_site_idx ON exposure.metrovan_site_exposure USING GIST("geom_site");
 CREATE INDEX IF NOT EXISTS metrovan_site_exposure_geom_sauid_idx ON exposure.metrovan_site_exposure USING GIST("geom_sauid");
