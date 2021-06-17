@@ -38,9 +38,11 @@ def main ():
                                                         nonstructural,
                                                         contents,
                                                         retrofitting,
-                                                        day,night,
+                                                        day,
+                                                        night,
                                                         transit,
                                                         GenOcc,
+                                                        OccType,
                                                         OccClass1,
                                                         OccClass2,
                                                         PopDU,
@@ -64,7 +66,9 @@ def main ():
                                                         eruid,
                                                         ername,
                                                         pruid,
-                                                        prname)
+                                                        prname,
+                                                        SS_Region,
+                                                        nation)
                         FROM '/usr/src/app/BldgExpRef_CA_master_v3p2.csv'
                             WITH
                             DELIMITER AS ','
