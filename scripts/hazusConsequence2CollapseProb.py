@@ -12,6 +12,9 @@ def main():
     # Convert percentages to decimal
     df['collapse_pc'] /= 100
 
+    # Add typology column and copy over eqbldgtype values
+    df.loc[:, 'typology'] = df['eqbldgtype']
+
     # Convert to .csv and add quotes around all entries
     df.to_csv('collapse_probability.csv', index=False,
               quoting=1)
