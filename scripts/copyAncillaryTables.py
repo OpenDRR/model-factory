@@ -676,8 +676,40 @@ def main ():
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    return
 
+    # Copy MH Rating Threshold Table
+    systemCall='''psql -h ${POSTGRES_HOST}
+                -U ${POSTGRES_USER}
+                -d ${DB_NAME}
+                -a 
+                -c "\copy   mh.mh_rating_thresholds(impact_potential,
+                                                    rel_score,
+                                                    exp_pp,
+                                                    exp_frm,
+                                                    exp_to,
+                                                    pga_pp_frm,
+                                                    pga_pp_to,
+                                                    pga_bldg_asset_frm,
+                                                    pga_bldg_asset_to,
+                                                    fld_tsun_pp_frm,
+                                                    fld_tsun_pp_to,
+                                                    fld_tsun_bldg_asset_frm,
+                                                    fld_tsun_bldg_asset_to,
+                                                    wildfire_pp_frm,
+                                                    wildfire_pp_to,
+                                                    wildfire_bldg_asset_frm,
+                                                    wildfire_bldg_asset_to,
+                                                    cy_ppl_frm,
+                                                    cy_ppl_to,
+                                                    cy_bldg_asset_frm,
+                                                    cy_bldg_asset_to)
+                    FROM '/usr/src/app/hazard_threat_rating_thresholds.csv'
+                            WITH 
+                            DELIMITER AS ','
+                            CSV HEADER ;"'''
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+    return
 
 #Support Functions
 def get_config_params(args):
