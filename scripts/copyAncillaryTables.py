@@ -682,7 +682,7 @@ def main ():
                 -U ${POSTGRES_USER}
                 -d ${DB_NAME}
                 -a 
-                -c "\copy   mh.mh_rating_thresholds(impact_potential,
+                -c "\copy   mh.mh_ratings_thresholds(impact_potential,
                                                     rel_score,
                                                     exp_pp,
                                                     exp_frm,
