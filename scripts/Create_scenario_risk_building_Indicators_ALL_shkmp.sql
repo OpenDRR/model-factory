@@ -139,6 +139,9 @@ CAST(CAST(ROUND(CAST(a."sC_Downtime_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS 
 CAST(CAST(ROUND(CAST((a."sC_DebrisBW_r2" + a."sC_DebrisC_r2") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisTotal_r1",
 CAST(CAST(ROUND(CAST(a."sC_DebrisBW_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisBW_r1",
 CAST(CAST(ROUND(CAST(a."sC_DebrisC_r2" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisCS_r1",
+-- 3.2.3 Building Characteristics
+b.bldgtype AS "E_BldgTypeG",
+b.occtype AS "E_OccType",
 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
