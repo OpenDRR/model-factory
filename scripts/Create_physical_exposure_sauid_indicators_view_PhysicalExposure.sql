@@ -28,10 +28,15 @@ CAST(CAST(ROUND(CAST(COALESCE(c.censusbldg,0) AS NUMERIC),6) AS FLOAT) AS NUMERI
 CAST(CAST(ROUND(CAST(c.censuspop AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_CensusPop",
 CAST(CAST(ROUND(CAST(c.censusdu AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_CensusDU",
 CAST(CAST(ROUND(CAST(AVG(a.popdu) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_People_DU",
-CAST(CAST(ROUND(CAST(AVG(a.day/a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Pop_Km2",
-CAST(CAST(ROUND(CAST(AVG(a.day/a.sauid_ha) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PPH",
-CAST(CAST(ROUND(CAST(AVG(a.number/a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) as "Et_Bldg_Km2",
-CAST(CAST(ROUND(CAST(AVG((a.structural + a.nonstructural + a.contents)/a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Value_Km2",
+--CAST(CAST(ROUND(CAST(AVG(a.day/a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Pop_Km2",
+--CAST(CAST(ROUND(CAST(AVG(a.day/a.sauid_ha) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PPH",
+--CAST(CAST(ROUND(CAST(AVG(a.number/a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) as "Et_Bldg_Km2",
+--CAST(CAST(ROUND(CAST(AVG((a.structural + a.nonstructural + a.contents)/a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Value_Km2",
+CAST(CAST(ROUND(CAST(SUM(a.day)/(a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Pop_Km2",
+CAST(CAST(ROUND(CAST(SUM(a.day)/(a.sauid_ha) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Pop_Ha",
+CAST(CAST(ROUND(CAST(AVG(a.day/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PPH",
+CAST(CAST(ROUND(CAST(SUM(a.number)/(a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) as "Et_Bldg_Km2",
+CAST(CAST(ROUND(CAST(SUM(a.structural + a.nonstructural + a.contents)/(a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Value_Km2",
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
