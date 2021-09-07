@@ -22,8 +22,8 @@ GROUP BY a."Sauid"
 
 
 --intermediates table to calculate shelter for DSRA
-DROP TABLE IF EXISTS results_dsra_{eq_Scenario}.{eq_Scenario}.shelter_calc2 CASCADE;
-CREATE TABLE results_dsra_{eq_Scenario}.{eq_Scenario}.shelter_calc2 AS
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}.shelter_calc2 CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.{eqScenario}.shelter_calc2 AS
 (
 SELECT
 a."Sauid",
@@ -104,8 +104,8 @@ LEFT JOIN results_nhsl_social_fabric.nhsl_social_fabric_all_indicators_s d ON a.
 
 
 -- intermediates table to calculate shelter for DSRA
-DROP TABLE IF EXISTS results_dsra_{eq_Scenario}.{eq_Scenario}.shelter_calc3 CASCADE;
-CREATE TABLE results_dsra_{eq_Scenario}.{eq_Scenario}.shelter_calc3 AS
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}.shelter_calc3 CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.{eqScenario}.shelter_calc3 AS
 (
 SELECT
 "Sauid",
@@ -119,8 +119,8 @@ FROM results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebest
 
 
 -- intermediates table to calculate shelter for DSRA
---DROP TABLE IF EXISTS results_dsra_{eq_Scenario}.{eq_Scenario}.shelter_calc4 CASCADE;
---CREATE TABLE results_dsra_{eq_Scenario}.{eq_Scenario}.shelter_calc4 AS
+--DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}.shelter_calc4 CASCADE;
+--CREATE TABLE results_dsra_{eqScenario}.{eqScenario}.shelter_calc4 AS
 DROP TABLE IF EXISTS results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc4 CASCADE;
 CREATE TABLE results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc4 AS
 (
@@ -138,8 +138,8 @@ LEFT JOIN results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfac
 
 
 --intermediates table to calculate shelter for DSRA
---DROP TABLE IF EXISTS results_dsra_{eq_Scenario}.{eq_Scenario}_shelter CASCADE;
---CREATE TABLE results_dsra_{eq_Scenario}.{eq_Scenario}_shelter AS
+--DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shelter CASCADE;
+--CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_shelter AS
 (
 SELECT
 a."Sauid",
