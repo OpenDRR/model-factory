@@ -32,8 +32,8 @@ CREATE INDEX IF NOT EXISTS {eqScenario}_assetid_idx ON dsra.dsra_{eqScenario}("A
 
 
 --intermediates table to calculate displaced households for DSRA
-DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}.displhshld_calc1 CASCADE;
-CREATE TABLE results_dsra_{eqScenario}.{eqScenario}.displhshld_calc1 AS
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_displhshld_calc1 CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_displhshld_calc1 AS
 (
 SELECT
 a."AssetID",
@@ -94,7 +94,7 @@ CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD'
 0.9 AS "W_MFE",
 1 AS "W_MFC"
 
-FROM dsra.dsra_sim9p0_cascadiainterfacebestfault a
+FROM dsra.dsra_{eqScenario} a
 LEFT JOIN results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b b ON a."AssetID" = b."BldgID"
 LEFT JOIN exposure.canada_exposure c ON  a."AssetID" = c.id
 LEFT JOIN results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_s d ON c.sauid = d."Sauid"
@@ -102,8 +102,8 @@ LEFT JOIN results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_s
 
 
 --intermediate tables to calculate displaced households for DSRA
-DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}.displhshld_calc2 CASCADE;
-CREATE TABLE results_dsra_{eqScenario}.{eqScenario}.displhshld_calc2 AS
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_displhshld_calc2 CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_displhshld_calc2 AS
 (
 SELECT
 "AssetID",
@@ -115,13 +115,13 @@ SELECT
 ("W_MFM" * "MFM_b0") + ("W_MFE" * "MFE_b0") + ("W_MFC" * "MFC_b0") AS "MF_b0",
 ("W_MFM" * "MFM_r1") + ("W_MFE" * "MFE_r1") + ("W_MFC" * "MFC_r1") AS "MF_r1"
 
-FROM results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_displhshld_calc1
+FROM results_dsra_{eqScenario}.{eqScenario}_displhshld_calc1
 );
 
 
 --intermediate tables to calculate displaced households for DSRA
-DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}.displhshld_calc3 CASCADE;
-CREATE TABLE results_dsra_{eqScenario}.{eqScenario}.displhshld_calc3 AS
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_displhshld_calc3 CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_displhshld_calc3 AS
 (
 SELECT
 a."AssetID",
@@ -132,14 +132,14 @@ COALESCE((a."E_SFHshld" * b."SF_b0") + (a."E_MFHshld" * b."MF_b0"),0) AS "sC_Dis
 --COALESCE((a."E_SFHshld" * b."SF_r1") + (a."E_MFHshld" * b."MF_r1") * (a."E_CensusDU" /NULLIF((a."E_SFHshld" + a."E_MFHshld"),0)),0) AS "sC_DisplHshld_r1",
 COALESCE((a."E_SFHshld" * b."SF_r1") + (a."E_MFHshld" * b."MF_r1"),0) AS "sC_DisplHshld_r1"
 
-FROM results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_displhshld_calc1 a
-LEFT JOIN results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_displhshld_calc2 b on a."AssetID" = b."AssetID"
+FROM results_dsra_{eqScenario}.{eqScenario}_displhshld_calc1 a
+LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_displhshld_calc2 b on a."AssetID" = b."AssetID"
 );
 
 
 --intermediate tables to calculate displaced households for DSRA
-DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}.displhshld CASCADE;
-CREATE TABLE results_dsra_{eqScenario}.{eqScenario}.displhshld AS
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_displhshld CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_displhshld AS
 (
 SELECT
 a."AssetID",
@@ -181,9 +181,9 @@ b."MF_r1",
 c."sC_DisplHshld_b0",
 c."sC_DisplHshld_r1"
 
-FROM results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_displhshld_calc1 a
-LEFT JOIN results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_displhshld_calc2 b ON a."AssetID" = b."AssetID"
-LEFT JOIN results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_displhshld_calc3 c ON a."AssetID" = c."AssetID"
+FROM results_dsra_{eqScenario}.{eqScenario}_displhshld_calc1 a
+LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_displhshld_calc2 b ON a."AssetID" = b."AssetID"
+LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_displhshld_calc3 c ON a."AssetID" = c."AssetID"
 );
 
 DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_displhshld_calc1,results_dsra_{eqScenario}.{eqScenario}_displhshld_calc2,results_dsra_{eqScenario}.{eqScenario}_displhshld_calc3;
@@ -435,11 +435,12 @@ LEFT JOIN boundaries."Geometry_SAUID" c on b.sauid = c."SAUIDt"
 LEFT JOIN gmf.shakemap_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 --LEFT JOIN lut.collapse_probability g ON b.bldgtype = g.eqbldgtype
+LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_displhshld h ON a."AssetID" = h."AssetID"
 WHERE e."gmv_SA(0.3)" >=0.02;
 
 
 
 -- insert dsra info into master dsra table per scenario
-INSERT INTO dsra.dsra_all_scenarios_tbl(assetid,sauid,pruid,prname,eruid,ername,cduid,cdname,csduid,csdname,fsauid,dauid,sh_rupname,sh_rupabbr,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake,geom_point)
+INSERT INTO dsra.dsra_all_scenarios_tbl(assetid,sauid,pruid,prname,eruid,ername,cduid,cdname,csduid,csdname,fsauid,dauid,sh_rupname,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake,geom_point)
 SELECT "AssetID","Sauid",pruid,prname,eruid,ername,cduid,cdname,csduid,csdname,fsauid,dauid,"sH_RupName","sH_Mag","sH_HypoLon","sH_HypoLat","sH_HypoDepth","sH_Rake",geom_point
 FROM results_dsra_{eqScenario}.dsra_{eqScenario}_all_indicators_b;
