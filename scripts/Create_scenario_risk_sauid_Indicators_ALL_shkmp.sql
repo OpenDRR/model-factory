@@ -14,16 +14,15 @@ SUM(a."sC_DisplHshld_b0") AS "sCt_DisplHshld_b0",
 SUM(a."sC_DisplHshld_r1") AS "sCt_DisplHshld_r1",
 SUM(b."E_PopNight") AS "Et_PopNight"
 	
-FROM results_dsra_sim9p0_cascadiainterfacebestfault.dsra_sim9p0_cascadiainterfacebestfault_all_indicators_b a
---FROM results_dsra_{eqScenario}.dsra_{eqScenario}_all_indicators_b a
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_all_indicators_b a
 LEFT JOIN results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b b ON a."AssetID" = b."BldgID"
 GROUP BY a."Sauid"
 );
 
 
 --intermediates table to calculate shelter for DSRA
-DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}.shelter_calc2 CASCADE;
-CREATE TABLE results_dsra_{eqScenario}.{eqScenario}.shelter_calc2 AS
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shelter_calc2 CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_shelter_calc2 AS
 (
 SELECT
 a."Sauid",
@@ -96,7 +95,7 @@ c.age_gt65 * 0.40 AS "AM1",
 c.age_lt6 * 0.40 AS "AM2"
 
 
-FROM results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc1 a
+FROM results_dsra_{eqScenario}.{eqScenario}_shelter_calc1 a
 LEFT JOIN results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_s b ON a."Sauid" = b."Sauid"
 LEFT JOIN sovi.sovi_census_canada c ON b."Sauid" = c.sauidt
 LEFT JOIN results_nhsl_social_fabric.nhsl_social_fabric_all_indicators_s d ON a."Sauid" = d."Sauid"
@@ -104,8 +103,8 @@ LEFT JOIN results_nhsl_social_fabric.nhsl_social_fabric_all_indicators_s d ON a.
 
 
 -- intermediates table to calculate shelter for DSRA
-DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}.shelter_calc3 CASCADE;
-CREATE TABLE results_dsra_{eqScenario}.{eqScenario}.shelter_calc3 AS
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shelter_calc3 CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_shelter_calc3 AS
 (
 SELECT
 "Sauid",
@@ -113,16 +112,13 @@ SELECT
 --(0.73* ([IM1]+[IM2]+[IM3]+[IM4]+[IM5])) + (0.27*([EM1]+[EM2]+[EM3]+[EM4]+[EM5])) = sigma
 (0.73 * ("IM1" + "IM2" + "IM3" + "IM4" + "IM5")) + (0.27 * ("EM1" + "EM2" + "EM3" + "EM4" + "EM5")) AS "sigma"
 
-FROM results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc2
---FROM results_dsra_{eqScenario}.{eqScenario}_shelter_calc2
+FROM results_dsra_{eqScenario}.{eqScenario}_shelter_calc2
 );
 
 
 -- intermediates table to calculate shelter for DSRA
---DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}.shelter_calc4 CASCADE;
---CREATE TABLE results_dsra_{eqScenario}.{eqScenario}.shelter_calc4 AS
-DROP TABLE IF EXISTS results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc4 CASCADE;
-CREATE TABLE results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc4 AS
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shelter_calc4 CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_shelter_calc4 AS
 (
 SELECT
 a."Sauid",
@@ -132,14 +128,14 @@ b.sigma * COALESCE(((a."sCt_DisplHshld_b0" * a."Et_PopNight") / NULLIF((a."Et_SF
 --b.sigma * COALESCE(((a."sCt_DisplHshld_r1" * a."E_CensusPop") / NULLIF(a."E_CensusDU",0)),0) * (a."IM1" + a."IM2" + a."IM3" + a."IM4" + a."IM5") * (a."EM1" + a."EM2" + a."EM3" + a."EM4" + a."EM5") * (a."OM1" + a."OM2") * (a."AM1" + a."AM2") AS "sCt_Shelter_r1"
 b.sigma * COALESCE(((a."sCt_DisplHshld_r1" * a."Et_PopNight") / NULLIF((a."Et_SFHshld" + a."Et_MFHshld"),0)),0) * (a."IM1" + a."IM2" + a."IM3" + a."IM4" + a."IM5") * (a."EM1" + a."EM2" + a."EM3" + a."EM4" + a."EM5") * (a."OM1" + a."OM2") * (a."AM1" + a."AM2") AS "sCt_Shelter_r1"
 
-FROM results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc2 a
-LEFT JOIN results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc3 b ON a."Sauid" = b."Sauid"
+FROM results_dsra_{eqScenario}.{eqScenario}_shelter_calc2 a
+LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_shelter_calc3 b ON a."Sauid" = b."Sauid"
 );
 
 
 --intermediates table to calculate shelter for DSRA
---DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shelter CASCADE;
---CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_shelter AS
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shelter CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_shelter AS
 (
 SELECT
 a."Sauid",
@@ -169,13 +165,12 @@ b.sigma,
 c."sCt_Shelter_b0",
 c."sCt_Shelter_r1"
 
-FROM results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc2 a
-LEFT JOIN results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc3 b ON a."Sauid" = b."Sauid"
-LEFT JOIN results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc4 c ON a."Sauid" = c."Sauid"
+FROM results_dsra_{eqScenario}.{eqScenario}_shelter_calc2 a
+LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_shelter_calc3 b ON a."Sauid" = b."Sauid"
+LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_shelter_calc4 c ON a."Sauid" = c."Sauid"
 );
 
---DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shelter_calc1,results_dsra_{eqScenario}.{eqScenario}_shelter_calc2,results_dsra_{eqScenario}.{eqScenario}_shelter_calc3,results_dsra_{eqScenario}.{eqScenario}_shelter_calc4;
-DROP TABLE IF EXISTS results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc1,results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc2,results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc3,results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter_calc4;
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shelter_calc1,results_dsra_{eqScenario}.{eqScenario}_shelter_calc2,results_dsra_{eqScenario}.{eqScenario}_shelter_calc3,results_dsra_{eqScenario}.{eqScenario}_shelter_calc4;
 
 
 
@@ -444,7 +439,7 @@ LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 --LEFT JOIN census.census_2016_canada h ON b.sauid = h.sauidt
 LEFT JOIN boundaries."Geometry_SAUID" i ON b.sauid = i."SAUIDt"
 --LEFT JOIN sovi.sovi_census_canada j ON b.sauid = j.sauidt
-LEFT JOIN results_dsra_sim9p0_cascadiainterfacebestfault.sim9p0_cascadiainterfacebestfault_shelter k ON b.sauid = k."Sauid"
+LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_shelter k ON b.id = k."Sauid"
 WHERE e."gmv_SA(0.3)" >=0.02
 GROUP BY a."Rupture_Abbr",a."gmpe_Model",b.sauid,b.landuse,d.vs30,d.z1pt0,d.z2pt5,d.vs_lon,d.vs_lat,e.site_id,e.lon,e.lat,f.source_type,
 f.magnitude,f.lon,f.lat,f.depth,f.rake,e."gmv_pga",e."gmv_SA(0.1)",e."gmv_SA(0.2)",e."gmv_SA(0.3)",e."gmv_SA(0.5)",e."gmv_SA(0.6)",e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",
