@@ -39,7 +39,7 @@ CAST(CAST(ROUND(CAST((CASE
 					  WHEN a.occclass1 = 'RES2' THEN a.number * 1 
 					  ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_SFHshld",
 
--- multi family household, res units for RES3A = 2, RES3B = 4, RES3C = 9, RES3D = 17, RES3E = 32, RES3F = 110
+-- multi family household, res units for RES3A = 2, RES3B = 4, RES3C = 9, RES3D = 17, RES3E = 32, RES3F = 110, RES4 = 68, RES5 = 50, RES6 = 65
 CAST(CAST(ROUND(CAST((CASE 
 					  WHEN a.occclass1 = 'RES3A' THEN a.number * 2
 					  WHEN a.occclass1 = 'RES3B' THEN a.number * 4
@@ -47,6 +47,9 @@ CAST(CAST(ROUND(CAST((CASE
 					  WHEN a.occclass1 = 'RES3D' THEN a.number * 17
 					  WHEN a.occclass1 = 'RES3E' THEN a.number * 32
 					  WHEN a.occclass1 = 'RES3F' THEN a.number * 110
+					  WHEN a.occclass1 = 'RES4' THEN a.number * 68
+					  WHEN a.occclass1 = 'RES5' THEN a.number * 50
+					  WHEN a.occclass1 = 'RES5' THEN a.number * 65
 					  ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_MFHshld",
 
 -- 1.0 Human Settlement
