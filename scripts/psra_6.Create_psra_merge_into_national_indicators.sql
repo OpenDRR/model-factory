@@ -266,3 +266,38 @@ SELECT * FROM results_psra_yt.psra_yt_src_loss;
 DROP VIEW IF EXISTS results_psra_national.psra_src_loss CASCADE;
 CREATE VIEW results_psra_national.psra_src_loss AS
 SELECT * FROM results_psra_national.psra_src_loss_tbl;
+
+-- combine psra hmaps into national level
+DROP TABLE IF EXISTS results_psra_national.psra_hmaps_tbl CASCADE;
+
+CREATE TABLE results_psra_national.psra_hmaps_tbl AS 
+SELECT * FROM results_psra_ab.psra_ab_hmaps
+UNION
+SELECT * FROM results_psra_bc.psra_bc_hmaps
+UNION
+SELECT * FROM results_psra_mb.psra_mb_hmaps
+UNION
+SELECT * FROM results_psra_nb.psra_nb_hmaps
+UNION
+SELECT * FROM results_psra_nl.psra_nl_hmaps
+UNION
+SELECT * FROM results_psra_ns.psra_ns_hmaps
+UNION
+SELECT * FROM results_psra_nt.psra_nt_hmaps
+UNION
+SELECT * FROM results_psra_nu.psra_nu_hmaps
+UNION
+SELECT * FROM results_psra_on.psra_on_hmaps
+UNION
+SELECT * FROM results_psra_pe.psra_pe_hmaps
+UNION
+SELECT * FROM results_psra_qc.psra_qc_hmaps
+UNION
+SELECT * FROM results_psra_sk.psra_sk_hmaps
+UNION
+SELECT * FROM results_psra_yt.psra_yt_hmaps;
+
+-- create psra hmaps national view
+DROP VIEW IF EXISTS results_psra_national.psra_hmaps CASCADE;
+CREATE VIEW results_psra_national.psra_hmaps AS
+SELECT * FROM results_psra_national.psra_hmaps_tbl;
