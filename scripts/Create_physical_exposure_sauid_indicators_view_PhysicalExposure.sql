@@ -70,7 +70,7 @@ CAST(CAST(ROUND(CAST(SUM(CASE
 					  WHEN a.occclass1 = 'RES3F' THEN a.number * 110
 					  WHEN a.occclass1 = 'RES4' THEN a.number * 68
 					  WHEN a.occclass1 = 'RES5' THEN a.number * 50
-					  WHEN a.occclass1 = 'RES5' THEN a.number * 65
+					  WHEN a.occclass1 = 'RES6' THEN a.number * 65
 					  ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_MFHshld",
 
 -- 1.0 Human Settlement
