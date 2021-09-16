@@ -58,7 +58,7 @@ CASE WHEN c.inc_hshld > 50000 THEN 1 * 0.13 ELSE 0 END AS "IM5",
 --1 - vis_min - indigenous *0.24 = white
 (1 - c.vis_min - c.indigenous) * 0.24 AS "EM1",
 
---vis_min * 0.40 = EM2, modification factors is average of Hazus visible minority values {avg(0.48 + 0.47 + 0.26)} = 0.40
+--vis_min * 0.40 = EM2, modification factors is average of Hazus visible minority values avg (0.48 + 0.47 + 0.26) = 0.40
 c.vis_min * 0.40 AS "EM2",
 
 --indigenous * 0.26 = EM3
