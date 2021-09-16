@@ -44,8 +44,8 @@ a."sD_Extensive_b0",
 a."sD_Extensive_r1",
 a."sD_Complete_b0",
 a."sD_Complete_r1",
-a."sC_Downtime_b0",
-a."sC_Downtime_r1",
+a."sC_Interruption_b0",
+a."sC_Interruption_r1",
 d."E_CensusDU",
 b."E_BldgOccG",
 b."E_SFHshld",
@@ -54,38 +54,26 @@ b."E_MFHshld",
 -- SFM
 CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Moderate_b0" / c.number) ELSE 0 END AS "SFM_b0",
 CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Moderate_r1" / c.number) ELSE 0 END AS "SFM_r1",
---CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Moderate_b0") ELSE 0 END AS "SFM_b0",
---CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Moderate_r1") ELSE 0 END AS "SFM_r1",
 
 -- SFE
 CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Extensive_b0" / c.number) ELSE 0 END AS "SFE_b0",
 CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Extensive_r1" / c.number) ELSE 0 END AS "SFE_r1",
---CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Extensive_b0") ELSE 0 END AS "SFE_b0",
---CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Extensive_r1") ELSE 0 END AS "SFE_r1",
 
 -- SFC
 CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Complete_b0" / c.number) ELSE 0 END AS "SFC_b0",
 CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Complete_r1" / c.number) ELSE 0 END AS "SFC_r1",
---CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Complete_b0") ELSE 0 END AS "SFC_b0",
---CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Complete_r1") ELSE 0 END AS "SFC_r1",
 
 -- MFM
 CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Moderate_b0" / c.number) ELSE 0 END AS "MFM_b0",
 CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Moderate_r1" / c.number) ELSE 0 END AS "MFM_r1",
---CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Moderate_b0") ELSE 0 END AS "MFM_b0",
---CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Moderate_r1") ELSE 0 END AS "MFM_r1",
 
 -- MFE
 CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Extensive_b0" / c.number) ELSE 0 END AS "MFE_b0",
 CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Extensive_r1" / c.number) ELSE 0 END AS "MFE_r1",
---CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Extensive_b0") ELSE 0 END AS "MFE_b0",
---CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Extensive_r1") ELSE 0 END AS "MFE_r1",
 
 -- MFC
 CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Complete_b0" / c.number) ELSE 0 END AS "MFC_b0",
 CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Complete_r1" / c.number) ELSE 0 END AS "MFC_r1",
---CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Complete_b0") ELSE 0 END AS "MFC_b0",
---CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Complete_r1") ELSE 0 END AS "MFC_r1",
 
 0 AS "W_SFM",
 0 AS "W_SFE",
@@ -150,8 +138,8 @@ a."sD_Extensive_b0",
 a."sD_Extensive_r1",
 a."sD_Complete_b0",
 a."sD_Complete_r1",
-a."sC_Downtime_b0",
-a."sC_Downtime_r1",
+a."sC_Interruption_b0",
+a."sC_Interruption_r1",
 a."E_CensusDU",
 a."E_BldgOccG",
 a."E_SFHshld",
@@ -208,15 +196,9 @@ CAST(CAST(ROUND(CAST(f.lat AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_HypoLat",
 CAST(CAST(ROUND(CAST(f.depth AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_HypoDepth",
 f.rake AS "sH_Rake",
 a."gmpe_Model" AS "sH_GMPE",
-e.site_id AS "sH_SiteID",
-CAST(CAST(ROUND(CAST(e.lon AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_SiteLon",
-CAST(CAST(ROUND(CAST(e.lat AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_SiteLat",
---CAST(CAST(ROUND(CAST(d.vs_lon AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS  "sH_Vs30Lon",
---CAST(CAST(ROUND(CAST(d.vs_lat AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Vs30Lat",
 CAST(CAST(ROUND(CAST(d.vs30 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Vs30",
 CAST(CAST(ROUND(CAST(d.z1pt0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_z1p0",
 CAST(CAST(ROUND(CAST(d.z2pt5 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_z2p5",
---CAST(CAST(ROUND(CAST(e."gmv_pgv" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_PGV",
 CAST(CAST(ROUND(CAST(e."gmv_pga" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_PGA",
 CAST(CAST(ROUND(CAST(e."gmv_SA(0.1)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa0p1",
 CAST(CAST(ROUND(CAST(e."gmv_SA(0.2)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa0p2",
@@ -232,77 +214,60 @@ CAST(CAST(ROUND(CAST(e."gmv_SA(2.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC)AS "sH_
 -- 3.2.1 Damage State - b0
 CAST(CAST(ROUND(CAST(a."sD_None_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_None_b0",
 CAST(CAST(ROUND(CAST(a."sD_None_b0" / b.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_None_b0",
---CAST(CAST(ROUND(CAST(a."sD_None_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_None_b0",
 
 CAST(CAST(ROUND(CAST(a."sD_Slight_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_Slight_b0",
 CAST(CAST(ROUND(CAST(a."sD_Slight_b0" / b.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_Slight_b0",
---CAST(CAST(ROUND(CAST(a."sD_Slight_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_Slight_b0",
 
 CAST(CAST(ROUND(CAST(a."sD_Moderate_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_Moderate_b0",
 CAST(CAST(ROUND(CAST(a."sD_Moderate_b0" / b.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_Moderate_b0",
---CAST(CAST(ROUND(CAST(a."sD_Moderate_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_Moderate_b0",
 
 CAST(CAST(ROUND(CAST(a."sD_Extensive_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_Extensive_b0",
 CAST(CAST(ROUND(CAST(a."sD_Extensive_b0" / b.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_Extensive_b0",
---CAST(CAST(ROUND(CAST(a."sD_Extensive_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_Extensive_b0",
 
 CAST(CAST(ROUND(CAST(a."sD_Complete_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_Complete_b0",
 CAST(CAST(ROUND(CAST(a."sD_Complete_b0" / b.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_Complete_b0",
---CAST(CAST(ROUND(CAST(a."sD_Complete_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_Complete_b0",
 
 CAST(CAST(ROUND(CAST(a."sD_Collapse_b0" * b.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_Collapse_b0",
 CAST(CAST(ROUND(CAST(a."sD_Collapse_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_Collapse_b0",
---CAST(CAST(ROUND(CAST(a."sD_Complete_stdv_b0" * g.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_Collapse_b0",
 
 -- 3.2.1 Damage State - r1
 CAST(CAST(ROUND(CAST(a."sD_None_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_None_r1",
 CAST(CAST(ROUND(CAST(a."sD_None_r1" / b.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_None_r1",
---CAST(CAST(ROUND(CAST(a."sD_None_stdv_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_None_r1",
 
 CAST(CAST(ROUND(CAST(a."sD_Slight_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_Slight_r1",
 CAST(CAST(ROUND(CAST(a."sD_Slight_r1" / b.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_Slight_r1",
---CAST(CAST(ROUND(CAST(a."sD_Slight_stdv_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_Slight_r1",
 
 CAST(CAST(ROUND(CAST(a."sD_Moderate_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_Moderate_r1",
 CAST(CAST(ROUND(CAST(a."sD_Moderate_r1" / b.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_Moderate_r1",
---CAST(CAST(ROUND(CAST(a."sD_Moderate_stdv_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_Moderate_r1",
 
 CAST(CAST(ROUND(CAST(a."sD_Extensive_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_Extensive_r1",
 CAST(CAST(ROUND(CAST(a."sD_Extensive_r1" / b.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_Extensive_r1",
---CAST(CAST(ROUND(CAST(a."sD_Extensive_stdv_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_Extensive_r1",
 
 CAST(CAST(ROUND(CAST(a."sD_Complete_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_Complete_r1",
 CAST(CAST(ROUND(CAST(a."sD_Complete_r1" / b.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_Complete_r1",
---CAST(CAST(ROUND(CAST(a."sD_Complete_stdv_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_Complete_r1",
 
 CAST(CAST(ROUND(CAST(a."sD_Collapse_r1" * b.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sD_Collapse_r1",
 CAST(CAST(ROUND(CAST(a."sD_Collapse_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDr_Collapse_r1",
---CAST(CAST(ROUND(CAST(a."sD_Complete_stdv_r1" * g.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sDsd_Collapse_r1",
 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.2 Building Damage
 -- 3.2.1 Recovery - b0
---CAST(CAST(ROUND(CAST(a."sC_Repair_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Repair_b0",
---CAST(CAST(ROUND(CAST(a."sC_Construxn_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Recovery_b0",
---CAST(CAST(ROUND(CAST(a."sC_Downtime_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Downtime_b0",
 CAST(CAST(ROUND(CAST(a."sC_Repair_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Repair_b0",
 CAST(CAST(ROUND(CAST(a."sC_Recovery_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Recovery_b0",
-CAST(CAST(ROUND(CAST(a."sC_Downtime_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Downtime_b0",
+CAST(CAST(ROUND(CAST(a."sC_Interruption_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Interruption_b0",
 CAST(CAST(ROUND(CAST((a."sC_DebrisBW_b0" + a."sC_DebrisC_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisTotal_b0",
 CAST(CAST(ROUND(CAST(a."sC_DebrisBW_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisBW_b0",
 CAST(CAST(ROUND(CAST(a."sC_DebrisC_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisCS_b0",
 
 -- 3.2.1 Recovery - r1
---CAST(CAST(ROUND(CAST(a."sC_Repair_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Repair_r1",
---CAST(CAST(ROUND(CAST(a."sC_Construxn_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Recovery_r1",
---CAST(CAST(ROUND(CAST(a."sC_Downtime_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Downtime_r1",
 CAST(CAST(ROUND(CAST(a."sC_Repair_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Repair_r1",
 CAST(CAST(ROUND(CAST(a."sC_Recovery_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Recovery_r1",
-CAST(CAST(ROUND(CAST(a."sC_Downtime_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Downtime_r1",
+CAST(CAST(ROUND(CAST(a."sC_Interruption_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Interruption_r1",
 CAST(CAST(ROUND(CAST((a."sC_DebrisBW_r1" + a."sC_DebrisC_r1") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisTotal_r1",
 CAST(CAST(ROUND(CAST(a."sC_DebrisBW_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisBW_r1",
 CAST(CAST(ROUND(CAST(a."sC_DebrisC_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisCS_r1",
+
 -- 3.2.3 Building Characteristics
 b.bldgtype AS "E_BldgTypeG",
 b.occtype AS "E_OccType",
@@ -311,8 +276,6 @@ b.occtype AS "E_OccType",
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.3 Affected People
 -- 3.3.1 Casualties - b0
---CAST(CAST(ROUND(CAST(a."sL_Fatalities_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Fatality_b0",
---CAST(CAST(ROUND(CAST(a."sL_Fatalities_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Fatality_b0",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL1_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL1_b0",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL2_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL2_b0",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL3_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL3_b0",
@@ -327,8 +290,6 @@ CAST(CAST(ROUND(CAST(a."sC_CasTransitL3_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC)
 CAST(CAST(ROUND(CAST(a."sC_CasTransitL4_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasTransitL4_b0",
 
 -- 3.3.1 Casualties - r1
---CAST(CAST(ROUND(CAST(a."sL_Fatalities_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Fatality_r1",
---CAST(CAST(ROUND(CAST(a."sL_Fatalities_stdv_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Fatality_r1",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL1_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL1_r1",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL2_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL2_r1",
 CAST(CAST(ROUND(CAST(a."sC_CasDayL3_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_CasDayL3_r1",
@@ -347,33 +308,36 @@ CAST(CAST(ROUND(CAST(a."sC_CasTransitL4_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC)
 -- 3.3 Affected People
 -- 3.3.2 Social Disruption - b0
 -- sC_Shelter -- calculated at sauid level only
-CAST(CAST(ROUND(CAST(a."sC_DisplRes_3_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisplRes3_b0",
-CAST(CAST(ROUND(CAST(a."sC_DisplRes_30_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisplRes30_b0",
-CAST(CAST(ROUND(CAST(a."sC_DisplRes_90_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisplRes90_b0",
-CAST(CAST(ROUND(CAST(a."sC_DisplRes_180_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisplRes180_b0",
-CAST(CAST(ROUND(CAST(a."sC_DisplRes_360_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisplRes360_b0",
+CAST(CAST(ROUND(CAST(a."sC_DisplRes_3_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Res3_b0",
+CAST(CAST(ROUND(CAST(a."sC_DisplRes_30_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Res30_b0",
+CAST(CAST(ROUND(CAST(a."sC_DisplRes_90_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Res90_b0",
+CAST(CAST(ROUND(CAST(COALESCE(a."sC_DisplRes_90_b0"/NULLIF(b.night,0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCr_Res90_b0",
+CAST(CAST(ROUND(CAST(a."sC_DisplRes_180_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Res180_b0",
+CAST(CAST(ROUND(CAST(a."sC_DisplRes_360_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Res360_b0",
 
-CAST(CAST(ROUND(CAST(h."sC_DisplHshld_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisplHshld_b0",
+CAST(CAST(ROUND(CAST(h."sC_DisplHshld_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Hshld_b0",
 
-
-CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_30_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisrupEmpl_30_b0",
-CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_90_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisrupEmpl_90_b0",
-CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_180_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisrupEmpl_180_b0",
-CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_360_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisrupEmpl_360_b0",
+CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_30_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Empl_30_b0",
+CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_90_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Empl_90_b0",
+CAST(CAST(ROUND(CAST(COALESCE(a."sC_DisrupEmpl_90_b0"/NULLIF(b.day,0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCr_Empl_90_b0",
+CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_180_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Empl_180_b0",
+CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_360_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Empl_360_b0",
 
 -- 3.3.2 Social Disruption - r1
 -- sC_Shelter -- calculated at sauid level only
-CAST(CAST(ROUND(CAST(a."sC_DisplRes_3_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisplRes3_r1",
-CAST(CAST(ROUND(CAST(a."sC_DisplRes_30_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisplRes30_r1",
-CAST(CAST(ROUND(CAST(a."sC_DisplRes_90_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisplRes90_r1",
-CAST(CAST(ROUND(CAST(a."sC_DisplRes_360_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisplRes360_r1",
+CAST(CAST(ROUND(CAST(a."sC_DisplRes_3_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Res3_r1",
+CAST(CAST(ROUND(CAST(a."sC_DisplRes_30_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Res30_r1",
+CAST(CAST(ROUND(CAST(a."sC_DisplRes_90_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Res90_r1",
+CAST(CAST(ROUND(CAST(COALESCE(a."sC_DisplRes_90_r1"/NULLIF(b.night,0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCr_Res90_r1",
+CAST(CAST(ROUND(CAST(a."sC_DisplRes_360_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Res360_r1",
 
-CAST(CAST(ROUND(CAST(h."sC_DisplHshld_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisplHshld_r1",
+CAST(CAST(ROUND(CAST(h."sC_DisplHshld_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Hshld_r1",
 
-CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_30_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisrupEmpl_30_r1",
-CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_90_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisrupEmpl_90_r1",
-CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_180_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisrupEmpl_180_r1",
-CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_360_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DisrupEmpl_360_r1",
+CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_30_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Empl_30_r1",
+CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_90_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Empl_90_r1",
+CAST(CAST(ROUND(CAST(COALESCE(a."sC_DisrupEmpl_90_r1"/NULLIF(b.day,0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sCr_Empl_90_r1",
+CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_180_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Empl_180_r1",
+CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_360_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Empl_360_r1",
 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
@@ -381,36 +345,24 @@ CAST(CAST(ROUND(CAST(a."sC_DisrupEmpl_360_r1" AS NUMERIC),6) AS FLOAT) AS NUMERI
 -- 3.4.1 Economic Loss - b0
 CAST(CAST(ROUND(CAST(a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Asset_b0",
 CAST(CAST(ROUND(CAST(a."sL_Str_b0" + a."sL_NStr_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Bldg_b0",
-CAST(CAST(ROUND(CAST(COALESCE(((a."sL_Str_b0" + a."sL_NStr_b0")/(b.number))/NULLIF(((b.structural + b.nonstructural)/(b.number)),0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr_Bldg_b0",
-
-CAST(CAST(ROUND(CAST((((a."sL_Str_b0" + a."sL_NStr_b0") - (a."sL_Str_r1" + a."sL_NStr_r1"))/(b.number))/((b.retrofitting)/(b.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr1_BCR_b0",
---CAST(CAST(ROUND(CAST((((a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0") - (a."sL_Str_r1" + a."sL_NStr_r1" + a."sL_Cont_r1"))/(b.retrofitting)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr1_BCR_b0",
-
-CAST(CAST(ROUND(CAST((((a."sL_Str_b0" + a."sL_NStr_b0") - (a."sL_Str_r1" + a."sL_NStr_r1"))/(b.number)) * ((EXP(-0.025*50)/0.025))/((b.retrofitting)/(b.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "SLr1_RoI",
---CAST(CAST(ROUND(CAST((((a."sL_Str_b0" + a."sL_NStr_b0" + a."sL_Cont_b0") - (a."sL_Str_r1" + a."sL_NStr_r1" + a."sL_Cont_r1")) * ((EXP(-0.03*100)/0.03)/(b.retrofitting))) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "SLr1_RoI",
+CAST(CAST(ROUND(CAST(COALESCE(((a."sL_Str_b0" + a."sL_NStr_b0"))/NULLIF(((b.structural + b.nonstructural)),0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr_Bldg_b0",
 
 CAST(CAST(ROUND(CAST(a."sL_Str_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Str_b0",
---CAST(CAST(ROUND(CAST(a."sL_Str_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Str_b0",
 
 CAST(CAST(ROUND(CAST(a."sL_NStr_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_NStr_b0",
---CAST(CAST(ROUND(CAST(a."sL_NStr_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_NStr_b0",
 
 CAST(CAST(ROUND(CAST(a."sL_Cont_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Cont_b0",
---CAST(CAST(ROUND(CAST(a."sL_Cont_stdv_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Cont_b0",
 
 -- 3.4.1 Economic Loss - r1
 CAST(CAST(ROUND(CAST(a."sL_Str_r1" + a."sL_NStr_r1" + a."sL_Cont_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Asset_r1",
 CAST(CAST(ROUND(CAST(a."sL_Str_r1" + a."sL_NStr_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Bldg_r1",
-CAST(CAST(ROUND(CAST(COALESCE(((a."sL_Str_r1" + a."sL_NStr_r1")/(b.number))/NULLIF(((b.structural + b.nonstructural)/(b.number)),0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr_Bldg_r1",
+CAST(CAST(ROUND(CAST(COALESCE(((a."sL_Str_r1" + a."sL_NStr_r1"))/NULLIF(((b.structural + b.nonstructural)),0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr_Bldg_r1",
 
 CAST(CAST(ROUND(CAST(a."sL_Str_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Str_r1",
---CAST(CAST(ROUND(CAST(a."sL_Str_stdv_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Str_r1",
 
 CAST(CAST(ROUND(CAST(a."sL_NStr_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_NStr_r1",
---CAST(CAST(ROUND(CAST(a."sL_NStr_stdv_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_NStr_r1",
 
 CAST(CAST(ROUND(CAST(a."sL_Cont_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sL_Cont_r1",
---CAST(CAST(ROUND(CAST(a."sL_Cont_stdv_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLsd_Cont_r1",
 
 b.sauid AS "Sauid",
 c."PRUID" AS "pruid",
@@ -434,7 +386,6 @@ LEFT JOIN vs30.vs30_can_site_model_xref d ON a."AssetID" = d.id
 LEFT JOIN boundaries."Geometry_SAUID" c on b.sauid = c."SAUIDt"
 LEFT JOIN gmf.shakemap_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
---LEFT JOIN lut.collapse_probability g ON b.bldgtype = g.eqbldgtype
 LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_displhshld h ON a."AssetID" = h."AssetID"
 WHERE e."gmv_SA(0.3)" >=0.02;
 
