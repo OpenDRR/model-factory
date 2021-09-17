@@ -138,7 +138,7 @@ LEFT JOIN boundaries."SAUID_HexGrid_100km_intersect" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_100km" c ON b.gridid_100 = c.gridid_100
 GROUP BY b.gridid_100,c.geom;
 
-/*
+
 -- global fabric
 DROP VIEW IF EXISTS results_nhsl_hazard_threat.nhsl_hazard_threat_prioritization_hexgrid_global_fabric;
 CREATE VIEW results_nhsl_hazard_threat.nhsl_hazard_threat_prioritization_hexgrid_global_fabric AS 
@@ -162,7 +162,6 @@ SUM(total_rel_score * b.area_ratio) AS "total_rel_score",
 c.geom
 
 FROM results_nhsl_hazard_threat.nhsl_hazard_threat_all_indicators_s_tbl a
-LEFT JOIN boundaries.sauid_hexgrid_global_fabric_intersect b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_global_fabric" c ON b.gridid = c.gridid
+LEFT JOIN boundaries."SAUID_HexGrid_GlobalFabric_intersect" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_GlobalFabric" c ON b.gridid = c.gridid
 GROUP BY b.gridid,c.geom;
-*/
