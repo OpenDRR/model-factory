@@ -123,3 +123,8 @@ CREATE INDEX IF NOT EXISTS sauid_hexgrid_50km_sauid_idx ON boundaries."SAUID_Hex
 ALTER TABLE boundaries."SAUID_HexGrid_100km_intersect" DROP CONSTRAINT IF EXISTS "SAUID_HexGrid_100km_intersect_pkey";
 ALTER TABLE boundaries."SAUID_HexGrid_100km_intersect" ADD PRIMARY KEY ("gridid_100","sauid");
 CREATE INDEX IF NOT EXISTS sauid_hexgrid_100km_sauid_idx ON boundaries."SAUID_HexGrid_100km_intersect"("gridid_100","sauid");
+
+-- change new PK / add indexes SAUID_100km_intersect
+ALTER TABLE boundaries."SAUID_HexGrid_GlobalFabric_intersect" DROP CONSTRAINT IF EXISTS "SAUID_HexGrid_GlobalFabric_intersect_pkey";
+ALTER TABLE boundaries."SAUID_HexGrid_GlobalFabric_intersect" ADD PRIMARY KEY ("gridid","sauid");
+CREATE INDEX IF NOT EXISTS sauid_hexgrid_100km_sauid_idx ON boundaries."SAUID_HexGrid_GlobalFabric_intersect" ("gridid","sauid");
