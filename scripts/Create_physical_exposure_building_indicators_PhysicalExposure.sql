@@ -15,7 +15,7 @@ CAST(CAST(ROUND(CAST(a.sauidlat AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "BldgLat
 a.sauid AS "Sauid",
 CAST(CAST(ROUND(CAST(a.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgNum",
 a.taxonomy AS "E_BldgTaxon",
-CAST(CAST(ROUND(CAST(a.bldg_ft2 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgArea",
+CAST(CAST(ROUND(CAST(a.bldg_ft2 * a.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgArea",
 --CAST(CAST(ROUND(CAST(CASE WHEN a.genocc IN ('Residential-LD','Residential-MD','Residential-HD') THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaRes",
 --CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Commercial' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaComm",
 --CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Industrial' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaInd",
@@ -32,6 +32,25 @@ a.bldepoch AS "E_BldgEpoch",
 a.ssc_zone AS "SSC_Zone",
 a.ss_region AS "E_SSRegion",
 a.eqdeslev AS "E_BldgDesLev",
+
+-- single family household, res units for RES1, RES2 = 1
+CAST(CAST(ROUND(CAST((CASE 
+					  WHEN a.occclass1 = 'RES1' THEN a.number * 1
+					  WHEN a.occclass1 = 'RES2' THEN a.number * 1 
+					  ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_SFHshld",
+
+-- multi family household, res units for RES3A = 2, RES3B = 4, RES3C = 9, RES3D = 17, RES3E = 32, RES3F = 110, RES4 = 68, RES5 = 50, RES6 = 65
+CAST(CAST(ROUND(CAST((CASE 
+					  WHEN a.occclass1 = 'RES3A' THEN a.number * 2
+					  WHEN a.occclass1 = 'RES3B' THEN a.number * 4
+					  WHEN a.occclass1 = 'RES3C' THEN a.number * 9
+					  WHEN a.occclass1 = 'RES3D' THEN a.number * 17
+					  WHEN a.occclass1 = 'RES3E' THEN a.number * 32
+					  WHEN a.occclass1 = 'RES3F' THEN a.number * 110
+					  WHEN a.occclass1 = 'RES4' THEN a.number * 68
+					  WHEN a.occclass1 = 'RES5' THEN a.number * 50
+					  WHEN a.occclass1 = 'RES6' THEN a.number * 65
+					  ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_MFHshld",
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -62,7 +81,6 @@ b."CFSAUID" AS "fsauid",
 b."DAUIDt" AS "dauid",
 b."SACCODE" AS "saccode",
 b."SACTYPE" AS "sactype",
-
 a.geom AS "geom_point"
 
 FROM exposure.canada_exposure a

@@ -146,11 +146,16 @@ def GetDataframeForScenario(url, repo_list, retrofitPrefix, eqscenario, columnCo
     #dfLosses['sl_BldgT'] = dfLosses['sl_Str'] + dfLosses['sl_NStr'] + dfLosses['sl_Cont']  
     dfLosses = dfLosses.add_suffix("_{}".format(retrofitPrefix))
     dfLosses.rename(columns={"AssetID_{}".format(retrofitPrefix):"AssetID"}, inplace=True)
+
+    eq_url = f'https://raw.githubusercontent.com/OpenDRR/earthquake-scenarios/master/initializations/s_Hazard_{eqscenario}.ini'
+    response = requests.get(eq_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))}).text
+    segment = response[response.index('gsim_logic_tree_file'):]
+    gmpe_model_value = segment[segment.index('LogicTree/') + 10:segment.index('.xml')]
     
     # Merge dataframes
     dfMerge = reduce(lambda left,right: pd.merge(left,right,on='AssetID'), [dfDamage, dfConsequence, dfLosses])
     dfMerge.insert(loc=0, column='Rupture_Abbr', value=eqscenario)
-    dfMerge.insert(loc=1, column='gmpe_Model', value='NBCC2020_TEST_PLACEHOLDER')
+    dfMerge.insert(loc=1, column='gmpe_Model', value=gmpe_model_value)
     return dfMerge
     
    
