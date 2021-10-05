@@ -496,12 +496,12 @@ def main ():
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
-    #Copy ed dmg mean r2 table
+    #Copy ed dmg mean r1 table
     systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c '\copy psra_{prov}.psra_{prov}_ed_dmg_mean_r2(asset_id,
+                -c '\copy psra_{prov}.psra_{prov}_ed_dmg_mean_r1(asset_id,
                                                                     "BldEpoch",
                                                                     "BldgType",
                                                                     "EqDesLev",
@@ -532,7 +532,7 @@ def main ():
                                                                     structural_moderate,
                                                                     structural_extensive,
                                                                     structural_complete)
-                        FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-mean_r2.csv
+                        FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-mean_r1.csv
                             WITH 
                             CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
@@ -544,12 +544,11 @@ def main ():
                 -d ${{DB_NAME}}
                 -a 
                 -c '\copy psra_{prov}.psra_{prov}_agg_curves_stats_b0(return_period,
-                                                                        stat,
+                                                                        loss_value,
                                                                         loss_type,
                                                                         fsauid,
                                                                         "GenOcc",
                                                                         "GenType",
-                                                                        loss_value,
                                                                         loss_ratio,
                                                                         annual_frequency_of_exceedence)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-stats_b0.csv
@@ -558,21 +557,20 @@ def main ():
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
-    #Copy agg curves stats r2 table
+    #Copy agg curves stats r1 table
     systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c '\copy psra_{prov}.psra_{prov}_agg_curves_stats_r2(return_period,
-                                                                        stat,
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves_stats_r1(return_period,
+                                                                        loss_value,
                                                                         loss_type,
                                                                         fsauid,
                                                                         "GenOcc",
                                                                         "GenType",
-                                                                        loss_value,
                                                                         loss_ratio,
                                                                         annual_frequency_of_exceedence)
-                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-stats_r2.csv
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-stats_r1.csv
                             WITH 
                             CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
@@ -611,6 +609,7 @@ def main ():
                                                                         lat,
                                                                         contents,
                                                                         nonstructural,
+                                                                        occupants,
                                                                         structural)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_avg_losses-stats_b0.csv
                             WITH 
@@ -618,12 +617,12 @@ def main ():
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
-    #Copy avg losses r2 table
+    #Copy avg losses r1 table
     systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c '\copy psra_{prov}.psra_{prov}_avg_losses_stats_r2(asset_id,
+                -c '\copy psra_{prov}.psra_{prov}_avg_losses_stats_r1(asset_id,
                                                                         "BldEpoch",
                                                                         "BldgType",
                                                                         "EqDesLev",
@@ -651,8 +650,9 @@ def main ():
                                                                         lat,
                                                                         contents,
                                                                         nonstructural,
+                                                                        occupants,
                                                                         structural)
-                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_avg_losses-stats_r2.csv
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_avg_losses-stats_r1.csv
                             WITH 
                             CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
@@ -666,7 +666,6 @@ def main ():
                 -c '\copy psra_{prov}.psra_{prov}_src_loss_b0(source,
                                                                 loss_type,
                                                                 loss_value,
-                                                                trt,
                                                                 region)
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_src_loss_table_b0.csv
                             WITH 
@@ -674,17 +673,16 @@ def main ():
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
     
-    #Copy source loss r2 table
+    #Copy source loss r1 table
     systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a 
-                -c '\copy psra_{prov}.psra_{prov}_src_loss_r2(source,
+                -c '\copy psra_{prov}.psra_{prov}_src_loss_r1(source,
                                                                 loss_type,
                                                                 loss_value,
-                                                                trt,
                                                                 region)
-                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_src_loss_table_r2.csv
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_src_loss_table_r1.csv
                             WITH 
                             CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
