@@ -2,9 +2,170 @@ CREATE SCHEMA IF NOT EXISTS results_psra_{prov};
 
 
 
+-- calculate new EQRiskIndex indicator for PSRA
+DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqriskindex_calc CASCADE;
+CREATE TABLE results_psra_{prov}.psra_{prov}_eqriskindex_calc AS
+(
+SELECT
+a.asset_id,
+b.sauid,
+a.structural_b0,
+a.nonstructural_b0,
+a.contents_b0,
+a.occupants_b0 AS "lifeloss_b0",
+a.contents_b0 + a.nonstructural_b0 + a.structural_b0 AS "asset_loss_b0",
+a.structural_r1,
+a.nonstructural_r1,
+a.contents_r1,
+a.occupants_r1 AS "lifeloss_r1",
+a.contents_r1 + a.nonstructural_r1 + a.structural_r1 AS "asset_loss_r1",
+b.structural,
+b.nonstructural,
+b.contents,
+b.structural + b.nonstructural + b.contents AS "asset_value",
+b.night,
+COALESCE((a.contents_b0 + a.nonstructural_b0 + a.structural_b0)/NULLIF((b.structural + b.nonstructural + b.contents),0),0) AS "bldglossratio_b0",
+COALESCE((a.contents_r1 + a.nonstructural_b0 + a.structural_r1)/NULLIF((b.structural + b.nonstructural + b.contents),0),0) AS "bldglossratio_r1",
+COALESCE(a.occupants_b0/NULLIF(b.night,0),0) AS "lifelossratio_b0",
+COALESCE(a.occupants_r1/NULLIF(b.night,0),0) AS "lifelossratio_r1"
+
+FROM psra_{prov}.psra_{prov}_avg_losses_stats a
+--FROM psra_{prov}.psra_{prov}_avg_losses_stats a
+LEFT JOIN exposure.canada_exposure b ON a.asset_id = b.id
+);
+
+
+
+DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqriskindex CASCADE;
+CREATE TABLE results_psra_{prov}.psra_{prov}_eqriskindex AS
+(
+SELECT
+a.sauid,
+SUM(a.asset_loss_b0) AS "asset_loss_b0",
+SUM(a.asset_loss_r1) AS "asset_loss_r1",
+SUM(a.lifeloss_b0) AS "lifeloss_b0",
+SUM(a.lifeloss_r1) AS "lifeloss_r1",
+SUM(a.lifeloss_b0 * 8000000) AS "lifelosscost_b0",
+SUM(a.lifeloss_r1 * 8000000) AS "lifelosscost_r1",
+AVG(a.bldglossratio_b0) AS "bldglossratio_b0",
+AVG(a.bldglossratio_r1) AS "bldglossratio_r1",
+AVG(a.lifelossratio_b0) AS "lifelossratio_b0",
+AVG(a.lifelossratio_r1) AS "lifelossratio_r1",
+b."SVlt_Score" + 1 AS "SVlt_Score_translated",
+
+--EQ Risk Index calculations
+(SUM(a.asset_loss_b0) + SUM(a.lifeloss_b0 * 8000000)) * (b."SVlt_Score" + 1) AS "eqri_abs_score_b0",
+'null' AS "eqri_abs_rating_b0",
+(AVG(a.bldglossratio_b0) + AVG(a.lifelossratio_b0)) * (b."SVlt_Score" + 1) AS "eqri_rel_score_b0",
+'null' AS "eqri_rel_rating_b0",
+(SUM(a.asset_loss_r1) + SUM(a.lifeloss_r1 * 8000000)) * (b."SVlt_Score" + 1) AS "eqri_abs_score_r1",
+'null' AS "eqri_abs_rating_r1",
+(AVG(a.bldglossratio_r1) + AVG(a.lifelossratio_r1)) * (b."SVlt_Score" + 1) AS "eqri_rel_score_r1",
+'null' AS "eqri_rel_rating_r1"
+
+FROM results_psra_{prov}.psra_{prov}_eqriskindex_calc a
+--FROM results_psra_{prov}.psra_{prov}_eqriskindex_calcs a
+LEFT JOIN results_nhsl_social_fabric.nhsl_social_fabric_indicators_s b ON a.sauid = b."Sauid"
+GROUP BY a.sauid,b."SVlt_Score"
+);
+
+
+
+--create threshold lookup table for rating
+--DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqri_thresholds CASCADE;
+--CREATE TABLE results_psra_{prov}.psra__{prov}_eqri_thresholds AS
+DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqri_thresholds CASCADE;
+CREATE TABLE results_psra_{prov}.psra_{prov}_eqri_thresholds
+(
+percentile NUMERIC,
+abs_score_threshold_b0 FLOAT DEFAULT 0,
+abs_score_threshold_r1 FLOAT DEFAULT 0,
+rel_score_threshold_b0 FLOAT DEFAULT 0,
+rel_score_threshold_r1 FLOAT DEFAULT 0,
+rating VARCHAR
+);
+
+
+
+--insert default values
+--INSERT INTO results_psra_{prov}.psra_{prov}_eqri_thresholds (percentile,rating) VALUES
+INSERT INTO results_psra_{prov}.psra_{prov}_eqri_thresholds (percentile,rating) VALUES
+(0,'Very Low'),
+(0.35,'Relatively Low'),
+(0.60,'Relatively Moderate'),
+(0.80,'Relatively High'),
+(0.95,'Very High');
+
+--update values with calculated percentiles
+--0.35 percentile
+UPDATE results_psra_{prov}.psra_{prov}_eqri_thresholds 
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
+	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
+	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex) WHERE percentile = 0.35;
+
+-- 0.60 percentile
+UPDATE results_psra_{prov}.psra_{prov}_eqri_thresholds 
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
+	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
+	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex) WHERE percentile = 0.60;
+	
+-- 0.80 percentile
+UPDATE results_psra_{prov}.psra_{prov}_eqri_thresholds 
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
+	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
+	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex) WHERE percentile = 0.80;
+	
+-- 0.95 percentile
+UPDATE results_psra_{prov}.psra_{prov}_eqri_thresholds 
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
+	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
+	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex) WHERE percentile = 0.95;
+
+
+-- update rating with threshold lookup table values
+UPDATE results_psra_{prov}.psra_{prov}_eqriskindex
+SET eqri_abs_rating_b0 =
+	CASE 
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.60) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.80) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.6)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.8)
+		WHEN eqri_abs_score_b0 > (SELECT abs_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95)
+		ELSE 'Error' END,
+	eqri_abs_rating_r1 =
+	CASE 
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.60) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.80) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.6)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.8)
+		WHEN eqri_abs_score_r1 > (SELECT abs_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95)
+		ELSE 'Error' END,
+	eqri_rel_rating_b0 =
+	CASE 
+		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0)
+		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.60) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35)
+		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.80) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.6)
+		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.8)
+		WHEN eqri_rel_score_b0 > (SELECT rel_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95)
+		ELSE 'Error' END,
+	eqri_rel_rating_r1 =
+	CASE 
+		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0)
+		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.60) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35)
+		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.80) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.6)
+		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.8)
+		WHEN eqri_rel_score_r1 > (SELECT rel_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95)
+		ELSE 'Error' END;
+
+
+
 -- create psra indicators
-DROP VIEW IF EXISTS results_psra_{prov}.psra_{prov}_all_indicators_s CASCADE;
-CREATE VIEW results_psra_{prov}.psra_{prov}_all_indicators_s AS 
+DROP VIEW IF EXISTS results_psra_{prov}.psra_{prov}_indicators_s CASCADE;
+CREATE VIEW results_psra_{prov}.psra_{prov}_indicators_s AS 
 
 
 -- 2.0 Seismic Risk (PSRA)
@@ -54,45 +215,6 @@ CAST(CAST(ROUND(CAST(h.mmi8 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "pH_MMI8",
 -- MMI8n
 
 -- 2.2 Building Damage
--- 2.2.1 Classical Damage - b0
-CAST(CAST(ROUND(CAST(SUM(c.structural_no_damage_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_None_b0",
-CAST(CAST(ROUND(CAST(AVG(c.structural_no_damage_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_None_b0",
-
-CAST(CAST(ROUND(CAST(SUM(c.structural_slight_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Slight_b0",
-CAST(CAST(ROUND(CAST(AVG(c.structural_slight_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Slight_b0",
-
-CAST(CAST(ROUND(CAST(SUM(c.structural_moderate_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Moderate_b0",
-CAST(CAST(ROUND(CAST(AVG(c.structural_moderate_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Moderate_b0",
-
-CAST(CAST(ROUND(CAST(SUM(c.structural_extensive_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Extensive_b0",
-CAST(CAST(ROUND(CAST(AVG(c.structural_extensive_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Extensive_b0",
-
-CAST(CAST(ROUND(CAST(SUM(c.structural_complete_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Complete_b0",
-CAST(CAST(ROUND(CAST(AVG(c.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Complete_b0",
-
-CAST(CAST(ROUND(CAST(SUM(c.structural_complete_b0 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Collapse_b0",
-CAST(CAST(ROUND(CAST(AVG(f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Collapse_b0",
-CAST(CAST(ROUND(CAST(AVG((c.structural_complete_b0/a.number) * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtp_Collapse_b0",
-
--- 2.2.1 Classical Damage - r2
-CAST(CAST(ROUND(CAST(SUM(c.structural_no_damage_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_None_r2",
-CAST(CAST(ROUND(CAST(AVG(c.structural_no_damage_r2/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_None_r2",
-
-CAST(CAST(ROUND(CAST(SUM(c.structural_slight_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Slight_r2",
-CAST(CAST(ROUND(CAST(AVG(c.structural_slight_r2/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Slight_r2",
-
-CAST(CAST(ROUND(CAST(SUM(c.structural_moderate_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Moderate_r2",
-CAST(CAST(ROUND(CAST(AVG(c.structural_moderate_r2/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Moderate_r2",
-
-CAST(CAST(ROUND(CAST(SUM(c.structural_extensive_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Extensive_r2",
-CAST(CAST(ROUND(CAST(AVG(c.structural_extensive_r2/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Extensive_r2",
-
-CAST(CAST(ROUND(CAST(SUM(c.structural_complete_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Complete_r2",
-CAST(CAST(ROUND(CAST(AVG(c.structural_complete_r2/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Complete_r2",
-
-CAST(CAST(ROUND(CAST(SUM(c.structural_complete_r2 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDt_Collapse_r2",
-CAST(CAST(ROUND(CAST(AVG(f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtr_Collapse_r2",
-CAST(CAST(ROUND(CAST(AVG((c.structural_complete_r2/a.number) * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "cDtp_Collapse_r2",
 
 -- 2.2.2 Event-Based Damage - b0
 CAST(CAST(ROUND(CAST(SUM(g.structural_no_damage_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_None_b0",
@@ -119,30 +241,19 @@ CAST(CAST(ROUND(CAST(SUM(g.structural_complete_b0 * f.collapse_pc) AS NUMERIC),6
 -- eDtsd_Collapse_b0
 CAST(CAST(ROUND(CAST(AVG((g.structural_complete_b0/a.number) * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Collapse_b0",
 
--- 2.2.2 Event-Based Damage - r2
-CAST(CAST(ROUND(CAST(SUM(g.structural_no_damage_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_None_r2",
--- eDtsd_None_r2
-CAST(CAST(ROUND(CAST(AVG(g.structural_no_damage_r2/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_None_r2",
-
-CAST(CAST(ROUND(CAST(SUM(g.structural_slight_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Slight_r2",
--- eDtsd_Slight_r2
-CAST(CAST(ROUND(CAST(AVG(g.structural_slight_r2/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Slight_r2",
-
-CAST(CAST(ROUND(CAST(SUM(g.structural_moderate_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Moderate_r2",
--- eDtsd_Moderate_r2
-CAST(CAST(ROUND(CAST(AVG(g.structural_moderate_r2/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Moderate_r2",
-
-CAST(CAST(ROUND(CAST(SUM(g.structural_extensive_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Extensive_r2",
--- eDtsd_Extensive_r2
-CAST(CAST(ROUND(CAST(AVG(g.structural_extensive_r2/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Extensive_r2",
-
-CAST(CAST(ROUND(CAST(SUM(g.structural_complete_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Complete_r2",
--- eDtsd_Complete_r2
-CAST(CAST(ROUND(CAST(AVG(g.structural_complete_r2/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Complete_r2",
-
-CAST(CAST(ROUND(CAST(SUM(g.structural_complete_r2 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Collapse_r2",
--- eDtsd_Collapse_r2
-CAST(CAST(ROUND(CAST(AVG((g.structural_complete_r2/a.number) * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Collapse_r2",
+-- 2.2.2 Event-Based Damage - r1
+CAST(CAST(ROUND(CAST(SUM(g.structural_no_damage_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_None_r1",
+CAST(CAST(ROUND(CAST(AVG(g.structural_no_damage_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_None_r1",
+CAST(CAST(ROUND(CAST(SUM(g.structural_slight_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Slight_r1",
+CAST(CAST(ROUND(CAST(AVG(g.structural_slight_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Slight_r1",
+CAST(CAST(ROUND(CAST(SUM(g.structural_moderate_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Moderate_r1",
+CAST(CAST(ROUND(CAST(AVG(g.structural_moderate_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Moderate_r1",
+CAST(CAST(ROUND(CAST(SUM(g.structural_extensive_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Extensive_r1",
+CAST(CAST(ROUND(CAST(AVG(g.structural_extensive_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Extensive_r1",
+CAST(CAST(ROUND(CAST(SUM(g.structural_complete_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Complete_r1",
+CAST(CAST(ROUND(CAST(AVG(g.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Complete_r1",
+CAST(CAST(ROUND(CAST(SUM(g.structural_complete_r1 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Collapse_r1",
+CAST(CAST(ROUND(CAST(AVG((g.structural_complete_r1/a.number) * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Collapse_r1",
 
 -- 2.4.1 Average Annual Loss - b0
 CAST(CAST(ROUND(CAST(SUM(i.structural_b0 + i.nonstructural_b0 + i.contents_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Asset_b0",
@@ -154,15 +265,26 @@ CAST(CAST(ROUND(CAST(SUM(i.nonstructural_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC
 CAST(CAST(ROUND(CAST(SUM(i.contents_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Cont_b0",
 
 
--- 2.4.1 Average Annual Loss - r2
-CAST(CAST(ROUND(CAST(SUM(i.structural_r2 + i.nonstructural_r2 + i.contents_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Asset_r2",
-CAST(CAST(ROUND(CAST(AVG((i.structural_r2 + i.nonstructural_r2 + i.contents_r2)/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALm_Asset_r2",
-CAST(CAST(ROUND(CAST(SUM(i.structural_r2 + i.nonstructural_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Bldg_r2",
-CAST(CAST(ROUND(CAST(AVG((i.structural_r2 + i.nonstructural_r2)/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALm_Bldg_r2",
-CAST(CAST(ROUND(CAST(SUM(i.structural_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Str_r2",
-CAST(CAST(ROUND(CAST(SUM(i.nonstructural_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_NStr_r2",
-CAST(CAST(ROUND(CAST(SUM(i.contents_r2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Cont_r2",
+-- 2.4.1 Average Annual Loss - r1
+CAST(CAST(ROUND(CAST(SUM(i.structural_r1 + i.nonstructural_r1 + i.contents_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Asset_r1",
+CAST(CAST(ROUND(CAST(AVG((i.structural_r1 + i.nonstructural_r1 + i.contents_r1)/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALm_Asset_r1",
+CAST(CAST(ROUND(CAST(SUM(i.structural_r1 + i.nonstructural_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Bldg_r1",
+CAST(CAST(ROUND(CAST(AVG((i.structural_r1 + i.nonstructural_r1)/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALm_Bldg_r1",
+CAST(CAST(ROUND(CAST(SUM(i.structural_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Str_r1",
+CAST(CAST(ROUND(CAST(SUM(i.nonstructural_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_NStr_r1",
+CAST(CAST(ROUND(CAST(SUM(i.contents_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Cont_r1",
 
+-- eq risk index - b0
+CAST(CAST(ROUND(CAST(j.eqri_abs_score_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_abs_score_b0",
+j.eqri_abs_rating_b0,
+CAST(CAST(ROUND(CAST(j.eqri_rel_score_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_rel_score_b0",
+j.eqri_rel_rating_b0,
+
+-- eq risk index - r1
+CAST(CAST(ROUND(CAST(j.eqri_abs_score_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_abs_score_r1",
+j.eqri_abs_rating_r1,
+CAST(CAST(ROUND(CAST(j.eqri_rel_score_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_rel_score_r1",
+j.eqri_rel_rating_r1,
 
 z."PRUID" AS "pruid",
 z."PRNAME" AS "prname",
@@ -181,17 +303,19 @@ a.landuse,
 z.geom AS "geom_poly"
 
 FROM exposure.canada_exposure a
-RIGHT JOIN psra_{prov}.psra_{prov}_cd_dmg_mean c ON a.id = c.asset_id
 LEFT JOIN psra_{prov}.psra_{prov}_hmaps_xref d ON a.id = d.id
 LEFT JOIN vs30.vs30_can_site_model_xref e ON a.id = e.id
 LEFT JOIN lut.collapse_probability f ON a.bldgtype = f.eqbldgtype
 RIGHT JOIN psra_{prov}.psra_{prov}_ed_dmg_mean g ON a.id = g.asset_id
 LEFT JOIN mh.mh_intensity_canada h ON a.sauid = h.sauidt
 RIGHT JOIN psra_{prov}.psra_{prov}_avg_losses_stats i ON a.id = i.asset_id
+RIGHT JOIN results_psra_{prov}.psra_{prov}_eqriskindex j ON a.sauid = j.sauid
+
 LEFT JOIN boundaries."Geometry_SAUID" z ON a.sauid = z."SAUIDt"
 GROUP BY a.sauid,a.landuse,d."PGA_0.02",d."SA(0.1)_0.02",d."SA(0.2)_0.02",d."SA(0.3)_0.02",d."SA(0.5)_0.02",d."SA(0.6)_0.02",d."SA(1.0)_0.02",d."SA(2.0)_0.02",
 d."PGA_0.1",d."SA(0.1)_0.1",d."SA(0.2)_0.1",d."SA(0.3)_0.1",d."SA(0.5)_0.1",d."SA(0.6)_0.1",d."SA(1.0)_0.1",d."SA(2.0)_0.1",d."SA(5.0)_0.1",d."SA(10.0)_0.1",
-e.vs_lon,e.vs_lat,e.vs30,e.z1pt0,e.z2pt5,h.mmi6,h.mmi7,h.mmi8,z."PRUID",z."PRNAME",z."ERUID",z."ERNAME",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME",z."CFSAUID",z."DAUIDt",z."SACCODE",z."SACTYPE",z.geom;
+e.vs_lon,e.vs_lat,e.vs30,e.z1pt0,e.z2pt5,h.mmi6,h.mmi7,h.mmi8,j.eqri_abs_score_b0,j.eqri_abs_rating_b0,j.eqri_rel_score_b0,j.eqri_rel_rating_b0,j.eqri_abs_score_r1,j.eqri_abs_rating_r1,
+j.eqri_rel_score_r1,j.eqri_rel_rating_r1,z."PRUID",z."PRNAME",z."ERUID",z."ERNAME",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME",z."CFSAUID",z."DAUIDt",z."SACCODE",z."SACTYPE",z.geom;
 
 
 
@@ -207,8 +331,8 @@ a.fsauid AS "ePML_FSAUID",
 -- 2.4.2 Probable Maximum Loss
 a.loss_value_b0 AS "ePML_b0",
 a.loss_ratio_b0 AS "ePMLr_b0",
-a.loss_value_r2 AS "ePML_r2",
-a.loss_ratio_r2 AS "ePMLr_r2",
+a.loss_value_r1 AS "ePML_r1",
+a.loss_ratio_r1 AS "ePMLr_r1",
 a.loss_type AS "ePML_type",
 a.return_period AS "ePML_Period",
 a.annual_frequency_of_exceedence AS "ePML_Probability",
