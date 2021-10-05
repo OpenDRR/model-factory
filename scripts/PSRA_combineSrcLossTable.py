@@ -22,7 +22,7 @@ def main():
     args = parse_args()
     os.chdir(args.srcLossDir)
 
-    for retrofit in 'b0', 'r2':
+    for retrofit in 'b0', 'r1':
         erFileList = glob.glob('*src_loss_table_{}.csv'.format(retrofit))
         erFileList.sort()
         
