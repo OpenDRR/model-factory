@@ -83,9 +83,9 @@ CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD'
 1 AS "W_MFC"
 
 FROM dsra.dsra_{eqScenario} a
-LEFT JOIN results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b b ON a."AssetID" = b."BldgID"
+LEFT JOIN results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b b ON a."AssetID" = b."BldgID"
 LEFT JOIN exposure.canada_exposure c ON  a."AssetID" = c.id
-LEFT JOIN results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_s d ON c.sauid = d."Sauid"
+LEFT JOIN results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s d ON c.sauid = d."Sauid"
 );
 
 
@@ -178,8 +178,8 @@ DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_displhshld_calc1,res
 
 
 -- create scenario risk building indicators
-DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_all_indicators_b CASCADE;
-CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_all_indicators_b AS 
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_indicators_b CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_indicators_b AS 
 
 --3.0 Earthquake Scenario Risk (DSRA)
 --3.1 Scenario Hazard
@@ -191,6 +191,7 @@ a."Rupture_Abbr" AS "sH_RupName",
 --a."Rupture_Abbr" AS "sH_RupAbbr",
 f.source_type AS "sH_Source",
 f.magnitude AS "sH_Mag",
+0.0 AS "sH_MMI",
 CAST(CAST(ROUND(CAST(f.lon AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_HypoLon",
 CAST(CAST(ROUND(CAST(f.lat AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_HypoLat",
 CAST(CAST(ROUND(CAST(f.depth AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_HypoDepth",
@@ -394,4 +395,4 @@ WHERE e."gmv_SA(0.3)" >=0.02;
 -- insert dsra info into master dsra table per scenario
 INSERT INTO dsra.dsra_all_scenarios_tbl(assetid,sauid,pruid,prname,eruid,ername,cduid,cdname,csduid,csdname,fsauid,dauid,sh_rupname,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake,geom_point)
 SELECT "AssetID","Sauid",pruid,prname,eruid,ername,cduid,cdname,csduid,csdname,fsauid,dauid,"sH_RupName","sH_Mag","sH_HypoLon","sH_HypoLat","sH_HypoDepth","sH_Rake",geom_point
-FROM results_dsra_{eqScenario}.dsra_{eqScenario}_all_indicators_b;
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_indicators_b;
