@@ -63,7 +63,6 @@ a.ername,
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -71,7 +70,6 @@ a.sh_hypodepth,
 a.sh_rake
 FROM dsra.dsra_all_scenarios_tbl a
 GROUP BY sauid,dauid,csduid,csdname,cduid,cdname,fsauid,eruid,ername,pruid,prname,sh_rupname,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
---GROUP BY sauid,dauid,csduid,csdname,cduid,cdname,fsauid,eruid,ername,pruid,prname,sh_rupname,sh_rupabbr,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
 
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_sauid_tbl CASCADE;
 CREATE TABLE dsra.dsra_all_scenarios_sauid_tbl AS
@@ -89,7 +87,6 @@ a.ername,
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -118,7 +115,6 @@ DROP TABLE IF EXISTS dsra.dsra_all_scenarios_sauid_tbl_temp CASCADE;
 
 
 
-
 -- create master dsra dauid view
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_dauid_tbl_temp CASCADE;
 CREATE TABLE dsra.dsra_all_scenarios_dauid_tbl_temp AS
@@ -134,7 +130,6 @@ a.ername,
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -143,7 +138,7 @@ a.sh_rake
 FROM dsra.dsra_all_scenarios_tbl a
 LEFT JOIN boundaries."Geometry_DAUID" b ON a.dauid = b."DAUID"
 GROUP BY dauid,csduid,csdname,cduid,cdname,eruid,ername,pruid,prname,sh_rupname,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
---GROUP BY dauid,csduid,csdname,cduid,cdname,eruid,ername,pruid,prname,sh_rupname,sh_rupabbr,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
+
 
 
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_dauid_tbl CASCADE;
@@ -160,7 +155,6 @@ a.ername,
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -187,7 +181,6 @@ DROP TABLE IF EXISTS dsra.dsra_all_scenarios_dauid_tbl_temp CASCADE;
 
 
 
-
 -- create master dsra csduid view
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_csduid_tbl_temp CASCADE;
 CREATE TABLE dsra.dsra_all_scenarios_csduid_tbl_temp AS
@@ -202,7 +195,6 @@ a.ername,
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -210,7 +202,8 @@ a.sh_hypodepth,
 a.sh_rake
 FROM dsra.dsra_all_scenarios_tbl a
 GROUP BY csduid,csdname,cduid,cdname,eruid,ername,pruid,prname,sh_rupname,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
---GROUP BY csduid,csdname,cduid,cdname,eruid,ername,pruid,prname,sh_rupname,sh_rupabbr,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
+
+
 
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_csduid_tbl CASCADE;
 CREATE TABLE dsra.dsra_all_scenarios_csduid_tbl AS
@@ -225,7 +218,6 @@ a.ername,
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -242,13 +234,15 @@ CREATE INDEX IF NOT EXISTS dsra_all_scenarios_csduid_eruid_idx ON dsra.dsra_all_
 CREATE INDEX IF NOT EXISTS dsra_all_scenarios_csduid_pruid_idx ON dsra.dsra_all_scenarios_csduid_tbl(pruid);
 CREATE INDEX IF NOT EXISTS dsra_all_scenarios_csduid_geom_idx ON dsra.dsra_all_scenarios_csduid_tbl USING GIST(geom);
 
+
+
+
 -- create master dsra csduid view
 DROP VIEW IF EXISTS dsra.dsra_all_scenarios_csduid CASCADE;
 CREATE VIEW dsra.dsra_all_scenarios_csduid AS 
 SELECT * FROM dsra.dsra_all_scenarios_csduid_tbl ORDER BY csduid,sh_rupname;
 
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_csduid_tbl_temp CASCADE;
-
 
 
 
@@ -261,7 +255,6 @@ a.fsauid,
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -269,7 +262,8 @@ a.sh_hypodepth,
 a.sh_rake
 FROM dsra.dsra_all_scenarios_tbl a
 GROUP BY fsauid,pruid,prname,sh_rupname,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
---GROUP BY fsauid,pruid,prname,sh_rupname,sh_rupabbr,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
+
+
 
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_fsauid_tbl CASCADE;
 CREATE TABLE dsra.dsra_all_scenarios_fsauid_tbl AS
@@ -279,7 +273,6 @@ a.fsauid,
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -294,13 +287,15 @@ CREATE INDEX IF NOT EXISTS dsra_all_scenarios_fsauid_fsauid_idx ON dsra.dsra_all
 CREATE INDEX IF NOT EXISTS dsra_all_scenarios_fsauid_pruid_idx ON dsra.dsra_all_scenarios_fsauid_tbl(pruid);
 CREATE INDEX IF NOT EXISTS dsra_all_scenarios_fsauid_geom_idx ON dsra.dsra_all_scenarios_fsauid_tbl USING GIST(geom);
 
+
+
+
 -- create master dsra fsauid view
 DROP VIEW IF EXISTS dsra.dsra_all_scenarios_fsauid CASCADE;
 CREATE VIEW dsra.dsra_all_scenarios_fsauid AS 
 SELECT * FROM dsra.dsra_all_scenarios_fsauid_tbl ORDER BY fsauid,sh_rupname;
 
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_fsauid_tbl_temp CASCADE;
-
 
 
 
@@ -316,7 +311,6 @@ a.ername,
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -324,7 +318,8 @@ a.sh_hypodepth,
 a.sh_rake
 FROM dsra.dsra_all_scenarios_tbl a
 GROUP BY cduid,cdname,eruid,ername,pruid,prname,sh_rupname,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
---GROUP BY cduid,cdname,eruid,ername,pruid,prname,sh_rupname,sh_rupabbr,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
+
+
 
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_cduid_tbl CASCADE;
 CREATE TABLE dsra.dsra_all_scenarios_cduid_tbl AS
@@ -337,7 +332,6 @@ a.ername,
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -362,7 +356,6 @@ DROP TABLE IF EXISTS dsra.dsra_all_scenarios_cduid_tbl_temp CASCADE;
 
 
 
-
 -- create master dsra eruid view
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_eruid_tbl_temp CASCADE;
 CREATE TABLE dsra.dsra_all_scenarios_eruid_tbl_temp AS
@@ -373,7 +366,6 @@ a.ername,
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -381,7 +373,8 @@ a.sh_hypodepth,
 a.sh_rake
 FROM dsra.dsra_all_scenarios_tbl a
 GROUP BY eruid,ername,pruid,prname,sh_rupname,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
---GROUP BY eruid,ername,pruid,prname,sh_rupname,sh_mag,sh_rupabbr,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
+
+
 
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_eruid_tbl CASCADE;
 CREATE TABLE dsra.dsra_all_scenarios_eruid_tbl AS
@@ -392,7 +385,6 @@ a.ername,
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -416,7 +408,6 @@ DROP TABLE IF EXISTS dsra.dsra_all_scenarios_eruid_tbl_temp CASCADE;
 
 
 
-
 -- create master dsra pruid view
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_pruid_tbl_temp CASCADE;
 CREATE TABLE dsra.dsra_all_scenarios_pruid_tbl_temp AS
@@ -425,7 +416,6 @@ SELECT
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
@@ -433,7 +423,8 @@ a.sh_hypodepth,
 a.sh_rake
 FROM dsra.dsra_all_scenarios_tbl a
 GROUP BY pruid,prname,sh_rupname,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
---GROUP BY pruid,prname,sh_rupname,sh_rupabbr,sh_mag,sh_hypolon,sh_hypolat,sh_hypodepth,sh_rake);
+
+
 
 DROP TABLE IF EXISTS dsra.dsra_all_scenarios_pruid_tbl CASCADE;
 CREATE TABLE dsra.dsra_all_scenarios_pruid_tbl AS
@@ -442,7 +433,6 @@ SELECT
 a.pruid,
 a.prname,
 a.sh_rupname,
---a.sh_rupabbr,
 a.sh_mag,
 a.sh_hypolon,
 a.sh_hypolat,
