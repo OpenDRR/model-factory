@@ -2,8 +2,8 @@
 CREATE SCHEMA IF NOT EXISTS results_nhsl_metrovan_physical_exposure;
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_all_indicators_s CASCADE;
-CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_all_indicators_s AS 
+DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_indicators_s CASCADE;
+CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_indicators_s AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -23,20 +23,13 @@ CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc = 'Industrial' THEN a.bldg_ft2 * a.n
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc = 'Civic' THEN a.bldg_ft2 * a.number ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_BldgAreaCivic",
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc = 'Agricultural' THEN a.bldg_ft2 * a.number ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_BldgAreaAgr",
 CAST(CAST(ROUND(CAST(SUM(a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_BldgNum",
---CAST(CAST(ROUND(CAST(COALESCE(c.censusbldg,0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_CensusBldg",
 CAST(CAST(ROUND(CAST(c.censuspop AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_CensusPop",
 CAST(CAST(ROUND(CAST(c.censusdu AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_CensusDU",
 CAST(CAST(ROUND(CAST(AVG(a.popdu) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_People_DU",
---CAST(CAST(ROUND(CAST(AVG(a.day/a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Pop_Km2",
---CAST(CAST(ROUND(CAST(AVG(a.day/a.sauid_ha) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PPH",
---CAST(CAST(ROUND(CAST(AVG(a.number/a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) as "Et_Bldg_Km2",
---CAST(CAST(ROUND(CAST(AVG((a.structural + a.nonstructural + a.contents)/a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Value_Km2",
 CAST(CAST(ROUND(CAST(SUM(a.day)/(a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PopDay_Km2",
 CAST(CAST(ROUND(CAST(SUM(a.day)/(a.sauid_ha) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PopDay_Ha",
 CAST(CAST(ROUND(CAST(SUM(a.night)/(a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PopNight_Km2",
 CAST(CAST(ROUND(CAST(SUM(a.night)/(a.sauid_ha) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PopNight_Ha",
---CAST(CAST(ROUND(CAST(AVG(a.day/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PopDay_Bldg",
---CAST(CAST(ROUND(CAST(AVG(a.night/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_PopNight_Bldg",
 CAST(CAST(ROUND(CAST(SUM(a.number)/(a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) as "Et_Bldg_Km2",
 CAST(CAST(ROUND(CAST(SUM(a.structural + a.nonstructural + a.contents)/(a.sauid_km2) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Value_Km2",
 
@@ -50,8 +43,6 @@ CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc ='Commercial' THEN a.number ELSE 0 E
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc ='Industrial' THEN a.number ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Ind",
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc ='Civic' THEN a.number ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Civic",
 CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc ='Agricultural' THEN a.number ELSE 0 END) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_Agr",
---CAST(CAST(ROUND(CAST(SUM(CASE WHEN a.genocc ='Residential-LD' THEN a.number ELSE 0 END) / AVG(a.popdu) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "Et_SFHshld",
---CAST(CAST(ROUND(CAST((SUM(CASE WHEN a.genocc ='Residential-MD' THEN a.number ELSE 0 END) + SUM(CASE WHEN a.genocc ='Residential-HD' THEN a.number ELSE 0 END)) / AVG(a.popdu) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "ET_MFHshld",
 
 -- single family household, res units for RES1, RES2 = 1
 CAST(CAST(ROUND(CAST(SUM(CASE 
@@ -116,7 +107,6 @@ d."DAUIDt" AS "dauid",
 d."SACCODE" AS "saccode",
 d."SACTYPE" AS "sactype",
 d.geom AS "geom_poly"
---d.geompoint AS "geom_point"
 
 FROM exposure.metrovan_building_exposure a
 LEFT JOIN census.census_2016_canada c ON a.sauid = c.sauidt
