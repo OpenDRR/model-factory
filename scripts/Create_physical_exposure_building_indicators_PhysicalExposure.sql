@@ -2,8 +2,8 @@
 CREATE SCHEMA IF NOT EXISTS results_nhsl_physical_exposure;
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -16,11 +16,6 @@ a.sauid AS "Sauid",
 CAST(CAST(ROUND(CAST(a.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgNum",
 a.taxonomy AS "E_BldgTaxon",
 CAST(CAST(ROUND(CAST(a.bldg_ft2 * a.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgArea",
---CAST(CAST(ROUND(CAST(CASE WHEN a.genocc IN ('Residential-LD','Residential-MD','Residential-HD') THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaRes",
---CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Commercial' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaComm",
---CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Industrial' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaInd",
---CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Civic' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaCivic",
---CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Agricultural' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaAgr",
 a.landuse AS "E_LandUse",
 a.genocc AS "E_BldgOccG",
 a.occclass1 AS "E_BldgOccS1",
@@ -88,54 +83,54 @@ LEFT JOIN boundaries."Geometry_SAUID" b on a.sauid = b."SAUIDt";
 
 
 --create views for province
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_nl CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_nl AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='10';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_nl CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_nl AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='10';
 
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_pe CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_pe AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='11';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_pe CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_pe AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='11';
 
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_ns CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_ns AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='12';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_ns CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_ns AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='12';
 
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_nb CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_nb AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='13';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_nb CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_nb AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='13';
 
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_qc CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_qc AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='24';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_qc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_qc AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='24';
 
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_on CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_on AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='35';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_on CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_on AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='35';
 
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_mb CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_mb AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='46';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_mb CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_mb AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='46';
 
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_sk CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_sk AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='47';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_sk CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_sk AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='47';
 
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_ab CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_ab AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='48';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_ab CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_ab AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='48';
 
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_bc CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_bc AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='59';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_bc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_bc AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='59';
 
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_yt CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_yt AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='60';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_yt CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_yt AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='60';
 
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_nt CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_nt AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='61';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_nt CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_nt AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='61';
 
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_nu CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b_nu AS 
-SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_b WHERE pruid ='62';
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_nu CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b_nu AS 
+SELECT * FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_b WHERE pruid ='62';
