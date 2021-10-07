@@ -7,13 +7,11 @@ CREATE VIEW results_psra_{prov}.psra_{prov}_src_loss AS
 
 SELECT 
 source AS "src_zone",
-trt AS "src_type",
-region,
 SUM(loss_value_b0)/(SELECT SUM(loss_value_b0) FROM psra_{prov}.psra_{prov}_src_loss ) AS "src_value_b0",
-SUM(loss_value_r2)/(SELECT SUM(loss_value_r2) FROM psra_{prov}.psra_{prov}_src_loss ) AS "src_value_r2"
+SUM(loss_value_r1)/(SELECT SUM(loss_value_r1) FROM psra_{prov}.psra_{prov}_src_loss ) AS "src_value_r1"
 FROM psra_{prov}.psra_{prov}_src_loss
-GROUP BY source,trt,region
-ORDER BY source,trt,region ASC;
+GROUP BY source
+ORDER BY source ASC;
 
 
 
@@ -25,15 +23,14 @@ CREATE VIEW results_psra_{prov}.psra_{prov}_agg_curves_stats AS
 (
 SELECT
 return_period,
-stat,
 loss_type,
 fsauid,
 "GenOcc",
 "GenType",
 loss_value_b0,
 loss_ratio_b0,
-loss_value_r2,
-loss_ratio_r2,
+loss_value_r1,
+loss_ratio_r1,
 annual_frequency_of_exceedence
 FROM psra_{prov}.psra_{prov}_agg_curves_stats
 );
@@ -372,9 +369,7 @@ lat,
 "0.02_SA(0.5)",
 "0.02_SA(0.6)",
 "0.02_SA(1.0)",
-"0.02_SA(10.0)"
 "0.02_SA(2.0)",
-"0.02_SA(5.0)"
 "0.1_PGA",
 "0.1_SA(0.1)",
 "0.1_SA(0.2)",
@@ -382,9 +377,7 @@ lat,
 "0.1_SA(0.5)",
 "0.1_SA(0.6)",
 "0.1_SA(1.0)",
-"0.1_SA(10.0)",
-"0.1_SA(2.0)",
-"0.1_SA(5.0)",
+"0.1_SA(2.0)"
 geom
 
 FROM psra_{prov}.psra_{prov}_uhs
