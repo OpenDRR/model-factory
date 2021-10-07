@@ -2,8 +2,8 @@
 CREATE SCHEMA IF NOT EXISTS results_nhsl_risk_dynamics;
 
 -- create risk dynamic indicators
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators AS 
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators AS 
 
 -- 1.3 Risk Dynamics
 -- 1.3.1 Population Growth
@@ -58,54 +58,54 @@ FROM ghsl.ghsl_mh_intensity_ghsl;
 
 
 --create views for province
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nl CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nl AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='10';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_nl CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_nl AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='10';
 
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_pe CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_pe AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='11';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_pe CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_pe AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='11';
 
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_ns CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_ns AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='12';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_ns CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_ns AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='12';
 
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nb CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nb AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='13';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_nb CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_nb AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='13';
 
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_qc CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_qc AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='24';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_qc CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_qc AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='24';
 
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_on CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_on AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='35';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_on CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_on AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='35';
 
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_mb CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_mb AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='46';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_mb CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_mb AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='46';
 
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_sk CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_sk AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='47';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_sk CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_sk AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='47';
 
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_ab CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_ab AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='48';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_ab CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_ab AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='48';
 
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_bc CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_bc AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='59';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_bc CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_bc AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='59';
 
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_yt CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_yt AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='60';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_yt CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_yt AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='60';
 
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nt CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nt AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='61';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_nt CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_nt AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='61';
 
-DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nu CASCADE;
-CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators_nu AS 
-SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_all_indicators WHERE pruid ='62';
+DROP VIEW IF EXISTS results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_nu CASCADE;
+CREATE VIEW results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators_nu AS 
+SELECT * FROM results_nhsl_risk_dynamics.nhsl_risk_dynamics_indicators WHERE pruid ='62';
