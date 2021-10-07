@@ -2,8 +2,8 @@
 CREATE SCHEMA IF NOT EXISTS results_nhsl_metrovan_physical_exposure;
 
 -- create physical exposure indicators
-DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_all_indicators_ste CASCADE;
-CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_all_indicators_ste AS 
+DROP VIEW IF EXISTS results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_indicators_ste CASCADE;
+CREATE VIEW results_nhsl_metrovan_physical_exposure.nhsl_metrovan_physical_exposure_indicators_ste AS 
 
 -- 1.0 Human Settlement
 -- 1.1 Physical Exposure
@@ -16,11 +16,6 @@ a.sauid AS "Sauid",
 CAST(CAST(ROUND(CAST(a.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgNum",
 a.taxonomy AS "E_BldgTaxon",
 CAST(CAST(ROUND(CAST(a.bldg_ft2 * a.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgArea",
---CAST(CAST(ROUND(CAST(CASE WHEN a.genocc IN ('Residential-LD','Residential-MD','Residential-HD') THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaRes",
---CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Commercial' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaComm",
---CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Industrial' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaInd",
---CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Civic' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaCivic",
---CAST(CAST(ROUND(CAST(CASE WHEN a.genocc = 'Agricultural' THEN a.bldg_ft2 ELSE 0 END AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgAreaAgr",
 a.landuse AS "E_LandUse",
 a.genocc AS "E_BldgOccG",
 a.occclass1 AS "E_BldgOccS1",
