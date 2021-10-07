@@ -1,7 +1,7 @@
 -- test aggregation to hexbin grids area proxy
 --5km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_5km CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_5km AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_5km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_5km AS 
 
 SELECT
 c.gridid_5,
@@ -12,7 +12,6 @@ SUM(a."Et_BldgAreaInd" * b.area_ratio) AS "Et_BldgAreaInd",
 SUM(a."Et_BldgAreaCivic" * b.area_ratio) AS "Et_BldgAreaCivic",
 SUM(a."Et_BldgAreaAgr" * b.area_ratio) AS "Et_BldgAreaAgr",
 SUM(a."Et_BldgNum" * b.area_ratio) AS "Et_BldgNum",
---SUM(a."E_CensusBldg" * b.area_ratio) AS "E_CensusBldg",
 SUM(a."E_CensusPop" * b.area_ratio) AS "E_CensusPop",
 SUM(a."E_CensusDU" * b.area_ratio) AS "E_CensusDU",
 SUM(a."E_People_DU" * b.area_ratio) AS "E_People_DU",
@@ -20,8 +19,6 @@ AVG(a."Et_PopDay_Km2" * b.area_ratio) AS "Et_PopDay_Km2",
 AVG(a."Et_PopDay_Ha" * b.area_ratio) AS "Et_PopDay_Ha",
 AVG(a."Et_PopNight_Km2" * b.area_ratio) AS "Et_PopNight_Km2",
 AVG(a."Et_PopNight_Ha" * b.area_ratio) AS "Et_PopNight_Ha",
---AVG(a."Et_PopDay_Bldg" * b.area_ratio) AS "Et_PopDay_Bldg",
---AVG(a."Et_PopNight_Bldg" * b.area_ratio) AS "Et_PopNight_Bldg",
 AVG(a."Et_Bldg_Km2" * b.area_ratio) AS "Et_Bldg_Km2",
 AVG(a."Et_Value_Km2" * b.area_ratio) AS "Et_Value_Km2",
 SUM(a."Et_ResLD" * b.area_ratio) AS "Et_ResLD",
@@ -55,24 +52,16 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 
 c.geom
 
-FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_s a
+FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
 LEFT JOIN boundaries."SAUID_HexGrid_5km_intersect" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_5km" c ON b.gridid_5 = c.gridid_5
 GROUP BY c.gridid_5,c.geom;
 
-/*
--- add PK
-ALTER TABLE results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_5km ADD PRIMARY KEY (gridid_5);
-
--- create indexes
-CREATE INDEX IF NOT EXISTS physical_exposure_indicators_hexbin_5km_geom_idx ON results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_5km using GIST (geom);
-CREATE INDEX IF NOT EXISTS physical_exposure_indicators_hexbin_5km_idx ON results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_5km (gridid_5);
-*/
 
 
 --10km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_10km CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_10km AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_10km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_10km AS 
 
 SELECT
 c.gridid_10,
@@ -83,7 +72,6 @@ SUM(a."Et_BldgAreaInd" * b.area_ratio) AS "Et_BldgAreaInd",
 SUM(a."Et_BldgAreaCivic" * b.area_ratio) AS "Et_BldgAreaCivic",
 SUM(a."Et_BldgAreaAgr" * b.area_ratio) AS "Et_BldgAreaAgr",
 SUM(a."Et_BldgNum" * b.area_ratio) AS "Et_BldgNum",
---SUM(a."E_CensusBldg" * b.area_ratio) AS "E_CensusBldg",
 SUM(a."E_CensusPop" * b.area_ratio) AS "E_CensusPop",
 SUM(a."E_CensusDU" * b.area_ratio) AS "E_CensusDU",
 SUM(a."E_People_DU" * b.area_ratio) AS "E_People_DU",
@@ -91,8 +79,6 @@ AVG(a."Et_PopDay_Km2" * b.area_ratio) AS "Et_PopDay_Km2",
 AVG(a."Et_PopDay_Ha" * b.area_ratio) AS "Et_PopDay_Ha",
 AVG(a."Et_PopNight_Km2" * b.area_ratio) AS "Et_PopNight_Km2",
 AVG(a."Et_PopNight_Ha" * b.area_ratio) AS "Et_PopNight_Ha",
---AVG(a."Et_PopDay_Bldg" * b.area_ratio) AS "Et_PopDay_Bldg",
---AVG(a."Et_PopNight_Bldg" * b.area_ratio) AS "Et_PopNight_Bldg",
 AVG(a."Et_Bldg_Km2" * b.area_ratio) AS "Et_Bldg_Km2",
 AVG(a."Et_Value_Km2" * b.area_ratio) AS "Et_Value_Km2",
 SUM(a."Et_ResLD" * b.area_ratio) AS "Et_ResLD",
@@ -126,24 +112,16 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 
 c.geom
 
-FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_s a
+FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
 LEFT JOIN boundaries."SAUID_HexGrid_10km_intersect" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_10km" c ON b.gridid_10 = c.gridid_10
 GROUP BY c.gridid_10,c.geom;
 
-/*
--- add PK
-ALTER TABLE results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_10km ADD PRIMARY KEY (gridid_10);
-
--- create indexes
-CREATE INDEX IF NOT EXISTS physical_exposure_indicators_hexbin_10km_geom_idx ON results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_10km using GIST (geom);
-CREATE INDEX IF NOT EXISTS physical_exposure_indicators_hexbin_10km_idx ON results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_10km (gridid_10);
-*/
 
 
 --25km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_25km CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_25km AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_25km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_25km AS 
 
 SELECT
 c.gridid_25,
@@ -154,7 +132,6 @@ SUM(a."Et_BldgAreaInd" * b.area_ratio) AS "Et_BldgAreaInd",
 SUM(a."Et_BldgAreaCivic" * b.area_ratio) AS "Et_BldgAreaCivic",
 SUM(a."Et_BldgAreaAgr" * b.area_ratio) AS "Et_BldgAreaAgr",
 SUM(a."Et_BldgNum" * b.area_ratio) AS "Et_BldgNum",
---SUM(a."E_CensusBldg" * b.area_ratio) AS "E_CensusBldg",
 SUM(a."E_CensusPop" * b.area_ratio) AS "E_CensusPop",
 SUM(a."E_CensusDU" * b.area_ratio) AS "E_CensusDU",
 SUM(a."E_People_DU" * b.area_ratio) AS "E_People_DU",
@@ -162,8 +139,6 @@ AVG(a."Et_PopDay_Km2" * b.area_ratio) AS "Et_PopDay_Km2",
 AVG(a."Et_PopDay_Ha" * b.area_ratio) AS "Et_PopDay_Ha",
 AVG(a."Et_PopNight_Km2" * b.area_ratio) AS "Et_PopNight_Km2",
 AVG(a."Et_PopNight_Ha" * b.area_ratio) AS "Et_PopNight_Ha",
---AVG(a."Et_PopDay_Bldg" * b.area_ratio) AS "Et_PopDay_Bldg",
---AVG(a."Et_PopNight_Bldg" * b.area_ratio) AS "Et_PopNight_Bldg",
 AVG(a."Et_Bldg_Km2" * b.area_ratio) AS "Et_Bldg_Km2",
 AVG(a."Et_Value_Km2" * b.area_ratio) AS "Et_Value_Km2",
 SUM(a."Et_ResLD" * b.area_ratio) AS "Et_ResLD",
@@ -196,23 +171,16 @@ SUM(a."Et_NStrValue" * b.area_ratio) AS "Et_NStrValue",
 SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 c.geom
 
-FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_s a
+FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
 LEFT JOIN boundaries."SAUID_HexGrid_25km_intersect" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_25km" c ON b.gridid_25 = c.gridid_25
 GROUP BY c.gridid_25,c.geom;
 
-/*
--- add PK
-ALTER TABLE results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_25km ADD PRIMARY KEY (gridid_25);
 
--- create indexes
-CREATE INDEX IF NOT EXISTS physical_exposure_indicators_hexbin_25km_geom_idx ON results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_25km using GIST (geom);
-CREATE INDEX IF NOT EXISTS physical_exposure_indicators_hexbin_25km_idx ON results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_25km (gridid_25);
-*/
 
 --50km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_50km CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_50km AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_50km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_50km AS 
 
 SELECT
 c.gridid_50,
@@ -223,7 +191,6 @@ SUM(a."Et_BldgAreaInd" * b.area_ratio) AS "Et_BldgAreaInd",
 SUM(a."Et_BldgAreaCivic" * b.area_ratio) AS "Et_BldgAreaCivic",
 SUM(a."Et_BldgAreaAgr" * b.area_ratio) AS "Et_BldgAreaAgr",
 SUM(a."Et_BldgNum" * b.area_ratio) AS "Et_BldgNum",
---SUM(a."E_CensusBldg" * b.area_ratio) AS "E_CensusBldg",
 SUM(a."E_CensusPop" * b.area_ratio) AS "E_CensusPop",
 SUM(a."E_CensusDU" * b.area_ratio) AS "E_CensusDU",
 SUM(a."E_People_DU" * b.area_ratio) AS "E_People_DU",
@@ -231,8 +198,6 @@ AVG(a."Et_PopDay_Km2" * b.area_ratio) AS "Et_PopDay_Km2",
 AVG(a."Et_PopDay_Ha" * b.area_ratio) AS "Et_PopDay_Ha",
 AVG(a."Et_PopNight_Km2" * b.area_ratio) AS "Et_PopNight_Km2",
 AVG(a."Et_PopNight_Ha" * b.area_ratio) AS "Et_PopNight_Ha",
---AVG(a."Et_PopDay_Bldg" * b.area_ratio) AS "Et_PopDay_Bldg",
---AVG(a."Et_PopNight_Bldg" * b.area_ratio) AS "Et_PopNight_Bldg",
 AVG(a."Et_Bldg_Km2" * b.area_ratio) AS "Et_Bldg_Km2",
 AVG(a."Et_Value_Km2" * b.area_ratio) AS "Et_Value_Km2",
 SUM(a."Et_ResLD" * b.area_ratio) AS "Et_ResLD",
@@ -266,24 +231,16 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 
 c.geom
 
-FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_s a
+FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
 LEFT JOIN boundaries."SAUID_HexGrid_50km_intersect" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_50km" c ON b.gridid_50 = c.gridid_50
 GROUP BY c.gridid_50,c.geom;
 
-/*
--- add PK
-ALTER TABLE results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_50km ADD PRIMARY KEY (gridid_50);
-
--- create indexes
-CREATE INDEX IF NOT EXISTS physical_exposure_indicators_hexbin_50km_geom_idx ON results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_50km using GIST (geom);
-CREATE INDEX IF NOT EXISTS physical_exposure_indicators_hexbin_50km_idx ON results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_50km (gridid_50);
-*/
 
 
 --100km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_100km CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_100km AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_100km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_100km AS 
 
 SELECT
 c.gridid_100,
@@ -294,7 +251,6 @@ SUM(a."Et_BldgAreaInd" * b.area_ratio) AS "Et_BldgAreaInd",
 SUM(a."Et_BldgAreaCivic" * b.area_ratio) AS "Et_BldgAreaCivic",
 SUM(a."Et_BldgAreaAgr" * b.area_ratio) AS "Et_BldgAreaAgr",
 SUM(a."Et_BldgNum" * b.area_ratio) AS "Et_BldgNum",
---SUM(a."E_CensusBldg" * b.area_ratio) AS "E_CensusBldg",
 SUM(a."E_CensusPop" * b.area_ratio) AS "E_CensusPop",
 SUM(a."E_CensusDU" * b.area_ratio) AS "E_CensusDU",
 SUM(a."E_People_DU" * b.area_ratio) AS "E_People_DU",
@@ -302,8 +258,6 @@ AVG(a."Et_PopDay_Km2" * b.area_ratio) AS "Et_PopDay_Km2",
 AVG(a."Et_PopDay_Ha" * b.area_ratio) AS "Et_PopDay_Ha",
 AVG(a."Et_PopNight_Km2" * b.area_ratio) AS "Et_PopNight_Km2",
 AVG(a."Et_PopNight_Ha" * b.area_ratio) AS "Et_PopNight_Ha",
---AVG(a."Et_PopDay_Bldg" * b.area_ratio) AS "Et_PopDay_Bldg",
---AVG(a."Et_PopNight_Bldg" * b.area_ratio) AS "Et_PopNight_Bldg",
 AVG(a."Et_Bldg_Km2" * b.area_ratio) AS "Et_Bldg_Km2",
 AVG(a."Et_Value_Km2" * b.area_ratio) AS "Et_Value_Km2",
 SUM(a."Et_ResLD" * b.area_ratio) AS "Et_ResLD",
@@ -337,26 +291,16 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 
 c.geom
 
-FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_s a
+FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
 LEFT JOIN boundaries."SAUID_HexGrid_100km_intersect" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_100km" c ON b.gridid_100 = c.gridid_100
 GROUP BY c.gridid_100,c.geom;
 
-/*
--- add PK
-ALTER TABLE results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_100km ADD PRIMARY KEY (gridid_100);
-
--- create indexes
-CREATE INDEX IF NOT EXISTS physical_exposure_indicators_hexbin_100km_geom_idx ON results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_100km using GIST (geom);
-CREATE INDEX IF NOT EXISTS physical_exposure_indicators_hexbin_100km_idx ON results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_100km (gridid_100);
-*/
-
-
 
 
 --global fabric
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_global_fabric CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_global_fabric AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_global_fabric CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_global_fabric AS 
 
 SELECT
 c.gridid,
@@ -367,7 +311,6 @@ SUM(a."Et_BldgAreaInd" * b.area_ratio) AS "Et_BldgAreaInd",
 SUM(a."Et_BldgAreaCivic" * b.area_ratio) AS "Et_BldgAreaCivic",
 SUM(a."Et_BldgAreaAgr" * b.area_ratio) AS "Et_BldgAreaAgr",
 SUM(a."Et_BldgNum" * b.area_ratio) AS "Et_BldgNum",
---SUM(a."E_CensusBldg" * b.area_ratio) AS "E_CensusBldg",
 SUM(a."E_CensusPop" * b.area_ratio) AS "E_CensusPop",
 SUM(a."E_CensusDU" * b.area_ratio) AS "E_CensusDU",
 SUM(a."E_People_DU" * b.area_ratio) AS "E_People_DU",
@@ -375,8 +318,6 @@ AVG(a."Et_PopDay_Km2" * b.area_ratio) AS "Et_PopDay_Km2",
 AVG(a."Et_PopDay_Ha" * b.area_ratio) AS "Et_PopDay_Ha",
 AVG(a."Et_PopNight_Km2" * b.area_ratio) AS "Et_PopNight_Km2",
 AVG(a."Et_PopNight_Ha" * b.area_ratio) AS "Et_PopNight_Ha",
---AVG(a."Et_PopDay_Bldg" * b.area_ratio) AS "Et_PopDay_Bldg",
---AVG(a."Et_PopNight_Bldg" * b.area_ratio) AS "Et_PopNight_Bldg",
 AVG(a."Et_Bldg_Km2" * b.area_ratio) AS "Et_Bldg_Km2",
 AVG(a."Et_Value_Km2" * b.area_ratio) AS "Et_Value_Km2",
 SUM(a."Et_ResLD" * b.area_ratio) AS "Et_ResLD",
@@ -410,16 +351,7 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 
 c.geom
 
-FROM results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_s a
+FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
 LEFT JOIN boundaries."SAUID_HexGrid_GlobalFabric_intersect" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_GlobalFabric" c ON b.gridid = c.gridid
 GROUP BY c.gridid,c.geom;
-
-/*
--- add PK
-ALTER TABLE results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_global_fabric ADD PRIMARY KEY (gridid_100);
-
--- create indexes
-CREATE INDEX IF NOT EXISTS physical_exposure_indicators_hexbin_global_fabric_geom_idx ON results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_global_fabric using GIST (geom);
-CREATE INDEX IF NOT EXISTS physical_exposure_indicators_hexbin_global_fabric_idx ON results_nhsl_physical_exposure.nhsl_physical_exposure_all_indicators_hexbin_global_fabric (gridid);
-*/
