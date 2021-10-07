@@ -105,9 +105,6 @@ b.id AS "id_building",
 a.sauid,
 a.landuse,
 a.taxonomy,
---a.business,
---a."limit",
---a.deductable
 a.genocc,
 a.occclass1,
 a.occclass2,
@@ -137,9 +134,6 @@ AND a.sauid_km2 = b.sauid_km2
 AND a.sauid_ha = b.sauid_ha 
 AND a.landuse = b.landuse 
 AND a.taxonomy = b.taxonomy 
---AND a.business = b.business 
---AND a."limit" = b."limit"
---AND a.deductible = b.deductible 
 AND a.genocc = b.genocc 
 AND a.occclass1 = b.occclass1
 AND a.occclass2 = b.occclass2
