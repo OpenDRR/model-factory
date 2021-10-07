@@ -4,31 +4,40 @@ CREATE SCHEMA IF NOT EXISTS results_psra_national;
 DROP TABLE IF EXISTS results_psra_national.psra_all_indicators_b_tbl CASCADE;
 
 CREATE TABLE results_psra_national.psra_all_indicators_b_tbl AS 
-SELECT * FROM results_psra_ab.psra_ab_all_indicators_b
-UNION
-SELECT * FROM results_psra_bc.psra_bc_all_indicators_b
-UNION
-SELECT * FROM results_psra_mb.psra_mb_all_indicators_b
-UNION
 SELECT * FROM results_psra_nb.psra_nb_all_indicators_b
 UNION
 SELECT * FROM results_psra_nl.psra_nl_all_indicators_b
 UNION
 SELECT * FROM results_psra_ns.psra_ns_all_indicators_b
 UNION
-SELECT * FROM results_psra_nt.psra_nt_all_indicators_b
-UNION
-SELECT * FROM results_psra_nu.psra_nu_all_indicators_b
-UNION
-SELECT * FROM results_psra_on.psra_on_all_indicators_b
-UNION
-SELECT * FROM results_psra_pe.psra_pe_all_indicators_b
-UNION
-SELECT * FROM results_psra_qc.psra_qc_all_indicators_b
-UNION
-SELECT * FROM results_psra_sk.psra_sk_all_indicators_b
-UNION
-SELECT * FROM results_psra_yt.psra_yt_all_indicators_b;
+SELECT * FROM results_psra_pe.psra_pe_all_indicators_b;
+
+-- CREATE TABLE results_psra_national.psra_all_indicators_b_tbl AS 
+-- SELECT * FROM results_psra_ab.psra_ab_all_indicators_b
+-- UNION
+-- SELECT * FROM results_psra_bc.psra_bc_all_indicators_b
+-- UNION
+-- SELECT * FROM results_psra_mb.psra_mb_all_indicators_b
+-- UNION
+-- SELECT * FROM results_psra_nb.psra_nb_all_indicators_b
+-- UNION
+-- SELECT * FROM results_psra_nl.psra_nl_all_indicators_b
+-- UNION
+-- SELECT * FROM results_psra_ns.psra_ns_all_indicators_b
+-- UNION
+-- SELECT * FROM results_psra_nt.psra_nt_all_indicators_b
+-- UNION
+-- SELECT * FROM results_psra_nu.psra_nu_all_indicators_b
+-- UNION
+-- SELECT * FROM results_psra_on.psra_on_all_indicators_b
+-- UNION
+-- SELECT * FROM results_psra_pe.psra_pe_all_indicators_b
+-- UNION
+-- SELECT * FROM results_psra_qc.psra_qc_all_indicators_b
+-- UNION
+-- SELECT * FROM results_psra_sk.psra_sk_all_indicators_b
+-- UNION
+-- SELECT * FROM results_psra_yt.psra_yt_all_indicators_b;
 
 
 -- create index
@@ -61,31 +70,40 @@ SELECT * FROM results_psra_national.psra_all_indicators_b_tbl;
 DROP TABLE IF EXISTS results_psra_national.psra_all_indicators_s_tbl CASCADE;
 
 CREATE TABLE results_psra_national.psra_all_indicators_s_tbl AS 
-SELECT * FROM results_psra_ab.psra_ab_all_indicators_s
-UNION
-SELECT * FROM results_psra_bc.psra_bc_all_indicators_s
-UNION
-SELECT * FROM results_psra_mb.psra_mb_all_indicators_s
-UNION
 SELECT * FROM results_psra_nb.psra_nb_all_indicators_s
 UNION
 SELECT * FROM results_psra_nl.psra_nl_all_indicators_s
 UNION
 SELECT * FROM results_psra_ns.psra_ns_all_indicators_s
 UNION
-SELECT * FROM results_psra_nt.psra_nt_all_indicators_s
-UNION
-SELECT * FROM results_psra_nu.psra_nu_all_indicators_s
-UNION
-SELECT * FROM results_psra_on.psra_on_all_indicators_s
-UNION
-SELECT * FROM results_psra_pe.psra_pe_all_indicators_s
-UNION
-SELECT * FROM results_psra_qc.psra_qc_all_indicators_s
-UNION
-SELECT * FROM results_psra_sk.psra_sk_all_indicators_s
-UNION
-SELECT * FROM results_psra_yt.psra_yt_all_indicators_s;
+SELECT * FROM results_psra_pe.psra_pe_all_indicators_s;
+
+-- CREATE TABLE results_psra_national.psra_all_indicators_s_tbl AS 
+-- SELECT * FROM results_psra_ab.psra_ab_all_indicators_s
+-- UNION
+-- SELECT * FROM results_psra_bc.psra_bc_all_indicators_s
+-- UNION
+-- SELECT * FROM results_psra_mb.psra_mb_all_indicators_s
+-- UNION
+-- SELECT * FROM results_psra_nb.psra_nb_all_indicators_s
+-- UNION
+-- SELECT * FROM results_psra_nl.psra_nl_all_indicators_s
+-- UNION
+-- SELECT * FROM results_psra_ns.psra_ns_all_indicators_s
+-- UNION
+-- SELECT * FROM results_psra_nt.psra_nt_all_indicators_s
+-- UNION
+-- SELECT * FROM results_psra_nu.psra_nu_all_indicators_s
+-- UNION
+-- SELECT * FROM results_psra_on.psra_on_all_indicators_s
+-- UNION
+-- SELECT * FROM results_psra_pe.psra_pe_all_indicators_s
+-- UNION
+-- SELECT * FROM results_psra_qc.psra_qc_all_indicators_s
+-- UNION
+-- SELECT * FROM results_psra_sk.psra_sk_all_indicators_s
+-- UNION
+-- SELECT * FROM results_psra_yt.psra_yt_all_indicators_s;
 
 -- create index
 CREATE INDEX psra_all_indicators_s_tbl_sauid_idx ON results_psra_national.psra_all_indicators_s_tbl("Sauid");
@@ -117,31 +135,40 @@ SELECT * FROM results_psra_national.psra_all_indicators_s_tbl;
 DROP TABLE IF EXISTS results_psra_national.psra_pml_s_tbl CASCADE;
 
 CREATE TABLE results_psra_national.psra_pml_s_tbl AS 
-SELECT * FROM results_psra_ab.psra_ab_pml_s
-UNION
-SELECT * FROM results_psra_bc.psra_bc_pml_s
-UNION
-SELECT * FROM results_psra_mb.psra_mb_pml_s
-UNION
 SELECT * FROM results_psra_nb.psra_nb_pml_s
 UNION
 SELECT * FROM results_psra_nl.psra_nl_pml_s
 UNION
 SELECT * FROM results_psra_ns.psra_ns_pml_s
 UNION
-SELECT * FROM results_psra_nt.psra_nt_pml_s
-UNION
-SELECT * FROM results_psra_nu.psra_nu_pml_s
-UNION
-SELECT * FROM results_psra_on.psra_on_pml_s
-UNION
-SELECT * FROM results_psra_pe.psra_pe_pml_s
-UNION
-SELECT * FROM results_psra_qc.psra_qc_pml_s
-UNION
-SELECT * FROM results_psra_sk.psra_sk_pml_s
-UNION
-SELECT * FROM results_psra_yt.psra_yt_pml_s;
+SELECT * FROM results_psra_pe.psra_pe_pml_s;
+
+-- CREATE TABLE results_psra_national.psra_pml_s_tbl AS 
+-- SELECT * FROM results_psra_ab.psra_ab_pml_s
+-- UNION
+-- SELECT * FROM results_psra_bc.psra_bc_pml_s
+-- UNION
+-- SELECT * FROM results_psra_mb.psra_mb_pml_s
+-- UNION
+-- SELECT * FROM results_psra_nb.psra_nb_pml_s
+-- UNION
+-- SELECT * FROM results_psra_nl.psra_nl_pml_s
+-- UNION
+-- SELECT * FROM results_psra_ns.psra_ns_pml_s
+-- UNION
+-- SELECT * FROM results_psra_nt.psra_nt_pml_s
+-- UNION
+-- SELECT * FROM results_psra_nu.psra_nu_pml_s
+-- UNION
+-- SELECT * FROM results_psra_on.psra_on_pml_s
+-- UNION
+-- SELECT * FROM results_psra_pe.psra_pe_pml_s
+-- UNION
+-- SELECT * FROM results_psra_qc.psra_qc_pml_s
+-- UNION
+-- SELECT * FROM results_psra_sk.psra_sk_pml_s
+-- UNION
+-- SELECT * FROM results_psra_yt.psra_yt_pml_s;
 
 -- create index
 CREATE INDEX psra_pml_s_tbl_sauid_idx ON results_psra_national.psra_pml_s_tbl("ePML_FSAUID");
@@ -156,33 +183,43 @@ SELECT * FROM results_psra_national.psra_pml_s_tbl;
 -- combine psra pml indicators into national level
 DROP TABLE IF EXISTS results_psra_national.psra_pml_s_tbl CASCADE;
 
+
 CREATE TABLE results_psra_national.psra_pml_s_tbl AS 
-SELECT * FROM results_psra_ab.psra_ab_pml_s
-UNION
-SELECT * FROM results_psra_bc.psra_bc_pml_s
-UNION
-SELECT * FROM results_psra_mb.psra_mb_pml_s
-UNION
 SELECT * FROM results_psra_nb.psra_nb_pml_s
 UNION
 SELECT * FROM results_psra_nl.psra_nl_pml_s
 UNION
 SELECT * FROM results_psra_ns.psra_ns_pml_s
 UNION
-SELECT * FROM results_psra_nt.psra_nt_pml_s
-UNION
-SELECT * FROM results_psra_nu.psra_nu_pml_s
-UNION
-SELECT * FROM results_psra_on.psra_on_pml_s
-UNION
-SELECT * FROM results_psra_pe.psra_pe_pml_s
-UNION
-SELECT * FROM results_psra_qc.psra_qc_pml_s
-UNION
-SELECT * FROM results_psra_sk.psra_sk_pml_s
-UNION
-SELECT * FROM results_psra_yt.psra_yt_pml_s;
+SELECT * FROM results_psra_pe.psra_pe_pml_s;
 
+
+-- CREATE TABLE results_psra_national.psra_pml_s_tbl AS 
+-- SELECT * FROM results_psra_ab.psra_ab_pml_s
+-- UNION
+-- SELECT * FROM results_psra_bc.psra_bc_pml_s
+-- UNION
+-- SELECT * FROM results_psra_mb.psra_mb_pml_s
+-- UNION
+-- SELECT * FROM results_psra_nb.psra_nb_pml_s
+-- UNION
+-- SELECT * FROM results_psra_nl.psra_nl_pml_s
+-- UNION
+-- SELECT * FROM results_psra_ns.psra_ns_pml_s
+-- UNION
+-- SELECT * FROM results_psra_nt.psra_nt_pml_s
+-- UNION
+-- SELECT * FROM results_psra_nu.psra_nu_pml_s
+-- UNION
+-- SELECT * FROM results_psra_on.psra_on_pml_s
+-- UNION
+-- SELECT * FROM results_psra_pe.psra_pe_pml_s
+-- UNION
+-- SELECT * FROM results_psra_qc.psra_qc_pml_s
+-- UNION
+-- SELECT * FROM results_psra_sk.psra_sk_pml_s
+-- UNION
+-- SELECT * FROM results_psra_yt.psra_yt_pml_s;
 -- create index
 CREATE INDEX psra_pml_s_tbl_sauid_idx ON results_psra_national.psra_pml_s_tbl("ePML_FSAUID");
 
@@ -197,31 +234,40 @@ SELECT * FROM results_psra_national.psra_pml_s_tbl;
 DROP TABLE IF EXISTS results_psra_national.psra_uhs_tbl CASCADE;
 
 CREATE TABLE results_psra_national.psra_uhs_tbl AS 
-SELECT * FROM results_psra_ab.psra_ab_uhs
-UNION
-SELECT * FROM results_psra_bc.psra_bc_uhs
-UNION
-SELECT * FROM results_psra_mb.psra_mb_uhs
-UNION
 SELECT * FROM results_psra_nb.psra_nb_uhs
 UNION
 SELECT * FROM results_psra_nl.psra_nl_uhs
 UNION
 SELECT * FROM results_psra_ns.psra_ns_uhs
 UNION
-SELECT * FROM results_psra_nt.psra_nt_uhs
-UNION
-SELECT * FROM results_psra_nu.psra_nu_uhs
-UNION
-SELECT * FROM results_psra_on.psra_on_uhs
-UNION
-SELECT * FROM results_psra_pe.psra_pe_uhs
-UNION
-SELECT * FROM results_psra_qc.psra_qc_uhs
-UNION
-SELECT * FROM results_psra_sk.psra_sk_uhs
-UNION
-SELECT * FROM results_psra_yt.psra_yt_uhs;
+SELECT * FROM results_psra_on.psra_on_uhs;
+
+-- CREATE TABLE results_psra_national.psra_uhs_tbl AS 
+-- SELECT * FROM results_psra_ab.psra_ab_uhs
+-- UNION
+-- SELECT * FROM results_psra_bc.psra_bc_uhs
+-- UNION
+-- SELECT * FROM results_psra_mb.psra_mb_uhs
+-- UNION
+-- SELECT * FROM results_psra_nb.psra_nb_uhs
+-- UNION
+-- SELECT * FROM results_psra_nl.psra_nl_uhs
+-- UNION
+-- SELECT * FROM results_psra_ns.psra_ns_uhs
+-- UNION
+-- SELECT * FROM results_psra_nt.psra_nt_uhs
+-- UNION
+-- SELECT * FROM results_psra_nu.psra_nu_uhs
+-- UNION
+-- SELECT * FROM results_psra_on.psra_on_uhs
+-- UNION
+-- SELECT * FROM results_psra_pe.psra_pe_uhs
+-- UNION
+-- SELECT * FROM results_psra_qc.psra_qc_uhs
+-- UNION
+-- SELECT * FROM results_psra_sk.psra_sk_uhs
+-- UNION
+-- SELECT * FROM results_psra_yt.psra_yt_uhs;
 
 CREATE INDEX psra_uhs_tbl_geom_idx ON results_psra_national.psra_uhs_tbl USING GIST(geom);
 
@@ -236,31 +282,40 @@ SELECT * FROM results_psra_national.psra_uhs_tbl;
 DROP TABLE IF EXISTS results_psra_national.psra_src_loss_tbl CASCADE;
 
 CREATE TABLE results_psra_national.psra_src_loss_tbl AS 
-SELECT * FROM results_psra_ab.psra_ab_src_loss
-UNION
-SELECT * FROM results_psra_bc.psra_bc_src_loss
-UNION
-SELECT * FROM results_psra_mb.psra_mb_src_loss
-UNION
 SELECT * FROM results_psra_nb.psra_nb_src_loss
 UNION
 SELECT * FROM results_psra_nl.psra_nl_src_loss
 UNION
 SELECT * FROM results_psra_ns.psra_ns_src_loss
 UNION
-SELECT * FROM results_psra_nt.psra_nt_src_loss
-UNION
-SELECT * FROM results_psra_nu.psra_nu_src_loss
-UNION
-SELECT * FROM results_psra_on.psra_on_src_loss
-UNION
-SELECT * FROM results_psra_pe.psra_pe_src_loss
-UNION
-SELECT * FROM results_psra_qc.psra_qc_src_loss
-UNION
-SELECT * FROM results_psra_sk.psra_sk_src_loss
-UNION
-SELECT * FROM results_psra_yt.psra_yt_src_loss;
+SELECT * FROM results_psra_pe.psra_pe_src_loss;
+
+-- CREATE TABLE results_psra_national.psra_src_loss_tbl AS 
+-- SELECT * FROM results_psra_ab.psra_ab_src_loss
+-- UNION
+-- SELECT * FROM results_psra_bc.psra_bc_src_loss
+-- UNION
+-- SELECT * FROM results_psra_mb.psra_mb_src_loss
+-- UNION
+-- SELECT * FROM results_psra_nb.psra_nb_src_loss
+-- UNION
+-- SELECT * FROM results_psra_nl.psra_nl_src_loss
+-- UNION
+-- SELECT * FROM results_psra_ns.psra_ns_src_loss
+-- UNION
+-- SELECT * FROM results_psra_nt.psra_nt_src_loss
+-- UNION
+-- SELECT * FROM results_psra_nu.psra_nu_src_loss
+-- UNION
+-- SELECT * FROM results_psra_on.psra_on_src_loss
+-- UNION
+-- SELECT * FROM results_psra_pe.psra_pe_src_loss
+-- UNION
+-- SELECT * FROM results_psra_qc.psra_qc_src_loss
+-- UNION
+-- SELECT * FROM results_psra_sk.psra_sk_src_loss
+-- UNION
+-- SELECT * FROM results_psra_yt.psra_yt_src_loss;
 
 -- create psra pml national view
 DROP VIEW IF EXISTS results_psra_national.psra_src_loss CASCADE;
@@ -271,31 +326,40 @@ SELECT * FROM results_psra_national.psra_src_loss_tbl;
 DROP TABLE IF EXISTS results_psra_national.psra_hmaps_tbl CASCADE;
 
 CREATE TABLE results_psra_national.psra_hmaps_tbl AS 
-SELECT * FROM results_psra_ab.psra_ab_hmaps
-UNION
-SELECT * FROM results_psra_bc.psra_bc_hmaps
-UNION
-SELECT * FROM results_psra_mb.psra_mb_hmaps
-UNION
 SELECT * FROM results_psra_nb.psra_nb_hmaps
 UNION
 SELECT * FROM results_psra_nl.psra_nl_hmaps
 UNION
 SELECT * FROM results_psra_ns.psra_ns_hmaps
 UNION
-SELECT * FROM results_psra_nt.psra_nt_hmaps
-UNION
-SELECT * FROM results_psra_nu.psra_nu_hmaps
-UNION
-SELECT * FROM results_psra_on.psra_on_hmaps
-UNION
-SELECT * FROM results_psra_pe.psra_pe_hmaps
-UNION
-SELECT * FROM results_psra_qc.psra_qc_hmaps
-UNION
-SELECT * FROM results_psra_sk.psra_sk_hmaps
-UNION
-SELECT * FROM results_psra_yt.psra_yt_hmaps;
+SELECT * FROM results_psra_pe.psra_pe_hmaps;
+
+-- CREATE TABLE results_psra_national.psra_hmaps_tbl AS 
+-- SELECT * FROM results_psra_ab.psra_ab_hmaps
+-- UNION
+-- SELECT * FROM results_psra_bc.psra_bc_hmaps
+-- UNION
+-- SELECT * FROM results_psra_mb.psra_mb_hmaps
+-- UNION
+-- SELECT * FROM results_psra_nb.psra_nb_hmaps
+-- UNION
+-- SELECT * FROM results_psra_nl.psra_nl_hmaps
+-- UNION
+-- SELECT * FROM results_psra_ns.psra_ns_hmaps
+-- UNION
+-- SELECT * FROM results_psra_nt.psra_nt_hmaps
+-- UNION
+-- SELECT * FROM results_psra_nu.psra_nu_hmaps
+-- UNION
+-- SELECT * FROM results_psra_on.psra_on_hmaps
+-- UNION
+-- SELECT * FROM results_psra_pe.psra_pe_hmaps
+-- UNION
+-- SELECT * FROM results_psra_qc.psra_qc_hmaps
+-- UNION
+-- SELECT * FROM results_psra_sk.psra_sk_hmaps
+-- UNION
+-- SELECT * FROM results_psra_yt.psra_yt_hmaps;
 
 -- create psra hmaps national view
 DROP VIEW IF EXISTS results_psra_national.psra_hmaps CASCADE;
