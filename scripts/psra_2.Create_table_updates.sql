@@ -116,7 +116,6 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_cd_dmg_mean_b0, psra_{prov}.psra_{p
 
 /* psra_3.Create_table_agg_curves_stats.sql */
 
-/*
 -- combine b0 and r1 tables - q05
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q05 AS
 (SELECT
@@ -154,7 +153,7 @@ LEFT JOIN psra_{prov}.psra_{prov}_agg_curves_q95_r1 b ON a.return_period = b.ret
 a."GenType" = b."GenType" and a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence);
 
 DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_q95_b0, psra_{prov}.psra_{prov}_agg_curves_q95_r1;
-*/
+
 
 -- combine b0 and r1 tables
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_stats AS
