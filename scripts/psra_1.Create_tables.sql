@@ -554,6 +554,63 @@ structural_complete float
 
 
 /* psra_3.Create_table_agg_curves_stats.sql */
+-- script to agg curves - q05
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_q05_b0, psra_{prov}.psra_{prov}_agg_curves_q05_r1, psra_{prov}.psra_{prov}_agg_curves_q05 CASCADE;
+
+-- create table
+CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q05_b0(
+return_period varchar,
+loss_type varchar,
+fsauid varchar,
+"GenOcc" varchar,
+"GenType" varchar,
+loss_value float,
+loss_ratio float,
+annual_frequency_of_exceedence float
+);
+
+-- create table
+CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q05_r1(
+return_period varchar,
+loss_type varchar,
+fsauid varchar,
+"GenOcc" varchar,
+"GenType" varchar,
+loss_value float,
+loss_ratio float,
+annual_frequency_of_exceedence float
+);
+
+
+
+-- script to agg curves - q95
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_q95_b0, psra_{prov}.psra_{prov}_agg_curves_q95_r1, psra_{prov}.psra_{prov}_agg_curves_q95 CASCADE;
+
+-- create table
+CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q95_b0(
+return_period varchar,
+loss_type varchar,
+fsauid varchar,
+"GenOcc" varchar,
+"GenType" varchar,
+loss_value float,
+loss_ratio float,
+annual_frequency_of_exceedence float
+);
+
+-- create table
+CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q95_r1(
+return_period varchar,
+loss_type varchar,
+fsauid varchar,
+"GenOcc" varchar,
+"GenType" varchar,
+loss_value float,
+loss_ratio float,
+annual_frequency_of_exceedence float
+);
+
+
 -- script to agg curves stats
 DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_stats_b0, psra_{prov}.psra_{prov}_agg_curves_stats_r1, psra_{prov}.psra_{prov}_agg_curves_stats CASCADE;
 
