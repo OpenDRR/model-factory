@@ -240,7 +240,7 @@ SELECT * FROM results_psra_nl.psra_nl_uhs
 UNION
 SELECT * FROM results_psra_ns.psra_ns_uhs
 UNION
-SELECT * FROM results_psra_on.psra_on_uhs;
+SELECT * FROM results_psra_pe.psra_pe_uhs;
 
 -- CREATE TABLE results_psra_national.psra_uhs_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_uhs
