@@ -377,7 +377,7 @@ lat,
 "0.1_SA(0.5)",
 "0.1_SA(0.6)",
 "0.1_SA(1.0)",
-"0.1_SA(2.0)"
+"0.1_SA(2.0)",
 geom
 
 FROM psra_{prov}.psra_{prov}_uhs
