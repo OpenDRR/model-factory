@@ -575,6 +575,82 @@ def main ():
                             CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
+
+    #Copy agg curves q05 b0 table
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves_q05_b0(return_period,
+                                                                        loss_value,
+                                                                        loss_type,
+                                                                        fsauid,
+                                                                        "GenOcc",
+                                                                        "GenType",
+                                                                        loss_ratio,
+                                                                        annual_frequency_of_exceedence)
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q05_b0.csv
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+    
+    #Copy agg curves q05 r1 table
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves_q05_r1(return_period,
+                                                                        loss_value,
+                                                                        loss_type,
+                                                                        fsauid,
+                                                                        "GenOcc",
+                                                                        "GenType",
+                                                                        loss_ratio,
+                                                                        annual_frequency_of_exceedence)
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q05_r1.csv
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
+    #Copy agg curves stats q95 b0 table
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves_q95_b0(return_period,
+                                                                        loss_value,
+                                                                        loss_type,
+                                                                        fsauid,
+                                                                        "GenOcc",
+                                                                        "GenType",
+                                                                        loss_ratio,
+                                                                        annual_frequency_of_exceedence)
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q95_b0.csv
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+    
+    #Copy agg curves q95 r1 table
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves_q95_r1(return_period,
+                                                                        loss_value,
+                                                                        loss_type,
+                                                                        fsauid,
+                                                                        "GenOcc",
+                                                                        "GenType",
+                                                                        loss_ratio,
+                                                                        annual_frequency_of_exceedence)
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q95_r1.csv
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
     
     #Copy avg losses b0 table
     systemCall="""psql -h  ${{POSTGRES_HOST}}
