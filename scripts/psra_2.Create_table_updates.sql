@@ -115,6 +115,46 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_cd_dmg_mean_b0, psra_{prov}.psra_{p
 
 
 /* psra_3.Create_table_agg_curves_stats.sql */
+
+-- combine b0 and r1 tables - q05
+CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q05 AS
+(SELECT
+a.return_period,
+a.loss_type,
+a.fsauid,
+a."GenOcc",
+a."GenType",
+a.loss_value AS "loss_value_b0",
+a.loss_ratio AS "loss_ratio_b0",
+b.loss_value AS "loss_value_r1",
+b.loss_ratio AS "loss_ratio_r1",
+a.annual_frequency_of_exceedence
+FROM psra_{prov}.psra_{prov}_agg_curves_q05_b0 a
+LEFT JOIN psra_{prov}.psra_{prov}_agg_curves_q05_r1 b ON a.return_period = b.return_period AND a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND
+a."GenType" = b."GenType" and a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence);
+
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_q05_b0, psra_{prov}.psra_{prov}_agg_curves_q05_r1;
+
+-- combine b0 and r1 tables - q95
+CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q95 AS
+(SELECT
+a.return_period,
+a.loss_type,
+a.fsauid,
+a."GenOcc",
+a."GenType",
+a.loss_value AS "loss_value_b0",
+a.loss_ratio AS "loss_ratio_b0",
+b.loss_value AS "loss_value_r1",
+b.loss_ratio AS "loss_ratio_r1",
+a.annual_frequency_of_exceedence
+FROM psra_{prov}.psra_{prov}_agg_curves_q95_b0 a
+LEFT JOIN psra_{prov}.psra_{prov}_agg_curves_q95_r1 b ON a.return_period = b.return_period AND a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND
+a."GenType" = b."GenType" and a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence);
+
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_q95_b0, psra_{prov}.psra_{prov}_agg_curves_q95_r1;
+
+
 -- combine b0 and r1 tables
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_stats AS
 (SELECT
