@@ -556,7 +556,7 @@ def main ():
                             CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
+
     #Copy agg curves stats r1 table
     systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
@@ -575,7 +575,143 @@ def main ():
                             CSV HEADER ;'""".format(**{'prov':args.province})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
-    
+
+    #Copy agg curves q05 b0 table
+    with open("/usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q05_b0.csv".format(**{'prov':args.province}), "r") as f:
+        reader = csv.reader(f)
+        aggColumns = next(reader)
+    aggColumns = ','.join('"{0}"'.format(w) for w in aggColumns)
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves-q05_b0({aggColumns})
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q05_b0.csv
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province,
+                                                       'aggColumns':aggColumns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
+    #Copy agg curves q05 r1 table
+    with open("/usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q05_r1.csv".format(**{'prov':args.province}), "r") as f:
+        reader = csv.reader(f)
+        aggColumns = next(reader)
+    aggColumns = ','.join('"{0}"'.format(w) for w in aggColumns)
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves-q05_r1({aggColumns})
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q05_r1.csv
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province,
+                                                       'aggColumns':aggColumns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
+    #Copy agg curves q95 b0 table
+    with open("/usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q95_b0.csv".format(**{'prov':args.province}), "r") as f:
+        reader = csv.reader(f)
+        aggColumns = next(reader)
+    aggColumns = ','.join('"{0}"'.format(w) for w in aggColumns)
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves-q95_b0({aggColumns})
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q95_b0.csv
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province,
+                                                       'aggColumns':aggColumns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
+    #Copy agg curves q95 r1 table
+    with open("/usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q95_r1.csv".format(**{'prov':args.province}), "r") as f:
+        reader = csv.reader(f)
+        aggColumns = next(reader)
+    aggColumns = ','.join('"{0}"'.format(w) for w in aggColumns)
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves-q95_r1({aggColumns})
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q95_r1.csv
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province,
+                                                       'aggColumns':aggColumns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
+    #Copy agg losses q05 b0 table
+    with open("/usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_losses-q05_b0.csv".format(**{'prov':args.province}), "r") as f:
+        reader = csv.reader(f)
+        aggColumns = next(reader)
+    aggColumns = ','.join('"{0}"'.format(w) for w in aggColumns)
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_losses-q05_b0({aggColumns})
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_losses-q05_b0.csv
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province,
+                                                       'aggColumns':aggColumns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
+    #Copy agg losses q05 r1 table
+    with open("/usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_losses-q05_r1.csv".format(**{'prov':args.province}), "r") as f:
+        reader = csv.reader(f)
+        aggColumns = next(reader)
+    aggColumns = ','.join('"{0}"'.format(w) for w in aggColumns)
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_losses-q05_r1({aggColumns})
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_losses-q05_r1.csv
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province,
+                                                       'aggColumns':aggColumns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
+    #Copy agg losses q95 b0 table
+    with open("/usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_losses-q95_b0.csv".format(**{'prov':args.province}), "r") as f:
+        reader = csv.reader(f)
+        aggColumns = next(reader)
+    aggColumns = ','.join('"{0}"'.format(w) for w in aggColumns)
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_losses-q95_b0({aggColumns})
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_losses-q95_b0.csv
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province,
+                                                       'aggColumns':aggColumns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
+    #Copy agg losses q95 r1 table
+    with open("/usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_losses-q95_r1.csv".format(**{'prov':args.province}), "r") as f:
+        reader = csv.reader(f)
+        aggColumns = next(reader)
+    aggColumns = ','.join('"{0}"'.format(w) for w in aggColumns)
+    systemCall="""psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_losses-q95_r1({aggColumns})
+                        FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_losses-q95_r1.csv
+                            WITH 
+                            CSV HEADER ;'""".format(**{'prov':args.province,
+                                                       'aggColumns':aggColumns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
     #Copy avg losses b0 table
     systemCall="""psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
