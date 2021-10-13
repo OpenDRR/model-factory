@@ -27,6 +27,7 @@ def main():
         reader = csv.reader(f)
         hcurveColumns = next(reader)
     hcurveColumns = ','.join('"{0}"'.format(w) for w in hcurveColumns)
+    hcurveColumns = hcurveColumns.replace('-', '_')
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -46,6 +47,7 @@ def main():
         reader = csv.reader(f)
         hcurveColumns = next(reader)
     hcurveColumns = ','.join('"{0}"'.format(w) for w in hcurveColumns)
+    hcurveColumns = hcurveColumns.replace('-', '_')
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -65,6 +67,7 @@ def main():
         reader = csv.reader(f)
         hcurveColumns = next(reader)
     hcurveColumns = ','.join('"{0}"'.format(w) for w in hcurveColumns)
+    hcurveColumns = hcurveColumns.replace('-', '_')
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -84,6 +87,7 @@ def main():
         reader = csv.reader(f)
         hcurveColumns = next(reader)
     hcurveColumns = ','.join('"{0}"'.format(w) for w in hcurveColumns)
+    hcurveColumns = hcurveColumns.replace('-', '_')
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -103,6 +107,7 @@ def main():
         reader = csv.reader(f)
         hcurveColumns = next(reader)
     hcurveColumns = ','.join('"{0}"'.format(w) for w in hcurveColumns)
+    hcurveColumns = hcurveColumns.replace('-', '_')
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -122,6 +127,7 @@ def main():
         reader = csv.reader(f)
         hcurveColumns = next(reader)
     hcurveColumns = ','.join('"{0}"'.format(w) for w in hcurveColumns)
+    hcurveColumns = hcurveColumns.replace('-', '_')
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -141,6 +147,7 @@ def main():
         reader = csv.reader(f)
         hcurveColumns = next(reader)
     hcurveColumns = ','.join('"{0}"'.format(w) for w in hcurveColumns)
+    hcurveColumns = hcurveColumns.replace('-', '_')
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -160,6 +167,7 @@ def main():
         reader = csv.reader(f)
         hcurveColumns = next(reader)
     hcurveColumns = ','.join('"{0}"'.format(w) for w in hcurveColumns)
+    hcurveColumns = hcurveColumns.replace('-', '_')
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -167,7 +175,9 @@ def main():
                 -c '\copy psra_{prov}.psra_{prov}_hcurves_sa2p0({hcurveColumns})
                     FROM /usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_Sa2p0.csv
                         WITH
-                        CSV HEADER ;'""".format(**{'prov': args.province})
+                        CSV HEADER ;'""".format(**{
+                            'prov': args.province,
+                            'hcurveColumns': hcurveColumns})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
@@ -177,9 +187,9 @@ def main():
         reader = csv.reader(f)
         hmapColumns = next(reader)
     hmapColumns = ','.join('"{0}"'.format(w) for w in hmapColumns)
-    hmapColumns = hmapColumns.replace('-','_')
-    hmapColumns = hmapColumns.replace('"lon"','lon')
-    hmapColumns = hmapColumns.replace('"lat"','lat')
+    hmapColumns = hmapColumns.replace('-', '_')
+    hmapColumns = hmapColumns.replace('"lon"', 'lon')
+    hmapColumns = hmapColumns.replace('"lat"', 'lat')
 
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
@@ -195,7 +205,7 @@ def main():
     os.system(systemCall)
 
     # Copy hmaps_xref table
-    with open("/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps_xref".format(
+    with open("/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps_xref.csv".format(
             **{'prov': args.province}), "r") as f:
         reader = csv.reader(f)
         hmapColumns = next(reader)
@@ -207,7 +217,9 @@ def main():
                 -c '\copy psra_{prov}.psra_{prov}_hmaps_xref({hmapColumns})
                         FROM '/usr/src/app/cHazard/{prov}/cH_{prov}_hmaps_xref.csv'
                             WITH
-                            CSV HEADER ;'""".format(**{'prov': args.province})
+                            CSV HEADER ;'""".format(**{
+                                'prov': args.province,
+                                'hmapColumns': hmapColumns})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
@@ -285,7 +297,9 @@ def main():
                 -c '\copy psra_{prov}.psra_{prov}_ed_dmg_mean_b0({dmgColumns})
                     FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-mean_b0.csv
                         WITH
-                        CSV HEADER ;'""".format(**{'prov': args.province})
+                        CSV HEADER ;'""".format(**{
+                            'prov': args.province,
+                            'dmgColumns': dmgColumns})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
