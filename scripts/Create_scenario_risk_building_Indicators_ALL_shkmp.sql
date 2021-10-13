@@ -52,28 +52,28 @@ b."E_SFHshld",
 b."E_MFHshld",
 
 -- SFM
-CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Moderate_b0" / c.number) ELSE 0 END AS "SFM_b0",
-CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Moderate_r1" / c.number) ELSE 0 END AS "SFM_r1",
+CASE WHEN c.occclass1 IN ('RES1','RES2') THEN (a."sD_Moderate_b0" / c.number) ELSE 0 END AS "SFM_b0",
+CASE WHEN c.occclass1 IN ('RES1','RES2') THEN (a."sD_Moderate_r1" / c.number) ELSE 0 END AS "SFM_r1",
 
 -- SFE
-CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Extensive_b0" / c.number) ELSE 0 END AS "SFE_b0",
-CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Extensive_r1" / c.number) ELSE 0 END AS "SFE_r1",
+CASE WHEN c.occclass1 IN ('RES1','RES2') THEN (a."sD_Extensive_b0" / c.number) ELSE 0 END AS "SFE_b0",
+CASE WHEN c.occclass1 IN ('RES1','RES2')THEN (a."sD_Extensive_r1" / c.number) ELSE 0 END AS "SFE_r1",
 
 -- SFC
-CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Complete_b0" / c.number) ELSE 0 END AS "SFC_b0",
-CASE WHEN b."E_BldgOccG" = 'Residential-LD' THEN (a."sD_Complete_r1" / c.number) ELSE 0 END AS "SFC_r1",
+CASE WHEN c.occclass1 IN ('RES1','RES2') THEN (a."sD_Complete_b0" / c.number) ELSE 0 END AS "SFC_b0",
+CASE WHEN c.occclass1 IN ('RES1','RES2') THEN (a."sD_Complete_r1" / c.number) ELSE 0 END AS "SFC_r1",
 
 -- MFM
-CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Moderate_b0" / c.number) ELSE 0 END AS "MFM_b0",
-CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Moderate_r1" / c.number) ELSE 0 END AS "MFM_r1",
+CASE WHEN c.occclass1 IN ('RES3A','RES3B','RES3C','RES3D','RES3E','RES3F','RES4','RES5','RES6') THEN (a."sD_Moderate_b0" / c.number) ELSE 0 END AS "MFM_b0",
+CASE WHEN c.occclass1 IN ('RES3A','RES3B','RES3C','RES3D','RES3E','RES3F','RES4','RES5','RES6') THEN (a."sD_Moderate_r1" / c.number) ELSE 0 END AS "MFM_r1",
 
 -- MFE
-CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Extensive_b0" / c.number) ELSE 0 END AS "MFE_b0",
-CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Extensive_r1" / c.number) ELSE 0 END AS "MFE_r1",
+CASE WHEN c.occclass1 IN ('RES3A','RES3B','RES3C','RES3D','RES3E','RES3F','RES4','RES5','RES6') THEN (a."sD_Extensive_b0" / c.number) ELSE 0 END AS "MFE_b0",
+CASE WHEN c.occclass1 IN ('RES3A','RES3B','RES3C','RES3D','RES3E','RES3F','RES4','RES5','RES6') THEN (a."sD_Extensive_r1" / c.number) ELSE 0 END AS "MFE_r1",
 
 -- MFC
-CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Complete_b0" / c.number) ELSE 0 END AS "MFC_b0",
-CASE WHEN b."E_BldgOccG" = 'Residential-MD' OR b."E_BldgOccG" = 'Residential-HD' THEN (a."sD_Complete_r1" / c.number) ELSE 0 END AS "MFC_r1",
+CASE WHEN c.occclass1 IN ('RES3A','RES3B','RES3C','RES3D','RES3E','RES3F','RES4','RES5','RES6') THEN (a."sD_Complete_b0" / c.number) ELSE 0 END AS "MFC_b0",
+CASE WHEN c.occclass1 IN ('RES3A','RES3B','RES3C','RES3D','RES3E','RES3F','RES4','RES5','RES6') THEN (a."sD_Complete_r1" / c.number) ELSE 0 END AS "MFC_r1",
 
 0 AS "W_SFM",
 0 AS "W_SFE",
