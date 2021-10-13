@@ -17,7 +17,7 @@ CAST(CAST(ROUND(CAST(a.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgNum
 a.taxonomy AS "E_BldgTaxon",
 CAST(CAST(ROUND(CAST(a.bldg_ft2 * a.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "E_BldgArea",
 a.landuse AS "E_LandUse",
-a.genocc AS "E_BldgOccG",
+a.occtype AS "E_BldgOccG",
 a.occclass1 AS "E_BldgOccS1",
 a.occclass2 AS "E_BldgOccS2",
 a.gentype AS "E_BldgTypeG",
