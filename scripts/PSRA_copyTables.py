@@ -355,8 +355,8 @@ def main():
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
-                -a
-                -c '\copy psra_{prov}.psra_{prov}_agg_curves-q05_b0({aggColumns})
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves_q05_b0({aggColumns})
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q05_b0.csv
                             WITH
                             CSV HEADER ;'""".format(**{
@@ -373,8 +373,8 @@ def main():
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
-                -a
-                -c '\copy psra_{prov}.psra_{prov}_agg_curves-q05_r1({aggColumns})
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves_q05_r1({aggColumns})
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q05_r1.csv
                             WITH
                             CSV HEADER ;'""".format(**{'prov': args.province,
@@ -390,8 +390,8 @@ def main():
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
-                -a
-                -c '\copy psra_{prov}.psra_{prov}_agg_curves-q95_b0({aggColumns})
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves_q95_b0({aggColumns})
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q95_b0.csv
                             WITH
                             CSV HEADER ;'""".format(**{'prov': args.province,
@@ -407,8 +407,8 @@ def main():
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
-                -a
-                -c '\copy psra_{prov}.psra_{prov}_agg_curves-q95_r1({aggColumns})
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_curves_q95_r1({aggColumns})
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_curves-q95_r1.csv
                             WITH
                             CSV HEADER ;'""".format(**{'prov': args.province,
@@ -424,8 +424,8 @@ def main():
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
-                -a
-                -c '\copy psra_{prov}.psra_{prov}_agg_losses-q05_b0({aggColumns})
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_losses_q05_b0({aggColumns})
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_losses-q05_b0.csv
                             WITH
                             CSV HEADER ;'""".format(**{'prov': args.province,
@@ -441,8 +441,8 @@ def main():
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
-                -a
-                -c '\copy psra_{prov}.psra_{prov}_agg_losses-q05_r1({aggColumns})
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_losses_q05_r1({aggColumns})
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_losses-q05_r1.csv
                             WITH
                             CSV HEADER ;'""".format(**{'prov': args.province,
@@ -458,8 +458,8 @@ def main():
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
-                -a
-                -c '\copy psra_{prov}.psra_{prov}_agg_losses-q95_b0({aggColumns})
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_losses_q95_b0({aggColumns})
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_losses-q95_b0.csv
                             WITH
                             CSV HEADER ;'""".format(**{'prov': args.province,
@@ -475,8 +475,8 @@ def main():
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
-                -a
-                -c '\copy psra_{prov}.psra_{prov}_agg_losses-q95_r1({aggColumns})
+                -a 
+                -c '\copy psra_{prov}.psra_{prov}_agg_losses_q95_r1({aggColumns})
                         FROM /usr/src/app/ebRisk/{prov}/ebR_{prov}_agg_losses-q95_r1.csv
                             WITH
                             CSV HEADER ;'""".format(**{
