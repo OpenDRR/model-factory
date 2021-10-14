@@ -133,6 +133,9 @@ FROM psra_{prov}.psra_{prov}_agg_curves_q05_b0 a
 LEFT JOIN psra_{prov}.psra_{prov}_agg_curves_q05_r1 b ON a.return_period = b.return_period AND a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND
 a."GenType" = b."GenType" and a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence);
 
+-- delete *total* rows from table
+DELETE FROM psra_{prov}.psra_{prov}_agg_curves_q05 WHERE fsauid = '*total*';
+
 DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_q05_b0, psra_{prov}.psra_{prov}_agg_curves_q05_r1;
 
 -- combine b0 and r1 tables - q95
@@ -151,6 +154,9 @@ a.annual_frequency_of_exceedence
 FROM psra_{prov}.psra_{prov}_agg_curves_q95_b0 a
 LEFT JOIN psra_{prov}.psra_{prov}_agg_curves_q95_r1 b ON a.return_period = b.return_period AND a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND
 a."GenType" = b."GenType" and a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence);
+
+-- delete *total* rows from table
+DELETE FROM psra_{prov}.psra_{prov}_agg_curves_q95 WHERE fsauid = '*total*';
 
 DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_q95_b0, psra_{prov}.psra_{prov}_agg_curves_q95_r1;
 
@@ -171,6 +177,9 @@ a.annual_frequency_of_exceedence
 FROM psra_{prov}.psra_{prov}_agg_curves_stats_b0 a
 LEFT JOIN psra_{prov}.psra_{prov}_agg_curves_stats_r1 b ON a.return_period = b.return_period AND a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND
 a."GenType" = b."GenType" and a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence);
+
+-- delete *total* rows from table
+DELETE FROM psra_{prov}.psra_{prov}_agg_curves_stats WHERE fsauid = '*total*';
 
 DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_stats_b0, psra_{prov}.psra_{prov}_agg_curves_stats_r1;
 
