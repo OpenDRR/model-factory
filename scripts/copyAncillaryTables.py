@@ -4,167 +4,56 @@ import os
 import argparse
 import configparser
 import logging
+import csv
 
 '''
 Script to copy Ancillary tables into PostGIS
 python3 copyAncillaryTables.py
 '''
 
-#Main Function
+# Main Function
 def main ():
     logging.basicConfig(level=logging.INFO,
-                format='%(asctime)s - %(levelname)s - %(message)s',
-                handlers=[logging.FileHandler('/tmp/{}.log'.format(os.path.splitext(sys.argv[0])[0])),
+                        format='%(asctime)s - %(levelname)s - %(message)s',
+                        handlers=[logging.FileHandler('/tmp/{}.log'.format(
+                            os.path.splitext(sys.argv[0])[0])),
                             logging.StreamHandler()])
     os.chdir(sys.path[0])
-    auth = get_config_params('config.ini')
-    args = parse_args()
+    # auth = get_config_params('config.ini')
+    # args = parse_args()
 
     # Copy Canada Exposure Model
-    systemCall='''psql -h ${POSTGRES_HOST}
+    with open("/usr/src/app/BldgExpRef_CA_master_v3p2.csv") as f:
+        reader = csv.reader(f)
+        columns = next(reader)
+    columns = ','.join('"{0}"'.format(w) for w in columns)
+    systemCall = '''psql -h ${POSTGRES_HOST}
                     -U ${POSTGRES_USER}
                     -d ${DB_NAME}
                     -a
-                    -c "\copy exposure.canada_exposure (objectid,
-                                                        id,
-                                                        SauidLat,
-                                                        SauidLon,
-                                                        Sauid_km2,
-                                                        Sauid_ha,
-                                                        LandUse,
-                                                        taxonomy,
-                                                        number,
-                                                        structural,
-                                                        nonstructural,
-                                                        contents,
-                                                        retrofitting,
-                                                        day,
-                                                        night,
-                                                        transit,
-                                                        GenOcc,
-                                                        OccType,
-                                                        OccClass1,
-                                                        OccClass2,
-                                                        PopDU,
-                                                        GenType,
-                                                        BldgType,
-                                                        NumFloors,
-                                                        Bldg_ft2,
-                                                        BldYear,
-                                                        BldEpoch,
-                                                        SSC_Zone,
-                                                        EqDesLev,
-                                                        sauid,
-                                                        dauid,
-                                                        adauid,
-                                                        fsauid,
-                                                        csduid,
-                                                        csdname,
-                                                        cduid,
-                                                        cdname,
-                                                        SAC,
-                                                        eruid,
-                                                        ername,
-                                                        pruid,
-                                                        prname,
-                                                        SS_Region,
-                                                        nation)
+                    -c "\copy exposure.canada_exposure ({columns})
                         FROM '/usr/src/app/BldgExpRef_CA_master_v3p2.csv'
                             WITH
                             DELIMITER AS ','
-                            CSV HEADER ;" '''
+                            CSV HEADER ;" '''.format(**{
+                                'columns': columns})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
     # Copy Site exposure model
-    systemCall="""psql -h ${POSTGRES_HOST}
+    with open("/usr/src/app/PhysExpRef_MetroVan_v4.csv") as f:
+        reader = csv.reader(f)
+        columns = next(reader)
+    columns = ','.join('"{0}"'.format(w) for w in columns)
+    systemCall = """psql -h ${POSTGRES_HOST}
                 -U ${POSTGRES_USER} 
                 -d ${DB_NAME}
                 -a 
-                -c '\copy  exposure.metrovan_site_exposure (OBJECTID,
-                                                            id,
-                                                            SiteID,
-                                                            SiteLon,
-                                                            SiteLat,
-                                                            SauidID,
-                                                            SauidLat,
-                                                            SauidLon,
-                                                            Sauid_km2,
-                                                            Sauid_ha,
-                                                            LandUse,
-                                                            taxonomy,
-                                                            number,
-                                                            structural,
-                                                            nonstructural,
-                                                            contents,
-                                                            business,
-                                                            "limit",
-                                                            deductible,
-                                                            retrofitting,
-                                                            day,
-                                                            night,
-                                                            transit,
-                                                            GenOcc,
-                                                            OccClass1,
-                                                            OccClass2,
-                                                            PopDU,
-                                                            GenType,
-                                                            BldgType,
-                                                            NumFloors,
-                                                            Bldg_ft2,
-                                                            BldYear,
-                                                            BldEpoch,
-                                                            SSC_Zone,
-                                                            EqDesLev,
-                                                            sauid,
-                                                            dauid,
-                                                            adauid,
-                                                            fsauid,
-                                                            csduid,
-                                                            csdname,
-                                                            cduid,
-                                                            cdname,
-                                                            SAC,
-                                                            eruid,
-                                                            ername,
-                                                            pruid,
-                                                            prname,
-                                                            OBJECTID_1,
-                                                            OBJECTID_12,
-                                                            SAUIDt,
-                                                            SAUIDi,
-                                                            Lon,
-                                                            Lat,
-                                                            Area_km2,
-                                                            Area_ha,
-                                                            DAUIDt,
-                                                            DAUIDi,
-                                                            ADAUID_1,
-                                                            CFSAUID,
-                                                            PRUID_1,
-                                                            PRNAME_1,
-                                                            CSDUID_1,
-                                                            CSDNAME_1,
-                                                            CSDTYPE,
-                                                            CDUID_1,
-                                                            CDNAME_1,
-                                                            CDTYPE,
-                                                            CCSUID,
-                                                            CCSNAME,
-                                                            ERUID_1,
-                                                            ERNAME_1,
-                                                            SACCODE,
-                                                            SACTYPE,
-                                                            CMAUID,
-                                                            CMAPUID,
-                                                            CMANAME,
-                                                            CMATYPE,
-                                                            Shape_Leng,
-                                                            Shape_Length,
-                                                            Shape_Area)
+                -c '\copy  exposure.metrovan_site_exposure ({columns})
                         FROM /usr/src/app/PhysExpRef_MetroVan_v4.csv
-                            WITH 
-                            CSV HEADER ;'"""
+                            WITH
+                            CSV HEADER ;'""".format(**{
+                                'columns': columns})
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
@@ -297,7 +186,7 @@ def main ():
                                                         Work_None,
                                                         Employ_Inc)
                         FROM '/usr/src/app/census-attributes-2016.csv'
-                            WITH 
+                            WITH
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
@@ -389,7 +278,7 @@ def main ():
                                                     renter,
                                                     dauid_text)
                         FROM '/usr/src/app/social-vulnerability-index.csv'
-                            WITH 
+                            WITH
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
@@ -482,7 +371,7 @@ def main ():
                                                     renter,
                                                     dauid_text)
                         FROM '/usr/src/app/social-vulnerability-census.csv'
-                            WITH 
+                            WITH
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
@@ -526,7 +415,7 @@ def main ():
                                                     pubtrans_t,
                                                     retail_t)
                         FROM '/usr/src/app/sovi_thresholds_2021.csv'
-                            WITH 
+                            WITH
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
@@ -541,7 +430,7 @@ def main ():
                                                         "eqbldgtype",
                                                         "collapse_pc")
                         FROM '/usr/src/app/collapse_probability.csv'
-                            WITH 
+                            WITH
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
@@ -549,7 +438,7 @@ def main ():
 
     #Copy Retrofit costs table
     # Retrofit costs depricated
-    # systemCall="""psql -h ${POSTGRES_HOST}
+    # systemCall = """psql -h ${POSTGRES_HOST}
     #             -U ${POSTGRES_USER}
     #             -d ${DB_NAME}
     #             -a 
@@ -610,7 +499,7 @@ def main ():
                                                         SACTYPE,
                                                         NEAR_FID)
                         FROM '/usr/src/app/mh-intensity-ghsl.csv'
-                            WITH 
+                            WITH
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
@@ -650,7 +539,7 @@ def main ():
                                                     cy1000,
                                                     svlt_score)
                         FROM '/usr/src/app/HTi_sauid.csv'
-                            WITH 
+                            WITH
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
@@ -671,7 +560,7 @@ def main ():
                                                 hti_lndsus,
                                                 hti_cy500)
                     FROM '/usr/src/app/HTi_thresholds.csv'
-                            WITH 
+                            WITH
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
@@ -704,7 +593,7 @@ def main ():
                                                     cy_bldg_asset_frm,
                                                     cy_bldg_asset_to)
                     FROM '/usr/src/app/hazard_threat_rating_thresholds.csv'
-                            WITH 
+                            WITH
                             DELIMITER AS ','
                             CSV HEADER ;"'''
     systemCall = ' '.join(systemCall.split())
