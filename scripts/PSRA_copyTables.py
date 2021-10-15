@@ -292,6 +292,7 @@ def main():
         reader = csv.reader(f)
         dmgColumns = next(reader)
     dmgColumns = ','.join('"{0}"'.format(w) for w in dmgColumns)
+    dmgColumns = dmgColumns.replace('~', '_')
     systemCall = """psql -h  ${{POSTGRES_HOST}}
                 -U  ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
