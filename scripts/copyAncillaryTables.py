@@ -46,6 +46,7 @@ def main():
         reader = csv.reader(f)
         columns = next(reader)
     columns = ','.join('"{0}"'.format(w) for w in columns)
+    columns = columns.lower()
     systemCall = """psql -h ${{POSTGRES_HOST}}
                 -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -97,6 +98,7 @@ def main():
         reader = csv.reader(f)
         columns = next(reader)
     columns = ','.join('"{0}"'.format(w) for w in columns)
+    columns = columns.lower()
     systemCall = """psql -h ${{POSTGRES_HOST}}
                 -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -113,7 +115,34 @@ def main():
     with open("/usr/src/app/social-vulnerability-index.csv") as f:
         reader = csv.reader(f)
         columns = next(reader)
+
     columns = ','.join('"{0}"'.format(w) for w in columns)
+    columns = columns.lower()
+    columns = columns.replace('van_', '').replace('ven_', '').replace('vfn_', '').replace('vhn_', '')
+    columns = columns.replace(',"age', ',"age_')
+    columns = columns.replace('health', 'health_job')
+    columns = columns.replace('noengfr', 'no_engfr')
+    columns = columns.replace('noseced', 'nosec_school')
+    columns = columns.replace('visminority', 'vis_min')
+    columns = columns.replace('pubtrans', 'pub_trans')
+    columns = columns.replace('inchshld', 'inc_hshld')
+    columns = columns.replace('incindiv', 'inc_indv')
+    columns = columns.replace('inclowdecile', 'inc_lowdecile')
+    columns = columns.replace('retail', 'retail_job')
+    columns = columns.replace('shltrgt30', 'shltr_gt30')
+    columns = columns.replace('worknone', 'work_none')
+    columns = columns.replace('workpart', 'work_parttime')
+    columns = columns.replace('incemploy', 'employ_inc')
+    columns = columns.replace('famgt5', 'fam_gt5')
+    columns = columns.replace('immlt5', 'imm_lt5')
+    columns = columns.replace('livalone', 'live_alone')
+    columns = columns.replace('lonpar3kids', 'lonepar3kids')
+    columns = columns.replace('movedlt1', 'moved_lt1')
+    columns = columns.replace('mntn1', 'hshld_mntn1')
+    columns = columns.replace('mntnage', 'hshld_mntnage')
+    columns = columns.replace('nsuit', 'hshld_nsuit')
+    columns = columns.replace('pre1975', 'pre_1975')
+
     systemCall = """psql -h ${{POSTGRES_HOST}}
                 -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -123,6 +152,7 @@ def main():
                             WITH
                             CSV HEADER ;'""".format(**{
                                 'columns': columns})
+
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
@@ -130,7 +160,33 @@ def main():
     with open("/usr/src/app/social-vulnerability-census.csv") as f:
         reader = csv.reader(f)
         columns = next(reader)
+
     columns = ','.join('"{0}"'.format(w) for w in columns)
+    columns = columns.lower()
+    columns = columns.replace('va_', '').replace('ve_', '').replace('vf_', '').replace('vh_', '')
+    columns = columns.replace(',"age', ',"age_')
+    columns = columns.replace('health', 'health_job')
+    columns = columns.replace('noengfr', 'no_engfr')
+    columns = columns.replace('noseced', 'nosec_school')
+    columns = columns.replace('visminority', 'vis_min')
+    columns = columns.replace('pubtrans', 'pub_trans')
+    columns = columns.replace('inchshld', 'inc_hshld')
+    columns = columns.replace('incindiv', 'inc_indv')
+    columns = columns.replace('inclowdecile', 'inc_lowdecile')
+    columns = columns.replace('retail', 'retail_job')
+    columns = columns.replace('shltrgt30', 'shltr_gt30')
+    columns = columns.replace('worknone', 'work_none')
+    columns = columns.replace('workpart', 'work_parttime')
+    columns = columns.replace('incemploy', 'employ_inc')
+    columns = columns.replace('famgt5', 'fam_gt5')
+    columns = columns.replace('immlt5', 'imm_lt5')
+    columns = columns.replace('livalone', 'live_alone')
+    columns = columns.replace('lonpar3kids', 'lonepar3kids')
+    columns = columns.replace('movedlt1', 'moved_lt1')
+    columns = columns.replace('mntn1', 'hshld_mntn1')
+    columns = columns.replace('mntnage', 'hshld_mntnage')
+    columns = columns.replace('nsuit', 'hshld_nsuit')
+    columns = columns.replace('pre1975', 'pre_1975')
     systemCall = """psql -h ${{POSTGRES_HOST}}
                 -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -140,6 +196,7 @@ def main():
                             WITH
                             CSV HEADER ;'""".format(**{
                                 'columns': columns})
+
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
@@ -147,6 +204,7 @@ def main():
     with open("/usr/src/app/sovi_thresholds_2021.csv") as f:
         reader = csv.reader(f)
         columns = next(reader)
+
     columns = ','.join('"{0}"'.format(w) for w in columns)
     systemCall = """psql -h ${{POSTGRES_HOST}}
                 -U ${{POSTGRES_USER}}
@@ -157,8 +215,10 @@ def main():
                             WITH
                             CSV HEADER ;'""".format(**{
                                 'columns': columns})
+
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
+
 
     # Copy table collapse probability
     with open("/usr/src/app/collapse_probability.csv") as f:
@@ -202,7 +262,9 @@ def main():
     with open("/usr/src/app/mh-intensity-ghsl.csv") as f:
         reader = csv.reader(f)
         columns = next(reader)
+
     columns = ','.join('"{0}"'.format(w) for w in columns)
+    columns = columns.lower()
     systemCall = """psql -h ${{POSTGRES_HOST}}
                 -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -212,14 +274,26 @@ def main():
                             WITH
                             CSV HEADER ;'""".format(**{
                                 'columns': columns})
+
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
+
 
     # Copy MH Intensity Table
     with open("/usr/src/app/HTi_sauid.csv") as f:
         reader = csv.reader(f)
         columns = next(reader)
+
     columns = ','.join('"{0}"'.format(w) for w in columns)
+    columns = columns.lower()
+    columns = columns.replace('e_sauid"', 'sauidt"')
+    columns = columns.replace(',"e_', ',"')
+    columns = columns.replace('sauidlon', 'lon')
+    columns = columns.replace('sauidlat', 'lat')
+    columns = columns.replace(',"hti_', ',"')
+    columns = columns.replace(',"ph_', ',"')
+    columns = columns.replace('svit_score', 'svlt_score')
+
     systemCall = """psql -h ${{POSTGRES_HOST}}
                 -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
@@ -229,8 +303,10 @@ def main():
                             WITH
                             CSV HEADER ;'""".format(**{
                                 'columns': columns})
+
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
+
 
     # Copy MH Threshold Table
     with open("/usr/src/app/HTi_thresholds.csv") as f:
