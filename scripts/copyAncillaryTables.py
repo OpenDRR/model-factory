@@ -249,7 +249,7 @@ def main():
     os.system(systemCall)
 
     # Copy MH Rating Threshold Table
-    with open("/usr/src/hazard_threat_rating_thresholds.csv") as f:
+    with open("/usr/src/app/hazard_threat_rating_thresholds.csv") as f:
         reader = csv.reader(f)
         columns = next(reader)
     columns = ','.join('"{0}"'.format(w) for w in columns)
