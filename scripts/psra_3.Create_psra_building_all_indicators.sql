@@ -87,6 +87,15 @@ CAST(CAST(ROUND(CAST(g.structural_complete_r1 * f.collapse_pc AS NUMERIC),6) AS 
 -- eDsd_Collapse_r1
 CAST(CAST(ROUND(CAST((g.structural_complete_r1/a.number) * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_Collapse_r1",
 
+-- 2.3 Affected People
+-- 2.3.1 Life Safety - b0
+CAST(CAST(ROUND(CAST(occupants_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eC_Fatality_b0",
+CAST(CAST(ROUND(CAST(COALESCE(occupants_b0/NULLIF(a.night,0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCr_Fatality_b0",
+
+-- 2.3.1 Life Safety - r1
+CAST(CAST(ROUND(CAST(occupants_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eC_Fatality_r1",
+CAST(CAST(ROUND(CAST(COALESCE(occupants_r1/NULLIF(a.night,0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCr_Fatality_r1",
+
 -- 2.4.1 Economic Loss - b0
 CAST(CAST(ROUND(CAST(i.structural_b0 + i.nonstructural_b0 + i.contents_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAAL_Asset_b0",
 CAST(CAST(ROUND(CAST((i.structural_b0 + i.nonstructural_b0 + i.contents_b0)/a.number AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALr_Asset_b0",
