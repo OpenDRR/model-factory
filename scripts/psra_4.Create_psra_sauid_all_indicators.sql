@@ -279,26 +279,106 @@ j.eqri_rel_score_r1,j.eqri_rel_rating_r1,z."PRUID",z."PRNAME",z."ERUID",z."ERNAM
 
 
 
+-- aggregate to csd level
+DROP VIEW IF EXISTS results_psra_{prov}.psra_{prov}_indicators_csd CASCADE;
+CREATE VIEW results_psra_{prov}.psra_{prov}_indicators_csd AS 
+
+SELECT
+a.csduid,
+a.csdname,
+ROUND(SUM("eDt_Slight_b0"),6) AS "eDt_Slight_b0",
+ROUND(AVG("eDtr_Slight_b0"),6) AS "eDtr_Slight_b0",
+ROUND(SUM("eDt_Moderate_b0"),6) AS "eDt_Moderate_b0",
+ROUND(AVG("eDtr_Moderate_b0"),6) AS "eDtr_Moderate_b0",
+ROUND(SUM("eDt_Extensive_b0"),6) AS "eDt_Extensive_b0",
+ROUND(AVG("eDtr_Extensive_b0"),6) AS "eDtr_Extensive_b0",
+ROUND(SUM("eDt_Complete_b0"),6) AS "eDt_Complete_b0",
+ROUND(AVG("eDtr_Complete_b0"),6) AS "eDtr_Complete_b0",
+ROUND(SUM("eDt_Collapse_b0"),6) AS "eDt_Collapse_b0",
+ROUND(AVG("eDtr_Collapse_b0"),6) AS "eDtr_Collapse_b0",
+
+ROUND(SUM("eDt_Slight_r1"),6) AS "eDt_Slight_r1",
+ROUND(AVG("eDtr_Slight_r1"),6) AS "eDtr_Slight_r1",
+ROUND(SUM("eDt_Moderate_r1"),6) AS "eDt_Moderate_r1",
+ROUND(AVG("eDtr_Moderate_r1"),6) AS "eDtr_Moderate_r1",
+ROUND(SUM("eDt_Extensive_r1"),6) AS "eDt_Extensive_r1",
+ROUND(AVG("eDtr_Extensive_r1"),6) AS "eDtr_Extensive_r1",
+ROUND(SUM("eDt_Complete_r1"),6) AS "eDt_Complete_r1",
+ROUND(AVG("eDtr_Complete_r1"),6) AS "eDtr_Complete_r1",
+ROUND(SUM("eDt_Collapse_r1"),6) AS "eDt_Collapse_r1",
+ROUND(AVG("eDtr_Collapse_r1"),6) AS "eDtr_Collapse_r1",
+
+ROUND(SUM("eC_Fatality_b0"),6) AS "eC_Fatality_b0",
+ROUND(AVG("eCr_Fatality_b0"),6) AS "eCr_Fatality_b0",
+
+ROUND(SUM("eC_Fatality_r1"),6) AS "eC_Fatality_r1",
+ROUND(AVG("eCr_Fatality_r1"),6) AS "eCr_Fatality_r1",
+
+ROUND(SUM("eAALt_Asset_b0"),6) AS "eAALt_Asset_b0",
+ROUND(AVG("eAALm_Asset_b0"),6) AS "eAALm_Asset_b0",
+ROUND(SUM("eAALt_Bldg_b0"),6) AS "eAALt_Bldg_b0",
+ROUND(AVG("eAALm_Bldg_b0"),6) AS "eAALm_Bldg_b0",
+ROUND(SUM("eAALt_Str_b0"),6) AS "eAALt_Str_b0",
+ROUND(SUM("eAALt_NStr_b0"),6) AS "eAALt_NStr_b0",
+ROUND(SUM("eAALt_Cont_b0"),6) AS "eAALt_Cont_b0",
+
+ROUND(SUM("eAALt_Asset_r1"),6) AS "eAALt_Asset_r1",
+ROUND(AVG("eAALm_Asset_r1"),6) AS "eAALm_Asset_r1",
+ROUND(SUM("eAALt_Bldg_r1"),6) AS "eAALt_Bldg_r1",
+ROUND(AVG("eAALm_Bldg_r1"),6) AS "eAALm_Bldg_r1",
+ROUND(SUM("eAALt_Str_r1"),6) AS "eAALt_Str_r1",
+ROUND(SUM("eAALt_NStr_r1"),6) AS "eAALt_NStr_r1",
+ROUND(SUM("eAALt_Cont_r1"),6) AS "eAALt_Cont_r1",
+
+b.geom
+
+FROM results_psra_{prov}.psra_{prov}_indicators_s a
+LEFT JOIN boundaries."Geometry_CSDUID" b ON a.csduid = b."CSDUID"
+GROUP BY a.csduid,a.csdname,b.geom;
+
+
+
 -- create psra indicators
-DROP VIEW IF EXISTS results_psra_{prov}.psra_{prov}_pml_s CASCADE;
-CREATE VIEW results_psra_{prov}.psra_{prov}_pml_s AS
+DROP VIEW IF EXISTS results_psra_{prov}.psra_{prov}_expected_loss_fsa CASCADE;
+CREATE VIEW results_psra_{prov}.psra_{prov}_expected_loss_fsa AS
 
 -- 2.0 Seismic Risk (PSRA)
 -- 2.4 Economic Security
 SELECT
-a.fsauid AS "ePML_FSAUID",
+a.fsauid AS "e_FSAUID",
 
--- 2.4.2 Probable Maximum Loss
-a.loss_value_b0 AS "ePML_b0",
-a.loss_ratio_b0 AS "ePMLr_b0",
-a.loss_value_r1 AS "ePML_r1",
-a.loss_ratio_r1 AS "ePMLr_r1",
-a.loss_type AS "ePML_type",
-a.return_period AS "ePML_Period",
-a.annual_frequency_of_exceedence AS "ePML_Probability",
-a."GenOcc" AS "ePML_OccGen",
-a."GenType" AS "ePML_BldgType"
+-- 2.4.2 Expected Loss
+COALESCE(a.loss_value_b0,0) AS "eEL_b0",
+COALESCE(a.loss_ratio_b0,0) AS "eELr_b0",
+COALESCE(a.loss_value_r1,0) AS "eEL_r1",
+COALESCE(a.loss_ratio_r1,0) AS "eELr_r1",
+
+-- q05
+COALESCE(b.loss_value_b0,0) AS "e5L_b0",
+COALESCE(b.loss_ratio_b0,0) AS "e5Lr_b0",
+COALESCE(b.loss_value_r1,0) AS "e5L_r1",
+COALESCE(b.loss_ratio_r1,0) AS "e5Lr_r1",
+
+-- q95
+COALESCE(c.loss_value_b0,0) AS "e95L_b0",
+COALESCE(c.loss_ratio_b0,0) AS "e95Lr_b0",
+COALESCE(c.loss_value_r1,0) AS "e95L_r1",
+COALESCE(c.loss_ratio_r1,0) AS "e95Lr_r1",
+
+a.loss_type AS "eEL_type",
+a.return_period AS "eEL_Period",
+a.annual_frequency_of_exceedence AS "eEL_Probability",
+a."GenOcc" AS "eEL_OccGen",
+a."GenType" AS "eEL_BldgType",
+UPPER('{prov}') AS "e_Aggregation"
 --b.geom  -in case fsa geom is needed
 
 FROM psra_{prov}.psra_{prov}_agg_curves_stats a
-LEFT JOIN boundaries."Geometry_FSAUID" b ON a.fsauid = b."CFSAUID";
+FULL JOIN psra_{prov}.psra_{prov}_agg_curves_q05 b ON a.return_period = b.return_period AND a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND a."GenType" = b."GenType" 
+	AND a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence
+FULL JOIN psra_{prov}.psra_{prov}_agg_curves_q95 c ON a.return_period = c.return_period AND a.loss_type = c.loss_type AND a.fsauid = c.fsauid AND a."GenOcc" = c."GenOcc" AND a."GenType" = c."GenType" 
+	AND a.annual_frequency_of_exceedence = c.annual_frequency_of_exceedence
+ORDER BY a.fsauid ASC;
+--LEFT JOIN boundaries."Geometry_FSAUID" b ON a.fsauid = b."CFSAUID";
+
+
