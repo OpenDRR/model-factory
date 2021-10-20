@@ -221,65 +221,14 @@ SELECT * FROM results_psra_pe.psra_pe_expected_loss_fsa;
 ALTER TABLE results_psra_national.psra_expected_loss_fsa_tbl ADD COLUMN fid SERIAL;
 
 -- create index
-CREATE INDEX psra_expected_loss_fsa_tbl_sauid_idx ON results_psra_national.psra_expected_loss_fsa_tbl("ePML_FSAUID");
+CREATE INDEX psra_expected_loss_fsa_tbl_sauid_idx ON results_psra_national.psra_expected_loss_fsa_tbl("eEL_FSAUID");
 CREATE INDEX psra_expected_loss_fsa_tbl_fid_idx ON results_psra_national.psra_expected_loss_fsa_tbl("fid");
 
 
 -- create psra pml national view
-DROP VIEW IF EXISTS results_psra_national.psra_pml_s CASCADE;
-CREATE VIEW results_psra_national.psra_pml_s AS SELECT * FROM results_psra_national.psra_pml_s_tbl;
+DROP VIEW IF EXISTS results_psra_national.psra_expected_loss_fsa CASCADE;
+CREATE VIEW results_psra_national.psra_expected_loss_fsa AS SELECT * FROM results_psra_national.psra_expected_loss_fsa_tbl;
 
-
-
--- combine psra uhs indicators into national level
-DROP TABLE IF EXISTS results_psra_national.psra_uhs_tbl CASCADE;
-
-CREATE TABLE results_psra_national.psra_uhs_tbl AS 
-SELECT * FROM results_psra_nb.psra_nb_uhs
-UNION
-SELECT * FROM results_psra_nl.psra_nl_uhs
-UNION
-SELECT * FROM results_psra_ns.psra_ns_uhs
-UNION
-SELECT * FROM results_psra_pe.psra_pe_uhs;
-
--- CREATE TABLE results_psra_national.psra_uhs_tbl AS 
--- SELECT * FROM results_psra_ab.psra_ab_uhs
--- UNION
--- SELECT * FROM results_psra_bc.psra_bc_uhs
--- UNION
--- SELECT * FROM results_psra_mb.psra_mb_uhs
--- UNION
--- SELECT * FROM results_psra_nb.psra_nb_uhs
--- UNION
--- SELECT * FROM results_psra_nl.psra_nl_uhs
--- UNION
--- SELECT * FROM results_psra_ns.psra_ns_uhs
--- UNION
--- SELECT * FROM results_psra_nt.psra_nt_uhs
--- UNION
--- SELECT * FROM results_psra_nu.psra_nu_uhs
--- UNION
--- SELECT * FROM results_psra_on.psra_on_uhs
--- UNION
--- SELECT * FROM results_psra_pe.psra_pe_uhs
--- UNION
--- SELECT * FROM results_psra_qc.psra_qc_uhs
--- UNION
--- SELECT * FROM results_psra_sk.psra_sk_uhs
--- UNION
--- SELECT * FROM results_psra_yt.psra_yt_uhs;
-
--- add fid column
-ALTER TABLE results_psra_national.psra_uhs_tbl ADD COLUMN fid SERIAL;
-
--- create index
-CREATE INDEX psra_uhs_tbl_geom_idx ON results_psra_national.psra_uhs_tbl USING GIST(geom);
-CREATE INDEX psra_uhs_tbl_fid_idx ON results_psra_national.psra_uhs_tbl("fid");
-
--- create psra pml national view
-DROP VIEW IF EXISTS results_psra_national.psra_uhs CASCADE;
-CREATE VIEW results_psra_national.psra_uhs AS SELECT * FROM results_psra_national.psra_uhs_tbl;
 
 
 
@@ -329,51 +278,3 @@ ALTER TABLE results_psra_national.psra_src_loss_tbl ADD COLUMN fid SERIAL;
 -- create psra src national view
 DROP VIEW IF EXISTS results_psra_national.psra_src_loss CASCADE;
 CREATE VIEW results_psra_national.psra_src_loss AS SELECT * FROM results_psra_national.psra_src_loss_tbl;
-
-
-
--- combine psra hmaps into national level
-DROP TABLE IF EXISTS results_psra_national.psra_hmaps_tbl CASCADE;
-
-CREATE TABLE results_psra_national.psra_hmaps_tbl AS 
-SELECT * FROM results_psra_nb.psra_nb_hmaps
-UNION
-SELECT * FROM results_psra_nl.psra_nl_hmaps
-UNION
-SELECT * FROM results_psra_ns.psra_ns_hmaps
-UNION
-SELECT * FROM results_psra_pe.psra_pe_hmaps;
-
--- CREATE TABLE results_psra_national.psra_hmaps_tbl AS 
--- SELECT * FROM results_psra_ab.psra_ab_hmaps
--- UNION
--- SELECT * FROM results_psra_bc.psra_bc_hmaps
--- UNION
--- SELECT * FROM results_psra_mb.psra_mb_hmaps
--- UNION
--- SELECT * FROM results_psra_nb.psra_nb_hmaps
--- UNION
--- SELECT * FROM results_psra_nl.psra_nl_hmaps
--- UNION
--- SELECT * FROM results_psra_ns.psra_ns_hmaps
--- UNION
--- SELECT * FROM results_psra_nt.psra_nt_hmaps
--- UNION
--- SELECT * FROM results_psra_nu.psra_nu_hmaps
--- UNION
--- SELECT * FROM results_psra_on.psra_on_hmaps
--- UNION
--- SELECT * FROM results_psra_pe.psra_pe_hmaps
--- UNION
--- SELECT * FROM results_psra_qc.psra_qc_hmaps
--- UNION
--- SELECT * FROM results_psra_sk.psra_sk_hmaps
--- UNION
--- SELECT * FROM results_psra_yt.psra_yt_hmaps;
-
--- add fid column
-ALTER TABLE results_psra_national.psra_hmaps_tbl ADD COLUMN fid SERIAL;
-
--- create psra hmaps national view
-DROP VIEW IF EXISTS results_psra_national.psra_hmaps CASCADE;
-CREATE VIEW results_psra_national.psra_hmaps AS SELECT * FROM results_psra_national.psra_hmaps_tbl;
