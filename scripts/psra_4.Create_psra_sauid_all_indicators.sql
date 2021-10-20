@@ -345,7 +345,7 @@ CREATE VIEW results_psra_{prov}.psra_{prov}_expected_loss_fsa AS
 -- 2.0 Seismic Risk (PSRA)
 -- 2.4 Economic Security
 SELECT
-a.fsauid AS "e_FSAUID",
+a.fsauid AS "eEL_FSAUID",
 
 -- 2.4.2 Expected Loss
 COALESCE(a.loss_value_b0,0) AS "eEL_b0",
