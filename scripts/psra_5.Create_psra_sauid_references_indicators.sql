@@ -15,17 +15,10 @@ ORDER BY source ASC;
 
 
 
-DROP VIEW IF EXISTS  results_psra_{prov}.psra_{prov}_agg_curves_stats,results_psra_{prov}.psra_{prov}_agg_curves_q05,results_psra_{prov}.psra_{prov}_agg_curves_q95,results_psra_{prov}.psra_{prov}_hcurves_pga,
-results_psra_{prov}.psra_{prov}_hcurves_sa0p1,results_psra_{prov}.psra_{prov}_hcurves_sa0p2,results_psra_{prov}.psra_{prov}_hcurves_sa0p3,results_psra_{prov}.psra_{prov}_hcurves_sa0p5,results_psra_{prov}.psra_{prov}_hcurves_sa0p6,
-results_psra_{prov}.psra_{prov}_hcurves_sa1p0,results_psra_{prov}.psra_{prov}_hcurves_sa2p0,results_psra_{prov}.psra_{prov}_hmaps,results_psra_{prov}.psra_{prov}_uhs,
-results_psra_{prov}.psra_{prov}_hmaps_xref CASCADE;
+DROP VIEW IF EXISTS results_psra_{prov}.psra_{prov}_hcurves_pga,results_psra_{prov}.psra_{prov}_hcurves_sa0p1,results_psra_{prov}.psra_{prov}_hcurves_sa0p2,results_psra_{prov}.psra_{prov}_hcurves_sa0p3,
+results_psra_{prov}.psra_{prov}_hcurves_sa0p5,results_psra_{prov}.psra_{prov}_hcurves_sa0p6,results_psra_{prov}.psra_{prov}_hcurves_sa1p0,results_psra_{prov}.psra_{prov}_hcurves_sa2p0,results_psra_{prov}.psra_{prov}_hmaps,
+results_psra_{prov}.psra_{prov}_uhs,results_psra_{prov}.psra_{prov}_hmaps_xref CASCADE;
 
-CREATE VIEW results_psra_{prov}.psra_{prov}_agg_curves_stats AS SELECT * FROM psra_{prov}.psra_{prov}_agg_curves_stats;
-
-
-CREATE VIEW results_psra_{prov}.psra_{prov}_agg_curves_q05 AS SELECT * FROM psra_{prov}.psra_{prov}_agg_curves_q05;
-
-CREATE VIEW results_psra_{prov}.psra_{prov}_agg_curves_q95 AS SELECT * FROM psra_{prov}.psra_{prov}_agg_curves_q95;
 
 CREATE VIEW results_psra_{prov}.psra_{prov}_hcurves_pga AS SELECT FROM psra_{prov}.psra_{prov}_hcurves_pga;
 
