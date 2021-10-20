@@ -59,8 +59,6 @@ CAST(CAST(ROUND(CAST((i.structural_b0 + i.nonstructural_b0)/a.number AS NUMERIC)
 CAST(CAST(ROUND(CAST(i.structural_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAAL_Str_b0",
 CAST(CAST(ROUND(CAST(i.nonstructural_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAAL_NStr_b0",
 CAST(CAST(ROUND(CAST(i.contents_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAAL_Cont_b0",
-CAST(CAST(ROUND(CAST((((i.structural_b0 + i.nonstructural_b0) - (i.structural_r1 + i.nonstructural_r1))/(a.number))/((a.retrofitting)/(a.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr1_BCR_b0",
-CAST(CAST(ROUND(CAST((((i.structural_b0 + i.nonstructural_b0) - (i.structural_r1 + i.nonstructural_r1))/(a.number)) * ((EXP(-0.025*50)/0.025))/((a.retrofitting)/(a.number)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sLr1_ROI_b0",
 
 -- 2.4.1 Economic Loss - r1
 CAST(CAST(ROUND(CAST(i.structural_r1 + i.nonstructural_r1 + i.contents_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAAL_Asset_r1",
