@@ -193,12 +193,12 @@ a.loss_type,
 a.fsauid,
 a."GenOcc",
 a."GenType",
-a.loss_value_b0,
-a.exposured_value_b0,
-a.loss_ratio_b0,
-b.loss_value_r1,
-b.exposured_value_r1,
-b.loss_ratio_r1
+a.loss_value AS "loss_value_b0",
+a.exposured_value AS "exposure_value_b0",
+a.loss_ratio AS "loss_ratio_b0",
+b.loss_value AS "loss_value_r1",
+b.exposured_value AS "exposure_value_r1",
+b.loss_ratio AS "loss_ratio_r1"
 
 FROM psra_{prov}.psra_{prov}_agg_losses_q05_b0 a
 LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q05_r1 b ON a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND a."GenType" = b."GenType";
@@ -217,12 +217,12 @@ a.loss_type,
 a.fsauid,
 a."GenOcc",
 a."GenType",
-a.loss_value_b0,
-a.exposured_value_b0,
-a.loss_ratio_b0,
-b.loss_value_r1,
-b.exposured_value_r1,
-b.loss_ratio_r1
+a.loss_value AS "loss_value_b0",
+a.exposured_value AS "exposure_value_b0",
+a.loss_ratio AS "loss_ratio_b0",
+b.loss_value AS "loss_value_r1",
+b.exposured_value AS "exposure_value_r1",
+b.loss_ratio AS "loss_ratio_r1"
 
 FROM psra_{prov}.psra_{prov}_agg_losses_q95_b0 a
 LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q95_r1 b ON a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND a."GenType" = b."GenType";
@@ -241,12 +241,12 @@ a.fsauid,
 a."GenOcc",
 a."GenType",
 a.region,
-a.loss_value_b0,
-a.exposured_value_b0,
-a.loss_ratio_b0,
-b.loss_value_r1,
-b.exposured_value_r1,
-b.loss_ratio_r1
+a.loss_value AS "loss_value_b0",
+a.exposured_value AS "exposure_value_b0",
+a.loss_ratio AS "loss_ratio_b0",
+b.loss_value AS "loss_value_r1",
+b.exposured_value AS "exposure_value_r1",
+b.loss_ratio AS "loss_ratio_r1"
 
 FROM psra_{prov}.psra_{prov}_agg_losses_stats_b0 a
 LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_stats_r1 b ON a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND a."GenType" = b."GenType";
