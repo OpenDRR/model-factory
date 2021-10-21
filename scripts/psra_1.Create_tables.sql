@@ -626,8 +626,6 @@ loss_ratio float,
 annual_frequency_of_exceedence float
 );
 
-
-
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_stats_r1(
 return_period varchar,
@@ -641,6 +639,85 @@ annual_frequency_of_exceedence float
 );
 
 
+
+-- script to agg losses -q05
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_losses_q05_b0, psra_{prov}.psra_{prov}_agg_losses_q05_r1, psra_{prov}.psra_{prov}_agg_losses_q05 CASCADE;
+
+-- create table
+CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_q05_b0(
+loss_type varchar,
+fsauid varchar,
+"GenOcc" varchar,
+"GenType" varchar,
+loss_value float,
+exposed_value float,
+loss_ratio float
+);
+
+-- create table
+CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_q05_r1(
+loss_type varchar,
+fsauid varchar,
+"GenOcc" varchar,
+"GenType" varchar,
+loss_value float,
+exposed_value float,
+loss_ratio float
+);
+
+
+
+-- add agg_losses tables - q95
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_losses_q95_b0, psra_{prov}.psra_{prov}_agg_losses_q95_r1, psra_{prov}.psra_{prov}_agg_losses_q95 CASCADE;
+
+-- create table
+CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_q95_b0(
+loss_type varchar,
+fsauid varchar,
+"GenOcc" varchar,
+"GenType" varchar,
+loss_value float,
+exposed_value float,
+loss_ratio float
+);
+
+-- create table
+CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_q95_r1(
+loss_type varchar,
+fsauid varchar,
+"GenOcc" varchar,
+"GenType" varchar,
+loss_value float,
+exposed_value float,
+loss_ratio float
+);
+
+
+-- script to agg losses stats
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_losses_stats_b0, psra_{prov}.psra_{prov}_agg_losses_stats_r1, psra_{prov}.psra_{prov}_agg_losses_stats CASCADE;
+
+-- create table
+CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_stats_b0(
+loss_type varchar,
+fsauid varchar,
+"GenOcc" varchar,
+"GenType" varchar,
+loss_value float,
+exposed_value float,
+loss_ratio float,
+region varchar
+);
+
+CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_stats_r1(
+loss_type varchar,
+fsauid varchar,
+"GenOcc" varchar,
+"GenType" varchar,
+loss_value float,
+exposed_value float,
+loss_ratio float,
+region varchar
+);
 
 
 /* psra_3.Create_table_avg_losses_stats.sql */
@@ -724,8 +801,14 @@ structural float
 
  /* psra_3.Create_table_src_loss_table.sql */
 -- script to agg curves stats
-DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_src_loss_b0, psra_{prov}.psra_{prov}_src_loss_r1, psra_{prov}.psra_{prov}_src_loss, psra_{prov}.psra_{prov}_src_loss_b0_temp, psra_{prov}.psra_{prov}_src_loss_r1_temp CASCADE;
+DROP TABLE IF EXISTS lut.psra_source_types,psra_{prov}.psra_{prov}_src_loss_b0, psra_{prov}.psra_{prov}_src_loss_r1, psra_{prov}.psra_{prov}_src_loss CASCADE;
 
+-- create source type table
+CREATE TABLE lut.psra_source_types(
+srccode varchar,
+srcname varchar,
+tectreg varchar
+);
 
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_src_loss_b0(
@@ -734,7 +817,6 @@ loss_type varchar,
 loss_value float,
 region varchar
 );
-
 
 
 
