@@ -185,6 +185,79 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_stats_b0, psra_{prov}.ps
 
 
 
+-- agg losses
+-- combine b0 and r1 tables - q05
+CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_q05 AS
+SELECT
+a.loss_type,
+a.fsauid,
+a."GenOcc",
+a."GenType",
+a.loss_value_b0,
+a.exposured_value_b0,
+a.loss_ratio_b0,
+b.loss_value_r1,
+b.exposured_value_r1,
+b.loss_ratio_r1
+
+FROM psra_{prov}.psra_{prov}_agg_losses_q05_b0 a
+LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q05_r1 b ON a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND a."GenType" = b."GenType";
+
+-- delete *total* rows from table
+DELETE FROM psra_{prov}.psra_{prov}_agg_losses_q05 WHERE fsauid = '*total*';
+
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_losses_q95_b0, psra_{prov}.psra_{prov}_agg_losses_q95_r1 CASCADE;
+
+
+
+-- combine b0 and r1 tables - q95
+CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_q95 AS
+SELECT
+a.loss_type,
+a.fsauid,
+a."GenOcc",
+a."GenType",
+a.loss_value_b0,
+a.exposured_value_b0,
+a.loss_ratio_b0,
+b.loss_value_r1,
+b.exposured_value_r1,
+b.loss_ratio_r1
+
+FROM psra_{prov}.psra_{prov}_agg_losses_q95_b0 a
+LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q95_r1 b ON a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND a."GenType" = b."GenType";
+
+-- delete *total* rows from table
+DELETE FROM psra_{prov}.psra_{prov}_agg_losses_q95 WHERE fsauid = '*total*';
+
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_losses_q95_b0, psra_{prov}.psra_{prov}_agg_losses_q95_r1 CASCADE;
+
+
+
+CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_stats AS
+SELECT
+a.loss_type,
+a.fsauid,
+a."GenOcc",
+a."GenType",
+a.region,
+a.loss_value_b0,
+a.exposured_value_b0,
+a.loss_ratio_b0,
+b.loss_value_r1,
+b.exposured_value_r1,
+b.loss_ratio_r1
+
+FROM psra_{prov}.psra_{prov}_agg_losses_stats_b0 a
+LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_stats_r1 b ON a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND a."GenType" = b."GenType";
+
+-- delete *total* rows from table
+DELETE FROM psra_{prov}.psra_{prov}_agg_losses_stats WHERE fsauid = '*total*';
+
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_losses_stats_b0, psra_{prov}.psra_{prov}_agg_losses_stats_r1 CASCADE;
+
+
+
 /* psra_3.Create_table_avg_losses_stats.sql */
 -- combine b0 and r1 table
 CREATE TABLE psra_{prov}.psra_{prov}_avg_losses_stats AS
@@ -235,42 +308,44 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_avg_losses_stats_b0, psra_{prov}.ps
 
 
  /* psra_3.Create_table_src_loss_table.sql */
- -- create temp table for agg
-CREATE TABLE psra_{prov}.psra_{prov}_src_loss_b0_temp AS
-(
-SELECT
-source,
-loss_type,
-SUM(loss_value) AS "loss_value",
-region
-
-FROM psra_{prov}.psra_{prov}_src_loss_b0
-GROUP BY source,loss_type,region);
-
--- create temp table for agg
-CREATE TABLE psra_{prov}.psra_{prov}_src_loss_r1_temp AS
-(
-SELECT
-source,
-loss_type,
-SUM(loss_value) AS "loss_value",
-region
-
-
-FROM psra_{prov}.psra_{prov}_src_loss_r1
-GROUP BY source,loss_type,region);
-
--- combine src tables into one
-CREATE TABLE psra_{prov}.psra_{prov}_src_loss AS
-(
-SELECT a.source,
-a.loss_type,
+DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_src_loss_temp CASCADE;
+CREATE TABLE results_psra_{prov}.psra_{prov}_src_loss_temp AS
+SELECT 
+a.source AS "src_zone",
+b.tectreg AS "src_type",
+CASE 
+	WHEN a.loss_type IN ('contents','nonstructural','structural') THEN 'building'
+	WHEN a.loss_type IN ('occupants') THEN 'occupants'
+	END AS "loss_type",
 a.region,
-a.loss_value AS "loss_value_b0",
-b.loss_value AS "loss_value_r1"
+SUM(a.loss_value_b0) AS "src_value_b0",
+SUM(a.loss_value_r1) AS "src_value_r1"
+--SUM(a.loss_value_b0)/(SELECT SUM(loss_value_b0) FROM psra_{prov}.psra_{prov}_src_loss ) AS "src_value_b0",
+--SUM(a.loss_value_r1)/(SELECT SUM(loss_value_r1) FROM psra_{prov}.psra_{prov}_src_loss ) AS "src_value_r1"
 
-FROM psra_{prov}.psra_{prov}_src_loss_b0_temp a
-INNER JOIN psra_{prov}.psra_{prov}_src_loss_r1_temp b ON a.source = b.source AND a.loss_type = b.loss_type AND a.region = b.region
-);
+FROM psra_{prov}.psra_{prov}_src_loss a
+LEFT JOIN lut.psra_source_types b ON a.source = b.srccode
+GROUP BY a.source,b.tectreg,a.loss_type,a.region
+ORDER BY a.source ASC;
 
-DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_src_loss_b0_temp, psra_{prov}.psra_{prov}_src_loss_r1_temp CASCADE;
+
+
+DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_src_loss_tbl CASCADE;
+CREATE TABLE results_psra_{prov}.psra_{prov}_src_loss_tbl AS
+SELECT
+src_zone,
+src_type,
+loss_type,
+region,
+CAST(CAST(ROUND(CAST(SUM(src_value_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "src_value_b0",
+CAST(CAST(ROUND(CAST(SUM(src_value_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "src_value_r1"
+
+FROM results_psra_{prov}.psra_{prov}_src_loss_temp
+GROUP BY src_zone,src_type,loss_type,region;
+
+
+DROP VIEW IF EXISTS results_psra_{prov}.psra_{prov}_src_loss;
+
+CREATE VIEW results_psra_{prov}.psra_{prov}_src_loss AS SELECT * FROM results_psra_{prov}.psra_{prov}_src_loss_tbl;
+
+DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_src_loss_temp,psra_{prov}.psra_{prov}_src_loss_b0, psra_{prov}.psra_{prov}_src_loss_r1 CASCADE;
