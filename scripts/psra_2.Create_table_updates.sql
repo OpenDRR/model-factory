@@ -194,10 +194,10 @@ a.fsauid,
 a."GenOcc",
 a."GenType",
 a.loss_value AS "loss_value_b0",
-a.exposure_value AS "exposure_value_b0",
+a.exposed_value AS "exposed_value_b0",
 a.loss_ratio AS "loss_ratio_b0",
 b.loss_value AS "loss_value_r1",
-b.exposure_value AS "exposure_value_r1",
+b.exposed_value AS "exposed_value_r1",
 b.loss_ratio AS "loss_ratio_r1"
 
 FROM psra_{prov}.psra_{prov}_agg_losses_q05_b0 a
@@ -218,10 +218,10 @@ a.fsauid,
 a."GenOcc",
 a."GenType",
 a.loss_value AS "loss_value_b0",
-a.exposure_value AS "exposure_value_b0",
+a.exposed_value AS "exposed_value_b0",
 a.loss_ratio AS "loss_ratio_b0",
 b.loss_value AS "loss_value_r1",
-b.exposure_value AS "exposure_value_r1",
+b.exposed_value AS "exposed_value_r1",
 b.loss_ratio AS "loss_ratio_r1"
 
 FROM psra_{prov}.psra_{prov}_agg_losses_q95_b0 a
@@ -242,10 +242,10 @@ a."GenOcc",
 a."GenType",
 a.region,
 a.loss_value AS "loss_value_b0",
-a.exposure_value AS "exposure_value_b0",
+a.exposed_value AS "exposed_value_b0",
 a.loss_ratio AS "loss_ratio_b0",
 b.loss_value AS "loss_value_r1",
-b.exposure_value AS "exposure_value_r1",
+b.exposed_value AS "exposed_value_r1",
 b.loss_ratio AS "loss_ratio_r1"
 
 FROM psra_{prov}.psra_{prov}_agg_losses_stats_b0 a
