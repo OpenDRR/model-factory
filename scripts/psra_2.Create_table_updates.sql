@@ -206,7 +206,7 @@ LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q05_r1 b ON a.loss_type = b.loss_ty
 -- delete *total* rows from table
 DELETE FROM psra_{prov}.psra_{prov}_agg_losses_q05 WHERE fsauid = '*total*';
 
-DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_losses_q95_b0, psra_{prov}.psra_{prov}_agg_losses_q95_r1 CASCADE;
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_losses_q05_b0, psra_{prov}.psra_{prov}_agg_losses_q05_r1 CASCADE;
 
 
 
