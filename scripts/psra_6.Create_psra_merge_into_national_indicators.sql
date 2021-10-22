@@ -221,7 +221,7 @@ SELECT * FROM results_psra_pe.psra_pe_expected_loss_fsa;
 ALTER TABLE results_psra_national.psra_expected_loss_fsa_tbl ADD COLUMN fid SERIAL;
 
 -- create index
-CREATE INDEX psra_expected_loss_fsa_tbl_sauid_idx ON results_psra_national.psra_expected_loss_fsa_tbl("eEL_FSAUID");
+CREATE INDEX psra_expected_loss_fsa_tbl_fsauid_idx ON results_psra_national.psra_expected_loss_fsa_tbl("eEL_FSAUID");
 CREATE INDEX psra_expected_loss_fsa_tbl_fid_idx ON results_psra_national.psra_expected_loss_fsa_tbl("fid");
 
 
@@ -229,6 +229,57 @@ CREATE INDEX psra_expected_loss_fsa_tbl_fid_idx ON results_psra_national.psra_ex
 DROP VIEW IF EXISTS results_psra_national.psra_expected_loss_fsa CASCADE;
 CREATE VIEW results_psra_national.psra_expected_loss_fsa AS SELECT * FROM results_psra_national.psra_expected_loss_fsa_tbl;
 
+
+
+-- combine psra agg loss indicators into national level
+DROP TABLE IF EXISTS results_psra_national.psra_agg_loss_fsa_tbl CASCADE;
+
+CREATE TABLE results_psra_national.psra_agg_loss_fsa_tbl AS 
+SELECT * FROM results_psra_nb.psra_nb_agg_loss_fsa
+UNION
+SELECT * FROM results_psra_nl.psra_nl_agg_loss_fsa
+UNION
+SELECT * FROM results_psra_ns.psra_ns_agg_loss_fsa
+UNION
+SELECT * FROM results_psra_pe.psra_pe_agg_loss_fsa;
+
+-- CREATE TABLE results_psra_national.psra_agg_loss_fsa_tbl AS 
+-- SELECT * FROM results_psra_ab.psra_ab_agg_loss_fsa
+-- UNION
+-- SELECT * FROM results_psra_bc.psra_bc_agg_loss_fsa
+-- UNION
+-- SELECT * FROM results_psra_mb.psra_mb_agg_loss_fsa
+-- UNION
+-- SELECT * FROM results_psra_nb.psra_nb_agg_loss_fsa
+-- UNION
+-- SELECT * FROM results_psra_nl.psra_nl_agg_loss_fsa
+-- UNION
+-- SELECT * FROM results_psra_ns.psra_ns_agg_loss_fsa
+-- UNION
+-- SELECT * FROM results_psra_nt.psra_nt_agg_loss_fsa
+-- UNION
+-- SELECT * FROM results_psra_nu.psra_nu_agg_loss_fsa
+-- UNION
+-- SELECT * FROM results_psra_on.psra_on_agg_loss_fsa
+-- UNION
+-- SELECT * FROM results_psra_pe.psra_pe_agg_loss_fsa
+-- UNION
+-- SELECT * FROM results_psra_qc.psra_qc_agg_loss_fsa
+-- UNION
+-- SELECT * FROM results_psra_sk.psra_sk_agg_loss_fsa
+-- UNION
+-- SELECT * FROM results_psra_yt.psra_yt_agg_loss_fsa;
+
+-- add fid column
+ALTER TABLE results_psra_national.psra_agg_loss_fsa_tbl ADD COLUMN fid SERIAL;
+
+-- create index
+CREATE INDEX psra_agg_loss_fsa_tbl_fsauid_idx ON results_psra_national.psra_agg_loss_fsa_tbl("fsauid");
+CREATE INDEX psra_agg_loss_fsa_tbl_fid_idx ON results_psra_national.psra_agg_loss_fsa_tbl("fid");
+
+-- create psra pml national view
+DROP VIEW IF EXISTS results_psra_national.psra_agg_loss_fsa CASCADE;
+CREATE VIEW results_psra_national.psra_agg_loss_fsa AS SELECT * FROM results_psra_national.psra_agg_loss_fsa_tbl;
 
 
 
