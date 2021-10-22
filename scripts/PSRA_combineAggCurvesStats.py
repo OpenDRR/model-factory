@@ -12,16 +12,16 @@ import argparse
 python script to add economic region or subregion to new column in csv file
 where PSRA runs have een split up by economic region or sub regions
 can be run from the command line with mandatory arguments like:
-python3 PSRA_combineAggLossesStats.py --aggLossDir=/usr/src/app/ebRisk/AB/
+python3 PSRA_combineAggCurvesStats.py --aggCurvesDir=/usr/src/app/ebRisk/AB/
 '''
 
 
 def main():
     args = parse_args()
-    os.chdir(args.aggLossDir)
+    os.chdir(args.aggCurvesDir)
 
     for retrofit in 'b0', 'r1':
-        erFileList = glob.glob('*agg_losses-stats_{}.csv'.format(retrofit))
+        erFileList = glob.glob('*agg_curves-stats_{}.csv'.format(retrofit))
         erFileList.sort()
 
     with open(erFileList[0], newline='') as f:
@@ -53,8 +53,8 @@ def main():
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description='Add Economic Regions field to agg loss tables')
-    parser.add_argument('--aggLossDir', type=str, help='', required=True)
+        description='Add Economic Regions field to agg curves tables')
+    parser.add_argument('--aggCurvesDir', type=str, help='', required=True)
     args = parser.parse_args()
 
     return args
