@@ -382,3 +382,43 @@ ORDER BY a.fsauid ASC;
 --LEFT JOIN boundaries."Geometry_FSAUID" b ON a.fsauid = b."CFSAUID";
 
 
+
+-- create psra indicators
+DROP VIEW IF EXISTS results_psra_{prov}.psra_{prov}_agg_loss_fsa CASCADE;
+CREATE VIEW results_psra_{prov}.psra_{prov}_agg_loss_fsa AS
+
+SELECT
+a.fsauid,
+a.loss_type,
+a."GenOcc",
+a."GenType",
+a.region,
+
+-- agg losses stats
+COALESCE(a.loss_value_b0,0) AS "loss_value_b0",
+COALESCE(a.exposed_value_b0,0) AS "exposed_value_b0",
+COALESCE(a.loss_ratio_b0,0) AS "loss_ratio_b0",
+COALESCE(a.loss_value_r1,0) AS "loss_value_r1",
+COALESCE(a.exposed_value_r1,0) AS "exposed_value_r1",
+COALESCE(a.loss_ratio_r1,0) AS "loss_ratio_r1",
+
+-- q05
+COALESCE(b.loss_value_b0,0) AS "q05_loss_value_b0",
+COALESCE(b.exposed_value_b0,0) AS "q05_exposed_value_b0",
+COALESCE(b.loss_ratio_b0,0) AS "q05_loss_ratio_b0",
+COALESCE(b.loss_value_r1,0) AS "q05_loss_value_r1",
+COALESCE(b.exposed_value_r1,0) AS "q05_exposed_value_r1",
+COALESCE(b.loss_ratio_r1,0) AS "q_05_loss_ratio_r1",
+
+-- q95
+COALESCE(c.loss_value_b0,0) AS "q95_loss_value_b0",
+COALESCE(c.exposed_value_b0,0) AS "q95_exposed_value_b0",
+COALESCE(c.loss_ratio_b0,0) AS "q95_loss_ratio_b0",
+COALESCE(c.loss_value_r1,0) AS "q95_loss_value_r1",
+COALESCE(c.exposed_value_r1,0) AS "q95_exposed_value_r1",
+COALESCE(c.loss_ratio_r1,0) AS "q_95_loss_ratio_r1"
+
+FROM psra_{prov}.psra_{prov}_agg_losses_stats a
+LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q05 b ON a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND a."GenType" = b."GenType"
+LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q95 c ON a.loss_type = c.loss_type AND a.fsauid = c.fsauid AND a."GenOcc" = c."GenOcc" AND a."GenType" = c."GenType"
+ORDER BY a.fsauid ASC;
