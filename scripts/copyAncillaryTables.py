@@ -246,7 +246,7 @@ def main():
                 -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
                 -a
-                -c '\copy  lut.sourceTypes ({columns})
+                -c '\copy  lut.psra_source_types ({columns})
                         FROM /usr/src/app/sourceTypes.csv
                             WITH
                             CSV HEADER ;'""".format(**{
