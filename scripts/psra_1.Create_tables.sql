@@ -623,7 +623,8 @@ fsauid varchar,
 "GenType" varchar,
 loss_value float,
 loss_ratio float,
-annual_frequency_of_exceedence float
+annual_frequency_of_exceedence float,
+region varchar
 );
 
 -- create table
@@ -635,7 +636,8 @@ fsauid varchar,
 "GenType" varchar,
 loss_value float,
 loss_ratio float,
-annual_frequency_of_exceedence float
+annual_frequency_of_exceedence float,
+region varchar
 );
 
 
