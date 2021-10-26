@@ -24,30 +24,30 @@ def main():
         erFileList = glob.glob('*agg_losses-stats_{}.csv'.format(retrofit))
         erFileList.sort()
 
-    with open(erFileList[0], newline='') as f:
-        reader = csv.reader(f)
-        columns = next(reader)
+        with open(erFileList[0], newline='') as f:
+            reader = csv.reader(f)
+            columns = next(reader)
 
-    columns.append('region')
+        columns.append('region')
 
-    dfFinal = pd.DataFrame(columns=columns)
+        dfFinal = pd.DataFrame(columns=columns)
 
-    for erFile in erFileList:
-        dfFinal = pd.read_csv(erFile)
-        er = erFile.split('_')[1]
-        # Remove the split econmic region identifiers
-        # handle subregions and combined regions differently
-        # For example 'QC2445-55' should remain the same
-        # NB1330 should remain the same
-        # BC5920A2 should be changed to BC5920
-        if len(re.split('(\d+)', er)) == 1 or re.split('(\d+)', er)[2] == '-':
-            er = ''.join(re.split('(\d+)', er)[0:4])
-        else:
-            er = ''.join(re.split('(\d+)', er)[0:2])
+        for erFile in erFileList:
+            dfFinal = pd.read_csv(erFile)
+            er = erFile.split('_')[1]
+            # Remove the split econmic region identifiers
+            # handle subregions and combined regions differently
+            # For example 'QC2445-55' should remain the same
+            # NB1330 should remain the same
+            # BC5920A2 should be changed to BC5920
+            if len(re.split('(\d+)', er)) == 1 or re.split('(\d+)', er)[2] == '-':
+                er = ''.join(re.split('(\d+)', er)[0:4])
+            else:
+                er = ''.join(re.split('(\d+)', er)[0:2])
 
-        dfFinal['region'] = er
-        os.rename(erFile, '{}_orginal.csv'.format(os.path.splitext(erFile)[0]))
-        dfFinal.to_csv(erFile, index=False)
+            dfFinal['region'] = er
+            os.rename(erFile, '{}_orginal.csv'.format(os.path.splitext(erFile)[0]))
+            dfFinal.to_csv(erFile, index=False)
     return
 
 
