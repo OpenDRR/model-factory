@@ -617,6 +617,24 @@ def main():
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
+    # Copy sourceTypes.csv into LUT schema
+    with open("/usr/src/app/sourceTypes.csv") as f:
+        reader = csv.reader(f)
+        columns = next(reader)
+    columns = ','.join('"{0}"'.format(w) for w in columns)
+    columns = columns.lower()
+    systemCall = """psql -h ${{POSTGRES_HOST}}
+                -U ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a
+                -c '\copy  lut.psra_source_types ({columns})
+                        FROM /usr/src/app/sourceTypes.csv
+                            WITH
+                            CSV HEADER ;'""".format(**{
+                                'columns': columns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
     return
 
 
