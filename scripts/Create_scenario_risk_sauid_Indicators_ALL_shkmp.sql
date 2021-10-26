@@ -851,7 +851,7 @@ i."CFSAUID" AS "fsauid",
 i."DAUIDt" AS "dauid",
 i."SACCODE" AS "saccode",
 i."SACTYPE" AS "sactype",
-b.landuse,
+--b.landuse,
 i.geom AS "geom_poly"
 
 FROM dsra.dsra_{eqScenario} a
@@ -862,7 +862,7 @@ LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN boundaries."Geometry_SAUID" i ON b.sauid = i."SAUIDt"
 LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_shelter k ON b.id = k."Sauid"
 WHERE e."gmv_SA(0.3)" >=0.02
-GROUP BY a."Rupture_Abbr",a."gmpe_Model",b.sauid,b.landuse,d.vs30,d.z1pt0,d.z2pt5,f.source_type,
+GROUP BY a."Rupture_Abbr",a."gmpe_Model",b.sauid,d.vs30,d.z1pt0,d.z2pt5,f.source_type,
 f.magnitude,f.lon,f.lat,f.depth,f.rake,e."gmv_pga",e."gmv_SA(0.1)",e."gmv_SA(0.2)",e."gmv_SA(0.3)",e."gmv_SA(0.5)",e."gmv_SA(0.6)",e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",
 i."PRUID",i."PRNAME",i."ERUID",i."ERNAME",i."CDUID",i."CDNAME",i."CSDUID",i."CSDNAME",i."CFSAUID",i."DAUIDt",i."SACCODE",i."SACTYPE",k."sCt_DisplHshld_b0",k."sCt_DisplHshld_r1",k."sCt_Shelter_b0",k."sCt_Shelter_r1",i.geom;
 
@@ -878,7 +878,6 @@ a.csdname,
 a."sH_RupName",
 a."sH_Source",
 a."sH_Mag",
---a."sH_MMI",
 a."sH_HypoLon",
 a."sH_HypoLat",
 a."sH_HypoDepth",
@@ -895,6 +894,7 @@ ROUND(AVG(a."sH_Sa0p5"),6) AS "sH_Sa0p5",
 ROUND(AVG(a."sH_Sa0p6"),6) AS "sH_Sa0p6",
 ROUND(AVG(a."sH_Sa1p0"),6) AS "sH_Sa1p0",
 ROUND(AVG(a."sH_Sa2p0"),6) AS "sH_Sa2p0",
+--a."sH_MMI",
 
 ROUND(SUM(a."sDt_None_b0"),6) AS "sDt_None_b0",
 ROUND(AVG(a."sDtr_None_b0"),6) AS "sDtr_None_b0",
@@ -922,14 +922,14 @@ ROUND(AVG(a."sDtr_Complete_r1"),6) AS "sDtr_Complete_r1",
 ROUND(SUM(a."sDt_Collapse_r1"),6) AS "sDt_Collapse_r1",
 ROUND(AVG(a."sDtr_Collapse_r1"),6) AS "sDtr_Collapse_r1",
 
-ROUND(AVG(a."SCm_Interruption_b0"),6) AS "SCm_Interruption_b0",
+ROUND(AVG(a."sCm_Interruption_b0"),6) AS "sCm_Interruption_b0",
 ROUND(AVG(a."sCm_Repair_b0"),6) AS "sCm_Repair_b0",
 ROUND(AVG(a."SCm_Recovery_b0"),6) AS "SCm_Recovery_b0",
 ROUND(SUM(a."sCt_DebrisTotal_b0"),6) AS "sCt_DebrisTotal_b0" ,
 ROUND(SUM(a."sCt_DebrisBW_b0"),6) AS "sCt_DebrisBW_b0",
 ROUND(SUM(a."sCt_DebrisCS_b0"),6) AS "sCt_DebrisCS_b0",
 
-ROUND(AVG(a."SCm_Interruption_r1"),6) AS "SCm_Interruption_r1",
+ROUND(AVG(a."sCm_Interruption_r1"),6) AS "sCm_Interruption_r1",
 ROUND(AVG(a."sCm_Repair_r1"),6) AS "sCm_Repair_r1",
 ROUND(AVG(a."SCm_Recovery_r1"),6) AS "SCm_Recovery_r1",
 ROUND(SUM(a."sCt_DebrisTotal_r1"),6) AS "sCt_DebrisTotal_r1" ,
