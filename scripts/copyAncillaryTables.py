@@ -242,6 +242,7 @@ def main():
         reader = csv.reader(f)
         columns = next(reader)
     columns = ','.join('"{0}"'.format(w) for w in columns)
+    columns = columns.lower()
     systemCall = """psql -h ${{POSTGRES_HOST}}
                 -U ${{POSTGRES_USER}}
                 -d ${{DB_NAME}}
