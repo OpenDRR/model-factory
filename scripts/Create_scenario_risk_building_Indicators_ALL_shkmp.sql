@@ -191,7 +191,6 @@ a."Rupture_Abbr" AS "sH_RupName",
 --a."Rupture_Abbr" AS "sH_RupAbbr",
 f.source_type AS "sH_Source",
 f.magnitude AS "sH_Mag",
---0.0 AS "sH_MMI",
 CAST(CAST(ROUND(CAST(f.lon AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_HypoLon",
 CAST(CAST(ROUND(CAST(f.lat AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_HypoLat",
 CAST(CAST(ROUND(CAST(f.depth AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_HypoDepth",
@@ -208,7 +207,7 @@ CAST(CAST(ROUND(CAST(e."gmv_SA(0.5)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH
 CAST(CAST(ROUND(CAST(e."gmv_SA(0.6)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa0p6",
 CAST(CAST(ROUND(CAST(e."gmv_SA(1.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sH_Sa1p0",
 CAST(CAST(ROUND(CAST(e."gmv_SA(2.0)" AS NUMERIC),6) AS FLOAT) AS NUMERIC)AS "sH_Sa2p0",
-
+--0.0 AS "sH_MMI",
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.2 Building Damage
@@ -254,24 +253,24 @@ CAST(CAST(ROUND(CAST(a."sD_Collapse_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS 
 -- 3.0 Earthquake Scenario Risk (DSRA)
 -- 3.2 Building Damage
 -- 3.2.1 Recovery - b0
+CAST(CAST(ROUND(CAST(a."sC_Interruption_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Interruption_b0",
 CAST(CAST(ROUND(CAST(a."sC_Repair_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Repair_b0",
 CAST(CAST(ROUND(CAST(a."sC_Recovery_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Recovery_b0",
-CAST(CAST(ROUND(CAST(a."sC_Interruption_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Interruption_b0",
 CAST(CAST(ROUND(CAST((a."sC_DebrisBW_b0" + a."sC_DebrisC_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisTotal_b0",
 CAST(CAST(ROUND(CAST(a."sC_DebrisBW_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisBW_b0",
 CAST(CAST(ROUND(CAST(a."sC_DebrisC_b0" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisCS_b0",
 
 -- 3.2.1 Recovery - r1
+CAST(CAST(ROUND(CAST(a."sC_Interruption_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Interruption_r1",
 CAST(CAST(ROUND(CAST(a."sC_Repair_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Repair_r1",
 CAST(CAST(ROUND(CAST(a."sC_Recovery_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Recovery_r1",
-CAST(CAST(ROUND(CAST(a."sC_Interruption_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_Interruption_r1",
 CAST(CAST(ROUND(CAST((a."sC_DebrisBW_r1" + a."sC_DebrisC_r1") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisTotal_r1",
 CAST(CAST(ROUND(CAST(a."sC_DebrisBW_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisBW_r1",
 CAST(CAST(ROUND(CAST(a."sC_DebrisC_r1" AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "sC_DebrisCS_r1",
 
 -- 3.2.3 Building Characteristics
-b.bldgtype AS "E_BldgTypeG",
-b.occtype AS "E_OccType",
+--b.bldgtype AS "E_BldgTypeG",
+--b.occtype AS "E_OccType",
 
 
 -- 3.0 Earthquake Scenario Risk (DSRA)
