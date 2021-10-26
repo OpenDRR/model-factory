@@ -377,7 +377,7 @@ c."CFSAUID" AS "fsauid",
 c."DAUIDt" AS "dauid",
 c."SACCODE" AS "saccode",
 c."SACTYPE" AS "sactype",
-b.landuse,
+--b.landuse,
 b.geom AS "geom_point"
 
 FROM dsra.dsra_{eqScenario} a
