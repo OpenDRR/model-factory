@@ -308,6 +308,21 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_avg_losses_stats_b0, psra_{prov}.ps
 
 
  /* psra_3.Create_table_src_loss_table.sql */
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_src_loss CASCADE;
+CREATE TABLE psra_{prov}.psra_{prov}_src_loss AS
+(
+SELECT a.source,
+a.loss_type,
+a.region,
+a.loss_value AS "loss_value_b0",
+b.loss_value AS "loss_value_r1"
+
+FROM psra_{prov}.psra_{prov}_src_loss_b0 a
+INNER JOIN psra_{prov}.psra_{prov}_src_loss_r1 b ON a.source = b.source AND a.loss_type = b.loss_type AND a.region = b.region
+);
+
+
+
 DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_src_loss_temp CASCADE;
 CREATE TABLE results_psra_{prov}.psra_{prov}_src_loss_temp AS
 SELECT 
