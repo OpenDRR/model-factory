@@ -807,9 +807,9 @@ DROP TABLE IF EXISTS lut.psra_source_types,psra_{prov}.psra_{prov}_src_loss_b0, 
 
 -- create source type table
 CREATE TABLE lut.psra_source_types(
-srccode varchar,
-srcname varchar,
-tectreg varchar
+code varchar,
+name varchar,
+tectonicregion varchar
 );
 
 -- create table
