@@ -4,13 +4,7 @@ CREATE SCHEMA IF NOT EXISTS results_psra_national;
 DROP TABLE IF EXISTS results_psra_national.psra_indicators_b_tbl CASCADE;
 
 CREATE TABLE results_psra_national.psra_indicators_b_tbl AS 
-SELECT * FROM results_psra_nb.psra_nb_indicators_b
-UNION
-SELECT * FROM results_psra_nl.psra_nl_indicators_b
-UNION
-SELECT * FROM results_psra_ns.psra_ns_indicators_b
-UNION
-SELECT * FROM results_psra_pe.psra_pe_indicators_b;
+SELECT * FROM results_psra_ab.psra_ab_indicators_b;
 
 -- CREATE TABLE results_psra_national.psra_indicators_b_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_indicators_b
@@ -67,13 +61,7 @@ CREATE VIEW results_psra_national.psra_indicators_b AS SELECT * FROM results_psr
 DROP TABLE IF EXISTS results_psra_national.psra_indicators_s_tbl CASCADE;
 
 CREATE TABLE results_psra_national.psra_indicators_s_tbl AS 
-SELECT * FROM results_psra_nb.psra_nb_indicators_s
-UNION
-SELECT * FROM results_psra_nl.psra_nl_indicators_s
-UNION
-SELECT * FROM results_psra_ns.psra_ns_indicators_s
-UNION
-SELECT * FROM results_psra_pe.psra_pe_indicators_s;
+SELECT * FROM results_psra_ab.psra_ab_indicators_s;
 
 -- CREATE TABLE results_psra_national.psra_indicators_s_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_indicators_s
@@ -129,13 +117,7 @@ CREATE VIEW results_psra_national.psra_indicators_s AS SELECT * FROM results_psr
 DROP TABLE IF EXISTS results_psra_national.psra_indicators_csd_tbl CASCADE;
 
 CREATE TABLE results_psra_national.psra_indicators_csd_tbl AS 
-SELECT * FROM results_psra_nb.psra_nb_indicators_csd
-UNION
-SELECT * FROM results_psra_nl.psra_nl_indicators_csd
-UNION
-SELECT * FROM results_psra_ns.psra_ns_indicators_csd
-UNION
-SELECT * FROM results_psra_pe.psra_pe_indicators_csd;
+SELECT * FROM results_psra_ab.psra_ab_indicators_csd;
 
 -- CREATE TABLE results_psra_national.psra_indicators_csd_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_indicators_csd
@@ -182,13 +164,7 @@ CREATE VIEW results_psra_national.psra_indicators_csd AS SELECT * FROM results_p
 DROP TABLE IF EXISTS results_psra_national.psra_expected_loss_fsa_tbl CASCADE;
 
 CREATE TABLE results_psra_national.psra_expected_loss_fsa_tbl AS 
-SELECT * FROM results_psra_nb.psra_nb_expected_loss_fsa
-UNION
-SELECT * FROM results_psra_nl.psra_nl_expected_loss_fsa
-UNION
-SELECT * FROM results_psra_ns.psra_ns_expected_loss_fsa
-UNION
-SELECT * FROM results_psra_pe.psra_pe_expected_loss_fsa;
+SELECT * FROM results_psra_ab.psra_ab_expected_loss_fsa;
 
 -- CREATE TABLE results_psra_national.psra_expected_loss_fsa_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_expected_loss_fsa
@@ -235,13 +211,7 @@ CREATE VIEW results_psra_national.psra_expected_loss_fsa AS SELECT * FROM result
 DROP TABLE IF EXISTS results_psra_national.psra_agg_loss_fsa_tbl CASCADE;
 
 CREATE TABLE results_psra_national.psra_agg_loss_fsa_tbl AS 
-SELECT * FROM results_psra_nb.psra_nb_agg_loss_fsa
-UNION
-SELECT * FROM results_psra_nl.psra_nl_agg_loss_fsa
-UNION
-SELECT * FROM results_psra_ns.psra_ns_agg_loss_fsa
-UNION
-SELECT * FROM results_psra_pe.psra_pe_agg_loss_fsa;
+SELECT * FROM results_psra_ab.psra_ab_agg_loss_fsa;
 
 -- CREATE TABLE results_psra_national.psra_agg_loss_fsa_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_agg_loss_fsa
@@ -287,13 +257,7 @@ CREATE VIEW results_psra_national.psra_agg_loss_fsa AS SELECT * FROM results_psr
 DROP TABLE IF EXISTS results_psra_national.psra_src_loss_tbl CASCADE;
 
 CREATE TABLE results_psra_national.psra_src_loss_tbl AS 
-SELECT * FROM results_psra_nb.psra_nb_src_loss
-UNION
-SELECT * FROM results_psra_nl.psra_nl_src_loss
-UNION
-SELECT * FROM results_psra_ns.psra_ns_src_loss
-UNION
-SELECT * FROM results_psra_pe.psra_pe_src_loss;
+SELECT * FROM results_psra_ab.psra_ab_src_loss;
 
 -- CREATE TABLE results_psra_national.psra_src_loss_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_src_loss
