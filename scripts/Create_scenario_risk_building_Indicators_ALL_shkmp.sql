@@ -2,9 +2,8 @@
 CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
 -- create shakemap table and view
-DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shakemapo_tbl;
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl CASCADE;
 CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl AS
-
 SELECT 
 DISTINCT(a.site_id) AS "SiteID",
 a.lon AS "Lon",
@@ -30,16 +29,29 @@ WHERE a."gmv_SA(0.3)" >= 0.02;
 
 
 -- update rupture, mag, gmpe information
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shakemap_temp CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_shakemap_temp AS
+SELECT
+DISTINCT(a."Rupture_Abbr"),
+b.magnitude,
+a."gmpe_Model"
+
+FROM dsra.dsra_{eqScenario} a
+LEFT JOIN ruptures.rupture_table b ON a."Rupture_Abbr" = b.rupture_name;
+
+
+
 UPDATE results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl
-SET "sH_RupName" = (SELECT DISTINCT("Rupture_Abbr") FROM dsra.dsra_{eqScenario} WHERE LOWER("Rupture_Abbr") = '{eqScenario}'),
-    "sH_Mag" = (SELECT DISTINCT(magnitude) FROM ruptures.rupture_table WHERE LOWER(rupture_name) = '{eqScenario}'),
-    "sH_GMPE" = (SELECT DISTINCT("gmpe_Model") FROM dsra.dsra_{eqScenario} WHERE LOWER("Rupture_Abbr") = '{eqScenario}');
+SET "sH_RupName" = (SELECT "Rupture_Abbr" FROM results_dsra_{eqScenario}.{eqScenario}_shakemap_temp),
+    "sH_Mag" = (SELECT magnitude FROM results_dsra_{eqScenario}.{eqScenario}_shakemap_temp),
+    "sH_GMPE" = (SELECT "gmpe_Model" FROM results_dsra_{eqScenario}.{eqScenario}_shakemap_temp);
 
 
 -- create indexes
 CREATE INDEX IF NOT EXISTS dsra_{eqScenario}_siteid_idx ON results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl("SiteID");
 CREATE INDEX IF NOT EXISTS dsra_{eqScenario}_geom_dx ON results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl USING GIST(geom);
 
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shakemap_temp;
 
 DROP VIEW IF EXISTS  results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap;
 CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap AS SELECT * FROM results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl;
