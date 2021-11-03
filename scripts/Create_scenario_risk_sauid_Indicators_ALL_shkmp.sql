@@ -860,7 +860,7 @@ LEFT JOIN vs30.vs30_can_site_model_xref d ON a."AssetID" = d.id
 LEFT JOIN gmf.shakemap_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN boundaries."Geometry_SAUID" i ON b.sauid = i."SAUIDt"
-LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_shelter k ON b.id = k."Sauid"
+LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_shelter k ON b.sauid = k."Sauid"
 WHERE e."gmv_SA(0.3)" >=0.02
 GROUP BY a."Rupture_Abbr",a."gmpe_Model",b.sauid,d.vs30,d.z1pt0,d.z2pt5,f.source_type,
 f.magnitude,f.lon,f.lat,f.depth,f.rake,e."gmv_pga",e."gmv_SA(0.1)",e."gmv_SA(0.2)",e."gmv_SA(0.3)",e."gmv_SA(0.5)",e."gmv_SA(0.6)",e."gmv_SA(1.0)",e."gmv_SA(0.3)",e."gmv_SA(2.0)",
