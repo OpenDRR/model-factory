@@ -2,7 +2,7 @@
 CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
 -- create shakemap table and view
-DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl;
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl CASCADE;
 CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl AS
 SELECT 
 DISTINCT(a.site_id) AS "SiteID",
