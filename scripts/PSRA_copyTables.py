@@ -23,7 +23,7 @@ def main():
 
     # Copy hcurve Table PGA
     with open("/usr/src/app/cHazard/{prov}/cH_{prov}_hcurves_PGA.csv".format(
-            **{'prov': args.province}), "r") as f:
+            **{'prov': args.province}), "r", encoding='UTF-8-sig') as f:
         reader = csv.reader(f)
         hcurveColumns = next(reader)
     hcurveColumns = ','.join('"{0}"'.format(w) for w in hcurveColumns)
