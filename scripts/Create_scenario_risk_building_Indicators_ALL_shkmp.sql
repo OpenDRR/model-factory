@@ -1,27 +1,51 @@
 -- create schema for new scenario
 CREATE SCHEMA IF NOT EXISTS results_dsra_{eqScenario};
 
+-- create shakemap table and view
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.{eqScenario}_shakemapo_tbl;
+CREATE TABLE results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl AS
 
-DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap;
-
-CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap AS
-(
 SELECT 
-site_id,
-"gmv_SA(0.1)",
-"gmv_SA(0.2)",
-"gmv_SA(0.3)",
-"gmv_SA(0.5)",
-"gmv_SA(1.0)",
-"gmv_SA(2.0)",
-lon,
-lat,
-geom,
-gmv_pga,
-gmv_pgv
-FROM gmf.shakemap_{eqScenario}
-WHERE "gmv_SA(0.3)" >= 0.02
-);
+DISTINCT(a.site_id) AS "SiteID",
+a.lon AS "Lon",
+a.lat AS "Lat",
+c."Rupture_Abbr" AS "sH_RupName",
+d.magnitude AS "sH_Mag",
+c."gmpe_Model" AS "sH_GMPE",
+a.gmv_pga AS "sH_PGA",
+a."gmv_SA(0.1)" AS "sH_Sa0p1",
+a."gmv_SA(0.2)" AS "sH_Sa0p2",
+a."gmv_SA(0.3)" AS "sH_Sa0p3",
+a."gmv_SA(0.5)" AS "sH_Sa0p5",
+a."gmv_SA(0.6)" AS "sH_Sa0p6",
+a."gmv_SA(1.0)" AS "sH_Sa1p0",
+a."gmv_SA(2.0)" AS "sH_Sa2p0",
+a.geom
+
+FROM gmf.shakemap_{eqScenario} a
+LEFT JOIN gmf.shakemap_{eqScenario}_xref b ON a.site_id = b.site_id
+LEFT JOIN dsra.dsra_{eqScenario} c ON b.id = c."AssetID"
+LEFT JOIN ruptures.rupture_table d ON d.rupture_name = c."Rupture_Abbr"
+WHERE a."gmv_SA(0.3)" >= 0.02;
+
+
+-- update rupture, mag, gmpe information
+UPDATE results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl
+SET "sH_RupName" = (SELECT DISTINCT("Rupture_Abbr") FROM dsra.dsra_{eqScenario} WHERE LOWER("Rupture_Abbr") = '{eqScenario}'),
+    "sH_Mag" = (SELECT DISTINCT(magnitude) FROM ruptures.rupture_table WHERE LOWER(rupture_name) = '{eqScenario}'),
+    "sH_GMPE" = (SELECT DISTINCT("gmpe_Model") FROM dsra.dsra_{eqScenario} WHERE LOWER("Rupture_Abbr") = '{eqScenario}');
+
+
+-- create indexes
+CREATE INDEX IF NOT EXISTS dsra_{eqScenario}_siteid_idx ON results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl("SiteID");
+CREATE INDEX IF NOT EXISTS dsra_{eqScenario}_geom_dx ON results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl USING GIST(geom);
+
+
+DROP VIEW IF EXISTS  results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap AS SELECT * FROM results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl;
+
+
+
 
 -- add polygon extents with smoothing scenario extents table for each scenario
 INSERT INTO gmf.shakemap_scenario_extents_temp(scenario,geom)
@@ -29,6 +53,7 @@ SELECT '{eqScenario}',st_astext(st_chaikinsmoothing(st_concavehull(st_collect(ge
 
 -- create index
 CREATE INDEX IF NOT EXISTS {eqScenario}_assetid_idx ON dsra.dsra_{eqScenario}("AssetID");
+
 
 
 --intermediates table to calculate displaced households for DSRA
