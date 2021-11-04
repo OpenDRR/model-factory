@@ -487,9 +487,11 @@ asset_id varchar,
 "GenType" varchar,
 "LandUse" varchar, 
 "OccClass" varchar,
+"OccType" varchar,
 "SAC" varchar, 
 "SSC_Zone" varchar,
-"SauidID" varchar,
+"SS_Region" varchar,
+"Sauid_km2" float,
 adauid varchar, 
 cdname varchar, 
 cduid varchar,
@@ -525,9 +527,11 @@ asset_id varchar,
 "GenType" varchar,
 "LandUse" varchar, 
 "OccClass" varchar,
+"OccType" varchar,
 "SAC" varchar, 
 "SSC_Zone" varchar,
-"SauidID" varchar,
+"SS_Region" varchar,
+"Sauid_km2" float,
 adauid varchar, 
 cdname varchar, 
 cduid varchar,
@@ -560,11 +564,11 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_q05_b0, psra_{prov}.psra
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q05_b0(
 return_period varchar,
+loss_value float,
 loss_type varchar,
 fsauid varchar,
-"GenOcc" varchar,
+"OccType" varchar,
 "GenType" varchar,
-loss_value float,
 loss_ratio float,
 annual_frequency_of_exceedence float
 );
@@ -572,11 +576,11 @@ annual_frequency_of_exceedence float
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q05_r1(
 return_period varchar,
+loss_value float,
 loss_type varchar,
 fsauid varchar,
-"GenOcc" varchar,
+"OccType" varchar,
 "GenType" varchar,
-loss_value float,
 loss_ratio float,
 annual_frequency_of_exceedence float
 );
@@ -589,11 +593,11 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_q95_b0, psra_{prov}.psra
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q95_b0(
 return_period varchar,
+loss_value float,
 loss_type varchar,
 fsauid varchar,
-"GenOcc" varchar,
+"OccType" varchar,
 "GenType" varchar,
-loss_value float,
 loss_ratio float,
 annual_frequency_of_exceedence float
 );
@@ -601,11 +605,11 @@ annual_frequency_of_exceedence float
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q95_r1(
 return_period varchar,
+loss_value float,
 loss_type varchar,
 fsauid varchar,
-"GenOcc" varchar,
+"OccType" varchar,
 "GenType" varchar,
-loss_value float,
 loss_ratio float,
 annual_frequency_of_exceedence float
 );
@@ -617,26 +621,26 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_stats_b0, psra_{prov}.ps
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_stats_b0(
 return_period varchar,
+loss_value float,
 loss_type varchar,
 fsauid varchar,
-"GenOcc" varchar,
+"OccType" varchar,
 "GenType" varchar,
-loss_value float,
 loss_ratio float,
-annual_frequency_of_exceedence float,
+annual_frequency_of_exceedence float
 region varchar
 );
 
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_stats_r1(
 return_period varchar,
+loss_value float,
 loss_type varchar,
 fsauid varchar,
-"GenOcc" varchar,
+"OccType" varchar,
 "GenType" varchar,
-loss_value float,
 loss_ratio float,
-annual_frequency_of_exceedence float,
+annual_frequency_of_exceedence float
 region varchar
 );
 
@@ -649,7 +653,7 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_losses_q05_b0, psra_{prov}.psra
 CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_q05_b0(
 loss_type varchar,
 fsauid varchar,
-"GenOcc" varchar,
+"OccType" varchar,
 "GenType" varchar,
 loss_value float,
 exposed_value float,
@@ -660,7 +664,7 @@ loss_ratio float
 CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_q05_r1(
 loss_type varchar,
 fsauid varchar,
-"GenOcc" varchar,
+"OccType" varchar,
 "GenType" varchar,
 loss_value float,
 exposed_value float,
@@ -676,7 +680,7 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_losses_q95_b0, psra_{prov}.psra
 CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_q95_b0(
 loss_type varchar,
 fsauid varchar,
-"GenOcc" varchar,
+"OccType" varchar,
 "GenType" varchar,
 loss_value float,
 exposed_value float,
@@ -687,7 +691,7 @@ loss_ratio float
 CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_q95_r1(
 loss_type varchar,
 fsauid varchar,
-"GenOcc" varchar,
+"OccType" varchar,
 "GenType" varchar,
 loss_value float,
 exposed_value float,
@@ -702,22 +706,22 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_losses_stats_b0, psra_{prov}.ps
 CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_stats_b0(
 loss_type varchar,
 fsauid varchar,
-"GenOcc" varchar,
+"OccType" varchar,
 "GenType" varchar,
 loss_value float,
 exposed_value float,
-loss_ratio float,
+loss_ratio float
 region varchar
 );
 
 CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_stats_r1(
 loss_type varchar,
 fsauid varchar,
-"GenOcc" varchar,
+"OccType" varchar,
 "GenType" varchar,
 loss_value float,
 exposed_value float,
-loss_ratio float,
+loss_ratio float
 region varchar
 );
 
@@ -737,9 +741,11 @@ asset_id varchar,
 "GenType" varchar,
 "LandUse" varchar,
 "OccClass" varchar,
+"OccType" varchar,
 "SAC" varchar,
 "SSC_Zone" varchar,
-"SauidID" varchar,
+"SS_Region" varchar,
+"Sauid_km2" float,
 adauid varchar,
 cdname varchar,
 cduid varchar,
@@ -774,9 +780,11 @@ asset_id varchar,
 "GenType" varchar,
 "LandUse" varchar,
 "OccClass" varchar,
+"OccType" varchar,
 "SAC" varchar,
 "SSC_Zone" varchar,
-"SauidID" varchar,
+"SS_Region" varchar,
+"Sauid_km2" float,
 adauid varchar,
 cdname varchar,
 cduid varchar,
