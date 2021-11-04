@@ -72,11 +72,11 @@ a."GenOcc",
 a."GenType",
 a."LandUse",
 a."OccClass",
-a."OccType"
+a."OccType",
 a."SAC",
 a."SSC_Zone",
 a."SS_Region",
-a."Saukd_km2",
+a."Sauid_km2",
 a.adauid,
 a.cdname,
 a.cduid,
@@ -169,7 +169,7 @@ CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_stats AS
 a.return_period,
 a.loss_type,
 a.fsauid,
-a."GenOcc",
+a."OccType",
 a."GenType",
 a.loss_value AS "loss_value_b0",
 a.loss_ratio AS "loss_ratio_b0",
@@ -177,7 +177,7 @@ b.loss_value AS "loss_value_r1",
 b.loss_ratio AS "loss_ratio_r1",
 a.annual_frequency_of_exceedence
 FROM psra_{prov}.psra_{prov}_agg_curves_stats_b0 a
-LEFT JOIN psra_{prov}.psra_{prov}_agg_curves_stats_r1 b ON a.return_period = b.return_period AND a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND
+LEFT JOIN psra_{prov}.psra_{prov}_agg_curves_stats_r1 b ON a.return_period = b.return_period AND a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."OccType" = b."OccType" AND
 a."GenType" = b."GenType" and a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence);
 
 -- delete *total* rows from table
@@ -240,7 +240,7 @@ CREATE TABLE psra_{prov}.psra_{prov}_agg_losses_stats AS
 SELECT
 a.loss_type,
 a.fsauid,
-a."OccType"
+a."OccType",
 a."GenType",
 a.region,
 a.loss_value AS "loss_value_b0",
