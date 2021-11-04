@@ -368,15 +368,15 @@ COALESCE(c.loss_ratio_r1,0) AS "e95Lr_r1",
 a.loss_type AS "eEL_type",
 a.return_period AS "eEL_Period",
 a.annual_frequency_of_exceedence AS "eEL_Probability",
-a."GenOcc" AS "eEL_OccGen",
+a."OccType" AS "eEL_OccGen",
 a."GenType" AS "eEL_BldgType",
 UPPER('{prov}') AS "e_Aggregation"
 --b.geom  -in case fsa geom is needed
 
 FROM psra_{prov}.psra_{prov}_agg_curves_stats a
-FULL JOIN psra_{prov}.psra_{prov}_agg_curves_q05 b ON a.return_period = b.return_period AND a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND a."GenType" = b."GenType" 
+FULL JOIN psra_{prov}.psra_{prov}_agg_curves_q05 b ON a.return_period = b.return_period AND a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."OccType" = b."OccType" AND a."GenType" = b."GenType" 
 	AND a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence
-FULL JOIN psra_{prov}.psra_{prov}_agg_curves_q95 c ON a.return_period = c.return_period AND a.loss_type = c.loss_type AND a.fsauid = c.fsauid AND a."GenOcc" = c."GenOcc" AND a."GenType" = c."GenType" 
+FULL JOIN psra_{prov}.psra_{prov}_agg_curves_q95 c ON a.return_period = c.return_period AND a.loss_type = c.loss_type AND a.fsauid = c.fsauid AND a."OccType" = c."OccType" AND a."GenType" = c."GenType" 
 	AND a.annual_frequency_of_exceedence = c.annual_frequency_of_exceedence
 ORDER BY a.fsauid ASC;
 --LEFT JOIN boundaries."Geometry_FSAUID" b ON a.fsauid = b."CFSAUID";
@@ -390,7 +390,7 @@ CREATE VIEW results_psra_{prov}.psra_{prov}_agg_loss_fsa AS
 SELECT
 a.fsauid,
 a.loss_type,
-a."GenOcc",
+a."OccType",
 a."GenType",
 a.region,
 
@@ -419,6 +419,6 @@ COALESCE(c.exposed_value_r1,0) AS "q95_exposed_value_r1",
 COALESCE(c.loss_ratio_r1,0) AS "q_95_loss_ratio_r1"
 
 FROM psra_{prov}.psra_{prov}_agg_losses_stats a
-LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q05 b ON a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."GenOcc" = b."GenOcc" AND a."GenType" = b."GenType"
-LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q95 c ON a.loss_type = c.loss_type AND a.fsauid = c.fsauid AND a."GenOcc" = c."GenOcc" AND a."GenType" = c."GenType"
+LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q05 b ON a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."OccType" = b."OccType" AND a."GenType" = b."GenType"
+LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q95 c ON a.loss_type = c.loss_type AND a.fsauid = c.fsauid AND a."OccType" = c."OccType" AND a."GenType" = c."GenType"
 ORDER BY a.fsauid ASC;
