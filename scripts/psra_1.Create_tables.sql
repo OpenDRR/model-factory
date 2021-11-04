@@ -627,7 +627,7 @@ fsauid varchar,
 "OccType" varchar,
 "GenType" varchar,
 loss_ratio float,
-annual_frequency_of_exceedence float
+annual_frequency_of_exceedence float,
 region varchar
 );
 
@@ -640,7 +640,7 @@ fsauid varchar,
 "OccType" varchar,
 "GenType" varchar,
 loss_ratio float,
-annual_frequency_of_exceedence float
+annual_frequency_of_exceedence float,
 region varchar
 );
 
