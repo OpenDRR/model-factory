@@ -710,7 +710,7 @@ fsauid varchar,
 "GenType" varchar,
 loss_value float,
 exposed_value float,
-loss_ratio float
+loss_ratio float,
 region varchar
 );
 
@@ -721,7 +721,7 @@ fsauid varchar,
 "GenType" varchar,
 loss_value float,
 exposed_value float,
-loss_ratio float
+loss_ratio float,
 region varchar
 );
 
