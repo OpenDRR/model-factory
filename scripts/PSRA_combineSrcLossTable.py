@@ -37,20 +37,25 @@ def main():
 
         for erFile in erFileList:
             dfTemp = pd.read_csv(erFile)
-            er = erFile.split('_')[1]
+            # er = erFile.split('_')[1]
             # Remove the split econmic region identifiers
             # handle subregions and combined regions differently
             # For example 'QC2445-55' should remain the same
             # NB1330 should remain the same
             # BC5920A2 should be changed to BC5920
-            if len(re.split('(\d+)', er)) == 1 or re.split('(\d+)', er)[2] == '-':
-                er = ''.join(re.split('(\d+)',er)[0:4])
-            else:
-                er = ''.join(re.split('(\d+)',er)[0:2])
+            er = erFile.split('ebR_')[1].split('_src_loss_table_{}.csv'.format(retrofit))[0]
+            # 2021-11-08 Updated, er will now be any of the text which the OpenQuake Analyst
+            # chooses to put in the filename between 'ebR_' and '_agg_curves-stats_{}.csv
+            # if len(re.split('(\d+)', er)) == 1 or re.split('(\d+)', er)[2] == '-':
+            #     er = ''.join(re.split('(\d+)',er)[0:4])
+            # else:
+            #     er = ''.join(re.split('(\d+)',er)[0:2])
 
             dfTemp['region'] = er
             dfFinal = dfFinal.append(dfTemp)
-        outFileName = 'ebR_{er}_src_loss_table_{retrofit}.csv'.format(**{'er':er[0:2], 'retrofit':retrofit})
+        outFileName = 'ebR_{er}_src_loss_table_{retrofit}.csv'.format(**{
+            'er': er[0:2],
+            'retrofit': retrofit})
 
         if not os.path.isfile(outFileName):
             # Check if the file already exists, it should for
