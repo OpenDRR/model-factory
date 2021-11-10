@@ -61,6 +61,106 @@ ALTER TABLE psra_{prov}.psra_{prov}_cd_dmg_mean ADD PRIMARY KEY (asset_id);
 
 
 
+-- combine ed q05 b0 and r1 table
+CREATE TABLE psra_{prov}.psra_{prov}_ed_dmg_q05 AS
+(SELECT
+a.asset_id,
+a."BldEpoch",
+a."BldgType",
+a."EqDesLev",
+a."GenOcc",
+a."GenType",
+a."LandUse",
+a."OccClass",
+a."OccType"
+a."SAC",
+a."SSC_Zone",
+a."SS_Region",
+a."Sauid_km2",
+a.adauid,
+a.cdname,
+a.cduid,
+a.csdname,
+a.csduid,
+a.dauid,
+a.ername,
+a.eruid,
+a.fsauid,
+a.prname,
+a.pruid,
+a.sauid,
+a.taxonomy,
+a.lon,
+a.lat,
+a.structural_no_damage AS "structural_no_damage_b0",
+a.structural_slight AS "structural_slight_b0",
+a.structural_moderate AS "structural_moderate_b0",
+a.structural_extensive AS "structural_extensive_b0",
+a.structural_complete AS "structural_complete_b0",
+b.structural_no_damage AS "structural_no_damage_r1",
+b.structural_slight AS "structural_slight_r1",
+b.structural_moderate AS "structural_moderate_r1",
+b.structural_extensive AS "structural_extensive_r1",
+b.structural_complete AS "structural_complete_r1"
+
+FROM psra_{prov}.psra_{prov}_ed_dmg_q05_b0 a
+INNER JOIN psra_{prov}.psra_{prov}_ed_dmg_q05_r1 b ON a.asset_id = b.asset_id
+);
+
+ALTER TABLE psra_{prov}.psra_{prov}_ed_dmg_q05 ADD PRIMARY KEY (asset_id);
+
+
+
+-- combine ed q95 b0 and r1 table
+CREATE TABLE psra_{prov}.psra_{prov}_ed_dmg_q95 AS
+(SELECT
+a.asset_id,
+a."BldEpoch",
+a."BldgType",
+a."EqDesLev",
+a."GenOcc",
+a."GenType",
+a."LandUse",
+a."OccClass",
+a."OccType"
+a."SAC",
+a."SSC_Zone",
+a."SS_Region",
+a."Sauid_km2",
+a.adauid,
+a.cdname,
+a.cduid,
+a.csdname,
+a.csduid,
+a.dauid,
+a.ername,
+a.eruid,
+a.fsauid,
+a.prname,
+a.pruid,
+a.sauid,
+a.taxonomy,
+a.lon,
+a.lat,
+a.structural_no_damage AS "structural_no_damage_b0",
+a.structural_slight AS "structural_slight_b0",
+a.structural_moderate AS "structural_moderate_b0",
+a.structural_extensive AS "structural_extensive_b0",
+a.structural_complete AS "structural_complete_b0",
+b.structural_no_damage AS "structural_no_damage_r1",
+b.structural_slight AS "structural_slight_r1",
+b.structural_moderate AS "structural_moderate_r1",
+b.structural_extensive AS "structural_extensive_r1",
+b.structural_complete AS "structural_complete_r1"
+
+FROM psra_{prov}.psra_{prov}_ed_dmg_q95_b0 a
+INNER JOIN psra_{prov}.psra_{prov}_ed_dmg_q95_r1 b ON a.asset_id = b.asset_id
+);
+
+ALTER TABLE psra_{prov}.psra_{prov}_ed_dmg_q95 ADD PRIMARY KEY (asset_id);
+
+
+
 -- combine ed b0 and r1 table
 CREATE TABLE psra_{prov}.psra_{prov}_ed_dmg_mean AS
 (SELECT
