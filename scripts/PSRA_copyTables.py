@@ -286,6 +286,86 @@ def main():
     systemCall = ' '.join(systemCall.split())
     os.system(systemCall)
 
+  # Copy ed dmg q05 b0 table
+    with open("/usr/src/app/eDamage/{prov}/eD_{prov}_damages-q05_b0.csv".format(
+            **{'prov': args.province}), "r") as f:
+        reader = csv.reader(f)
+        dmgColumns = next(reader)
+    dmgColumns = ','.join('"{0}"'.format(w) for w in dmgColumns)
+    dmgColumns = dmgColumns.replace('~', '_')
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a
+                -c '\copy psra_{prov}.psra_{prov}_ed_dmg_q05_b0({dmgColumns})
+                    FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-q05_b0.csv
+                        WITH
+                        CSV HEADER ;'""".format(**{
+                            'prov': args.province,
+                            'dmgColumns': dmgColumns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
+      # Copy ed dmg q05 r1 table
+    with open("/usr/src/app/eDamage/{prov}/eD_{prov}_damages-q05_r1.csv".format(
+            **{'prov': args.province}), "r") as f:
+        reader = csv.reader(f)
+        dmgColumns = next(reader)
+    dmgColumns = ','.join('"{0}"'.format(w) for w in dmgColumns)
+    dmgColumns = dmgColumns.replace('~', '_')
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a
+                -c '\copy psra_{prov}.psra_{prov}_ed_dmg_q05_r1({dmgColumns})
+                    FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-q05_r1.csv
+                        WITH
+                        CSV HEADER ;'""".format(**{
+                            'prov': args.province,
+                            'dmgColumns': dmgColumns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
+      # Copy ed dmg q95 b0 table
+    with open("/usr/src/app/eDamage/{prov}/eD_{prov}_damages-q95_b0.csv".format(
+            **{'prov': args.province}), "r") as f:
+        reader = csv.reader(f)
+        dmgColumns = next(reader)
+    dmgColumns = ','.join('"{0}"'.format(w) for w in dmgColumns)
+    dmgColumns = dmgColumns.replace('~', '_')
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a
+                -c '\copy psra_{prov}.psra_{prov}_ed_dmg_q95_b0({dmgColumns})
+                    FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-q95_b0.csv
+                        WITH
+                        CSV HEADER ;'""".format(**{
+                            'prov': args.province,
+                            'dmgColumns': dmgColumns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
+      # Copy ed dmg q95 r1 table
+    with open("/usr/src/app/eDamage/{prov}/eD_{prov}_damages-q95_r1.csv".format(
+            **{'prov': args.province}), "r") as f:
+        reader = csv.reader(f)
+        dmgColumns = next(reader)
+    dmgColumns = ','.join('"{0}"'.format(w) for w in dmgColumns)
+    dmgColumns = dmgColumns.replace('~', '_')
+    systemCall = """psql -h  ${{POSTGRES_HOST}}
+                -U  ${{POSTGRES_USER}}
+                -d ${{DB_NAME}}
+                -a
+                -c '\copy psra_{prov}.psra_{prov}_ed_dmg_q95_r1({dmgColumns})
+                    FROM /usr/src/app/eDamage/{prov}/eD_{prov}_damages-q95_r1.csv
+                        WITH
+                        CSV HEADER ;'""".format(**{
+                            'prov': args.province,
+                            'dmgColumns': dmgColumns})
+    systemCall = ' '.join(systemCall.split())
+    os.system(systemCall)
+
     # Copy ed dmg mean b0 table
     with open("/usr/src/app/eDamage/{prov}/eD_{prov}_damages-mean_b0.csv".format(
             **{'prov': args.province}), "r") as f:

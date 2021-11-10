@@ -436,7 +436,6 @@ structural_complete float
 
 
 
-
 -- create cd table r2
 CREATE TABLE psra_{prov}.psra_{prov}_cd_dmg_mean_r2(
 PRIMARY KEY (asset_id),
@@ -473,6 +472,170 @@ structural_extensive float,
 structural_complete float
 );
 
+
+-- add ed q05 tables
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_ed_dmg_q05_b0,psra_{prov}.psra_{prov}_ed_dmg_q05_r1 CASCADE;
+
+-- create ed table q05 b0
+CREATE TABLE psra_{prov}.psra_{prov}_ed_dmg_q05_b0(
+PRIMARY KEY (asset_id),
+asset_id varchar, 
+"BldEpoch" varchar,
+"BldgType" varchar,
+"EqDesLev" varchar, 
+"GenOcc" varchar, 
+"GenType" varchar,
+"LandUse" varchar, 
+"OccClass" varchar,
+"OccType" varchar,
+"SAC" varchar, 
+"SSC_Zone" varchar,
+"SS_Region" varchar,
+"Sauid_km2" float,
+adauid varchar, 
+cdname varchar, 
+cduid varchar,
+csdname varchar, 
+csduid varchar,
+dauid varchar, 
+ername varchar,
+eruid varchar,
+fsauid varchar, 
+prname varchar, 
+pruid varchar,
+sauid varchar, 
+taxonomy varchar, 
+lon float, 
+lat float, 
+structural_no_damage float, 
+structural_slight float, 
+structural_moderate float, 
+structural_extensive float, 
+structural_complete float
+);
+
+
+
+-- create ed table q05 r1
+CREATE TABLE psra_{prov}.psra_{prov}_ed_dmg_q05_r1(
+PRIMARY KEY (asset_id),
+asset_id varchar, 
+"BldEpoch" varchar,
+"BldgType" varchar,
+"EqDesLev" varchar, 
+"GenOcc" varchar, 
+"GenType" varchar,
+"LandUse" varchar, 
+"OccClass" varchar,
+"OccType" varchar,
+"SAC" varchar, 
+"SSC_Zone" varchar,
+"SS_Region" varchar,
+"Sauid_km2" float,
+adauid varchar, 
+cdname varchar, 
+cduid varchar,
+csdname varchar, 
+csduid varchar,
+dauid varchar, 
+ername varchar,
+eruid varchar,
+fsauid varchar, 
+prname varchar, 
+pruid varchar,
+sauid varchar, 
+taxonomy varchar, 
+lon float, 
+lat float, 
+structural_no_damage float, 
+structural_slight float, 
+structural_moderate float, 
+structural_extensive float, 
+structural_complete float
+);
+
+
+
+-- add ed q95 tables
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_ed_dmg_q95_b0,psra_{prov}.psra_{prov}_ed_dmg_q95_r1 CASCADE;
+
+-- create ed table q05 b0
+CREATE TABLE psra_{prov}.psra_{prov}_ed_dmg_q95_b0(
+PRIMARY KEY (asset_id),
+asset_id varchar, 
+"BldEpoch" varchar,
+"BldgType" varchar,
+"EqDesLev" varchar, 
+"GenOcc" varchar, 
+"GenType" varchar,
+"LandUse" varchar, 
+"OccClass" varchar,
+"OccType" varchar,
+"SAC" varchar, 
+"SSC_Zone" varchar,
+"SS_Region" varchar,
+"Sauid_km2" float,
+adauid varchar, 
+cdname varchar, 
+cduid varchar,
+csdname varchar, 
+csduid varchar,
+dauid varchar, 
+ername varchar,
+eruid varchar,
+fsauid varchar, 
+prname varchar, 
+pruid varchar,
+sauid varchar, 
+taxonomy varchar, 
+lon float, 
+lat float, 
+structural_no_damage float, 
+structural_slight float, 
+structural_moderate float, 
+structural_extensive float, 
+structural_complete float
+);
+
+
+
+-- create ed table q05 r1
+CREATE TABLE psra_{prov}.psra_{prov}_ed_dmg_q95_r1(
+PRIMARY KEY (asset_id),
+asset_id varchar, 
+"BldEpoch" varchar,
+"BldgType" varchar,
+"EqDesLev" varchar, 
+"GenOcc" varchar, 
+"GenType" varchar,
+"LandUse" varchar, 
+"OccClass" varchar,
+"OccType" varchar,
+"SAC" varchar, 
+"SSC_Zone" varchar,
+"SS_Region" varchar,
+"Sauid_km2" float,
+adauid varchar, 
+cdname varchar, 
+cduid varchar,
+csdname varchar, 
+csduid varchar,
+dauid varchar, 
+ername varchar,
+eruid varchar,
+fsauid varchar, 
+prname varchar, 
+pruid varchar,
+sauid varchar, 
+taxonomy varchar, 
+lon float, 
+lat float, 
+structural_no_damage float, 
+structural_slight float, 
+structural_moderate float, 
+structural_extensive float, 
+structural_complete float
+);
 
 
 
@@ -516,7 +679,7 @@ structural_complete float
 
 
 
--- create cd table r1
+-- create ed table r1
 CREATE TABLE psra_{prov}.psra_{prov}_ed_dmg_mean_r1(
 PRIMARY KEY (asset_id),
 asset_id varchar, 
