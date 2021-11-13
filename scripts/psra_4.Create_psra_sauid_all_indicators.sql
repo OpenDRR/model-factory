@@ -180,18 +180,39 @@ a.sauid AS "Sauid",
 -- 2.2.2 Event-Based Damage - b0
 CAST(CAST(ROUND(CAST(SUM(g.structural_slight_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Slight_b0",
 CAST(CAST(ROUND(CAST(AVG(g.structural_slight_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Slight_b0",
-
 CAST(CAST(ROUND(CAST(SUM(g.structural_moderate_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Moderate_b0",
 CAST(CAST(ROUND(CAST(AVG(g.structural_moderate_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Moderate_b0",
-
 CAST(CAST(ROUND(CAST(SUM(g.structural_extensive_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Extensive_b0",
 CAST(CAST(ROUND(CAST(AVG(g.structural_extensive_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Extensive_b0",
-
 CAST(CAST(ROUND(CAST(SUM(g.structural_complete_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Complete_b0",
 CAST(CAST(ROUND(CAST(AVG(g.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Complete_b0",
-
 CAST(CAST(ROUND(CAST(SUM(g.structural_complete_b0 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Collapse_b0",
 CAST(CAST(ROUND(CAST(AVG((g.structural_complete_b0/a.number) * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Collapse_b0",
+
+-- q05 - b0
+CAST(CAST(ROUND(CAST(SUM(k.structural_slight_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Slight_b0",
+CAST(CAST(ROUND(CAST(SUM(k.structural_slight_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Slight_b0",
+CAST(CAST(ROUND(CAST(SUM(k.structural_moderate_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Moderate_b0",
+CAST(CAST(ROUND(CAST(SUM(k.structural_moderate_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Moderate_b0",
+CAST(CAST(ROUND(CAST(SUM(k.structural_extensive_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Extensive_b0",
+CAST(CAST(ROUND(CAST(SUM(k.structural_extensive_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Extensive_b0",
+CAST(CAST(ROUND(CAST(SUM(k.structural_complete_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Complete_b0",
+CAST(CAST(ROUND(CAST(SUM(k.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Complete_b0",
+CAST(CAST(ROUND(CAST(SUM(k.structural_complete_b0 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Collapse_b0",
+CAST(CAST(ROUND(CAST(SUM(k.structural_complete_b0/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Collapse_b0",
+
+-- q95 - b0
+CAST(CAST(ROUND(CAST(SUM(l.structural_slight_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Slight_b0",
+CAST(CAST(ROUND(CAST(SUM(l.structural_slight_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Slight_b0",
+CAST(CAST(ROUND(CAST(SUM(l.structural_moderate_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Moderate_b0",
+CAST(CAST(ROUND(CAST(SUM(l.structural_moderate_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Moderate_b0",
+CAST(CAST(ROUND(CAST(SUM(l.structural_extensive_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Extensive_b0",
+CAST(CAST(ROUND(CAST(SUM(l.structural_extensive_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Extensive_b0",
+CAST(CAST(ROUND(CAST(SUM(l.structural_complete_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Complete_b0",
+CAST(CAST(ROUND(CAST(SUM(l.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Complete_b0",
+CAST(CAST(ROUND(CAST(SUM(l.structural_complete_b0 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Collapse_b0",
+CAST(CAST(ROUND(CAST(SUM(l.structural_complete_b0/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Collapse_b0",
+
 
 -- 2.2.2 Event-Based Damage - r1
 CAST(CAST(ROUND(CAST(SUM(g.structural_slight_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Slight_r1",
@@ -205,6 +226,30 @@ CAST(CAST(ROUND(CAST(AVG(g.structural_complete_r1/a.number) AS NUMERIC),6) AS FL
 CAST(CAST(ROUND(CAST(SUM(g.structural_complete_r1 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Collapse_r1",
 CAST(CAST(ROUND(CAST(AVG((g.structural_complete_r1/a.number) * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Collapse_r1",
 
+-- q05 - r1
+CAST(CAST(ROUND(CAST(SUM(k.structural_slight_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Slight_r1",
+CAST(CAST(ROUND(CAST(SUM(k.structural_slight_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Slight_r1",
+CAST(CAST(ROUND(CAST(SUM(k.structural_moderate_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Moderate_r1",
+CAST(CAST(ROUND(CAST(SUM(k.structural_moderate_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Moderate_r1",
+CAST(CAST(ROUND(CAST(SUM(k.structural_extensive_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Extensive_r1",
+CAST(CAST(ROUND(CAST(SUM(k.structural_extensive_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Extensive_r1",
+CAST(CAST(ROUND(CAST(SUM(k.structural_complete_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Complete_r1",
+CAST(CAST(ROUND(CAST(SUM(k.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Complete_r1",
+CAST(CAST(ROUND(CAST(SUM(k.structural_complete_r1 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Collapse_r1",
+CAST(CAST(ROUND(CAST(SUM(k.structural_complete_r1/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Collapse_r1",
+
+-- q95 - r1
+CAST(CAST(ROUND(CAST(SUM(l.structural_slight_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Slight_r1",
+CAST(CAST(ROUND(CAST(SUM(l.structural_slight_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Slight_r1",
+CAST(CAST(ROUND(CAST(SUM(l.structural_moderate_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Moderate_r1",
+CAST(CAST(ROUND(CAST(SUM(l.structural_moderate_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Moderate_r1",
+CAST(CAST(ROUND(CAST(SUM(l.structural_extensive_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Extensive_r1",
+CAST(CAST(ROUND(CAST(SUM(l.structural_extensive_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Extensive_r1",
+CAST(CAST(ROUND(CAST(SUM(l.structural_complete_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Complete_r1",
+CAST(CAST(ROUND(CAST(SUM(l.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Complete_r1",
+CAST(CAST(ROUND(CAST(SUM(l.structural_complete_r1 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Collapse_r1",
+CAST(CAST(ROUND(CAST(SUM(l.structural_complete_r1/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Collapse_r1",
+
 
 -- 2.3 Affected People
 -- 2.3.1 Life Safety - b0
@@ -217,9 +262,9 @@ CAST(CAST(ROUND(CAST(AVG(COALESCE(occupants_r1/NULLIF(a.night,0),0)) AS NUMERIC)
 
 -- 2.4.1 Average Annual Loss - b0
 CAST(CAST(ROUND(CAST(SUM(i.structural_b0 + i.nonstructural_b0 + i.contents_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Asset_b0",
-CAST(CAST(ROUND(CAST(AVG((i.structural_b0 + i.nonstructural_b0 + i.contents_b0)/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALm_Asset_b0",
+CAST(CAST(ROUND(CAST(AVG((i.structural_b0 + i.nonstructural_b0 + i.contents_b0)/(a.structural + a.nonstructural)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALm_Asset_b0",
 CAST(CAST(ROUND(CAST(SUM(i.structural_b0 + i.nonstructural_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Bldg_b0",
-CAST(CAST(ROUND(CAST(AVG((i.structural_b0 + i.nonstructural_b0)/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALm_Bldg_b0",
+CAST(CAST(ROUND(CAST(AVG((i.structural_b0 + i.nonstructural_b0)/(a.structural + a.nonstructural)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALm_Bldg_b0",
 CAST(CAST(ROUND(CAST(SUM(i.structural_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Str_b0",
 CAST(CAST(ROUND(CAST(SUM(i.nonstructural_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_NStr_b0",
 CAST(CAST(ROUND(CAST(SUM(i.contents_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Cont_b0",
@@ -227,9 +272,9 @@ CAST(CAST(ROUND(CAST(SUM(i.contents_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS 
 
 -- 2.4.1 Average Annual Loss - r1
 CAST(CAST(ROUND(CAST(SUM(i.structural_r1 + i.nonstructural_r1 + i.contents_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Asset_r1",
-CAST(CAST(ROUND(CAST(AVG((i.structural_r1 + i.nonstructural_r1 + i.contents_r1)/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALm_Asset_r1",
+CAST(CAST(ROUND(CAST(AVG((i.structural_r1 + i.nonstructural_r1 + i.contents_r1)/(a.structural + a.nonstructural)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALm_Asset_r1",
 CAST(CAST(ROUND(CAST(SUM(i.structural_r1 + i.nonstructural_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Bldg_r1",
-CAST(CAST(ROUND(CAST(AVG((i.structural_r1 + i.nonstructural_r1)/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALm_Bldg_r1",
+CAST(CAST(ROUND(CAST(AVG((i.structural_r1 + i.nonstructural_r1)/(a.structural + a.nonstructural)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALm_Bldg_r1",
 CAST(CAST(ROUND(CAST(SUM(i.structural_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Str_r1",
 CAST(CAST(ROUND(CAST(SUM(i.nonstructural_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_NStr_r1",
 CAST(CAST(ROUND(CAST(SUM(i.contents_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Cont_r1",
@@ -270,7 +315,8 @@ RIGHT JOIN psra_{prov}.psra_{prov}_ed_dmg_mean g ON a.id = g.asset_id
 LEFT JOIN mh.mh_intensity_canada h ON a.sauid = h.sauidt
 RIGHT JOIN psra_{prov}.psra_{prov}_avg_losses_stats i ON a.id = i.asset_id
 RIGHT JOIN results_psra_{prov}.psra_{prov}_eqriskindex j ON a.sauid = j.sauid
-
+LEFT JOIN psra_{prov}.psra_{prov}_ed_dmg_q05 k ON a.id = k.asset_id
+LEFT JOIN psra_{prov}.psra_{prov}_ed_dmg_q95 l ON a.id = l.asset_id
 LEFT JOIN boundaries."Geometry_SAUID" z ON a.sauid = z."SAUIDt"
 GROUP BY a.sauid,a.landuse,d."PGA_0.02",d."SA(0.1)_0.02",d."SA(0.2)_0.02",d."SA(0.3)_0.02",d."SA(0.5)_0.02",d."SA(0.6)_0.02",d."SA(1.0)_0.02",d."SA(2.0)_0.02",
 d."PGA_0.1",d."SA(0.1)_0.1",d."SA(0.2)_0.1",d."SA(0.3)_0.1",d."SA(0.5)_0.1",d."SA(0.6)_0.1",d."SA(1.0)_0.1",d."SA(2.0)_0.1",d."SA(5.0)_0.1",d."SA(10.0)_0.1",
@@ -297,6 +343,28 @@ ROUND(AVG("eDtr_Complete_b0"),6) AS "eDtr_Complete_b0",
 ROUND(SUM("eDt_Collapse_b0"),6) AS "eDt_Collapse_b0",
 ROUND(AVG("eDtr_Collapse_b0"),6) AS "eDtr_Collapse_b0",
 
+ROUND(SUM("eDt_q05_Slight_b0"),6) AS "eDt_q05_Slight_b0",
+ROUND(AVG("eDtr_q05_Slight_b0"),6) AS "eDtr_q05_Slight_b0",
+ROUND(SUM("eDt_q05_Moderate_b0"),6) AS "eDt_q05_Moderate_b0",
+ROUND(AVG("eDtr_q05_Moderate_b0"),6) AS "eDtr_q05_Moderate_b0",
+ROUND(SUM("eDt_q05_Extensive_b0"),6) AS "eDt_q05_Extensive_b0",
+ROUND(AVG("eDtr_q05_Extensive_b0"),6) AS "eDtr_q05_Extensive_b0",
+ROUND(SUM("eDt_q05_Complete_b0"),6) AS "eDt_q05_Complete_b0",
+ROUND(AVG("eDtr_q05_Complete_b0"),6) AS "eDtr_q05_Complete_b0",
+ROUND(SUM("eDt_q05_Collapse_b0"),6) AS "eDt_q05_Collapse_b0",
+ROUND(AVG("eDtr_q05_Collapse_b0"),6) AS "eDtr_q05_Collapse_b0",
+
+ROUND(SUM("eDt_q95_Slight_b0"),6) AS "eDt_q95_Slight_b0",
+ROUND(AVG("eDtr_q95_Slight_b0"),6) AS "eDtr_q95_Slight_b0",
+ROUND(SUM("eDt_q95_Moderate_b0"),6) AS "eDt_q95_Moderate_b0",
+ROUND(AVG("eDtr_q95_Moderate_b0"),6) AS "eDtr_q95_Moderate_b0",
+ROUND(SUM("eDt_q95_Extensive_b0"),6) AS "eDt_q95_Extensive_b0",
+ROUND(AVG("eDtr_q95_Extensive_b0"),6) AS "eDtr_q95_Extensive_b0",
+ROUND(SUM("eDt_q95_Complete_b0"),6) AS "eDt_q95_Complete_b0",
+ROUND(AVG("eDtr_q95_Complete_b0"),6) AS "eDtr_q95_Complete_b0",
+ROUND(SUM("eDt_q95_Collapse_b0"),6) AS "eDt_q95_Collapse_b0",
+ROUND(AVG("eDtr_q95_Collapse_b0"),6) AS "eDtr_q95_Collapse_b0",
+
 ROUND(SUM("eDt_Slight_r1"),6) AS "eDt_Slight_r1",
 ROUND(AVG("eDtr_Slight_r1"),6) AS "eDtr_Slight_r1",
 ROUND(SUM("eDt_Moderate_r1"),6) AS "eDt_Moderate_r1",
@@ -307,6 +375,28 @@ ROUND(SUM("eDt_Complete_r1"),6) AS "eDt_Complete_r1",
 ROUND(AVG("eDtr_Complete_r1"),6) AS "eDtr_Complete_r1",
 ROUND(SUM("eDt_Collapse_r1"),6) AS "eDt_Collapse_r1",
 ROUND(AVG("eDtr_Collapse_r1"),6) AS "eDtr_Collapse_r1",
+
+ROUND(SUM("eDt_q05_Slight_r1"),6) AS "eDt_q05_Slight_r1",
+ROUND(AVG("eDtr_q05_Slight_r1"),6) AS "eDtr_q05_Slight_r1",
+ROUND(SUM("eDt_q05_Moderate_r1"),6) AS "eDt_q05_Moderate_r1",
+ROUND(AVG("eDtr_q05_Moderate_r1"),6) AS "eDtr_q05_Moderate_r1",
+ROUND(SUM("eDt_q05_Extensive_r1"),6) AS "eDt_q05_Extensive_r1",
+ROUND(AVG("eDtr_q05_Extensive_r1"),6) AS "eDtr_q05_Extensive_r1",
+ROUND(SUM("eDt_q05_Complete_r1"),6) AS "eDt_q05_Complete_r1",
+ROUND(AVG("eDtr_q05_Complete_r1"),6) AS "eDtr_q05_Complete_r1",
+ROUND(SUM("eDt_q05_Collapse_r1"),6) AS "eDt_q05_Collapse_r1",
+ROUND(AVG("eDtr_q05_Collapse_r1"),6) AS "eDtr_q05_Collapse_r1",
+
+ROUND(SUM("eDt_q95_Slight_r1"),6) AS "eDt_q95_Slight_r1",
+ROUND(AVG("eDtr_q95_Slight_r1"),6) AS "eDtr_q95_Slight_r1",
+ROUND(SUM("eDt_q95_Moderate_r1"),6) AS "eDt_q95_Moderate_r1",
+ROUND(AVG("eDtr_q95_Moderate_r1"),6) AS "eDtr_q95_Moderate_r1",
+ROUND(SUM("eDt_q95_Extensive_r1"),6) AS "eDt_q95_Extensive_r1",
+ROUND(AVG("eDtr_q95_Extensive_r1"),6) AS "eDtr_q95_Extensive_r1",
+ROUND(SUM("eDt_q95_Complete_r1"),6) AS "eDt_q95_Complete_r1",
+ROUND(AVG("eDtr_q95_Complete_r1"),6) AS "eDtr_q95_Complete_r1",
+ROUND(SUM("eDt_q95_Collapse_r1"),6) AS "eDt_q95_Collapse_r1",
+ROUND(AVG("eDtr_q95_Collapse_r1"),6) AS "eDtr_q95_Collapse_r1",
 
 ROUND(SUM("eC_Fatality_b0"),6) AS "eC_Fatality_b0",
 ROUND(AVG("eCr_Fatality_b0"),6) AS "eCr_Fatality_b0",
@@ -408,7 +498,7 @@ COALESCE(b.exposed_value_b0,0) AS "q05_exposed_value_b0",
 COALESCE(b.loss_ratio_b0,0) AS "q05_loss_ratio_b0",
 COALESCE(b.loss_value_r1,0) AS "q05_loss_value_r1",
 COALESCE(b.exposed_value_r1,0) AS "q05_exposed_value_r1",
-COALESCE(b.loss_ratio_r1,0) AS "q_05_loss_ratio_r1",
+COALESCE(b.loss_ratio_r1,0) AS "q05_loss_ratio_r1",
 
 -- q95
 COALESCE(c.loss_value_b0,0) AS "q95_loss_value_b0",
@@ -416,7 +506,7 @@ COALESCE(c.exposed_value_b0,0) AS "q95_exposed_value_b0",
 COALESCE(c.loss_ratio_b0,0) AS "q95_loss_ratio_b0",
 COALESCE(c.loss_value_r1,0) AS "q95_loss_value_r1",
 COALESCE(c.exposed_value_r1,0) AS "q95_exposed_value_r1",
-COALESCE(c.loss_ratio_r1,0) AS "q_95_loss_ratio_r1"
+COALESCE(c.loss_ratio_r1,0) AS "q95_loss_ratio_r1"
 
 FROM psra_{prov}.psra_{prov}_agg_losses_stats a
 LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q05 b ON a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."OccType" = b."OccType" AND a."GenType" = b."GenType"
