@@ -122,7 +122,6 @@ a.sauid AS "Sauid",
 b."PRUID" AS "pruid",
 b."PRNAME" AS "prname",
 b."ERUID" AS "eruid",
-b."ERNAME" AS "ername",
 b."CDUID" AS "cduid",
 b."CDNAME" AS "cdname",
 b."CSDUID" AS "csduid",
@@ -131,7 +130,6 @@ b."CFSAUID" AS "fsauid",
 b."DAUIDt" AS "dauid",
 b."SACCODE" AS "saccode",
 b."SACTYPE" AS "sactype",
-a.landuse,
 a.geom AS "geom_point"
 
 FROM exposure.canada_exposure a

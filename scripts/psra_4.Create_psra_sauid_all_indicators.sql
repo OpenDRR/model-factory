@@ -294,7 +294,6 @@ j.eqri_rel_rating_r1,
 z."PRUID" AS "pruid",
 z."PRNAME" AS "prname",
 z."ERUID" AS "eruid",
-z."ERNAME" AS "ername",
 z."CDUID" AS "cduid",
 z."CDNAME" AS "cdname",
 z."CSDUID" AS "csduid",
@@ -303,7 +302,6 @@ z."CFSAUID" AS "fsauid",
 z."DAUIDt" AS "dauid",
 z."SACCODE" AS "saccode",
 z."SACTYPE" AS "sactype",
-a.landuse,
 --z.geompoint AS "geom_point"
 z.geom AS "geom_poly"
 
@@ -318,10 +316,10 @@ RIGHT JOIN results_psra_{prov}.psra_{prov}_eqriskindex j ON a.sauid = j.sauid
 LEFT JOIN psra_{prov}.psra_{prov}_ed_dmg_q05 k ON a.id = k.asset_id
 LEFT JOIN psra_{prov}.psra_{prov}_ed_dmg_q95 l ON a.id = l.asset_id
 LEFT JOIN boundaries."Geometry_SAUID" z ON a.sauid = z."SAUIDt"
-GROUP BY a.sauid,a.landuse,d."PGA_0.02",d."SA(0.1)_0.02",d."SA(0.2)_0.02",d."SA(0.3)_0.02",d."SA(0.5)_0.02",d."SA(0.6)_0.02",d."SA(1.0)_0.02",d."SA(2.0)_0.02",
+GROUP BY a.sauid,d."PGA_0.02",d."SA(0.1)_0.02",d."SA(0.2)_0.02",d."SA(0.3)_0.02",d."SA(0.5)_0.02",d."SA(0.6)_0.02",d."SA(1.0)_0.02",d."SA(2.0)_0.02",
 d."PGA_0.1",d."SA(0.1)_0.1",d."SA(0.2)_0.1",d."SA(0.3)_0.1",d."SA(0.5)_0.1",d."SA(0.6)_0.1",d."SA(1.0)_0.1",d."SA(2.0)_0.1",d."SA(5.0)_0.1",d."SA(10.0)_0.1",
 e.vs_lon,e.vs_lat,e.vs30,e.z1pt0,e.z2pt5,h.mmi6,h.mmi7,h.mmi8,j.eqri_abs_score_b0,j.eqri_abs_rating_b0,j.eqri_rel_score_b0,j.eqri_rel_rating_b0,j.eqri_abs_score_r1,j.eqri_abs_rating_r1,
-j.eqri_rel_score_r1,j.eqri_rel_rating_r1,z."PRUID",z."PRNAME",z."ERUID",z."ERNAME",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME",z."CFSAUID",z."DAUIDt",z."SACCODE",z."SACTYPE",z.geom;
+j.eqri_rel_score_r1,j.eqri_rel_rating_r1,z."PRUID",z."PRNAME",z."ERUID",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME",z."CFSAUID",z."DAUIDt",z."SACCODE",z."SACTYPE",z.geom;
 
 
 
