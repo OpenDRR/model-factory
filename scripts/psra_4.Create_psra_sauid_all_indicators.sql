@@ -191,27 +191,27 @@ CAST(CAST(ROUND(CAST(AVG((g.structural_complete_b0/a.number) * f.collapse_pc) AS
 
 -- q05 - b0
 CAST(CAST(ROUND(CAST(SUM(k.structural_slight_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Slight_b0",
-CAST(CAST(ROUND(CAST(SUM(k.structural_slight_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Slight_b0",
+CAST(CAST(ROUND(CAST(AVG(k.structural_slight_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Slight_b0",
 CAST(CAST(ROUND(CAST(SUM(k.structural_moderate_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Moderate_b0",
-CAST(CAST(ROUND(CAST(SUM(k.structural_moderate_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Moderate_b0",
+CAST(CAST(ROUND(CAST(AVG(k.structural_moderate_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Moderate_b0",
 CAST(CAST(ROUND(CAST(SUM(k.structural_extensive_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Extensive_b0",
-CAST(CAST(ROUND(CAST(SUM(k.structural_extensive_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Extensive_b0",
+CAST(CAST(ROUND(CAST(AVG(k.structural_extensive_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Extensive_b0",
 CAST(CAST(ROUND(CAST(SUM(k.structural_complete_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Complete_b0",
-CAST(CAST(ROUND(CAST(SUM(k.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Complete_b0",
+CAST(CAST(ROUND(CAST(AVG(k.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Complete_b0",
 CAST(CAST(ROUND(CAST(SUM(k.structural_complete_b0 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Collapse_b0",
-CAST(CAST(ROUND(CAST(SUM(k.structural_complete_b0/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Collapse_b0",
+CAST(CAST(ROUND(CAST(AVG(k.structural_complete_b0/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Collapse_b0",
 
 -- q95 - b0
 CAST(CAST(ROUND(CAST(SUM(l.structural_slight_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Slight_b0",
-CAST(CAST(ROUND(CAST(SUM(l.structural_slight_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Slight_b0",
+CAST(CAST(ROUND(CAST(AVG(l.structural_slight_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Slight_b0",
 CAST(CAST(ROUND(CAST(SUM(l.structural_moderate_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Moderate_b0",
-CAST(CAST(ROUND(CAST(SUM(l.structural_moderate_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Moderate_b0",
+CAST(CAST(ROUND(CAST(AVG(l.structural_moderate_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Moderate_b0",
 CAST(CAST(ROUND(CAST(SUM(l.structural_extensive_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Extensive_b0",
-CAST(CAST(ROUND(CAST(SUM(l.structural_extensive_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Extensive_b0",
+CAST(CAST(ROUND(CAST(AVG(l.structural_extensive_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Extensive_b0",
 CAST(CAST(ROUND(CAST(SUM(l.structural_complete_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Complete_b0",
-CAST(CAST(ROUND(CAST(SUM(l.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Complete_b0",
+CAST(CAST(ROUND(CAST(AVG(l.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Complete_b0",
 CAST(CAST(ROUND(CAST(SUM(l.structural_complete_b0 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Collapse_b0",
-CAST(CAST(ROUND(CAST(SUM(l.structural_complete_b0/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Collapse_b0",
+CAST(CAST(ROUND(CAST(AVG(l.structural_complete_b0/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Collapse_b0",
 
 
 -- 2.2.2 Event-Based Damage - r1
@@ -228,27 +228,27 @@ CAST(CAST(ROUND(CAST(AVG((g.structural_complete_r1/a.number) * f.collapse_pc) AS
 
 -- q05 - r1
 CAST(CAST(ROUND(CAST(SUM(k.structural_slight_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Slight_r1",
-CAST(CAST(ROUND(CAST(SUM(k.structural_slight_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Slight_r1",
+CAST(CAST(ROUND(CAST(AVG(k.structural_slight_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Slight_r1",
 CAST(CAST(ROUND(CAST(SUM(k.structural_moderate_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Moderate_r1",
-CAST(CAST(ROUND(CAST(SUM(k.structural_moderate_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Moderate_r1",
+CAST(CAST(ROUND(CAST(AVG(k.structural_moderate_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Moderate_r1",
 CAST(CAST(ROUND(CAST(SUM(k.structural_extensive_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Extensive_r1",
-CAST(CAST(ROUND(CAST(SUM(k.structural_extensive_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Extensive_r1",
+CAST(CAST(ROUND(CAST(AVG(k.structural_extensive_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Extensive_r1",
 CAST(CAST(ROUND(CAST(SUM(k.structural_complete_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Complete_r1",
-CAST(CAST(ROUND(CAST(SUM(k.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Complete_r1",
+CAST(CAST(ROUND(CAST(AVG(k.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Complete_r1",
 CAST(CAST(ROUND(CAST(SUM(k.structural_complete_r1 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q05_Collapse_r1",
-CAST(CAST(ROUND(CAST(SUM(k.structural_complete_r1/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Collapse_r1",
+CAST(CAST(ROUND(CAST(AVG(k.structural_complete_r1/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q05_Collapse_r1",
 
 -- q95 - r1
 CAST(CAST(ROUND(CAST(SUM(l.structural_slight_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Slight_r1",
-CAST(CAST(ROUND(CAST(SUM(l.structural_slight_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Slight_r1",
+CAST(CAST(ROUND(CAST(AVG(l.structural_slight_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Slight_r1",
 CAST(CAST(ROUND(CAST(SUM(l.structural_moderate_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Moderate_r1",
-CAST(CAST(ROUND(CAST(SUM(l.structural_moderate_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Moderate_r1",
+CAST(CAST(ROUND(CAST(AVG(l.structural_moderate_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Moderate_r1",
 CAST(CAST(ROUND(CAST(SUM(l.structural_extensive_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Extensive_r1",
-CAST(CAST(ROUND(CAST(SUM(l.structural_extensive_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Extensive_r1",
+CAST(CAST(ROUND(CAST(AVG(l.structural_extensive_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Extensive_r1",
 CAST(CAST(ROUND(CAST(SUM(l.structural_complete_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Complete_r1",
-CAST(CAST(ROUND(CAST(SUM(l.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Complete_r1",
+CAST(CAST(ROUND(CAST(AVG(l.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Complete_r1",
 CAST(CAST(ROUND(CAST(SUM(l.structural_complete_r1 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_q95_Collapse_r1",
-CAST(CAST(ROUND(CAST(SUM(l.structural_complete_r1/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Collapse_r1",
+CAST(CAST(ROUND(CAST(AVG(l.structural_complete_r1/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_q95_Collapse_r1",
 
 
 -- 2.3 Affected People
