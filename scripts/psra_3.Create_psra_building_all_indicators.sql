@@ -25,6 +25,7 @@ CAST(CAST(ROUND(CAST((g.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT
 
 CAST(CAST(ROUND(CAST(g.structural_complete_b0 * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_Collapse_b0",
 CAST(CAST(ROUND(CAST((g.structural_complete_b0/a.number) * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_Collapse_b0",
+CASE WHEN ((g.structural_complete_b0/a.number) * f.collapse_pc) >0.01 THEN a.number ELSE 0 END AS "eD_p01_Collapse_b0",
 
 -- q05 - b0
 CAST(CAST(ROUND(CAST(j.structural_slight_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_q05_Slight_b0",
@@ -37,6 +38,8 @@ CAST(CAST(ROUND(CAST(j.structural_complete_b0 AS NUMERIC),6) AS FLOAT) AS NUMERI
 CAST(CAST(ROUND(CAST((j.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_q05_Complete_b0",
 CAST(CAST(ROUND(CAST(j.structural_complete_b0 * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_q05_Collapse_b0",
 CAST(CAST(ROUND(CAST((j.structural_complete_b0/a.number) * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_q05_Collapse_b0",
+CASE WHEN ((j.structural_complete_b0/a.number) * f.collapse_pc) >0.01 THEN a.number ELSE 0 END AS "eD_q05_p01_Collapse_b0",
+
 
 -- q95 - b0
 CAST(CAST(ROUND(CAST(k.structural_slight_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_q95_Slight_b0",
@@ -49,6 +52,7 @@ CAST(CAST(ROUND(CAST(k.structural_complete_b0 AS NUMERIC),6) AS FLOAT) AS NUMERI
 CAST(CAST(ROUND(CAST((k.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_q95_Complete_b0",
 CAST(CAST(ROUND(CAST(k.structural_complete_b0 * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_q95_Collapse_b0",
 CAST(CAST(ROUND(CAST((k.structural_complete_b0/a.number) * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_q95_Collapse_b0",
+CASE WHEN ((k.structural_complete_b0/a.number) * f.collapse_pc) >0.01 THEN a.number ELSE 0 END AS "eD_q95_p01_Collapse_b0",
 
 -- 2.2.2 Event-Based Damage - r1
 CAST(CAST(ROUND(CAST(g.structural_slight_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_Slight_r1",
@@ -65,6 +69,7 @@ CAST(CAST(ROUND(CAST((g.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT
 
 CAST(CAST(ROUND(CAST(g.structural_complete_r1 * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_Collapse_r1",
 CAST(CAST(ROUND(CAST((g.structural_complete_r1/a.number) * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_Collapse_r1",
+CASE WHEN ((g.structural_complete_r1/a.number) * f.collapse_pc) >0.01 THEN a.number ELSE 0 END AS "eD_p01_Collapse_r1",
 
 -- q05 - r1
 CAST(CAST(ROUND(CAST(j.structural_slight_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_q05_Slight_r1",
@@ -77,6 +82,7 @@ CAST(CAST(ROUND(CAST(j.structural_complete_r1 AS NUMERIC),6) AS FLOAT) AS NUMERI
 CAST(CAST(ROUND(CAST((j.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_q05_Complete_r1",
 CAST(CAST(ROUND(CAST(j.structural_complete_r1 * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_q05_Collapse_r1",
 CAST(CAST(ROUND(CAST((j.structural_complete_r1/a.number) * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_q05_Collapse_r1",
+CASE WHEN ((j.structural_complete_r1/a.number) * f.collapse_pc) >0.01 THEN a.number ELSE 0 END AS "eD_q05_p01_Collapse_r1",
 
 -- q95 - r1
 CAST(CAST(ROUND(CAST(k.structural_slight_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_q95_Slight_r1",
@@ -89,6 +95,8 @@ CAST(CAST(ROUND(CAST(k.structural_complete_r1 AS NUMERIC),6) AS FLOAT) AS NUMERI
 CAST(CAST(ROUND(CAST((k.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_q95_Complete_r1",
 CAST(CAST(ROUND(CAST(k.structural_complete_r1 * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_q95_Collapse_r1",
 CAST(CAST(ROUND(CAST((k.structural_complete_r1/a.number) * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_q95_Collapse_r1",
+CASE WHEN ((k.structural_complete_r1/a.number) * f.collapse_pc) >0.01 THEN a.number ELSE 0 END AS "eD_q95_p01_Collapse_r1",
+
 
 
 -- 2.3 Affected People
