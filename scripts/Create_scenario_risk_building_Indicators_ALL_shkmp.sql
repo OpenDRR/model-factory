@@ -427,7 +427,7 @@ LEFT JOIN boundaries."Geometry_SAUID" c on b.sauid = c."SAUIDt"
 LEFT JOIN gmf.shakemap_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_displhshld h ON a."AssetID" = h."AssetID"
-JOIN gmf.shakemap_scenario_extents i ON ST_Intersects(b.geom,i.geom) WHERE i.scenario = '{eqScenario}'
+JOIN gmf.shakemap_scenario_extents_temp i ON ST_Intersects(b.geom,i.geom) WHERE i.scenario = '{eqScenario}';
 --WHERE e."gmv_SA(0.3)" >=0.02;
 
 
