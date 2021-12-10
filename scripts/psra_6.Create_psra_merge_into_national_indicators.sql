@@ -313,7 +313,7 @@ SELECT * FROM results_psra_on.psra_on_agg_loss_fsa;
 ALTER TABLE results_psra_national.psra_agg_loss_fsa_tbl ADD COLUMN fid SERIAL;
 
 -- create index
-CREATE INDEX psra_agg_loss_fsa_tbl_fsauid_idx ON results_psra_national.psra_agg_loss_fsa_tbl("fsauid");
+CREATE INDEX psra_agg_loss_fsa_tbl_fsauid_idx ON results_psra_national.psra_agg_loss_fsa_tbl("e_FSAUID");
 CREATE INDEX psra_agg_loss_fsa_tbl_fid_idx ON results_psra_national.psra_agg_loss_fsa_tbl("fid");
 
 -- create psra pml national view
