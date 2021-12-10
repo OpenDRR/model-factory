@@ -24,8 +24,8 @@ a.geom
 FROM gmf.shakemap_{eqScenario} a
 LEFT JOIN gmf.shakemap_{eqScenario}_xref b ON a.site_id = b.site_id
 LEFT JOIN dsra.dsra_{eqScenario} c ON b.id = c."AssetID"
-LEFT JOIN ruptures.rupture_table d ON d.rupture_name = c."Rupture_Abbr"
-WHERE a."gmv_SA(0.3)" >= 0.02;
+LEFT JOIN ruptures.rupture_table d ON d.rupture_name = c."Rupture_Abbr";
+--WHERE a."gmv_SA(0.3)" >= 0.02;
 
 
 -- update rupture, mag, gmpe information
@@ -38,7 +38,6 @@ a."gmpe_Model"
 
 FROM dsra.dsra_{eqScenario} a
 LEFT JOIN ruptures.rupture_table b ON a."Rupture_Abbr" = b.rupture_name;
-
 
 
 UPDATE results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl
@@ -57,15 +56,19 @@ DROP VIEW IF EXISTS  results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap;
 CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap AS SELECT * FROM results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl;
 
 
-
-
--- add polygon extents with smoothing scenario extents table for each scenario
+-- add polygon extents to scenario extents table for each scenario
 INSERT INTO gmf.shakemap_scenario_extents_temp(scenario,geom)
-SELECT '{eqScenario}',st_astext(st_chaikinsmoothing(st_concavehull(st_collect(geom),0.98))) FROM gmf.shakemap_{eqScenario} WHERE "gmv_SA(0.3)" >= 0.02;
+SELECT '{eqScenario}',st_astext(st_chaikinsmoothing(st_concavehull(st_collect(geom),0.98))) FROM gmf.shakemap_{eqScenario};
+--SELECT '{eqScenario}',st_astext(st_chaikinsmoothing(st_concavehull(st_collect(geom),0.98))) FROM gmf.shakemap_{eqScenario} WHERE "gmv_SA(0.3)" >= 0.02;
+
+
+-- add 10m buffer to ensure all assetIDs are captured
+UPDATE gmf.shakemap_scenario_extents_temp
+SET geom = ST_BUFFER(geom,0.0001) WHERE scenario = '{eqScenario}';
+
 
 -- create index
 CREATE INDEX IF NOT EXISTS {eqScenario}_assetid_idx ON dsra.dsra_{eqScenario}("AssetID");
-
 
 
 --intermediates table to calculate displaced households for DSRA
@@ -424,7 +427,8 @@ LEFT JOIN boundaries."Geometry_SAUID" c on b.sauid = c."SAUIDt"
 LEFT JOIN gmf.shakemap_{eqScenario}_xref e ON b.id = e.id
 LEFT JOIN ruptures.rupture_table f ON f.rupture_name = a."Rupture_Abbr"
 LEFT JOIN results_dsra_{eqScenario}.{eqScenario}_displhshld h ON a."AssetID" = h."AssetID"
-WHERE e."gmv_SA(0.3)" >=0.02;
+JOIN gmf.shakemap_scenario_extents i ON ST_Intersects(b.geom,i.geom) WHERE i.scenario = '{eqScenario}'
+--WHERE e."gmv_SA(0.3)" >=0.02;
 
 
 

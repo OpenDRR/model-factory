@@ -30,6 +30,10 @@ CREATE TABLE gmf.shakemap_scenario_extents_temp(
 scenario varchar,
 geom geometry);
 
+-- add coordinate system
+ALTER TABLE gmf.shakemap_scenario_extents_temp
+ALTER COLUMN geom TYPE geometry(POLYGON,4326) USING ST_SetSRID(geom,4326);
+
 
 /* Create_table_canada_exposure.psql */
 -- add geometries field to enable PostGIS (WGS1984 SRID = 4326)

@@ -13,9 +13,11 @@ INTO gmf.shakemap_scenario_extents_tbl
 FROM gmf.shakemap_scenario_extents_temp a
 LEFT JOIN ruptures.rupture_table b on a.scenario = b.rupture_name;
 
+/*
 -- fix invalid projection
 ALTER TABLE gmf.shakemap_scenario_extents_tbl
 ALTER COLUMN geom TYPE geometry(POLYGON,4326) USING ST_SetSRID(geom,4326);
+*/
 
 -- create shakemap extents view
 DROP VIEW IF EXISTS gmf.shakemap_scenario_extents CASCADE;
@@ -25,7 +27,7 @@ SELECT * FROM gmf.shakemap_scenario_extents_tbl;
 -- create index
 CREATE INDEX IF NOT EXISTS shakemap_scenario_extents_idx ON gmf.shakemap_scenario_extents_tbl USING GIST(geom);
 
-DROP TABLE IF EXISTS gmf.shakemap_scenario_extents_temp;
+--DROP TABLE IF EXISTS gmf.shakemap_scenario_extents_temp;
 
 
 -- create index on master dsra table
