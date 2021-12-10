@@ -11,8 +11,8 @@ UNION
 SELECT * FROM results_psra_nb.psra_nb_indicators_b
 UNION
 SELECT * FROM results_psra_nl.psra_nl_indicators_b
---UNION
---SELECT * FROM results_psra_ns.psra_ns_indicators_b
+UNION
+SELECT * FROM results_psra_ns.psra_ns_indicators_b
 UNION
 SELECT * FROM results_psra_nt.psra_nt_indicators_b
 UNION
@@ -81,8 +81,8 @@ UNION
 SELECT * FROM results_psra_nb.psra_nb_indicators_s
 UNION
 SELECT * FROM results_psra_nl.psra_nl_indicators_s
---UNION
---SELECT * FROM results_psra_ns.psra_ns_indicators_s
+UNION
+SELECT * FROM results_psra_ns.psra_ns_indicators_s
 UNION
 SELECT * FROM results_psra_nt.psra_nt_indicators_s
 UNION
@@ -150,8 +150,8 @@ UNION
 SELECT * FROM results_psra_nb.psra_nb_indicators_csd
 UNION
 SELECT * FROM results_psra_nl.psra_nl_indicators_csd
---UNION
---SELECT * FROM results_psra_ns.psra_ns_indicators_csd
+UNION
+SELECT * FROM results_psra_ns.psra_ns_indicators_csd
 UNION
 SELECT * FROM results_psra_nt.psra_nt_indicators_csd
 UNION
@@ -211,8 +211,8 @@ UNION
 SELECT * FROM results_psra_nb.psra_nb_expected_loss_fsa
 UNION
 SELECT * FROM results_psra_nl.psra_nl_expected_loss_fsa
---UNION
---SELECT * FROM results_psra_ns.psra_ns_expected_loss_fsa
+UNION
+SELECT * FROM results_psra_ns.psra_ns_expected_loss_fsa
 UNION
 SELECT * FROM results_psra_nt.psra_nt_expected_loss_fsa
 UNION
@@ -273,8 +273,8 @@ UNION
 SELECT * FROM results_psra_nb.psra_nb_agg_loss_fsa
 UNION
 SELECT * FROM results_psra_nl.psra_nl_agg_loss_fsa
---UNION
---SELECT * FROM results_psra_ns.psra_ns_agg_loss_fsa
+UNION
+SELECT * FROM results_psra_ns.psra_ns_agg_loss_fsa
 UNION
 SELECT * FROM results_psra_nt.psra_nt_agg_loss_fsa
 UNION
@@ -333,8 +333,8 @@ UNION
 SELECT * FROM results_psra_nb.psra_nb_src_loss
 UNION
 SELECT * FROM results_psra_nl.psra_nl_src_loss
---UNION
---SELECT * FROM results_psra_ns.psra_ns_src_loss
+UNION
+SELECT * FROM results_psra_ns.psra_ns_src_loss
 UNION
 SELECT * FROM results_psra_nt.psra_nt_src_loss
 UNION
