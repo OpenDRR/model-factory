@@ -55,13 +55,13 @@ b."SVlt_Score" + 1 AS "SVlt_Score_translated",
 
 --EQ Risk Index calculations
 (SUM(a.asset_loss_b0) + SUM(a.lifeloss_b0 * 8000000)) * (b."SVlt_Score" + 1) AS "eqri_abs_score_b0",
-'null' AS "eqri_abs_rating_b0",
+0.0 AS "eqri_abs_percentilerank_b0",
 (AVG(a.bldglossratio_b0) + AVG(a.lifelossratio_b0)) * (b."SVlt_Score" + 1) AS "eqri_rel_score_b0",
-'null' AS "eqri_rel_rating_b0",
+0.0 AS "eqri_rel_percentilerank_b0",
 (SUM(a.asset_loss_r1) + SUM(a.lifeloss_r1 * 8000000)) * (b."SVlt_Score" + 1) AS "eqri_abs_score_r1",
-'null' AS "eqri_abs_rating_r1",
+0.0 AS "eqri_abs_percentilerank_r1",
 (AVG(a.bldglossratio_r1) + AVG(a.lifelossratio_r1)) * (b."SVlt_Score" + 1) AS "eqri_rel_score_r1",
-'null' AS "eqri_rel_rating_r1"
+0.0 AS "eqri_rel_percentilerank_r1"
 
 FROM results_psra_{prov}.psra_{prov}_eqriskindex_calc a
 --FROM results_psra_{prov}.psra_{prov}_eqriskindex_calcs a
@@ -71,95 +71,36 @@ GROUP BY a.sauid,b."SVlt_Score"
 
 
 
---create threshold lookup table for rating
---DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqri_thresholds CASCADE;
---CREATE TABLE results_psra_{prov}.psra__{prov}_eqri_thresholds AS
-DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqri_thresholds CASCADE;
-CREATE TABLE results_psra_{prov}.psra_{prov}_eqri_thresholds
+DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqriskindex_csd CASCADE;
+CREATE TABLE results_psra_{prov}.psra_{prov}_eqriskindex_csd AS
 (
-percentile NUMERIC,
-abs_score_threshold_b0 FLOAT DEFAULT 0,
-abs_score_threshold_r1 FLOAT DEFAULT 0,
-rel_score_threshold_b0 FLOAT DEFAULT 0,
-rel_score_threshold_r1 FLOAT DEFAULT 0,
-rating VARCHAR
+SELECT
+b.csduid,
+SUM(a.asset_loss_b0) AS "asset_loss_b0",
+SUM(asset_loss_r1) AS "asset_loss_r1",
+SUM(lifeloss_b0) AS "lifeloss_b0",
+SUM(lifeloss_r1) AS "lifeloss_r1",
+SUM(lifelosscost_b0) AS "lifelosscost_b0",
+SUM(lifelosscost_r1) AS "lifelosscost_r1",
+AVG(bldglossratio_b0) AS "bldglossratio_b0",
+AVG(bldglossratio_r1) AS "bldglossratio_r1",
+AVG(lifelossratio_b0) AS "lifelossratio_b0",
+AVG(lifelossratio_r1) AS "lifelossratio_r1",
+SUM("SVlt_Score_translated") AS "SVlt_Score_translated",
+SUM(eqri_abs_score_b0) AS "eqri_abs_score_b0",
+0.0 AS "eqri_abs_percentilerank_b0",
+AVG(eqri_rel_score_b0) AS "eqri_rel_score_b0",
+0.0 AS "eqri_rel_percentilerank_b0",
+SUM(eqri_abs_score_r1) AS "eqri_abs_score_r1",
+0.0 AS "eqri_abs_percentilerank_r1",
+AVG(eqri_rel_score_r1) AS "eqri_rel_score_r1",
+0.0 AS "eqri_rel_percentilerank_r1"
+
+FROM results_psra_{prov}.psra_{prov}_eqriskindex a
+LEFT JOIN results_psra_{prov}.psra_{prov}_indicators_b b ON a.sauid = b."Sauid"
+GROUP BY b.csduid
 );
 
-
-
---insert default values
---INSERT INTO results_psra_{prov}.psra_{prov}_eqri_thresholds (percentile,rating) VALUES
-INSERT INTO results_psra_{prov}.psra_{prov}_eqri_thresholds (percentile,rating) VALUES
-(0,'Very Low'),
-(0.35,'Relatively Low'),
-(0.60,'Relatively Moderate'),
-(0.80,'Relatively High'),
-(0.95,'Very High');
-
---update values with calculated percentiles
---0.35 percentile
-UPDATE results_psra_{prov}.psra_{prov}_eqri_thresholds 
-SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
-	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
-	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
-	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex) WHERE percentile = 0.35;
-
--- 0.60 percentile
-UPDATE results_psra_{prov}.psra_{prov}_eqri_thresholds 
-SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
-	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
-	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
-	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex) WHERE percentile = 0.60;
-	
--- 0.80 percentile
-UPDATE results_psra_{prov}.psra_{prov}_eqri_thresholds 
-SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
-	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
-	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
-	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex) WHERE percentile = 0.80;
-	
--- 0.95 percentile
-UPDATE results_psra_{prov}.psra_{prov}_eqri_thresholds 
-SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
-	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
-	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex),
-	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_{prov}.psra_{prov}_eqriskindex) WHERE percentile = 0.95;
-
-
--- update rating with threshold lookup table values
-UPDATE results_psra_{prov}.psra_{prov}_eqriskindex
-SET eqri_abs_rating_b0 =
-	CASE 
-		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0)
-		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.60) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35)
-		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.80) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.6)
-		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.8)
-		WHEN eqri_abs_score_b0 > (SELECT abs_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95)
-		ELSE 'Error' END,
-	eqri_abs_rating_r1 =
-	CASE 
-		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0)
-		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.60) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35)
-		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.80) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.6)
-		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.8)
-		WHEN eqri_abs_score_r1 > (SELECT abs_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95)
-		ELSE 'Error' END,
-	eqri_rel_rating_b0 =
-	CASE 
-		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0)
-		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.60) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35)
-		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.80) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.6)
-		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.8)
-		WHEN eqri_rel_score_b0 > (SELECT rel_score_threshold_b0 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95)
-		ELSE 'Error' END,
-	eqri_rel_rating_r1 =
-	CASE 
-		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0)
-		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.60) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.35)
-		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.80) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.6)
-		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.8)
-		WHEN eqri_rel_score_r1 > (SELECT rel_score_threshold_r1 FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_{prov}.psra_{prov}_eqri_thresholds WHERE percentile = 0.95)
-		ELSE 'Error' END;
 
 
 
@@ -287,15 +228,15 @@ CAST(CAST(ROUND(CAST(SUM(i.contents_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS 
 
 -- eq risk index - b0
 CAST(CAST(ROUND(CAST(j.eqri_abs_score_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_abs_score_b0",
-j.eqri_abs_rating_b0,
+j.eqri_abs_percentilerank_b0,
 CAST(CAST(ROUND(CAST(j.eqri_rel_score_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_rel_score_b0",
-j.eqri_rel_rating_b0,
+j.eqri_rel_percentilerank_b0,
 
 -- eq risk index - r1
 CAST(CAST(ROUND(CAST(j.eqri_abs_score_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_abs_score_r1",
-j.eqri_abs_rating_r1,
+j.eqri_abs_percentilerank_r1,
 CAST(CAST(ROUND(CAST(j.eqri_rel_score_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_rel_score_r1",
-j.eqri_rel_rating_r1,
+j.eqri_rel_percentilerank_r1,
 
 z."PRUID" AS "pruid",
 z."PRNAME" AS "prname",
@@ -324,9 +265,8 @@ LEFT JOIN psra_{prov}.psra_{prov}_ed_dmg_q95 l ON a.id = l.asset_id
 LEFT JOIN boundaries."Geometry_SAUID" z ON a.sauid = z."SAUIDt"
 GROUP BY a.sauid,d."PGA_0.02",d."SA(0.1)_0.02",d."SA(0.2)_0.02",d."SA(0.3)_0.02",d."SA(0.5)_0.02",d."SA(0.6)_0.02",d."SA(1.0)_0.02",d."SA(2.0)_0.02",
 d."PGA_0.1",d."SA(0.1)_0.1",d."SA(0.2)_0.1",d."SA(0.3)_0.1",d."SA(0.5)_0.1",d."SA(0.6)_0.1",d."SA(1.0)_0.1",d."SA(2.0)_0.1",d."SA(5.0)_0.1",d."SA(10.0)_0.1",
-e.vs_lon,e.vs_lat,e.vs30,e.z1pt0,e.z2pt5,h.mmi6,h.mmi7,h.mmi8,j.eqri_abs_score_b0,j.eqri_abs_rating_b0,j.eqri_rel_score_b0,j.eqri_rel_rating_b0,j.eqri_abs_score_r1,j.eqri_abs_rating_r1,
-j.eqri_rel_score_r1,j.eqri_rel_rating_r1,z."PRUID",z."PRNAME",z."ERUID",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME",z."CFSAUID",z."DAUIDt",z."SACCODE",z."SACTYPE",z.geom;
-
+e.vs_lon,e.vs_lat,e.vs30,e.z1pt0,e.z2pt5,h.mmi6,h.mmi7,h.mmi8,j.eqri_abs_score_b0,j.eqri_abs_percentilerank_b0,j.eqri_rel_score_b0,j.eqri_rel_percentilerank_b0,j.eqri_abs_score_r1,j.eqri_abs_percentilerank_r1,
+j.eqri_rel_score_r1,j.eqri_rel_percentilerank_r1,z."PRUID",z."PRNAME",z."ERUID",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME",z."CFSAUID",z."DAUIDt",z."SACCODE",z."SACTYPE",z.geom;
 
 
 
@@ -431,11 +371,21 @@ ROUND(SUM("eAALt_Str_r1"),6) AS "eAALt_Str_r1",
 ROUND(SUM("eAALt_NStr_r1"),6) AS "eAALt_NStr_r1",
 ROUND(SUM("eAALt_Cont_r1"),6) AS "eAALt_Cont_r1",
 
+ROUND(SUM(a.eqri_abs_score_b0),6) AS "eqri_abs_score_b0",
+c.eqri_abs_percentilerank_b0,
+ROUND(AVG(a.eqri_rel_score_b0),6) AS "eqri_rel_score_b0",
+c.eqri_rel_percentilerank_b0,
+ROUND(SUM(a.eqri_abs_score_r1),6) AS "eqri_abs_score_r1",
+c.eqri_abs_percentilerank_r1,
+ROUND(AVG(a.eqri_rel_score_r1),6) AS "eqri_rel_score_r1",
+c.eqri_rel_percentilerank_r1,
+
 b.geom
 
 FROM results_psra_{prov}.psra_{prov}_indicators_s a
 LEFT JOIN boundaries."Geometry_CSDUID" b ON a.csduid = b."CSDUID"
-GROUP BY a.csduid,a.csdname,b.geom;
+LEFT JOIN results_psra_{prov}.psra_{prov}_eqriskindex_csd c ON a.csduid = c.csduid
+GROUP BY a.csduid,a.csdname,c.eqri_abs_percentilerank_b0,c.eqri_rel_percentilerank_b0,c.eqri_abs_percentilerank_r1,c.eqri_rel_percentilerank_r1,b.geom;
 
 
 

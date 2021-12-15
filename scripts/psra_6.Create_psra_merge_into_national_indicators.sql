@@ -139,6 +139,258 @@ CREATE VIEW results_psra_national.psra_indicators_s AS SELECT * FROM results_psr
 
 
 
+-- combine eqriskindex sauid tables into national level
+DROP TABLE IF EXISTS results_psra_national.psra_eqriskindex CASCADE;
+
+CREATE TABLE results_psra_national.psra_eqriskindex AS 
+SELECT * FROM results_psra_ab.psra_eqriskindex
+UNION
+SELECT * FROM results_psra_mb.psra_mb_eqriskindex
+UNION
+SELECT * FROM results_psra_nb.psra_nb_eqriskindex
+UNION
+SELECT * FROM results_psra_nl.psra_nl_eqriskindex
+UNION
+SELECT * FROM results_psra_ns.psra_ns_eqriskindex
+UNION
+SELECT * FROM results_psra_nt.psra_nt_eqriskindex
+UNION
+SELECT * FROM results_psra_nu.psra_nu_eqriskindex
+UNION
+SELECT * FROM results_psra_on.psra_on_eqriskindex;
+
+-- UNION
+-- SELECT * FROM results_psra_bc.psra_bc_eqriskindex
+-- UNION
+-- SELECT * FROM results_psra_mb.psra_mb_eqriskindex
+-- UNION
+-- SELECT * FROM results_psra_nb.psra_nb_eqriskindex
+-- UNION
+-- SELECT * FROM results_psra_nl.psra_nl_eqriskindex
+-- UNION
+-- SELECT * FROM results_psra_ns.psra_ns_eqriskindex
+-- UNION
+-- SELECT * FROM results_psra_nt.psra_nt_eqriskindex
+-- UNION
+-- SELECT * FROM results_psra_nu.psra_nu_eqriskindex
+-- UNION
+-- SELECT * FROM results_psra_on.psra_on_eqriskindex
+-- UNION
+-- SELECT * FROM results_psra_pe.psra_pe_eqriskindex
+-- UNION
+-- SELECT * FROM results_psra_qc.psra_qc_eqriskindex
+-- UNION
+-- SELECT * FROM results_psra_sk.psra_sk_eqriskindex
+-- UNION
+-- SELECT * FROM results_psra_yt.psra_yt_eqriskindex;
+
+
+--create national threshold sauid lookup table for rating
+DROP TABLE IF EXISTS results_psra_national.psra_eqri_thresholds CASCADE;
+CREATE TABLE results_psra_national.psra_eqri_thresholds
+(
+percentile NUMERIC,
+abs_score_threshold_b0 FLOAT DEFAULT 0,
+abs_score_threshold_r1 FLOAT DEFAULT 0, 
+rel_score_threshold_b0 FLOAT DEFAULT 0,
+rel_score_threshold_r1 FLOAT DEFAULT 0,
+rating VARCHAR
+);
+
+
+INSERT INTO results_psra_national.psra_eqri_thresholds (percentile,rating) VALUES
+(0,'Very Low'),
+(0.35,'Relatively Low'),
+(0.60,'Relatively Moderate'),
+(0.80,'Relatively High'),
+(0.95,'Very High');
+
+
+--update values with calculated percentiles
+--0.35 percentile
+UPDATE results_psra_national.psra_eqri_thresholds 
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex),
+	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex),
+	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex) WHERE percentile = 0.35;
+
+-- 0.60 percentile
+UPDATE results_psra_national.psra_eqri_thresholds 
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex),
+	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex),
+	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex) WHERE percentile = 0.60;
+	
+-- 0.80 percentile
+UPDATE results_psra_national.psra_eqri_thresholds 
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex),
+	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex),
+	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex) WHERE percentile = 0.80;
+	
+-- 0.95 percentile
+UPDATE results_psra_national.psra_eqri_thresholds 
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex),
+	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex),
+	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex) WHERE percentile = 0.95;
+
+
+-- update percentilerank value for national sauid 
+UPDATE results_psra_national.psra_eqriskindex
+SET eqri_abs_percentilerank_b0 =
+	CASE 
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.35) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.60) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.35)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.80) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.6)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.8)
+		WHEN eqri_abs_score_b0 > (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95)
+		ELSE 0 END,
+	eqri_abs_percentilerank_r1 =
+	CASE 
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.35) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.60) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.35)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.80) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.6)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.8)
+		WHEN eqri_abs_score_r1 > (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95)
+		ELSE 0 END,
+	eqri_rel_percentilerank_b0 =
+	CASE 
+		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.35) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0)
+		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.60) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.35)
+		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.80) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.6)
+		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.8)
+		WHEN eqri_rel_score_b0 > (SELECT rel_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95)
+		ELSE 0 END,
+	eqri_rel_percentilerank_r1 =
+	CASE 
+		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.35) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0)
+		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.60) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.35)
+		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.80) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.6)
+		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.8)
+		WHEN eqri_rel_score_r1 > (SELECT rel_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95)
+		ELSE 0 END;
+
+
+-- update percentilerank on national sauid table
+UPDATE results_psra_national.psra_indicators_s_tbl b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b."Sauid";
+
+
+-- update percentilerank on P/T eqriskindex sauid table
+UPDATE results_psra_ab.psra_ab_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
+UPDATE results_psra_mb.psra_mb_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
+UPDATE results_psra_nb.psra_nb_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
+UPDATE results_psra_nl.psra_nl_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
+UPDATE results_psra_ns.psra_ns_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
+UPDATE results_psra_nt.psra_nt_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
+UPDATE results_psra_nu.psra_nu_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
+UPDATE results_psra_on.psra_on_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
+
+/*
+UPDATE results_psra_bc.psra_bc_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
+UPDATE results_psra_pe.psra_pe_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
+UPDATE results_psra_qc.psra_qc_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
+UPDATE results_psra_sk.psra_sk_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
+UPDATE results_psra_yt.psra_yt_eqriskindex b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+*/
+
+
 -- combine psra csd indicators into national level
 DROP TABLE IF EXISTS results_psra_national.psra_indicators_csd_tbl CASCADE;
 
@@ -198,6 +450,258 @@ ALTER TABLE results_psra_national.psra_indicators_csd_tbl ADD PRIMARY KEY(csduid
 DROP VIEW IF EXISTS results_psra_national.psra_indicators_csd CASCADE;
 CREATE VIEW results_psra_national.psra_indicators_csd AS SELECT * FROM results_psra_national.psra_indicators_csd_tbl;
 
+
+
+-- combine eqriskindex csd tables into national level
+DROP TABLE IF EXISTS results_psra_national.psra_eqriskindex_csd CASCADE;
+
+CREATE TABLE results_psra_national.psra_eqriskindex_csd AS 
+SELECT * FROM results_psra_ab.psra_eqriskindex_csd;
+UNION
+SELECT * FROM results_psra_mb.psra_mb_eqriskindex_csd
+UNION
+SELECT * FROM results_psra_nb.psra_nb_eqriskindex_csd
+UNION
+SELECT * FROM results_psra_nl.psra_nl_eqriskindex_csd
+UNION
+SELECT * FROM results_psra_ns.psra_ns_eqriskindex_csd
+UNION
+SELECT * FROM results_psra_nt.psra_nt_eqriskindex_csd
+UNION
+SELECT * FROM results_psra_nu.psra_nu_eqriskindex_csd
+UNION
+SELECT * FROM results_psra_on.psra_on_eqriskindex_csd;
+
+
+-- UNION
+-- SELECT * FROM results_psra_bc.psra_bc_eqriskindex_csd
+-- UNION
+-- SELECT * FROM results_psra_mb.psra_mb_eqriskindex_csd
+-- UNION
+-- SELECT * FROM results_psra_nb.psra_nb_eqriskindex_csd
+-- UNION
+-- SELECT * FROM results_psra_nl.psra_nl_eqriskindex_csd
+-- UNION
+-- SELECT * FROM results_psra_ns.psra_ns_eqriskindex_csd
+-- UNION
+-- SELECT * FROM results_psra_nt.psra_nt_eqriskindex_csd
+-- UNION
+-- SELECT * FROM results_psra_nu.psra_nu_eqriskindex_csd
+-- UNION
+-- SELECT * FROM results_psra_on.psra_on_eqriskindex_csd
+-- UNION
+-- SELECT * FROM results_psra_pe.psra_pe_eqriskindex_csd
+-- UNION
+-- SELECT * FROM results_psra_qc.psra_qc_eqriskindex_csd
+-- UNION
+-- SELECT * FROM results_psra_sk.psra_sk_eqriskindex_csd
+-- UNION
+-- SELECT * FROM results_psra_yt.psra_yt_eqriskindex_csd;
+
+
+--create national threshold csd lookup table for rating
+DROP TABLE IF EXISTS results_psra_national.psra_eqri_thresholds_csd CASCADE;
+CREATE TABLE results_psra_national.psra_eqri_thresholds_csd
+(
+percentile NUMERIC,
+abs_score_threshold_b0 FLOAT DEFAULT 0,
+abs_score_threshold_r1 FLOAT DEFAULT 0,
+rel_score_threshold_b0 FLOAT DEFAULT 0,
+rel_score_threshold_r1 FLOAT DEFAULT 0,
+rating VARCHAR
+);
+
+
+INSERT INTO results_psra_national.psra_eqri_thresholds_csd (percentile,rating) VALUES
+(0,'Very Low'),
+(0.35,'Relatively Low'),
+(0.60,'Relatively Moderate'),
+(0.80,'Relatively High'),
+(0.95,'Very High');
+
+
+--update values with calculated percentiles
+--0.35 percentile
+UPDATE results_psra_national.psra_eqri_thresholds_csd 
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex_csd),
+	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
+	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.35) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex_csd) WHERE percentile = 0.35;
+
+-- 0.60 percentile
+UPDATE results_psra_national.psra_eqri_thresholds_csd 
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex_csd),
+	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
+	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.60) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex_csd) WHERE percentile = 0.60;
+	
+-- 0.80 percentile
+UPDATE results_psra_national.psra_eqri_thresholds_csd 
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex_csd),
+	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
+	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.80) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex_csd) WHERE percentile = 0.80;
+	
+-- 0.95 percentile
+UPDATE results_psra_national.psra_eqri_thresholds_csd 
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex_csd),
+	rel_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
+	rel_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_rel_score_b0) FROM results_psra_national.psra_eqriskindex_csd) WHERE percentile = 0.95;
+
+
+-- update percentilerank value for national sauid 
+UPDATE results_psra_national.psra_eqriskindex_csd
+SET eqri_abs_percentilerank_b0 =
+	CASE 
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.35) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.60) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.35)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.80) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.6)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.8)
+		WHEN eqri_abs_score_b0 > (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95)
+		ELSE 0 END,
+	eqri_abs_percentilerank_r1 =
+	CASE 
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.35) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.60) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.35)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.80) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.6)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.8)
+		WHEN eqri_abs_score_r1 > (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95)
+		ELSE 0 END,
+	eqri_rel_percentilerank_b0 =
+	CASE 
+		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.35) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0)
+		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.60) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.35)
+		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.80) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.6)
+		WHEN eqri_rel_score_b0 < (SELECT rel_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.8)
+		WHEN eqri_rel_score_b0 > (SELECT rel_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95)
+		ELSE 0 END,
+	eqri_rel_percentilerank_r1 =
+	CASE 
+		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.35) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0)
+		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.60) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.35)
+		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.80) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.6)
+		WHEN eqri_rel_score_r1 < (SELECT rel_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.8)
+		WHEN eqri_rel_score_r1 > (SELECT rel_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT percentile FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95)
+		ELSE 0 END;
+
+
+-- update percentilerank on national csd table
+UPDATE results_psra_national.psra_indicators_csd_tbl b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+
+-- update percentilerank on P/T eqriskindex csd table
+UPDATE results_psra_ab.psra_ab_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+UPDATE results_psra_mb.psra_mb_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+UPDATE results_psra_nb.psra_nb_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+UPDATE results_psra_nl.psra_nl_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+UPDATE results_psra_ns.psra_ns_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+UPDATE results_psra_nt.psra_nt_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+UPDATE results_psra_nu.psra_nu_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+UPDATE results_psra_on.psra_on_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+/*
+UPDATE results_psra_bc.psra_bc_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+UPDATE results_psra_pe.psra_pe_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+UPDATE results_psra_qc.psra_qc_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+UPDATE results_psra_sk.psra_sk_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
+UPDATE results_psra_yt.psra_yt_eqriskindex_csd b
+SET eqri_abs_percentilerank_b0 = a.eqri_abs_percentilerank_b0,
+	eqri_rel_percentilerank_b0 = a.eqri_rel_percentilerank_b0,
+	eqri_abs_percentilerank_r1 = a.eqri_abs_percentilerank_r1,
+	eqri_rel_percentilerank_r1 = a.eqri_rel_percentilerank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+*/
 
 
 -- combine psra expected loss indicators into national level
