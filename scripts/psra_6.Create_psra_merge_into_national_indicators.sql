@@ -143,7 +143,7 @@ CREATE VIEW results_psra_national.psra_indicators_s AS SELECT * FROM results_psr
 DROP TABLE IF EXISTS results_psra_national.psra_eqriskindex CASCADE;
 
 CREATE TABLE results_psra_national.psra_eqriskindex AS 
-SELECT * FROM results_psra_ab.psra_eqriskindex
+SELECT * FROM results_psra_ab.psra_ab_eqriskindex
 UNION
 SELECT * FROM results_psra_mb.psra_mb_eqriskindex
 UNION
@@ -456,7 +456,7 @@ CREATE VIEW results_psra_national.psra_indicators_csd AS SELECT * FROM results_p
 DROP TABLE IF EXISTS results_psra_national.psra_eqriskindex_csd CASCADE;
 
 CREATE TABLE results_psra_national.psra_eqriskindex_csd AS 
-SELECT * FROM results_psra_ab.psra_eqriskindex_csd;
+SELECT * FROM results_psra_ab.psra_eqriskindex_csd
 UNION
 SELECT * FROM results_psra_mb.psra_mb_eqriskindex_csd
 UNION
