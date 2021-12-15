@@ -45,8 +45,8 @@ SUM(a.asset_loss_b0) AS "asset_loss_b0",
 SUM(a.asset_loss_r1) AS "asset_loss_r1",
 SUM(a.lifeloss_b0) AS "lifeloss_b0",
 SUM(a.lifeloss_r1) AS "lifeloss_r1",
-SUM(a.lifeloss_b0 * 8000000) AS "lifelosscost_b0",
-SUM(a.lifeloss_r1 * 8000000) AS "lifelosscost_r1",
+SUM(a.lifeloss_b0 * 8343390) AS "lifelosscost_b0",
+SUM(a.lifeloss_r1 * 8343390) AS "lifelosscost_r1",
 AVG(a.bldglossratio_b0) AS "bldglossratio_b0",
 AVG(a.bldglossratio_r1) AS "bldglossratio_r1",
 AVG(a.lifelossratio_b0) AS "lifelossratio_b0",
@@ -54,14 +54,14 @@ AVG(a.lifelossratio_r1) AS "lifelossratio_r1",
 b."SVlt_Score" + 1 AS "SVlt_Score_translated",
 
 --EQ Risk Index calculations
-(SUM(a.asset_loss_b0) + SUM(a.lifeloss_b0 * 8000000)) * (b."SVlt_Score" + 1) AS "eqri_abs_score_b0",
-0.0 AS "eqri_abs_percentilerank_b0",
-(AVG(a.bldglossratio_b0) + AVG(a.lifelossratio_b0)) * (b."SVlt_Score" + 1) AS "eqri_rel_score_b0",
-0.0 AS "eqri_rel_percentilerank_b0",
-(SUM(a.asset_loss_r1) + SUM(a.lifeloss_r1 * 8000000)) * (b."SVlt_Score" + 1) AS "eqri_abs_score_r1",
-0.0 AS "eqri_abs_percentilerank_r1",
-(AVG(a.bldglossratio_r1) + AVG(a.lifelossratio_r1)) * (b."SVlt_Score" + 1) AS "eqri_rel_score_r1",
-0.0 AS "eqri_rel_percentilerank_r1"
+(SUM(a.asset_loss_b0) + SUM(a.lifeloss_b0 * 8343390)) * (b."SVlt_Score" + 1) AS "eqri_tot_score_b0",
+'null' AS "eqri_tot_rank_b0",
+(AVG(a.bldglossratio_b0) + AVG(a.lifelossratio_b0)) * (b."SVlt_Score" + 1) AS "eqri_norm_score_b0",
+'null' AS "eqri_norm_rank_b0",
+(SUM(a.asset_loss_r1) + SUM(a.lifeloss_r1 * 8343390)) * (b."SVlt_Score" + 1) AS "eqri_tot_score_r1",
+'null' AS "eqri_tot_rank_r1",
+(AVG(a.bldglossratio_r1) + AVG(a.lifelossratio_r1)) * (b."SVlt_Score" + 1) AS "eqri_norm_score_r1",
+'null' AS "eqri_norm_rank_r1"
 
 FROM results_psra_{prov}.psra_{prov}_eqriskindex_calc a
 --FROM results_psra_{prov}.psra_{prov}_eqriskindex_calcs a
@@ -87,14 +87,14 @@ AVG(bldglossratio_r1) AS "bldglossratio_r1",
 AVG(lifelossratio_b0) AS "lifelossratio_b0",
 AVG(lifelossratio_r1) AS "lifelossratio_r1",
 SUM("SVlt_Score_translated") AS "SVlt_Score_translated",
-SUM(eqri_abs_score_b0) AS "eqri_abs_score_b0",
-0.0 AS "eqri_abs_percentilerank_b0",
-AVG(eqri_rel_score_b0) AS "eqri_rel_score_b0",
-0.0 AS "eqri_rel_percentilerank_b0",
-SUM(eqri_abs_score_r1) AS "eqri_abs_score_r1",
-0.0 AS "eqri_abs_percentilerank_r1",
-AVG(eqri_rel_score_r1) AS "eqri_rel_score_r1",
-0.0 AS "eqri_rel_percentilerank_r1"
+SUM(eqri_tot_score_b0) AS "eqri_tot_score_b0",
+'null' AS "eqri_tot_rank_b0",
+AVG(eqri_norm_score_b0) AS "eqri_norm_score_b0",
+'null' AS "eqri_norm_rank_b0",
+SUM(eqri_tot_score_r1) AS "eqri_tot_score_r1",
+'null' AS "eqri_tot_rank_r1",
+AVG(eqri_norm_score_r1) AS "eqri_norm_score_r1",
+'null' AS "eqri_norm_rank_r1"
 
 FROM results_psra_{prov}.psra_{prov}_eqriskindex a
 LEFT JOIN results_psra_{prov}.psra_{prov}_indicators_b b ON a.sauid = b."Sauid"
@@ -227,16 +227,16 @@ CAST(CAST(ROUND(CAST(SUM(i.nonstructural_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC
 CAST(CAST(ROUND(CAST(SUM(i.contents_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Cont_r1",
 
 -- eq risk index - b0
-CAST(CAST(ROUND(CAST(j.eqri_abs_score_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_abs_score_b0",
-j.eqri_abs_percentilerank_b0,
-CAST(CAST(ROUND(CAST(j.eqri_rel_score_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_rel_score_b0",
-j.eqri_rel_percentilerank_b0,
+CAST(CAST(ROUND(CAST(j.eqri_tot_score_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_tot_score_b0",
+j.eqri_tot_rank_b0,
+CAST(CAST(ROUND(CAST(j.eqri_norm_score_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_norm_score_b0",
+j.eqri_norm_rank_b0,
 
 -- eq risk index - r1
-CAST(CAST(ROUND(CAST(j.eqri_abs_score_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_abs_score_r1",
-j.eqri_abs_percentilerank_r1,
-CAST(CAST(ROUND(CAST(j.eqri_rel_score_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_rel_score_r1",
-j.eqri_rel_percentilerank_r1,
+CAST(CAST(ROUND(CAST(j.eqri_tot_score_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_tot_score_r1",
+j.eqri_tot_rank_r1,
+CAST(CAST(ROUND(CAST(j.eqri_norm_score_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_norm_score_r1",
+j.eqri_norm_rank_r1,
 
 z."PRUID" AS "pruid",
 z."PRNAME" AS "prname",
@@ -265,8 +265,8 @@ LEFT JOIN psra_{prov}.psra_{prov}_ed_dmg_q95 l ON a.id = l.asset_id
 LEFT JOIN boundaries."Geometry_SAUID" z ON a.sauid = z."SAUIDt"
 GROUP BY a.sauid,d."PGA_0.02",d."SA(0.1)_0.02",d."SA(0.2)_0.02",d."SA(0.3)_0.02",d."SA(0.5)_0.02",d."SA(0.6)_0.02",d."SA(1.0)_0.02",d."SA(2.0)_0.02",
 d."PGA_0.1",d."SA(0.1)_0.1",d."SA(0.2)_0.1",d."SA(0.3)_0.1",d."SA(0.5)_0.1",d."SA(0.6)_0.1",d."SA(1.0)_0.1",d."SA(2.0)_0.1",d."SA(5.0)_0.1",d."SA(10.0)_0.1",
-e.vs_lon,e.vs_lat,e.vs30,e.z1pt0,e.z2pt5,h.mmi6,h.mmi7,h.mmi8,j.eqri_abs_score_b0,j.eqri_abs_percentilerank_b0,j.eqri_rel_score_b0,j.eqri_rel_percentilerank_b0,j.eqri_abs_score_r1,j.eqri_abs_percentilerank_r1,
-j.eqri_rel_score_r1,j.eqri_rel_percentilerank_r1,z."PRUID",z."PRNAME",z."ERUID",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME",z."CFSAUID",z."DAUIDt",z."SACCODE",z."SACTYPE",z.geom;
+e.vs_lon,e.vs_lat,e.vs30,e.z1pt0,e.z2pt5,h.mmi6,h.mmi7,h.mmi8,j.eqri_tot_score_b0,j.eqri_tot_rank_b0,j.eqri_norm_score_b0,j.eqri_norm_rank_b0,j.eqri_tot_score_r1,j.eqri_tot_rank_r1,
+j.eqri_norm_score_r1,j.eqri_norm_rank_r1,z."PRUID",z."PRNAME",z."ERUID",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME",z."CFSAUID",z."DAUIDt",z."SACCODE",z."SACTYPE",z.geom;
 
 
 
@@ -371,21 +371,21 @@ ROUND(SUM("eAALt_Str_r1"),6) AS "eAALt_Str_r1",
 ROUND(SUM("eAALt_NStr_r1"),6) AS "eAALt_NStr_r1",
 ROUND(SUM("eAALt_Cont_r1"),6) AS "eAALt_Cont_r1",
 
-ROUND(SUM(a.eqri_abs_score_b0),6) AS "eqri_abs_score_b0",
-c.eqri_abs_percentilerank_b0,
-ROUND(AVG(a.eqri_rel_score_b0),6) AS "eqri_rel_score_b0",
-c.eqri_rel_percentilerank_b0,
-ROUND(SUM(a.eqri_abs_score_r1),6) AS "eqri_abs_score_r1",
-c.eqri_abs_percentilerank_r1,
-ROUND(AVG(a.eqri_rel_score_r1),6) AS "eqri_rel_score_r1",
-c.eqri_rel_percentilerank_r1,
+ROUND(SUM(a.eqri_tot_score_b0),6) AS "eqri_tot_score_b0",
+c.eqri_tot_rank_b0,
+ROUND(AVG(a.eqri_norm_score_b0),6) AS "eqri_norm_score_b0",
+c.eqri_norm_rank_b0,
+ROUND(SUM(a.eqri_tot_score_r1),6) AS "eqri_tot_score_r1",
+c.eqri_tot_rank_r1,
+ROUND(AVG(a.eqri_norm_score_r1),6) AS "eqri_norm_score_r1",
+c.eqri_norm_rank_r1,
 
 b.geom
 
 FROM results_psra_{prov}.psra_{prov}_indicators_s a
 LEFT JOIN boundaries."Geometry_CSDUID" b ON a.csduid = b."CSDUID"
 LEFT JOIN results_psra_{prov}.psra_{prov}_eqriskindex_csd c ON a.csduid = c.csduid
-GROUP BY a.csduid,a.csdname,c.eqri_abs_percentilerank_b0,c.eqri_rel_percentilerank_b0,c.eqri_abs_percentilerank_r1,c.eqri_rel_percentilerank_r1,b.geom;
+GROUP BY a.csduid,a.csdname,c.eqri_tot_rank_b0,c.eqri_norm_rank_b0,c.eqri_tot_rank_r1,c.eqri_norm_rank_r1,b.geom;
 
 
 
