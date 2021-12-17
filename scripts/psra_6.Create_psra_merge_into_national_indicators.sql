@@ -18,7 +18,15 @@ SELECT * FROM results_psra_nt.psra_nt_indicators_b
 UNION
 SELECT * FROM results_psra_nu.psra_nu_indicators_b
 UNION
-SELECT * FROM results_psra_on.psra_on_indicators_b;
+SELECT * FROM results_psra_on.psra_on_indicators_b
+UNION
+SELECT * FROM results_psra_pe.psra_pe_indicators_b
+UNION
+SELECT * FROM results_psra_qc.psra_qc_indicators_b
+UNION
+SELECT * FROM results_psra_sk.psra_sk_indicators_b
+UNION
+SELECT * FROM results_psra_yt.psra_yt_indicators_b;
 
 -- CREATE TABLE results_psra_national.psra_indicators_b_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_indicators_b
@@ -88,7 +96,15 @@ SELECT * FROM results_psra_nt.psra_nt_indicators_s
 UNION
 SELECT * FROM results_psra_nu.psra_nu_indicators_s
 UNION
-SELECT * FROM results_psra_on.psra_on_indicators_s;
+SELECT * FROM results_psra_on.psra_on_indicators_s
+UNION
+SELECT * FROM results_psra_pe.psra_pe_indicators_s
+UNION
+SELECT * FROM results_psra_qc.psra_qc_indicators_s
+UNION
+SELECT * FROM results_psra_sk.psra_sk_indicators_s
+UNION
+SELECT * FROM results_psra_yt.psra_yt_indicators_s;
 
 -- CREATE TABLE results_psra_national.psra_indicators_s_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_indicators_s
@@ -157,8 +173,17 @@ SELECT * FROM results_psra_nt.psra_nt_eqriskindex
 UNION
 SELECT * FROM results_psra_nu.psra_nu_eqriskindex
 UNION
-SELECT * FROM results_psra_on.psra_on_eqriskindex;
+SELECT * FROM results_psra_on.psra_on_eqriskindex
+UNION
+SELECT * FROM results_psra_pe.psra_pe_eqriskindex
+UNION
+SELECT * FROM results_psra_qc.psra_qc_eqriskindex
+UNION
+SELECT * FROM results_psra_sk.psra_sk_eqriskindex
+UNION
+SELECT * FROM results_psra_yt.psra_yt_eqriskindex;
 
+-- SELECT * FROM results_psra_ab.psra_ab_eqriskindex
 -- UNION
 -- SELECT * FROM results_psra_bc.psra_bc_eqriskindex
 -- UNION
@@ -347,16 +372,6 @@ SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
-
-/*
-UPDATE results_psra_bc.psra_bc_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
-
 UPDATE results_psra_pe.psra_pe_eqriskindex b
 SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
@@ -388,6 +403,15 @@ SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
+
+/*
+UPDATE results_psra_bc.psra_bc_eqriskindex b
+SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
+	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
 */
 
 
@@ -409,7 +433,15 @@ SELECT * FROM results_psra_nt.psra_nt_indicators_csd
 UNION
 SELECT * FROM results_psra_nu.psra_nu_indicators_csd
 UNION
-SELECT * FROM results_psra_on.psra_on_indicators_csd;
+SELECT * FROM results_psra_on.psra_on_indicators_csd
+UNION
+SELECT * FROM results_psra_pe.psra_pe_indicators_csd
+UNION
+SELECT * FROM results_psra_qc.psra_qc_indicators_csd
+UNION
+SELECT * FROM results_psra_sk.psra_sk_indicators_csd
+UNION
+SELECT * FROM results_psra_yt.psra_yt_indicators_csd;
 
 -- CREATE TABLE results_psra_national.psra_indicators_csd_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_indicators_csd
@@ -470,9 +502,17 @@ SELECT * FROM results_psra_nt.psra_nt_eqriskindex_csd
 UNION
 SELECT * FROM results_psra_nu.psra_nu_eqriskindex_csd
 UNION
-SELECT * FROM results_psra_on.psra_on_eqriskindex_csd;
+SELECT * FROM results_psra_on.psra_on_eqriskindex_csd
+UNION
+SELECT * FROM results_psra_pe.psra_pe_eqriskindex_csd
+UNION
+SELECT * FROM results_psra_qc.psra_qc_eqriskindex_csd
+UNION
+SELECT * FROM results_psra_sk.psra_sk_eqriskindex_csd
+UNION
+SELECT * FROM results_psra_yt.psra_yt_eqriskindex_csd;
 
-
+-- SELECT * FROM results_psra_ab.psra_ab_eqriskindex_csd
 -- UNION
 -- SELECT * FROM results_psra_bc.psra_bc_eqriskindex_csd
 -- UNION
@@ -661,15 +701,6 @@ SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
-/*
-UPDATE results_psra_bc.psra_bc_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
-WHERE a.csduid = b.csduid;
-
 UPDATE results_psra_pe.psra_pe_eqriskindex_csd b
 SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
@@ -701,6 +732,15 @@ SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
+
+/*
+UPDATE results_psra_bc.psra_bc_eqriskindex_csd b
+SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
+	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
 */
 
 
@@ -723,7 +763,14 @@ UNION
 SELECT * FROM results_psra_nu.psra_nu_expected_loss_fsa
 UNION
 SELECT * FROM results_psra_on.psra_on_expected_loss_fsa
-;
+UNION
+SELECT * FROM results_psra_pe.psra_pe_expected_loss_fsa
+UNION
+SELECT * FROM results_psra_qc.psra_qc_expected_loss_fsa
+UNION
+SELECT * FROM results_psra_sk.psra_sk_expected_loss_fsa
+UNION
+SELECT * FROM results_psra_yt.psra_yt_expected_loss_fsa;
 
 -- CREATE TABLE results_psra_national.psra_expected_loss_fsa_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_expected_loss_fsa
@@ -784,7 +831,15 @@ SELECT * FROM results_psra_nt.psra_nt_agg_loss_fsa
 UNION
 SELECT * FROM results_psra_nu.psra_nu_agg_loss_fsa
 UNION
-SELECT * FROM results_psra_on.psra_on_agg_loss_fsa;
+SELECT * FROM results_psra_on.psra_on_agg_loss_fsa
+UNION
+SELECT * FROM results_psra_pe.psra_pe_agg_loss_fsa
+UNION
+SELECT * FROM results_psra_qc.psra_qc_agg_loss_fsa
+UNION
+SELECT * FROM results_psra_sk.psra_sk_agg_loss_fsa
+UNION
+SELECT * FROM results_psra_yt.psra_yt_agg_loss_fsa;
 
 -- CREATE TABLE results_psra_national.psra_agg_loss_fsa_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_agg_loss_fsa
@@ -844,7 +899,15 @@ SELECT * FROM results_psra_nt.psra_nt_src_loss
 UNION
 SELECT * FROM results_psra_nu.psra_nu_src_loss
 UNION
-SELECT * FROM results_psra_on.psra_on_src_loss;
+SELECT * FROM results_psra_on.psra_on_src_loss
+UNION
+SELECT * FROM results_psra_pe.psra_pe_src_loss
+UNION
+SELECT * FROM results_psra_qc.psra_qc_src_loss
+UNION
+SELECT * FROM results_psra_sk.psra_sk_src_loss
+UNION
+SELECT * FROM results_psra_yt.psra_yt_src_loss;
 
 -- CREATE TABLE results_psra_national.psra_src_loss_tbl AS 
 -- SELECT * FROM results_psra_ab.psra_ab_src_loss
