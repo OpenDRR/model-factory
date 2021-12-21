@@ -224,11 +224,11 @@ rating VARCHAR
 
 
 INSERT INTO results_psra_national.psra_eqri_thresholds (percentile,rating) VALUES
-(0,'Within bottom 50% of local authorities'),
-(0.50,'Within 50-75% of local authorities'),
-(0.75,'Within 75-90% of local authorities'),
-(0.90,'Within 90-95% of local authorities'),
-(0.95,'Within top 5% of local authorities');
+(0,'Within bottom 50% of communities'),
+(0.50,'Within 50-75% of communities'),
+(0.75,'Within 75-90% of communities'),
+(0.90,'Within 90-95% of communities'),
+(0.95,'Within top 5% of communities');
 
 
 --update values with calculated percentiles
@@ -553,11 +553,11 @@ rating VARCHAR
 
 
 INSERT INTO results_psra_national.psra_eqri_thresholds_csd (percentile,rating) VALUES
-(0,'Within bottom 50% of local authorities'),
-(0.50,'Within 50-75% of local authorities'),
-(0.75,'Within 75-90% of local authorities'),
-(0.90,'Within 90-95% of local authorities'),
-(0.95,'Within top 5% of local authorities');
+(0,'Within bottom 50% of communities'),
+(0.50,'Within 50-75% of communities'),
+(0.75,'Within 75-90% of communities'),
+(0.90,'Within 90-95% of communities'),
+(0.95,'Within top 5% of communities');
 
 
 --update values with calculated percentiles
