@@ -133,7 +133,8 @@ CAST(CAST(ROUND(CAST(SUM(g.structural_complete_b0) AS NUMERIC),6) AS FLOAT) AS N
 CAST(CAST(ROUND(CAST(AVG(g.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Complete_b0",
 CAST(CAST(ROUND(CAST(SUM(g.structural_complete_b0 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Collapse_b0",
 CAST(CAST(ROUND(CAST(AVG((g.structural_complete_b0/a.number) * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Collapse_b0",
-CASE WHEN AVG((g.structural_complete_b0/a.number) * f.collapse_pc) >0.01 THEN SUM(a.number) ELSE 0 END AS "eDt_Fail_Collapse_b0",
+--CASE WHEN AVG((g.structural_complete_b0/a.number) * f.collapse_pc) >0.01 THEN SUM(a.number) ELSE 0 END AS "eDt_Fail_Collapse_b0",
+CAST(CAST(ROUND(CAST(SUM(m."eD_Fail_Collapse_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Fail_Collapse_b0",
 
 -- q05 - b0
 CAST(CAST(ROUND(CAST(SUM(k.structural_slight_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Slight05_b0",
@@ -146,7 +147,8 @@ CAST(CAST(ROUND(CAST(SUM(k.structural_complete_b0) AS NUMERIC),6) AS FLOAT) AS N
 CAST(CAST(ROUND(CAST(AVG(k.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Complete05_b0",
 CAST(CAST(ROUND(CAST(SUM(k.structural_complete_b0 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Collapse05_b0",
 CAST(CAST(ROUND(CAST(AVG(k.structural_complete_b0/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Collapse05_b0",
-CASE WHEN AVG((k.structural_complete_b0/a.number) * f.collapse_pc) >0.01 THEN SUM(a.number) ELSE 0 END AS "eDt_Fail_Collapse05_b0",
+--CASE WHEN AVG((k.structural_complete_b0/a.number) * f.collapse_pc) >0.01 THEN SUM(a.number) ELSE 0 END AS "eDt_Fail_Collapse05_b0",
+CAST(CAST(ROUND(CAST(SUM(m."eD_Fail_Collapse05_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Fail_Collapse05_b0",
 
 -- q95 - b0
 CAST(CAST(ROUND(CAST(SUM(l.structural_slight_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Slight95_b0",
@@ -159,7 +161,8 @@ CAST(CAST(ROUND(CAST(SUM(l.structural_complete_b0) AS NUMERIC),6) AS FLOAT) AS N
 CAST(CAST(ROUND(CAST(AVG(l.structural_complete_b0/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Complete95_b0",
 CAST(CAST(ROUND(CAST(SUM(l.structural_complete_b0 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Collapse95_b0",
 CAST(CAST(ROUND(CAST(AVG(l.structural_complete_b0/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Collapse95_b0",
-CASE WHEN AVG((l.structural_complete_b0/a.number) * f.collapse_pc) >0.01 THEN SUM(a.number) ELSE 0 END AS "eDt_Fail_Collapse95_b0",
+--CASE WHEN AVG((l.structural_complete_b0/a.number) * f.collapse_pc) >0.01 THEN SUM(a.number) ELSE 0 END AS "eDt_Fail_Collapse95_b0",
+CAST(CAST(ROUND(CAST(SUM(m."eD_Fail_Collapse95_b0") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Fail_Collapse95_b0",
 
 
 -- 2.2.2 Event-Based Damage - r1
@@ -173,7 +176,8 @@ CAST(CAST(ROUND(CAST(SUM(g.structural_complete_r1) AS NUMERIC),6) AS FLOAT) AS N
 CAST(CAST(ROUND(CAST(AVG(g.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Complete_r1",
 CAST(CAST(ROUND(CAST(SUM(g.structural_complete_r1 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Collapse_r1",
 CAST(CAST(ROUND(CAST(AVG((g.structural_complete_r1/a.number) * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Collapse_r1",
-CASE WHEN AVG((g.structural_complete_r1/a.number) * f.collapse_pc) >0.01 THEN SUM(a.number) ELSE 0 END AS "eDt_Fail_Collapse_r1",
+--CASE WHEN AVG((g.structural_complete_r1/a.number) * f.collapse_pc) >0.01 THEN SUM(a.number) ELSE 0 END AS "eDt_Fail_Collapse_r1",
+CAST(CAST(ROUND(CAST(SUM(m."eD_Fail_Collapse_r1") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Fail_Collapse_r1",
 
 -- q05 - r1
 CAST(CAST(ROUND(CAST(SUM(k.structural_slight_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Slight05_r1",
@@ -186,7 +190,8 @@ CAST(CAST(ROUND(CAST(SUM(k.structural_complete_r1) AS NUMERIC),6) AS FLOAT) AS N
 CAST(CAST(ROUND(CAST(AVG(k.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Complete05_r1",
 CAST(CAST(ROUND(CAST(SUM(k.structural_complete_r1 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Collapse05_r1",
 CAST(CAST(ROUND(CAST(AVG(k.structural_complete_r1/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Collapse05_r1",
-CASE WHEN AVG((k.structural_complete_r1/a.number) * f.collapse_pc) >0.01 THEN SUM(a.number) ELSE 0 END AS "eDt_Fail_Collapse05_r1",
+--CASE WHEN AVG((k.structural_complete_r1/a.number) * f.collapse_pc) >0.01 THEN SUM(a.number) ELSE 0 END AS "eDt_Fail_Collapse05_r1",
+CAST(CAST(ROUND(CAST(SUM(m."eD_Fail_Collapse05_r1") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Fail_Collapse05_r1",
 
 -- q95 - r1
 CAST(CAST(ROUND(CAST(SUM(l.structural_slight_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Slight95_r1",
@@ -199,7 +204,8 @@ CAST(CAST(ROUND(CAST(SUM(l.structural_complete_r1) AS NUMERIC),6) AS FLOAT) AS N
 CAST(CAST(ROUND(CAST(AVG(l.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Complete95_r1",
 CAST(CAST(ROUND(CAST(SUM(l.structural_complete_r1 * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Collapse95_r1",
 CAST(CAST(ROUND(CAST(AVG(l.structural_complete_r1/a.number * f.collapse_pc) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDtr_Collapse95_r1",
-CASE WHEN AVG((l.structural_complete_r1/a.number) * f.collapse_pc) >0.01 THEN SUM(a.number) ELSE 0 END AS "eDt_Fail_Collapse95_r1",
+--CASE WHEN AVG((l.structural_complete_r1/a.number) * f.collapse_pc) >0.01 THEN SUM(a.number) ELSE 0 END AS "eDt_Fail_Collapse95_r1",
+CAST(CAST(ROUND(CAST(SUM(m."eD_Fail_Collapse95_r1") AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDt_Fail_Collapse95_r1",
 
 
 -- 2.3 Affected People
@@ -266,6 +272,7 @@ RIGHT JOIN psra_{prov}.psra_{prov}_avg_losses_stats i ON a.id = i.asset_id
 RIGHT JOIN results_psra_{prov}.psra_{prov}_eqriskindex j ON a.sauid = j.sauid
 LEFT JOIN psra_{prov}.psra_{prov}_ed_dmg_q05 k ON a.id = k.asset_id
 LEFT JOIN psra_{prov}.psra_{prov}_ed_dmg_q95 l ON a.id = l.asset_id
+LEFT JOIN results_psra_{prov}.psra_{prov}_indicators_b m ON a.id = m."AssetID"
 LEFT JOIN boundaries."Geometry_SAUID" z ON a.sauid = z."SAUIDt"
 GROUP BY a.sauid,d."PGA_0.02",d."SA(0.1)_0.02",d."SA(0.2)_0.02",d."SA(0.3)_0.02",d."SA(0.5)_0.02",d."SA(0.6)_0.02",d."SA(1.0)_0.02",d."SA(2.0)_0.02",
 d."PGA_0.1",d."SA(0.1)_0.1",d."SA(0.2)_0.1",d."SA(0.3)_0.1",d."SA(0.5)_0.1",d."SA(0.6)_0.1",d."SA(1.0)_0.1",d."SA(2.0)_0.1",d."SA(5.0)_0.1",d."SA(10.0)_0.1",
