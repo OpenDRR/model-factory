@@ -68,7 +68,7 @@ CAST(CAST(ROUND(CAST((g.structural_complete_r1/a.number) AS NUMERIC),6) AS FLOAT
 
 CAST(CAST(ROUND(CAST(g.structural_complete_r1 * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_Collapse_r1",
 CAST(CAST(ROUND(CAST((g.structural_complete_r1/a.number) * f.collapse_pc AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eDr_Collapse_r1",
-CASE WHEN ((g.structural_complete_r1/a.number) * f.collapse_pc) >0.01 THEN a.number ELSE 0 END AS "eD_p01_Collapse_r1",
+CASE WHEN ((g.structural_complete_r1/a.number) * f.collapse_pc) >0.01 THEN a.number ELSE 0 END AS "eD_Fail_Collapse_r1",
 
 -- q05 - r1
 CAST(CAST(ROUND(CAST(j.structural_slight_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eD_Slight05_r1",
