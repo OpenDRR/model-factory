@@ -940,6 +940,64 @@ SELECT * FROM results_psra_yt.psra_yt_src_loss;
 -- add fid column
 ALTER TABLE results_psra_national.psra_src_loss_tbl ADD COLUMN fid SERIAL;
 
+-- create index
+CREATE INDEX psra_src_loss_tbl_fid_idx ON results_psra_national.psra_src_loss_tbl("fid");
+
 -- create psra src national view
 DROP VIEW IF EXISTS results_psra_national.psra_src_loss CASCADE;
 CREATE VIEW results_psra_national.psra_src_loss AS SELECT * FROM results_psra_national.psra_src_loss_tbl;
+
+
+
+-- add canada views into psra_national
+-- combine psra canada expected loss indicators 
+DROP TABLE IF EXISTS results_psra_national.psra_canada_expected_loss_tbl CASCADE;
+
+CREATE TABLE results_psra_national.psra_canada_expected_loss_tbl AS 
+SELECT * FROM results_psra_canada.psra_canada_expected_loss;
+
+-- add fid column
+ALTER TABLE results_psra_national.psra_canada_expected_loss_tbl ADD COLUMN fid SERIAL;
+
+-- create index
+CREATE INDEX psra_canada_expected_loss_tbl_fid_idx ON results_psra_national.psra_canada_expected_loss_tbl("fid");
+
+-- create view
+DROP VIEW IF EXISTS results_psra_national.psra_canada_expected_loss CASCADE;
+CREATE VIEW results_psra_national.psra_canada_expected_loss AS SELECT * FROM results_psra_national.psra_canada_expected_loss_tbl;
+
+
+-- combine psra canada agg loss indicators 
+DROP TABLE IF EXISTS results_psra_national.psra_agg_loss_tbl CASCADE;
+
+CREATE TABLE results_psra_national.psra_agg_loss_tbl AS 
+SELECT * FROM results_psra_canada.psra_canada_agg_loss
+
+-- add fid column
+ALTER TABLE results_psra_national.psra_canada_agg_loss_tbl ADD COLUMN fid SERIAL;
+
+-- create index
+CREATE INDEX psra_canada_agg_loss_tbl_fid_idx ON results_psra_national.psra_canada_agg_loss_tbl("fid");
+
+-- create psra pml national view
+DROP VIEW IF EXISTS results_psra_national.psra_canada_agg_loss CASCADE;
+CREATE VIEW results_psra_national.psra_canada_agg_loss AS SELECT * FROM results_psra_national.psra_canada_agg_loss_tbl;
+
+
+
+-- combine psra canada src_loss indicators 
+DROP TABLE IF EXISTS results_psra_national.psra_canada_src_loss_tbl CASCADE;
+
+CREATE TABLE results_psra_national.psra_canada_src_loss_tbl AS 
+SELECT * FROM results_psra_canada.psra_canada_src_loss;
+
+-- add fid column
+ALTER TABLE results_psra_national.psra_canada_src_loss_tbl ADD COLUMN fid SERIAL;
+
+-- create index
+CREATE INDEX psra_canada_src_loss_tbl_fid_idx ON results_psra_national.psra_canada_src_loss_tbl("fid");
+
+-- create psra src national view
+DROP VIEW IF EXISTS results_psra_national.psra_canada_src_loss CASCADE;
+CREATE VIEW results_psra_national.psra_canada_src_loss AS SELECT * FROM results_psra_national.psra_canada_src_loss_tbl;
+
