@@ -32,7 +32,7 @@ COALESCE(c.loss_ratio_r1,0) AS "e95Lr_r1",
 
 a.loss_type AS "eEL_type",
 a.return_period AS "eEL_Period",
-a.annual_frequency_of_exceedence AS "eEL_Probability",
+a.annual_frequency_of_exceedence AS "eEL_Probability"
 
 FROM psra_canada.psra_canada_agg_curves_stats a
 FULL JOIN psra_canada.psra_canada_agg_curves_q05 b ON a.return_period = b.return_period AND a.loss_type = b.loss_type AND a.ss_region = b.ss_region AND a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence
