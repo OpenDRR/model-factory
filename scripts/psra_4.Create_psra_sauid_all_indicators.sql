@@ -440,7 +440,7 @@ FULL JOIN psra_{prov}.psra_{prov}_agg_curves_q05 b ON a.return_period = b.return
 	AND a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence
 FULL JOIN psra_{prov}.psra_{prov}_agg_curves_q95 c ON a.return_period = c.return_period AND a.loss_type = c.loss_type AND a.fsauid = c.fsauid AND a."OccType" = c."OccType" AND a."GenType" = c."GenType" 
 	AND a.annual_frequency_of_exceedence = c.annual_frequency_of_exceedence
-ORDER BY a.fsauid ASC;
+ORDER BY a.return_period,a.fsauid ASC;
 --LEFT JOIN boundaries."Geometry_FSAUID" b ON a.fsauid = b."CFSAUID";
 
 
@@ -483,4 +483,4 @@ COALESCE(c.loss_ratio_r1,0) AS "e_LossRatio95_r1"
 FROM psra_{prov}.psra_{prov}_agg_losses_stats a
 LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q05 b ON a.loss_type = b.loss_type AND a.fsauid = b.fsauid AND a."OccType" = b."OccType" AND a."GenType" = b."GenType"
 LEFT JOIN psra_{prov}.psra_{prov}_agg_losses_q95 c ON a.loss_type = c.loss_type AND a.fsauid = c.fsauid AND a."OccType" = c."OccType" AND a."GenType" = c."GenType"
-ORDER BY a.fsauid ASC;
+ORDER BY a.loss_type,a.fsauid ASC;
