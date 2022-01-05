@@ -968,10 +968,10 @@ CREATE VIEW results_psra_national.psra_canada_expected_loss AS SELECT * FROM res
 
 
 -- combine psra canada agg loss indicators 
-DROP TABLE IF EXISTS results_psra_national.psra_agg_loss_tbl CASCADE;
+DROP TABLE IF EXISTS results_psra_national.psra_canada_agg_loss_tbl CASCADE;
 
-CREATE TABLE results_psra_national.psra_agg_loss_tbl AS 
-SELECT * FROM results_psra_canada.psra_canada_agg_loss
+CREATE TABLE results_psra_national.psra_canada_agg_loss_tbl AS 
+SELECT * FROM results_psra_canada.psra_canada_agg_loss;
 
 -- add fid column
 ALTER TABLE results_psra_national.psra_canada_agg_loss_tbl ADD COLUMN fid SERIAL;

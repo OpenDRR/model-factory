@@ -158,7 +158,7 @@ loss_ratio float
 
  /* psra_3.Create_table_src_loss_table.sql */
 -- script to agg curves stats
-DROP TABLE IF EXISTS lut.psra_source_types,psra_canada.psra_canada_src_loss_b0, psra_canada.psra_canada_src_loss_r1, psra_canada.psra_canada_src_loss CASCADE;
+DROP TABLE IF EXISTS psra_canada.psra_canada_src_loss_b0, psra_canada.psra_canada_src_loss_r1, psra_canada.psra_canada_src_loss CASCADE;
 
 -- create table
 CREATE TABLE psra_canada.psra_canada_src_loss_b0(
