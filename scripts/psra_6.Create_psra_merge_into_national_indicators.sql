@@ -209,14 +209,21 @@ SELECT * FROM results_psra_yt.psra_yt_eqriskindex;
 -- UNION
 -- SELECT * FROM results_psra_yt.psra_yt_eqriskindex;
 
+-- normalize norm scores between 0 and 1
+UPDATE results_psra_national.psra_eqriskindex
+SET eqri_norm_score_b0 = (eqri_norm_score_b0 - (SELECT MIN(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex)) / ((SELECT MAX(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex) - 
+(SELECT MIN(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex)),
+ 	eqri_norm_score_r1 = (eqri_norm_score_r1 - (SELECT MIN(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex)) / ((SELECT MAX(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex) - 
+	(SELECT MIN(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex));
+
 
 --create national threshold sauid lookup table for rating
 DROP TABLE IF EXISTS results_psra_national.psra_eqri_thresholds CASCADE;
 CREATE TABLE results_psra_national.psra_eqri_thresholds
 (
 percentile NUMERIC,
-tot_score_threshold_b0 FLOAT DEFAULT 0,
-tot_score_threshold_r1 FLOAT DEFAULT 0, 
+abs_score_threshold_b0 FLOAT DEFAULT 0,
+abs_score_threshold_r1 FLOAT DEFAULT 0, 
 norm_score_threshold_b0 FLOAT DEFAULT 0,
 norm_score_threshold_r1 FLOAT DEFAULT 0,
 rating VARCHAR
@@ -234,50 +241,50 @@ INSERT INTO results_psra_national.psra_eqri_thresholds (percentile,rating) VALUE
 --update values with calculated percentiles
 --0.50 percentile
 UPDATE results_psra_national.psra_eqri_thresholds 
-SET tot_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY eqri_tot_score_b0) FROM results_psra_national.psra_eqriskindex),
-	tot_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY eqri_tot_score_r1) FROM results_psra_national.psra_eqriskindex),
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex),
 	norm_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex),
 	norm_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex) WHERE percentile = 0.50;
 
 -- 0.75 percentile
 UPDATE results_psra_national.psra_eqri_thresholds 
-SET tot_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY eqri_tot_score_b0) FROM results_psra_national.psra_eqriskindex),
-	tot_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY eqri_tot_score_r1) FROM results_psra_national.psra_eqriskindex),
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex),
 	norm_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex),
 	norm_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex) WHERE percentile = 0.75;
 	
 -- 0.90 percentile
 UPDATE results_psra_national.psra_eqri_thresholds 
-SET tot_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.90) WITHIN GROUP (ORDER BY eqri_tot_score_b0) FROM results_psra_national.psra_eqriskindex),
-	tot_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.90) WITHIN GROUP (ORDER BY eqri_tot_score_r1) FROM results_psra_national.psra_eqriskindex),
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.90) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.90) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex),
 	norm_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.90) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex),
 	norm_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.90) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex) WHERE percentile = 0.90;
 	
 -- 0.95 percentile
 UPDATE results_psra_national.psra_eqri_thresholds 
-SET tot_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_tot_score_b0) FROM results_psra_national.psra_eqriskindex),
-	tot_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_tot_score_r1) FROM results_psra_national.psra_eqriskindex),
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex),
 	norm_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex),
 	norm_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex) WHERE percentile = 0.95;
 
 
 -- update percentilerank value for national sauid 
 UPDATE results_psra_national.psra_eqriskindex
-SET eqri_tot_rank_b0 =
+SET eqri_abs_rank_b0 =
 	CASE 
-		WHEN eqri_tot_score_b0 < (SELECT tot_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.50) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0)
-		WHEN eqri_tot_score_b0 < (SELECT tot_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.75) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.50)
-		WHEN eqri_tot_score_b0 < (SELECT tot_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.90) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.75)
-		WHEN eqri_tot_score_b0 < (SELECT tot_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.90)
-		WHEN eqri_tot_score_b0 > (SELECT tot_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.50) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.75) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.50)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.90) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.75)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.90)
+		WHEN eqri_abs_score_b0 > (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95)
 		ELSE 'null' END,
-	eqri_tot_rank_r1 =
+	eqri_abs_rank_r1 =
 	CASE 
-		WHEN eqri_tot_score_r1 < (SELECT tot_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.50) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0)
-		WHEN eqri_tot_score_r1 < (SELECT tot_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.75) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.50)
-		WHEN eqri_tot_score_r1 < (SELECT tot_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.90) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.75)
-		WHEN eqri_tot_score_r1 < (SELECT tot_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.90)
-		WHEN eqri_tot_score_r1 > (SELECT tot_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.50) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.75) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.50)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.90) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.75)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.90)
+		WHEN eqri_abs_score_r1 > (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds WHERE percentile = 0.95)
 		ELSE 'null' END,
 	eqri_norm_rank_b0 =
 	CASE 
@@ -297,118 +304,144 @@ SET eqri_tot_rank_b0 =
 		ELSE 'null' END;
 
 
--- update percentilerank on national sauid table
+-- update percentilerank, normalized score on national sauid table
 UPDATE results_psra_national.psra_indicators_s_tbl b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b."Sauid";
 
 
--- update percentilerank on P/T eqriskindex sauid table
+-- update percentilerank, normalized score on P/T eqriskindex sauid table
 UPDATE results_psra_ab.psra_ab_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
 UPDATE results_psra_mb.psra_mb_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
 UPDATE results_psra_nb.psra_nb_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
 UPDATE results_psra_nl.psra_nl_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
 UPDATE results_psra_ns.psra_ns_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
 UPDATE results_psra_nt.psra_nt_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
 UPDATE results_psra_nu.psra_nu_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
 UPDATE results_psra_on.psra_on_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
 UPDATE results_psra_pe.psra_pe_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
 UPDATE results_psra_qc.psra_qc_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
 UPDATE results_psra_sk.psra_sk_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
 UPDATE results_psra_yt.psra_yt_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
 /*
 UPDATE results_psra_bc.psra_bc_eqriskindex b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
@@ -538,14 +571,21 @@ SELECT * FROM results_psra_yt.psra_yt_eqriskindex_csd;
 -- UNION
 -- SELECT * FROM results_psra_yt.psra_yt_eqriskindex_csd;
 
+-- normalize norm scores between 0 and 1
+UPDATE results_psra_national.psra_eqriskindex_csd
+SET eqri_norm_score_b0 = (eqri_norm_score_b0 - (SELECT MIN(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd)) / ((SELECT MAX(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd) - 
+(SELECT MIN(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd)),
+ 	eqri_norm_score_r1 = (eqri_norm_score_r1 - (SELECT MIN(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex_csd)) / ((SELECT MAX(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex_csd) - 
+	(SELECT MIN(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex_csd));
+
 
 --create national threshold csd lookup table for rating
 DROP TABLE IF EXISTS results_psra_national.psra_eqri_thresholds_csd CASCADE;
 CREATE TABLE results_psra_national.psra_eqri_thresholds_csd
 (
 percentile NUMERIC,
-tot_score_threshold_b0 FLOAT DEFAULT 0,
-tot_score_threshold_r1 FLOAT DEFAULT 0,
+abs_score_threshold_b0 FLOAT DEFAULT 0,
+abs_score_threshold_r1 FLOAT DEFAULT 0,
 norm_score_threshold_b0 FLOAT DEFAULT 0,
 norm_score_threshold_r1 FLOAT DEFAULT 0,
 rating VARCHAR
@@ -563,50 +603,50 @@ INSERT INTO results_psra_national.psra_eqri_thresholds_csd (percentile,rating) V
 --update values with calculated percentiles
 --0.50 percentile
 UPDATE results_psra_national.psra_eqri_thresholds_csd 
-SET tot_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY eqri_tot_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
-	tot_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY eqri_tot_score_r1) FROM results_psra_national.psra_eqriskindex_csd),
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex_csd),
 	norm_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
 	norm_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd) WHERE percentile = 0.50;
 
 -- 0.75 percentile
 UPDATE results_psra_national.psra_eqri_thresholds_csd 
-SET tot_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY eqri_tot_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
-	tot_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY eqri_tot_score_r1) FROM results_psra_national.psra_eqriskindex_csd),
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex_csd),
 	norm_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
 	norm_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd) WHERE percentile = 0.75;
 	
 -- 0.90 percentile
 UPDATE results_psra_national.psra_eqri_thresholds_csd 
-SET tot_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.90) WITHIN GROUP (ORDER BY eqri_tot_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
-	tot_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.90) WITHIN GROUP (ORDER BY eqri_tot_score_r1) FROM results_psra_national.psra_eqriskindex_csd),
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.90) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.90) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex_csd),
 	norm_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.90) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
 	norm_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.90) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd) WHERE percentile = 0.90;
 	
 -- 0.95 percentile
 UPDATE results_psra_national.psra_eqri_thresholds_csd 
-SET tot_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_tot_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
-	tot_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_tot_score_r1) FROM results_psra_national.psra_eqriskindex_csd),
+SET abs_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_abs_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
+	abs_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_abs_score_r1) FROM results_psra_national.psra_eqriskindex_csd),
 	norm_score_threshold_b0 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd),
 	norm_score_threshold_r1 = (SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd) WHERE percentile = 0.95;
 
 
 -- update percentilerank value for national sauid 
 UPDATE results_psra_national.psra_eqriskindex_csd
-SET eqri_tot_rank_b0 =
+SET eqri_abs_rank_b0 =
 	CASE 
-		WHEN eqri_tot_score_b0 < (SELECT tot_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.50) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0)
-		WHEN eqri_tot_score_b0 < (SELECT tot_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.75) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.50)
-		WHEN eqri_tot_score_b0 < (SELECT tot_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.90) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.75)
-		WHEN eqri_tot_score_b0 < (SELECT tot_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.90)
-		WHEN eqri_tot_score_b0 > (SELECT tot_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.50) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.75) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.50)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.90) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.75)
+		WHEN eqri_abs_score_b0 < (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.90)
+		WHEN eqri_abs_score_b0 > (SELECT abs_score_threshold_b0 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95)
 		ELSE 'null' END,
-	eqri_tot_rank_r1 =
+	eqri_abs_rank_r1 =
 	CASE 
-		WHEN eqri_tot_score_r1 < (SELECT tot_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.50) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0)
-		WHEN eqri_tot_score_r1 < (SELECT tot_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.75) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.50)
-		WHEN eqri_tot_score_r1 < (SELECT tot_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.90) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.75)
-		WHEN eqri_tot_score_r1 < (SELECT tot_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.90)
-		WHEN eqri_tot_score_r1 > (SELECT tot_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.50) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.75) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.50)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.90) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.75)
+		WHEN eqri_abs_score_r1 < (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.90)
+		WHEN eqri_abs_score_r1 > (SELECT abs_score_threshold_r1 FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95) THEN (SELECT rating FROM results_psra_national.psra_eqri_thresholds_csd WHERE percentile = 0.95)
 		ELSE 'null' END,
 	eqri_norm_rank_b0 =
 	CASE 
@@ -626,118 +666,144 @@ SET eqri_tot_rank_b0 =
 		ELSE 'null' END;
 
 
--- update percentilerank on national csd table
+-- update percentilerank, normalized score on national csd table
 UPDATE results_psra_national.psra_indicators_csd_tbl b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 
--- update percentilerank on P/T eqriskindex csd table
+-- update percentilerank, normalized score on P/T eqriskindex csd table
 UPDATE results_psra_ab.psra_ab_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_mb.psra_mb_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_nb.psra_nb_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_nl.psra_nl_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_ns.psra_ns_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_nt.psra_nt_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_nu.psra_nu_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_on.psra_on_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_pe.psra_pe_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_qc.psra_qc_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_sk.psra_sk_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_yt.psra_yt_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_score_b0 = a.eqri_norm_score_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_score_r1 = a.eqri_norm_score_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
 /*
 UPDATE results_psra_bc.psra_bc_eqriskindex_csd b
-SET eqri_tot_rank_b0 = a.eqri_tot_rank_b0,
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
 	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_tot_rank_r1 = a.eqri_tot_rank_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
 	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
