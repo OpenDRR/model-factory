@@ -1,9 +1,6 @@
 scripts/config.ini
 .vscode/settings.json
-<<<<<<< HEAD
 scripts/*.log
 scripts/__pycache__/*
-=======
 venv
 *.log
->>>>>>> 79dba4ae4eca73797b1d9abcb63a0c5badbb0af3
