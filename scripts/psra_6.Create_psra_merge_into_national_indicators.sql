@@ -209,12 +209,12 @@ SELECT * FROM results_psra_yt.psra_yt_eqriskindex;
 -- UNION
 -- SELECT * FROM results_psra_yt.psra_yt_eqriskindex;
 
--- normalize norm scores between 0 and 1
+-- normalize norm scores between 0 and 100
 UPDATE results_psra_national.psra_eqriskindex
-SET eqri_norm_score_b0 = CAST(CAST(ROUND(CAST((eqri_norm_score_b0 - (SELECT MIN(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex)) / ((SELECT MAX(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex) - 
-(SELECT MIN(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex)) AS NUMERIC),6) AS FLOAT) AS NUMERIC),
- 	eqri_norm_score_r1 = CAST(CAST(ROUND(CAST((eqri_norm_score_r1 - (SELECT MIN(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex)) / ((SELECT MAX(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex) - 
-	(SELECT MIN(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex)) AS NUMERIC),6) AS FLOAT) AS NUMERIC);
+SET eqri_norm_score_b0 = CAST(CAST(ROUND(CAST(((eqri_norm_score_b0 - (SELECT MIN(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex)) / ((SELECT MAX(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex) - 
+(SELECT MIN(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex))*100) AS NUMERIC),6) AS FLOAT) AS NUMERIC),
+ 	eqri_norm_score_r1 = CAST(CAST(ROUND(CAST(((eqri_norm_score_r1 - (SELECT MIN(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex)) / ((SELECT MAX(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex) - 
+	(SELECT MIN(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex))*100) AS NUMERIC),6) AS FLOAT) AS NUMERIC);
 
 
 --create national threshold sauid lookup table for rating
@@ -571,12 +571,12 @@ SELECT * FROM results_psra_yt.psra_yt_eqriskindex_csd;
 -- UNION
 -- SELECT * FROM results_psra_yt.psra_yt_eqriskindex_csd;
 
--- normalize norm scores between 0 and 1
+-- normalize norm scores between 0 and 100
 UPDATE results_psra_national.psra_eqriskindex_csd
-SET eqri_norm_score_b0 = CAST(CAST(ROUND(CAST((eqri_norm_score_b0 - (SELECT MIN(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd)) / ((SELECT MAX(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd) - 
-(SELECT MIN(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd)) AS NUMERIC),6) AS FLOAT) AS NUMERIC),
- 	eqri_norm_score_r1 = CAST(CAST(ROUND(CAST((eqri_norm_score_r1 - (SELECT MIN(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex_csd)) / ((SELECT MAX(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex_csd) - 
-	(SELECT MIN(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex_csd)) AS NUMERIC),6) AS FLOAT) AS NUMERIC);
+SET eqri_norm_score_b0 = CAST(CAST(ROUND(CAST(((eqri_norm_score_b0 - (SELECT MIN(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd)) / ((SELECT MAX(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd) - 
+(SELECT MIN(eqri_norm_score_b0) FROM results_psra_national.psra_eqriskindex_csd))*100) AS NUMERIC),6) AS FLOAT) AS NUMERIC),
+ 	eqri_norm_score_r1 = CAST(CAST(ROUND(CAST(((eqri_norm_score_r1 - (SELECT MIN(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex_csd)) / ((SELECT MAX(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex_csd) - 
+	(SELECT MIN(eqri_norm_score_r1) FROM results_psra_national.psra_eqriskindex_csd))*100) AS NUMERIC),6) AS FLOAT) AS NUMERIC);
 
 
 --create national threshold csd lookup table for rating
