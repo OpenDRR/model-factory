@@ -137,31 +137,41 @@ CREATE INDEX IF NOT EXISTS census_2016_canada_sauid_idx ON census.census_2016_ca
 
 /* Create_table_sovi_index_canada_v2.sql */
 -- create index
-CREATE INDEX sovi_index_canada_idx ON sovi.sovi_index_canada (sauidt);
+-- CREATE INDEX sovi_index_canada_idx ON sovi.sovi_index_canada (sauidt);
 
 
 
-/* Create_table_sovi_census_canada.sql */
--- create indexes
-CREATE INDEX IF NOT EXISTS sovi_census_canada_sauid_idx ON sovi.sovi_census_canada(sauidt);
-CREATE INDEX IF NOT EXISTS sovi_census_canada_dauid_idx ON sovi.sovi_census_canada(dauidt);
-CREATE INDEX IF NOT EXISTS sovi_census_canada_cfsauid_idx ON sovi.sovi_census_canada(cfsauid);
-CREATE INDEX IF NOT EXISTS sovi_census_canada_csduid_idx ON sovi.sovi_census_canada(csduid);
-CREATE INDEX IF NOT EXISTS sovi_census_canada_adauid_idx ON sovi.sovi_census_canada(adauid);
-CREATE INDEX IF NOT EXISTS sovi_census_canada_cduid_idx ON sovi.sovi_census_canada(cduid);
-CREATE INDEX IF NOT EXISTS sovi_census_canada_eruid_idx ON sovi.sovi_census_canada(eruid);
-CREATE INDEX IF NOT EXISTS sovi_census_canada_pruid_idx ON sovi.sovi_census_canada(pruid);
+-- /* Create_table_sovi_census_canada.sql */
+-- -- create indexes
+-- CREATE INDEX IF NOT EXISTS sovi_census_canada_sauid_idx ON sovi.sovi_census_canada(sauidt);
+-- CREATE INDEX IF NOT EXISTS sovi_census_canada_dauid_idx ON sovi.sovi_census_canada(dauidt);
+-- CREATE INDEX IF NOT EXISTS sovi_census_canada_cfsauid_idx ON sovi.sovi_census_canada(cfsauid);
+-- CREATE INDEX IF NOT EXISTS sovi_census_canada_csduid_idx ON sovi.sovi_census_canada(csduid);
+-- CREATE INDEX IF NOT EXISTS sovi_census_canada_adauid_idx ON sovi.sovi_census_canada(adauid);
+-- CREATE INDEX IF NOT EXISTS sovi_census_canada_cduid_idx ON sovi.sovi_census_canada(cduid);
+-- CREATE INDEX IF NOT EXISTS sovi_census_canada_eruid_idx ON sovi.sovi_census_canada(eruid);
+-- CREATE INDEX IF NOT EXISTS sovi_census_canada_pruid_idx ON sovi.sovi_census_canada(pruid);
 
 /* sovi_index */
 -- create indexes
-CREATE INDEX IF NOT EXISTS sovi_index_canada_sauid_idx ON sovi.sovi_index_canada(sauidt);
-CREATE INDEX IF NOT EXISTS sovi_index_canada_dauid_idx ON sovi.sovi_index_canada(dauidt);
-CREATE INDEX IF NOT EXISTS sovi_index_canada_cfsauid_idx ON sovi.sovi_index_canada(cfsauid);
-CREATE INDEX IF NOT EXISTS sovi_index_canada_csduid_idx ON sovi.sovi_index_canada(csduid);
-CREATE INDEX IF NOT EXISTS sovi_index_canada_adauid_idx ON sovi.sovi_index_canada(adauid);
-CREATE INDEX IF NOT EXISTS sovi_index_canada_cduid_idx ON sovi.sovi_index_canada(cduid);
-CREATE INDEX IF NOT EXISTS sovi_index_canada_eruid_idx ON sovi.sovi_index_canada(eruid);
-CREATE INDEX IF NOT EXISTS sovi_index_canada_pruid_idx ON sovi.sovi_index_canada(pruid);
+-- CREATE INDEX IF NOT EXISTS sovi_index_canada_sauid_idx ON sovi.sovi_index_canada(sauidt);
+-- CREATE INDEX IF NOT EXISTS sovi_index_canada_dauid_idx ON sovi.sovi_index_canada(dauidt);
+-- CREATE INDEX IF NOT EXISTS sovi_index_canada_cfsauid_idx ON sovi.sovi_index_canada(cfsauid);
+-- CREATE INDEX IF NOT EXISTS sovi_index_canada_csduid_idx ON sovi.sovi_index_canada(csduid);
+-- CREATE INDEX IF NOT EXISTS sovi_index_canada_adauid_idx ON sovi.sovi_index_canada(adauid);
+-- CREATE INDEX IF NOT EXISTS sovi_index_canada_cduid_idx ON sovi.sovi_index_canada(cduid);
+-- CREATE INDEX IF NOT EXISTS sovi_index_canada_eruid_idx ON sovi.sovi_index_canada(eruid);
+-- CREATE INDEX IF NOT EXISTS sovi_index_canada_pruid_idx ON sovi.sovi_index_canada(pruid);
+
+/* Create_table_sovi_sauid.sql */
+-- create indexes
+CREATE INDEX IF NOT EXISTS sovi_index_canada_sauid_idx ON sovi.sovi_sauid_nov2021(sauid);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_dauid_idx ON sovi.sovi_sauid_nov2021(dauid);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_fsauid_idx ON sovi.sovi_sauid_nov2021(fsauid);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_csduid_idx ON sovi.sovi_sauid_nov2021(csduid);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_cduid_idx ON sovi.sovi_sauid_nov2021(cduid);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_eruid_idx ON sovi.sovi_sauid_nov2021(eruid);
+CREATE INDEX IF NOT EXISTS sovi_index_canada_pruid_idx ON sovi.sovi_sauid_nov2021(pruid);
 
 
 
