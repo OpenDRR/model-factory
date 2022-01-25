@@ -1058,7 +1058,7 @@ a.geom_poly
 
 FROM results_nhsl_hazard_threat.hazard_threat_values_s a
 LEFT JOIN results_nhsl_hazard_threat.hazard_threat_values_csd b ON a.csduid = b.csduid
-LEFT JOIN results_nhsl_social_fabric.nhsl_social_fabric_indicators_s_tbl c ON a."Sauid" = c."Sauid"
+LEFT JOIN results_nhsl_social_fabric.nhsl_social_fabric_indicators_s c ON a."Sauid" = c."Sauid"
 ORDER BY a."Sauid" ASC; 
 
 -- update total absolute and relative scores
