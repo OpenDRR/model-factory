@@ -56,6 +56,22 @@ DROP VIEW IF EXISTS  results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap;
 CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap AS SELECT * FROM results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl;
 
 
+-- create shakemap in hexbin for display
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km AS
+
+SELECT
+b.gridid_5,
+AVG("sH_PGA") AS "sH_PGA_avg",
+MIN("sH_PGA") as "sH_PGA_min",
+MAX("sH_PGA") as "sH_PGA_max",
+b.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
+JOIN boundaries."HexGrid_5km" b ON ST_INTERSECTS(a.geom,b.geom)
+GROUP BY b.gridid_5;
+
+
 -- add polygon extents to scenario extents table for each scenario
 INSERT INTO gmf.shakemap_scenario_extents_temp(scenario,geom)
 SELECT '{eqScenario}',st_astext(st_concavehull(st_collect(geom),0.98)) FROM gmf.shakemap_{eqScenario};
