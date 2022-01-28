@@ -303,6 +303,7 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_indicators_b AS
 --3.1 Scenario Hazard
 SELECT 
 a."AssetID",
+b.eqdeslev AS "E_BldgDesLev",
 
 -- 3.1.1 Shakemap Intensity
 a."Rupture_Abbr" AS "sH_RupName",
