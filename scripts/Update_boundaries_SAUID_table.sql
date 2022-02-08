@@ -63,83 +63,6 @@ ALTER TABLE boundaries."Geometry_PRUID" ADD PRIMARY KEY ("PRUID");
 CREATE INDEX IF NOT EXISTS geometry_pruid_pruid_idx ON boundaries."Geometry_PRUID"("PRUID");
 CREATE INDEX IF NOT EXISTS geometry_prauid_geom_idx ON boundaries."Geometry_PRUID" using GIST(geom);
 
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_AB" DROP CONSTRAINT IF EXISTS "HexGrid_1km_ab_pkey";
-ALTER TABLE boundaries."HexGrid_1km_AB" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_ab_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_ab_idx ON boundaries."HexGrid_1km" using GIST(geom);
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_BC" DROP CONSTRAINT IF EXISTS "HexGrid_1km_bc_pkey";
-ALTER TABLE boundaries."HexGrid_1km_BC" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_bc_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_bc_idx ON boundaries."HexGrid_1km" using GIST(geom);
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_MB" DROP CONSTRAINT IF EXISTS "HexGrid_1km_mb_pkey";
-ALTER TABLE boundaries."HexGrid_1km_MB" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_mb_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_mb_idx ON boundaries."HexGrid_1km" using GIST(geom);
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_NB" DROP CONSTRAINT IF EXISTS "HexGrid_1km_nb_pkey";
-ALTER TABLE boundaries."HexGrid_1km_NB" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_nb_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_nb_idx ON boundaries."HexGrid_1km" using GIST(geom);
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_NL" DROP CONSTRAINT IF EXISTS "HexGrid_1km_nl_pkey";
-ALTER TABLE boundaries."HexGrid_1km_NL" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_nl_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_nl_idx ON boundaries."HexGrid_1km" using GIST(geom);
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_NS" DROP CONSTRAINT IF EXISTS "HexGrid_1km_ns_pkey";
-ALTER TABLE boundaries."HexGrid_1km_NS" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_ns_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_ns_idx ON boundaries."HexGrid_1km" using GIST(geom);
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_NT" DROP CONSTRAINT IF EXISTS "HexGrid_1km_nt_pkey";
-ALTER TABLE boundaries."HexGrid_1km_NT" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_nt_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_nt_idx ON boundaries."HexGrid_1km" using GIST(geom);
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_NU" DROP CONSTRAINT IF EXISTS "HexGrid_1km_nu_pkey";
-ALTER TABLE boundaries."HexGrid_1km_NU" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_nu_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_nu_idx ON boundaries."HexGrid_1km" using GIST(geom);
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_ON" DROP CONSTRAINT IF EXISTS "HexGrid_1km_on_pkey";
-ALTER TABLE boundaries."HexGrid_1km_ON" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_on_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_on_idx ON boundaries."HexGrid_1km" using GIST(geom);
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_PE" DROP CONSTRAINT IF EXISTS "HexGrid_1km_pe_pkey";
-ALTER TABLE boundaries."HexGrid_1km_PE" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_pe_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_pe_idx ON boundaries."HexGrid_1km" using GIST(geom);
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_QC" DROP CONSTRAINT IF EXISTS "HexGrid_1km_qc_pkey";
-ALTER TABLE boundaries."HexGrid_1km_QC" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_qc_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_qc_idx ON boundaries."HexGrid_1km" using GIST(geom);
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_SK" DROP CONSTRAINT IF EXISTS "HexGrid_1km_sk_pkey";
-ALTER TABLE boundaries."HexGrid_1km_SK" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_sk_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_sk_idx ON boundaries."HexGrid_1km" using GIST(geom);
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km_YT" DROP CONSTRAINT IF EXISTS "HexGrid_1km_yt_pkey";
-ALTER TABLE boundaries."HexGrid_1km_YT" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_yt_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_yt_idx ON boundaries."HexGrid_1km" using GIST(geom);
 -- change new PK / add indexes HexGrid_5km
 ALTER TABLE boundaries."HexGrid_5km" DROP CONSTRAINT IF EXISTS "HexGrid_5km_pkey";
 ALTER TABLE boundaries."HexGrid_5km" ADD PRIMARY KEY ("gridid_5");
@@ -201,39 +124,7 @@ ALTER TABLE boundaries."SAUID_HexGrid_100km_intersect" DROP CONSTRAINT IF EXISTS
 ALTER TABLE boundaries."SAUID_HexGrid_100km_intersect" ADD PRIMARY KEY ("gridid_100","sauid");
 CREATE INDEX IF NOT EXISTS sauid_hexgrid_100km_sauid_idx ON boundaries."SAUID_HexGrid_100km_intersect"("gridid_100","sauid");
 
-
--- union 1km hexgrid from P/T
-DROP TABLE IF EXISTS boundaries."HexGrid_1km" CASCADE;
-
-CREATE TABLE boundaries."HexGrid_1km" AS
-SELECT * FROM boundaries."HexGrid_1km_AB"
-UNION
-SELECT * FROM boundaries."HexGrid_1km_BC"
-UNION
-SELECT * FROM boundaries."HexGrid_1km_MB"
-UNION
-SELECT * FROM boundaries."HexGrid_1km_NB"
-UNION
-SELECT * FROM boundaries."HexGrid_1km_NL"
-UNION
-SELECT * FROM boundaries."HexGrid_1km_NS"
-UNION
-SELECT * FROM boundaries."HexGrid_1km_NT"
-UNION
-SELECT * FROM boundaries."HexGrid_1km_NU"
-UNION
-SELECT * FROM boundaries."HexGrid_1km_ON"
-UNION
-SELECT * FROM boundaries."HexGrid_1km_PE"
-UNION
-SELECT * FROM boundaries."HexGrid_1km_QC"
-UNION
-SELECT * FROM boundaries."HexGrid_1km_SK"
-UNION
-SELECT * FROM boundaries."HexGrid_1km_YT";
-
--- change new PK / add indexes HexGrid_1km
-ALTER TABLE boundaries."HexGrid_1km" DROP CONSTRAINT IF EXISTS "HexGrid_1km_pkey";
-ALTER TABLE boundaries."HexGrid_1km" ADD PRIMARY KEY ("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_idx ON boundaries."HexGrid_1km"("gridid_1");
-CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_idx ON boundaries."HexGrid_1km" using GIST(geom);
+-- change new PK / add indexes SAUID_100km_intersect
+ALTER TABLE boundaries."SAUID_HexGrid_GlobalFabric_intersect" DROP CONSTRAINT IF EXISTS "SAUID_HexGrid_GlobalFabric_intersect_pkey";
+ALTER TABLE boundaries."SAUID_HexGrid_GlobalFabric_intersect" ADD PRIMARY KEY ("gridid","sauid");
+CREATE INDEX IF NOT EXISTS sauid_hexgrid_100km_sauid_idx ON boundaries."SAUID_HexGrid_GlobalFabric_intersect" ("gridid","sauid");
