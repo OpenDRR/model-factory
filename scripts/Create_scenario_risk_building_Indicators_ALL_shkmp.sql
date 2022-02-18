@@ -397,6 +397,7 @@ b.eqdeslev AS "E_BldgDesLev",
 b.occtype AS "E_BldgOccG",
 b.occclass1 AS "E_BldgOccS1",
 b.gentype AS "E_BldgTypeG",
+b.bldgtype AS "E_BldgTypeS",
 
 -- 3.1.1 Shakemap Intensity
 a."Rupture_Abbr" AS "sH_RupName",
