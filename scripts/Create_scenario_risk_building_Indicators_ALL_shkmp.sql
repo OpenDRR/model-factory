@@ -70,7 +70,7 @@ b.geom
 
 FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
 JOIN boundaries."HexGrid_5km" b ON ST_INTERSECTS(a.geom,b.geom)
-GROUP BY b.gridid_5;
+GROUP BY b.gridid_5,b.geom;
 
 -- create shakemap in hexbin for display - 10km
 DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_10km CASCADE;
@@ -85,7 +85,7 @@ b.geom
 
 FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
 JOIN boundaries."HexGrid_10km" b ON ST_INTERSECTS(a.geom,b.geom)
-GROUP BY b.gridid_10;
+GROUP BY b.gridid_10,b.geom;
 
 -- create shakemap in hexbin for display - 25km
 DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_25km CASCADE;
@@ -100,7 +100,7 @@ b.geom
 
 FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
 JOIN boundaries."HexGrid_25km" b ON ST_INTERSECTS(a.geom,b.geom)
-GROUP BY b.gridid_25;
+GROUP BY b.gridid_25,b.geom;
 
 -- create shakemap in hexbin for display - 50km
 DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_50km CASCADE;
@@ -115,7 +115,7 @@ b.geom
 
 FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
 JOIN boundaries."HexGrid_50km" b ON ST_INTERSECTS(a.geom,b.geom)
-GROUP BY b.gridid_50;
+GROUP BY b.gridid_50,b.geom;
 
 -- create shakemap in hexbin for display - 100km
 DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_100km CASCADE;
@@ -130,7 +130,7 @@ b.geom
 
 FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
 JOIN boundaries."HexGrid_100km" b ON ST_INTERSECTS(a.geom,b.geom)
-GROUP BY b.gridid_100;
+GROUP BY b.gridid_100,b.geom;
 
 
 -- create shakemap in hexbin for display - 1km
