@@ -57,9 +57,33 @@ CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap AS SELECT * FRO
 
 
 
+-- add polygon extents to scenario extents table for each scenario
+INSERT INTO gmf.shakemap_scenario_extents_temp(scenario,geom)
+SELECT '{eqScenario}',st_astext(st_concavehull(st_collect(geom),0.98)) FROM gmf.shakemap_{eqScenario};
+--SELECT '{eqScenario}',st_astext(st_chaikinsmoothing(st_concavehull(st_collect(geom),0.98))) FROM gmf.shakemap_{eqScenario} WHERE "gmv_SA(0.3)" >= 0.02;
+
+
+-- add 10m buffer to ensure all assetIDs are captured
+UPDATE gmf.shakemap_scenario_extents_temp
+SET geom = ST_BUFFER(geom,0.0001) WHERE scenario = '{eqScenario}';
+
+
+
 -- create shakemap in hexbin for display - 5km
-DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km CASCADE;
-CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km AS
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_full;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_full AS
+SELECT
+a.gridid_5,
+a.geom
+
+FROM boundaries."HexGrid_5km" a
+JOIN gmf.shakemap_scenario_extents_temp b ON ST_INTERSECTS(a.geom,b.geom)
+WHERE b.scenario = '{eqScenario}';
+
+
+-- calculate avg, min, max pga of shakemap points within 5km hexbin
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_temp CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_temp AS
 
 SELECT
 b.gridid_5,
@@ -71,6 +95,64 @@ b.geom
 FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
 JOIN boundaries."HexGrid_5km" b ON ST_INTERSECTS(a.geom,b.geom)
 GROUP BY b.gridid_5,b.geom;
+
+
+-- create dsra scenario shakemap 1km hexbin and assign PGA value based on nearest shakemap ID
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_temp1 CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_temp1 AS
+SELECT
+a.gridid_5,
+0.00 AS "sH_PGA_avg",
+0.00 AS "sH_PGA_min",
+b."sH_PGA" AS "sH_PGA_max",
+a.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_full a
+CROSS JOIN LATERAL 
+(
+SELECT
+"sH_PGA",
+geom
+	
+FROM results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl
+ORDER BY a.geom <-> geom
+LIMIT 1
+) AS b;
+
+
+-- update dsra shakeap 1km hexbin with calculated max PGA values
+UPDATE results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_temp1 b
+SET "sH_PGA_max" = a."sH_PGA_max",
+"sH_PGA_min" = a."sH_PGA_min",
+"sH_PGA_avg" = a."sH_PGA_avg"
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_temp a
+WHERE a.gridid_5 = b.gridid_5;
+
+
+-- remove duplicate gridid_1 values from selection
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_tbl CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_tbl AS
+SELECT
+DISTINCT(gridid_5),
+"sH_PGA_avg",
+"sH_PGA_min",
+"sH_PGA_max",
+geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_temp1;
+
+
+-- drop temp
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_temp,
+results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_temp1,
+results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_full CASCADE;
+
+
+-- create view
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km AS SELECT * FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_tbl;
+
+
 
 -- create shakemap in hexbin for display - 10km
 DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_10km CASCADE;
@@ -134,15 +216,15 @@ GROUP BY b.gridid_100,b.geom;
 
 
 -- create shakemap in hexbin for display - 1km
--- create full extent of dsra scenario 1km hexbin - using 5km shakemap hexbin
-DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_1km_full CASCADE;
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_1km_full;
 CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_1km_full AS
-SELECT 
+SELECT
 a.gridid_1,
 a.geom
 
 FROM boundaries."HexGrid_1km" a
-JOIN results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km b ON ST_INTERSECTS(a.geom,b.geom);
+JOIN gmf.shakemap_scenario_extents_temp b ON ST_INTERSECTS(a.geom,b.geom)
+WHERE b.scenario = '{eqScenario}';
 
 
 -- calculate avg, min, max pga of shakemap points within 1km hexbin
@@ -223,16 +305,6 @@ results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_1km_full CASCADE;
 DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_1km;
 CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_1km AS SELECT * FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_1km_tbl;
 
-
--- add polygon extents to scenario extents table for each scenario
-INSERT INTO gmf.shakemap_scenario_extents_temp(scenario,geom)
-SELECT '{eqScenario}',st_astext(st_concavehull(st_collect(geom),0.98)) FROM gmf.shakemap_{eqScenario};
---SELECT '{eqScenario}',st_astext(st_chaikinsmoothing(st_concavehull(st_collect(geom),0.98))) FROM gmf.shakemap_{eqScenario} WHERE "gmv_SA(0.3)" >= 0.02;
-
-
--- add 10m buffer to ensure all assetIDs are captured
-UPDATE gmf.shakemap_scenario_extents_temp
-SET geom = ST_BUFFER(geom,0.0001) WHERE scenario = '{eqScenario}';
 
 
 -- create index
