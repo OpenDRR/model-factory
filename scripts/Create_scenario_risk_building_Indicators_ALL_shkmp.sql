@@ -199,8 +199,8 @@ results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hb_1km_t1,
 results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hb_1km_f CASCADE;
 
 -- create view
-DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hb_1km;
-CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hb_1km AS SELECT * FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hb_1km_tbl;
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_1km;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_1km AS SELECT * FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hb_1km_tbl;
 
 
 
@@ -287,8 +287,8 @@ results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hb_5km_uc_t1,
 results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hb_5km_uc_f CASCADE;
 
 -- create view
-DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hb_5km_uc;
-CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hb_5km_uc AS SELECT * FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hb_5km_uc_tbl;
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_uc;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap_hexbin_5km_uc AS SELECT * FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hb_5km_uc_tbl;
 
 
 
