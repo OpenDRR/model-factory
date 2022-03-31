@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS results_psra_national.psra_indicators_b_tbl CASCADE;
 CREATE TABLE results_psra_national.psra_indicators_b_tbl AS 
 SELECT * FROM results_psra_ab.psra_ab_indicators_b
 UNION
+SELECT * FROM results_psra_bc.psra_bc_indicators_b
+UNION
 SELECT * FROM results_psra_mb.psra_mb_indicators_b
 UNION
 SELECT * FROM results_psra_nb.psra_nb_indicators_b
@@ -27,33 +29,6 @@ UNION
 SELECT * FROM results_psra_sk.psra_sk_indicators_b
 UNION
 SELECT * FROM results_psra_yt.psra_yt_indicators_b;
-
--- CREATE TABLE results_psra_national.psra_indicators_b_tbl AS 
--- SELECT * FROM results_psra_ab.psra_ab_indicators_b
--- UNION
--- SELECT * FROM results_psra_bc.psra_bc_indicators_b
--- UNION
--- SELECT * FROM results_psra_mb.psra_mb_indicators_b
--- UNION
--- SELECT * FROM results_psra_nb.psra_nb_indicators_b
--- UNION
--- SELECT * FROM results_psra_nl.psra_nl_indicators_b
--- UNION
--- SELECT * FROM results_psra_ns.psra_ns_indicators_b
--- UNION
--- SELECT * FROM results_psra_nt.psra_nt_indicators_b
--- UNION
--- SELECT * FROM results_psra_nu.psra_nu_indicators_b
--- UNION
--- SELECT * FROM results_psra_on.psra_on_indicators_b
--- UNION
--- SELECT * FROM results_psra_pe.psra_pe_indicators_b
--- UNION
--- SELECT * FROM results_psra_qc.psra_qc_indicators_b
--- UNION
--- SELECT * FROM results_psra_sk.psra_sk_indicators_b
--- UNION
--- SELECT * FROM results_psra_yt.psra_yt_indicators_b;
 
 -- create index
 CREATE INDEX psra_indicators_b_tbl_idx ON results_psra_national.psra_indicators_b_tbl("AssetID");
@@ -84,6 +59,8 @@ DROP TABLE IF EXISTS results_psra_national.psra_indicators_s_tbl CASCADE;
 CREATE TABLE results_psra_national.psra_indicators_s_tbl AS 
 SELECT * FROM results_psra_ab.psra_ab_indicators_s
 UNION
+SELECT * FROM results_psra_bc.psra_bc_indicators_s
+UNION
 SELECT * FROM results_psra_mb.psra_mb_indicators_s
 UNION
 SELECT * FROM results_psra_nb.psra_nb_indicators_s
@@ -105,33 +82,6 @@ UNION
 SELECT * FROM results_psra_sk.psra_sk_indicators_s
 UNION
 SELECT * FROM results_psra_yt.psra_yt_indicators_s;
-
--- CREATE TABLE results_psra_national.psra_indicators_s_tbl AS 
--- SELECT * FROM results_psra_ab.psra_ab_indicators_s
--- UNION
--- SELECT * FROM results_psra_bc.psra_bc_indicators_s
--- UNION
--- SELECT * FROM results_psra_mb.psra_mb_indicators_s
--- UNION
--- SELECT * FROM results_psra_nb.psra_nb_indicators_s
--- UNION
--- SELECT * FROM results_psra_nl.psra_nl_indicators_s
--- UNION
--- SELECT * FROM results_psra_ns.psra_ns_indicators_s
--- UNION
--- SELECT * FROM results_psra_nt.psra_nt_indicators_s
--- UNION
--- SELECT * FROM results_psra_nu.psra_nu_indicators_s
--- UNION
--- SELECT * FROM results_psra_on.psra_on_indicators_s
--- UNION
--- SELECT * FROM results_psra_pe.psra_pe_indicators_s
--- UNION
--- SELECT * FROM results_psra_qc.psra_qc_indicators_s
--- UNION
--- SELECT * FROM results_psra_sk.psra_sk_indicators_s
--- UNION
--- SELECT * FROM results_psra_yt.psra_yt_indicators_s;
 
 -- create index
 CREATE INDEX psra_indicators_s_tbl_sauid_idx ON results_psra_national.psra_indicators_s_tbl("Sauid");
@@ -158,8 +108,11 @@ CREATE VIEW results_psra_national.psra_indicators_s AS SELECT * FROM results_psr
 -- combine eqriskindex sauid tables into national level
 DROP TABLE IF EXISTS results_psra_national.psra_eqriskindex CASCADE;
 
+
 CREATE TABLE results_psra_national.psra_eqriskindex AS 
 SELECT * FROM results_psra_ab.psra_ab_eqriskindex
+UNION
+SELECT * FROM results_psra_bc.psra_bc_eqriskindex
 UNION
 SELECT * FROM results_psra_mb.psra_mb_eqriskindex
 UNION
@@ -182,32 +135,6 @@ UNION
 SELECT * FROM results_psra_sk.psra_sk_eqriskindex
 UNION
 SELECT * FROM results_psra_yt.psra_yt_eqriskindex;
-
--- SELECT * FROM results_psra_ab.psra_ab_eqriskindex
--- UNION
--- SELECT * FROM results_psra_bc.psra_bc_eqriskindex
--- UNION
--- SELECT * FROM results_psra_mb.psra_mb_eqriskindex
--- UNION
--- SELECT * FROM results_psra_nb.psra_nb_eqriskindex
--- UNION
--- SELECT * FROM results_psra_nl.psra_nl_eqriskindex
--- UNION
--- SELECT * FROM results_psra_ns.psra_ns_eqriskindex
--- UNION
--- SELECT * FROM results_psra_nt.psra_nt_eqriskindex
--- UNION
--- SELECT * FROM results_psra_nu.psra_nu_eqriskindex
--- UNION
--- SELECT * FROM results_psra_on.psra_on_eqriskindex
--- UNION
--- SELECT * FROM results_psra_pe.psra_pe_eqriskindex
--- UNION
--- SELECT * FROM results_psra_qc.psra_qc_eqriskindex
--- UNION
--- SELECT * FROM results_psra_sk.psra_sk_eqriskindex
--- UNION
--- SELECT * FROM results_psra_yt.psra_yt_eqriskindex;
 
 -- normalize norm scores between 0 and 100
 UPDATE results_psra_national.psra_eqriskindex
@@ -327,6 +254,14 @@ SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
+UPDATE results_psra_bc.psra_bc_eqriskindex b
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
+FROM results_psra_national.psra_eqriskindex a
+WHERE a.sauid = b.sauid;
+
 UPDATE results_psra_mb.psra_mb_eqriskindex b
 SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
 	eqri_norm_score_b0 = a.eqri_norm_score_b0,
@@ -437,22 +372,15 @@ SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
 FROM results_psra_national.psra_eqriskindex a
 WHERE a.sauid = b.sauid;
 
-/*
-UPDATE results_psra_bc.psra_bc_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
-*/
-
 
 -- combine psra csd indicators into national level
 DROP TABLE IF EXISTS results_psra_national.psra_indicators_csd_tbl CASCADE;
 
+
 CREATE TABLE results_psra_national.psra_indicators_csd_tbl AS 
 SELECT * FROM results_psra_ab.psra_ab_indicators_csd
+UNION
+SELECT * FROM results_psra_bc.psra_bc_indicators_csd
 UNION
 SELECT * FROM results_psra_mb.psra_mb_indicators_csd
 UNION
@@ -476,33 +404,6 @@ SELECT * FROM results_psra_sk.psra_sk_indicators_csd
 UNION
 SELECT * FROM results_psra_yt.psra_yt_indicators_csd;
 
--- CREATE TABLE results_psra_national.psra_indicators_csd_tbl AS 
--- SELECT * FROM results_psra_ab.psra_ab_indicators_csd
--- UNION
--- SELECT * FROM results_psra_bc.psra_bc_indicators_csd
--- UNION
--- SELECT * FROM results_psra_mb.psra_mb_indicators_csd
--- UNION
--- SELECT * FROM results_psra_nb.psra_nb_indicators_csd
--- UNION
--- SELECT * FROM results_psra_nl.psra_nl_indicators_csd
--- UNION
--- SELECT * FROM results_psra_ns.psra_ns_indicators_csd
--- UNION
--- SELECT * FROM results_psra_nt.psra_nt_indicators_csd
--- UNION
--- SELECT * FROM results_psra_nu.psra_nu_indicators_csd
--- UNION
--- SELECT * FROM results_psra_on.psra_on_indicators_csd
--- UNION
--- SELECT * FROM results_psra_pe.psra_pe_indicators_csd
--- UNION
--- SELECT * FROM results_psra_qc.psra_qc_indicators_csd
--- UNION
--- SELECT * FROM results_psra_sk.psra_sk_indicators_csd
--- UNION
--- SELECT * FROM results_psra_yt.psra_yt_indicators_csd;
-
 -- create index
 CREATE INDEX psra_indicators_csd_tbl_csduid_idx ON results_psra_national.psra_indicators_csd_tbl(csduid);
 CREATE INDEX psra_indicators_csd_tbl_csdname_idx ON results_psra_national.psra_indicators_csd_tbl(csdname);
@@ -520,8 +421,11 @@ CREATE VIEW results_psra_national.psra_indicators_csd AS SELECT * FROM results_p
 -- combine eqriskindex csd tables into national level
 DROP TABLE IF EXISTS results_psra_national.psra_eqriskindex_csd CASCADE;
 
+
 CREATE TABLE results_psra_national.psra_eqriskindex_csd AS 
 SELECT * FROM results_psra_ab.psra_ab_eqriskindex_csd
+UNION
+SELECT * FROM results_psra_bc.psra_bc_eqriskindex_csd
 UNION
 SELECT * FROM results_psra_mb.psra_mb_eqriskindex_csd
 UNION
@@ -544,32 +448,6 @@ UNION
 SELECT * FROM results_psra_sk.psra_sk_eqriskindex_csd
 UNION
 SELECT * FROM results_psra_yt.psra_yt_eqriskindex_csd;
-
--- SELECT * FROM results_psra_ab.psra_ab_eqriskindex_csd
--- UNION
--- SELECT * FROM results_psra_bc.psra_bc_eqriskindex_csd
--- UNION
--- SELECT * FROM results_psra_mb.psra_mb_eqriskindex_csd
--- UNION
--- SELECT * FROM results_psra_nb.psra_nb_eqriskindex_csd
--- UNION
--- SELECT * FROM results_psra_nl.psra_nl_eqriskindex_csd
--- UNION
--- SELECT * FROM results_psra_ns.psra_ns_eqriskindex_csd
--- UNION
--- SELECT * FROM results_psra_nt.psra_nt_eqriskindex_csd
--- UNION
--- SELECT * FROM results_psra_nu.psra_nu_eqriskindex_csd
--- UNION
--- SELECT * FROM results_psra_on.psra_on_eqriskindex_csd
--- UNION
--- SELECT * FROM results_psra_pe.psra_pe_eqriskindex_csd
--- UNION
--- SELECT * FROM results_psra_qc.psra_qc_eqriskindex_csd
--- UNION
--- SELECT * FROM results_psra_sk.psra_sk_eqriskindex_csd
--- UNION
--- SELECT * FROM results_psra_yt.psra_yt_eqriskindex_csd;
 
 -- normalize norm scores between 0 and 100
 UPDATE results_psra_national.psra_eqriskindex_csd
@@ -689,6 +567,14 @@ SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
+UPDATE results_psra_bc.psra_bc_eqriskindex_csd b
+SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
+	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
+FROM results_psra_national.psra_eqriskindex_csd a
+WHERE a.csduid = b.csduid;
+
 UPDATE results_psra_mb.psra_mb_eqriskindex_csd b
 SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
 	eqri_norm_score_b0 = a.eqri_norm_score_b0,
@@ -799,22 +685,15 @@ SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
 FROM results_psra_national.psra_eqriskindex_csd a
 WHERE a.csduid = b.csduid;
 
-/*
-UPDATE results_psra_bc.psra_bc_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
-WHERE a.csduid = b.csduid;
-*/
-
 
 -- combine psra expected loss indicators into national level
 DROP TABLE IF EXISTS results_psra_national.psra_expected_loss_fsa_tbl CASCADE;
 
+
 CREATE TABLE results_psra_national.psra_expected_loss_fsa_tbl AS 
 SELECT * FROM results_psra_ab.psra_ab_expected_loss_fsa
+UNION
+SELECT * FROM results_psra_bc.psra_bc_expected_loss_fsa
 UNION
 SELECT * FROM results_psra_mb.psra_mb_expected_loss_fsa
 UNION
@@ -838,33 +717,6 @@ SELECT * FROM results_psra_sk.psra_sk_expected_loss_fsa
 UNION
 SELECT * FROM results_psra_yt.psra_yt_expected_loss_fsa;
 
--- CREATE TABLE results_psra_national.psra_expected_loss_fsa_tbl AS 
--- SELECT * FROM results_psra_ab.psra_ab_expected_loss_fsa
--- UNION
--- SELECT * FROM results_psra_bc.psra_bc_expected_loss_fsa
--- UNION
--- SELECT * FROM results_psra_mb.psra_mb_expected_loss_fsa
--- UNION
--- SELECT * FROM results_psra_nb.psra_nb_expected_loss_fsa
--- UNION
--- SELECT * FROM results_psra_nl.psra_nl_expected_loss_fsa
--- UNION
--- SELECT * FROM results_psra_ns.psra_ns_expected_loss_fsa
--- UNION
--- SELECT * FROM results_psra_nt.psra_nt_expected_loss_fsa
--- UNION
--- SELECT * FROM results_psra_nu.psra_nu_expected_loss_fsa
--- UNION
--- SELECT * FROM results_psra_on.psra_on_expected_loss_fsa
--- UNION
--- SELECT * FROM results_psra_pe.psra_pe_expected_loss_fsa
--- UNION
--- SELECT * FROM results_psra_qc.psra_qc_expected_loss_fsa
--- UNION
--- SELECT * FROM results_psra_sk.psra_sk_expected_loss_fsa
--- UNION
--- SELECT * FROM results_psra_yt.psra_yt_expected_loss_fsa;
-
 -- add fid column
 ALTER TABLE results_psra_national.psra_expected_loss_fsa_tbl ADD COLUMN fid SERIAL;
 
@@ -882,8 +734,11 @@ CREATE VIEW results_psra_national.psra_expected_loss_fsa AS SELECT * FROM result
 -- combine psra agg loss indicators into national level
 DROP TABLE IF EXISTS results_psra_national.psra_agg_loss_fsa_tbl CASCADE;
 
+
 CREATE TABLE results_psra_national.psra_agg_loss_fsa_tbl AS 
 SELECT * FROM results_psra_ab.psra_ab_agg_loss_fsa
+UNION
+SELECT * FROM results_psra_bc.psra_bc_agg_loss_fsa
 UNION
 SELECT * FROM results_psra_mb.psra_mb_agg_loss_fsa
 UNION
@@ -907,33 +762,6 @@ SELECT * FROM results_psra_sk.psra_sk_agg_loss_fsa
 UNION
 SELECT * FROM results_psra_yt.psra_yt_agg_loss_fsa;
 
--- CREATE TABLE results_psra_national.psra_agg_loss_fsa_tbl AS 
--- SELECT * FROM results_psra_ab.psra_ab_agg_loss_fsa
--- UNION
--- SELECT * FROM results_psra_bc.psra_bc_agg_loss_fsa
--- UNION
--- SELECT * FROM results_psra_mb.psra_mb_agg_loss_fsa
--- UNION
--- SELECT * FROM results_psra_nb.psra_nb_agg_loss_fsa
--- UNION
--- SELECT * FROM results_psra_nl.psra_nl_agg_loss_fsa
--- UNION
--- SELECT * FROM results_psra_ns.psra_ns_agg_loss_fsa
--- UNION
--- SELECT * FROM results_psra_nt.psra_nt_agg_loss_fsa
--- UNION
--- SELECT * FROM results_psra_nu.psra_nu_agg_loss_fsa
--- UNION
--- SELECT * FROM results_psra_on.psra_on_agg_loss_fsa
--- UNION
--- SELECT * FROM results_psra_pe.psra_pe_agg_loss_fsa
--- UNION
--- SELECT * FROM results_psra_qc.psra_qc_agg_loss_fsa
--- UNION
--- SELECT * FROM results_psra_sk.psra_sk_agg_loss_fsa
--- UNION
--- SELECT * FROM results_psra_yt.psra_yt_agg_loss_fsa;
-
 -- add fid column
 ALTER TABLE results_psra_national.psra_agg_loss_fsa_tbl ADD COLUMN fid SERIAL;
 
@@ -950,8 +778,11 @@ CREATE VIEW results_psra_national.psra_agg_loss_fsa AS SELECT * FROM results_psr
 -- combine psra src_loss indicators into national level
 DROP TABLE IF EXISTS results_psra_national.psra_src_loss_tbl CASCADE;
 
+
 CREATE TABLE results_psra_national.psra_src_loss_tbl AS 
 SELECT * FROM results_psra_ab.psra_ab_src_loss
+UNION
+SELECT * FROM results_psra_bc.psra_bc_src_loss
 UNION
 SELECT * FROM results_psra_mb.psra_mb_src_loss
 UNION
@@ -974,33 +805,6 @@ UNION
 SELECT * FROM results_psra_sk.psra_sk_src_loss
 UNION
 SELECT * FROM results_psra_yt.psra_yt_src_loss;
-
--- CREATE TABLE results_psra_national.psra_src_loss_tbl AS 
--- SELECT * FROM results_psra_ab.psra_ab_src_loss
--- UNION
--- SELECT * FROM results_psra_bc.psra_bc_src_loss
--- UNION
--- SELECT * FROM results_psra_mb.psra_mb_src_loss
--- UNION
--- SELECT * FROM results_psra_nb.psra_nb_src_loss
--- UNION
--- SELECT * FROM results_psra_nl.psra_nl_src_loss
--- UNION
--- SELECT * FROM results_psra_ns.psra_ns_src_loss
--- UNION
--- SELECT * FROM results_psra_nt.psra_nt_src_loss
--- UNION
--- SELECT * FROM results_psra_nu.psra_nu_src_loss
--- UNION
--- SELECT * FROM results_psra_on.psra_on_src_loss
--- UNION
--- SELECT * FROM results_psra_pe.psra_pe_src_loss
--- UNION
--- SELECT * FROM results_psra_qc.psra_qc_src_loss
--- UNION
--- SELECT * FROM results_psra_sk.psra_sk_src_loss
--- UNION
--- SELECT * FROM results_psra_yt.psra_yt_src_loss;
 
 
 -- add fid column
@@ -1066,4 +870,3 @@ CREATE INDEX psra_canada_src_loss_tbl_fid_idx ON results_psra_national.psra_cana
 -- create psra src national view
 DROP VIEW IF EXISTS results_psra_national.psra_canada_src_loss CASCADE;
 CREATE VIEW results_psra_national.psra_canada_src_loss AS SELECT * FROM results_psra_national.psra_canada_src_loss_tbl;
-
