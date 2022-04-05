@@ -13,6 +13,7 @@ CREATE INDEX IF NOT EXISTS psra_{prov}_hmaps_xref_id_idx ON psra_{prov}.psra_{pr
 DROP TABLE IF EXISTS psra_{prov}.exposure_{prov};
 
 /* psra_2.Create_table_dmg_mean.sql */
+/*
 -- combine cd b0 and r2 table
 CREATE TABLE psra_{prov}.psra_{prov}_cd_dmg_mean AS
 (SELECT
@@ -58,7 +59,7 @@ INNER JOIN psra_{prov}.psra_{prov}_cd_dmg_mean_r2 b ON a.asset_id = b.asset_id
 );
 
 ALTER TABLE psra_{prov}.psra_{prov}_cd_dmg_mean ADD PRIMARY KEY (asset_id);
-
+*/
 
 
 -- combine ed q05 b0 and r1 table

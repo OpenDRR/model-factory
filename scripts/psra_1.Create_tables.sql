@@ -395,6 +395,9 @@ lat float,
 
 /* psra_2.Create_table_dmg_mean.sql */
 -- script to generate cd/ed structural mean - b0, r2
+DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_ed_dmg_mean_b0, psra_{prov}.psra_{prov}_ed_dmg_mean_r1, psra_{prov}.psra_{prov}_ed_dmg_mean CASCADE;
+
+/*
 DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_cd_dmg_mean_b0, psra_{prov}.psra_{prov}_cd_dmg_mean_r1, psra_{prov}.psra_{prov}_cd_dmg_mean, psra_{prov}.psra_{prov}_ed_dmg_mean_b0, psra_{prov}.psra_{prov}_ed_dmg_mean_r1,
 psra_{prov}.psra_{prov}_ed_dmg_mean CASCADE;
 
@@ -471,7 +474,7 @@ structural_moderate float,
 structural_extensive float, 
 structural_complete float
 );
-
+*/
 
 -- add ed q05 tables
 DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_ed_dmg_q05_b0,psra_{prov}.psra_{prov}_ed_dmg_q05_r1 CASCADE;
