@@ -214,7 +214,7 @@ ALTER TABLE psra_{prov}.psra_{prov}_ed_dmg_mean ADD PRIMARY KEY (asset_id);
 CREATE INDEX IF NOT EXISTS psra_{prov}_ed_dmg_mean_asset_id_idx ON psra_{prov}.psra_{prov}_ed_dmg_mean(asset_id);
 
 DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_cd_dmg_mean_b0, psra_{prov}.psra_{prov}_cd_dmg_mean_r2, psra_{prov}.psra_{prov}_ed_dmg_mean_b0, psra_{prov}.psra_{prov}_ed_dmg_mean_r1,
-psra_{prov}_ed_dmg_q05_b0, psra_{prov}_ed_dmg_q05_r1, psra_{prov}_ed_dmg_q95_b0, psra_{prov}_ed_dmg_q95_r1 CASCADE;
+psra_{prov}.psra_{prov}_ed_dmg_q05_b0, psra_{prov}.psra_{prov}_ed_dmg_q05_r1, psra_{prov}.psra_{prov}_ed_dmg_q95_b0, psra_{prov}.psra_{prov}_ed_dmg_q95_r1 CASCADE;
 
 
 
