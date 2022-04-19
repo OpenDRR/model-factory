@@ -11,7 +11,6 @@ CREATE TABLE psra_canada.psra_canada_agg_curves_q05_b0(
 return_period varchar,
 loss_value float,
 loss_type varchar,
-ss_region varchar,
 prname varchar,
 loss_ratio float,
 annual_frequency_of_exceedence float
@@ -22,7 +21,6 @@ CREATE TABLE psra_canada.psra_canada_agg_curves_q05_r1(
 return_period varchar,
 loss_value float,
 loss_type varchar,
-ss_region varchar,
 prname varchar,
 loss_ratio float,
 annual_frequency_of_exceedence float
@@ -38,7 +36,6 @@ CREATE TABLE psra_canada.psra_canada_agg_curves_q95_b0(
 return_period varchar,
 loss_value float,
 loss_type varchar,
-ss_region varchar,
 prname varchar,
 loss_ratio float,
 annual_frequency_of_exceedence float
@@ -49,7 +46,6 @@ CREATE TABLE psra_canada.psra_canada_agg_curves_q95_r1(
 return_period varchar,
 loss_value float,
 loss_type varchar,
-ss_region varchar,
 prname varchar,
 loss_ratio float,
 annual_frequency_of_exceedence float
@@ -64,7 +60,6 @@ CREATE TABLE psra_canada.psra_canada_agg_curves_stats_b0(
 return_period varchar,
 loss_value float,
 loss_type varchar,
-ss_region varchar,
 prname varchar,
 loss_ratio float,
 annual_frequency_of_exceedence float
@@ -75,7 +70,6 @@ CREATE TABLE psra_canada.psra_canada_agg_curves_stats_r1(
 return_period varchar,
 loss_value float,
 loss_type varchar,
-ss_region varchar,
 prname varchar,
 loss_ratio float,
 annual_frequency_of_exceedence float
@@ -89,7 +83,6 @@ DROP TABLE IF EXISTS psra_canada.psra_canada_agg_losses_q05_b0, psra_canada.psra
 -- create table
 CREATE TABLE psra_canada.psra_canada_agg_losses_q05_b0(
 loss_type varchar,
-ss_region varchar,
 prname varchar,
 loss_value float,
 exposed_value float,
@@ -99,7 +92,6 @@ loss_ratio float
 -- create table
 CREATE TABLE psra_canada.psra_canada_agg_losses_q05_r1(
 loss_type varchar,
-ss_region varchar,
 prname varchar,
 loss_value float,
 exposed_value float,
@@ -114,7 +106,6 @@ DROP TABLE IF EXISTS psra_canada.psra_canada_agg_losses_q95_b0, psra_canada.psra
 -- create table
 CREATE TABLE psra_canada.psra_canada_agg_losses_q95_b0(
 loss_type varchar,
-ss_region varchar,
 prname varchar,
 loss_value float,
 exposed_value float,
@@ -124,7 +115,6 @@ loss_ratio float
 -- create table
 CREATE TABLE psra_canada.psra_canada_agg_losses_q95_r1(
 loss_type varchar,
-ss_region varchar,
 prname varchar,
 loss_value float,
 exposed_value float,
@@ -138,7 +128,6 @@ DROP TABLE IF EXISTS psra_canada.psra_canada_agg_losses_stats_b0, psra_canada.ps
 -- create table
 CREATE TABLE psra_canada.psra_canada_agg_losses_stats_b0(
 loss_type varchar,
-ss_region varchar,
 prname varchar,
 loss_value float,
 exposed_value float,
@@ -147,7 +136,6 @@ loss_ratio float
 
 CREATE TABLE psra_canada.psra_canada_agg_losses_stats_r1(
 loss_type varchar,
-ss_region varchar,
 prname varchar,
 loss_value float,
 exposed_value float,
