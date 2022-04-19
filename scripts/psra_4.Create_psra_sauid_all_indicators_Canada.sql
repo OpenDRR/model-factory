@@ -9,7 +9,6 @@ CREATE VIEW results_psra_canada.psra_canada_expected_loss AS
 -- 2.0 Seismic Risk (PSRA)
 -- 2.4 Economic Security
 SELECT
-a.ss_region AS "ss_region",
 a.prname AS "prname",
 
 -- 2.4.2 Expected Loss
@@ -48,7 +47,6 @@ DROP VIEW IF EXISTS results_psra_canada.psra_canada_agg_loss CASCADE;
 CREATE VIEW results_psra_canada.psra_canada_agg_loss AS
 
 SELECT
-a.ss_region AS "ss_region",
 a.prname AS "prname",
 a.loss_type AS "e_LossType",
 
