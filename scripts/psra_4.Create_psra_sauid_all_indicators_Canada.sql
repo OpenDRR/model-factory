@@ -75,8 +75,8 @@ COALESCE(c.exposed_value_r1,0) AS "e_ExposedValue95_r1",
 COALESCE(c.loss_ratio_r1,0) AS "e_LossRatio95_r1"
 
 FROM psra_canada.psra_canada_agg_losses_stats a
-LEFT JOIN psra_canada.psra_canada_agg_losses_q05 b ON a.loss_type = b.loss_type AND a.ss_region = b.ss_region AND a.prname = b.prname
-LEFT JOIN psra_canada.psra_canada_agg_losses_q95 c ON a.loss_type = c.loss_type AND a.ss_region = c.ss_region AND a.prname = c.prname
+LEFT JOIN psra_canada.psra_canada_agg_losses_q05 b ON a.loss_type = b.loss_type AND a.prname = b.prname
+LEFT JOIN psra_canada.psra_canada_agg_losses_q95 c ON a.loss_type = c.loss_type AND a.prname = c.prname
 ORDER BY a.loss_type,a.ss_region, a.prname ASC;
 
 
