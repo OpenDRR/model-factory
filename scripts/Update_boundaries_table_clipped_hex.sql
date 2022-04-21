@@ -2,12 +2,6 @@
 ALTER TABLE boundaries."Geometry_SAUID" ADD COLUMN IF NOT EXISTS geompoint geometry(Point,4326);
 UPDATE boundaries."Geometry_SAUID" SET geompoint = st_setsrid(st_makepoint("Lon","Lat"),4326);
 
-/*  -- fix already corrected at source geopackage
--- fix error geometries in Geometry_SAUID
-UPDATE boundaries."Geometry_SAUID"
-SET geom = ST_MakeValid(geom);
-*/
-
 -- change new PK / add indexes Geometry_SAUID
 ALTER TABLE boundaries."Geometry_SAUID" DROP CONSTRAINT IF EXISTS "Geometry_SAUID_pkey";
 ALTER TABLE boundaries."Geometry_SAUID" ADD PRIMARY KEY ("SAUIDt");
