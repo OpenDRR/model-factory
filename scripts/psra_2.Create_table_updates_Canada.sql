@@ -53,8 +53,8 @@ a.loss_value AS "loss_value_b0",
 a.loss_ratio AS "loss_ratio_b0",
 b.loss_value AS "loss_value_r1",
 b.loss_ratio AS "loss_ratio_r1",
-a.annual_frequency_of_exceedence,
-a.region
+a.annual_frequency_of_exceedence
+
 
 FROM psra_canada.psra_canada_agg_curves_stats_b0 a
 LEFT JOIN psra_canada.psra_canada_agg_curves_stats_r1 b ON a.return_period = b.return_period AND a.loss_type = b.loss_type AND a.prname = b.prname
