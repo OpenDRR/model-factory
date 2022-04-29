@@ -436,7 +436,8 @@ a.return_period AS "eEL_Period",
 a.annual_frequency_of_exceedence AS "eEL_Probability",
 a."OccType" AS "eEL_OccGen",
 a."GenType" AS "eEL_BldgType",
-UPPER('{prov}') AS "e_Aggregation"
+a.region AS "e_Aggregation"
+-- UPPER('{prov}') AS "e_Aggregation"
 --b.geom  -in case fsa geom is needed
 
 FROM psra_{prov}.psra_{prov}_agg_curves_stats a
