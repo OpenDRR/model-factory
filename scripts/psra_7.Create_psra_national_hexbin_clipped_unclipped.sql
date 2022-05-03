@@ -1,4 +1,4 @@
--- test hexbin aggregation for psra national level
+-- test hexgrid aggregation for psra national level
 -- create eqriskindex tables - 1km
 DROP TABLE IF EXISTS results_psra_national.psra_eqriskindex_1km_uc CASCADE;
 
@@ -158,8 +158,8 @@ SET eqri_abs_rank_b0 =
 		ELSE 'null' END;
 
 -- 1km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexbin_1km_uc CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexbin_1km_uc AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_1km_uc CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_1km_uc AS
 SELECT 
 c.gridid_1,
 SUM("eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -373,8 +373,8 @@ SET eqri_abs_rank_b0 =
 		ELSE 'null' END;
 
 -- 1km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexbin_5km_uc CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexbin_5km_uc AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_5km_uc CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_5km_uc AS
 SELECT 
 c.gridid_5,
 SUM("eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -588,8 +588,8 @@ SET eqri_abs_rank_b0 =
 		ELSE 'null' END;
 
 -- 10km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexbin_10km_uc CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexbin_10km_uc AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_10km_uc CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_10km_uc AS
 SELECT 
 c.gridid_10,
 SUM("eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -803,8 +803,8 @@ SET eqri_abs_rank_b0 =
 		ELSE 'null' END;
 
 -- 25km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexbin_25km_uc CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexbin_25km_uc AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_25km_uc CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_25km_uc AS
 SELECT 
 c.gridid_25,
 SUM("eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -1018,8 +1018,8 @@ SET eqri_abs_rank_b0 =
 		ELSE 'null' END;
 
 -- 50km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexbin_50km_uc CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexbin_50km_uc AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_50km_uc CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_50km_uc AS
 SELECT 
 c.gridid_50,
 SUM("eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -1233,8 +1233,8 @@ SET eqri_abs_rank_b0 =
 		ELSE 'null' END;
 
 -- 1km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexbin_100km_uc CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexbin_100km_uc AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_100km_uc CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_100km_uc AS
 SELECT 
 c.gridid_100,
 SUM("eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",

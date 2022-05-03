@@ -1,9 +1,9 @@
--- test aggregation to hexbin grids area proxy
+-- test aggregation to hexgrid grids area proxy
 
 -- clipped
 --1km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_1km CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_1km AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km AS 
 
 SELECT
 c.gridid_1,
@@ -60,8 +60,8 @@ GROUP BY c.gridid_1,c.geom;
 
 
 --5km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_5km CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_5km AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_5km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_5km AS 
 
 SELECT
 c.gridid_5,
@@ -118,8 +118,8 @@ GROUP BY c.gridid_5,c.geom;
 
 
 --10km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_10km CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_10km AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_10km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_10km AS 
 
 SELECT
 c.gridid_10,
@@ -176,8 +176,8 @@ GROUP BY c.gridid_10,c.geom;
 
 
 --25km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_25km CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_25km AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km AS 
 
 SELECT
 c.gridid_25,
@@ -232,8 +232,8 @@ GROUP BY c.gridid_25,c.geom;
 
 
 --global fabric
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_global_fabric CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_global_fabric AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_global_fabric CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_global_fabric AS 
 
 SELECT
 c.gridid,
@@ -291,8 +291,8 @@ GROUP BY c.gridid,c.geom;
 
 --unclipped
 --1km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_1km_uc CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_1km_uc AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km_uc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km_uc AS 
 
 SELECT
 c.gridid_1,
@@ -349,8 +349,8 @@ GROUP BY c.gridid_1,c.geom;
 
 
 --5km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_5km_uc CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_5km_uc AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_5km_uc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_5km_uc AS 
 
 SELECT
 c.gridid_5,
@@ -407,8 +407,8 @@ GROUP BY c.gridid_5,c.geom;
 
 
 --10km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_10km_uc CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_10km_uc AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_10km_uc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_10km_uc AS 
 
 SELECT
 c.gridid_10,
@@ -465,8 +465,8 @@ GROUP BY c.gridid_10,c.geom;
 
 
 --25km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_25km_uc CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_25km_uc AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km_uc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km_uc AS 
 
 SELECT
 c.gridid_25,
@@ -520,8 +520,8 @@ LEFT JOIN boundaries."HexGrid_25km_unclipped" c ON b.gridid_25 = c.gridid_25
 GROUP BY c.gridid_25,c.geom;
 
 --50km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_50km_uc CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_50km_uc AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_50km_uc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_50km_uc AS 
 
 SELECT
 c.gridid_50,
@@ -578,8 +578,8 @@ GROUP BY c.gridid_50,c.geom;
 
 
 --100km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_100km_uc CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexbin_100km_uc AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_100km_uc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_100km_uc AS 
 
 SELECT
 c.gridid_100,

@@ -1,5 +1,5 @@
 
--- test aggregation to hexbin grids area proxy
+-- test aggregation to hexgrid grids area proxy
 
 -- clipped
 -- 1km
