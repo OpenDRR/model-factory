@@ -13,6 +13,7 @@ CREATE INDEX IF NOT EXISTS psra_{prov}_hmaps_xref_id_idx ON psra_{prov}.psra_{pr
 DROP TABLE IF EXISTS psra_{prov}.exposure_{prov};
 
 /* psra_2.Create_table_dmg_mean.sql */
+/*
 -- combine cd b0 and r2 table
 CREATE TABLE psra_{prov}.psra_{prov}_cd_dmg_mean AS
 (SELECT
@@ -58,7 +59,7 @@ INNER JOIN psra_{prov}.psra_{prov}_cd_dmg_mean_r2 b ON a.asset_id = b.asset_id
 );
 
 ALTER TABLE psra_{prov}.psra_{prov}_cd_dmg_mean ADD PRIMARY KEY (asset_id);
-
+*/
 
 
 -- combine ed q05 b0 and r1 table
@@ -213,7 +214,7 @@ ALTER TABLE psra_{prov}.psra_{prov}_ed_dmg_mean ADD PRIMARY KEY (asset_id);
 CREATE INDEX IF NOT EXISTS psra_{prov}_ed_dmg_mean_asset_id_idx ON psra_{prov}.psra_{prov}_ed_dmg_mean(asset_id);
 
 DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_cd_dmg_mean_b0, psra_{prov}.psra_{prov}_cd_dmg_mean_r2, psra_{prov}.psra_{prov}_ed_dmg_mean_b0, psra_{prov}.psra_{prov}_ed_dmg_mean_r1,
-psra_{prov}_ed_dmg_q05_b0, psra_{prov}_ed_dmg_q05_r1, psra_{prov}_ed_dmg_q95_b0, psra_{prov}_ed_dmg_q95_r1 CASCADE;
+psra_{prov}.psra_{prov}_ed_dmg_q05_b0, psra_{prov}.psra_{prov}_ed_dmg_q05_r1, psra_{prov}.psra_{prov}_ed_dmg_q95_b0, psra_{prov}.psra_{prov}_ed_dmg_q95_r1 CASCADE;
 
 
 
@@ -272,6 +273,7 @@ a.loss_type,
 a.fsauid,
 a."OccType",
 a."GenType",
+a.region,
 a.loss_value AS "loss_value_b0",
 a.loss_ratio AS "loss_ratio_b0",
 b.loss_value AS "loss_value_r1",

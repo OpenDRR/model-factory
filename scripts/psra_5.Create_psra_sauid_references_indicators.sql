@@ -45,7 +45,7 @@ CREATE VIEW results_psra_{prov}.psra_{prov}_src_loss AS SELECT * FROM results_ps
 DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_src_loss_temp,psra_{prov}.psra_{prov}_src_loss_b0, psra_{prov}.psra_{prov}_src_loss_r1 CASCADE;
 
 
-
+/*
 DROP VIEW IF EXISTS results_psra_{prov}.psra_{prov}_hcurves_pga,results_psra_{prov}.psra_{prov}_hcurves_sa0p1,results_psra_{prov}.psra_{prov}_hcurves_sa0p2,results_psra_{prov}.psra_{prov}_hcurves_sa0p3,
 results_psra_{prov}.psra_{prov}_hcurves_sa0p5,results_psra_{prov}.psra_{prov}_hcurves_sa0p6,results_psra_{prov}.psra_{prov}_hcurves_sa1p0,results_psra_{prov}.psra_{prov}_hcurves_sa2p0,results_psra_{prov}.psra_{prov}_hmaps,
 results_psra_{prov}.psra_{prov}_uhs,results_psra_{prov}.psra_{prov}_hmaps_xref CASCADE;
@@ -82,3 +82,4 @@ UPDATE psra_{prov}.psra_{prov}_uhs SET geom = st_setsrid(st_makepoint(lon,lat),4
 CREATE INDEX psra_{prov}_uhs_geom_idx ON psra_{prov}.psra_{prov}_uhs using GIST (geom);
 
 CREATE VIEW results_psra_{prov}.psra_{prov}_uhs AS SELECT * FROM psra_{prov}.psra_{prov}_uhs;
+*/

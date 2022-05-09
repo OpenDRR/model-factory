@@ -42,22 +42,22 @@ def main():
     os.system(systemCall)
 
     # Copy Site exposure model
-    with open("/usr/src/app/PhysExpRef_MetroVan_v4.csv") as f:
-        reader = csv.reader(f)
-        columns = next(reader)
-    columns = ','.join('"{0}"'.format(w) for w in columns)
-    columns = columns.lower()
-    systemCall = """psql -h ${{POSTGRES_HOST}}
-                -U ${{POSTGRES_USER}}
-                -d ${{DB_NAME}}
-                -a
-                -c '\copy  exposure.metrovan_site_exposure ({columns})
-                        FROM /usr/src/app/PhysExpRef_MetroVan_v4.csv
-                            WITH
-                            CSV HEADER ;'""".format(**{
-                                'columns': columns})
-    systemCall = ' '.join(systemCall.split())
-    os.system(systemCall)
+    # with open("/usr/src/app/PhysExpRef_MetroVan_v4.csv") as f:
+    #     reader = csv.reader(f)
+    #     columns = next(reader)
+    # columns = ','.join('"{0}"'.format(w) for w in columns)
+    # columns = columns.lower()
+    # systemCall = """psql -h ${{POSTGRES_HOST}}
+    #             -U ${{POSTGRES_USER}}
+    #             -d ${{DB_NAME}}
+    #             -a
+    #             -c '\copy  exposure.metrovan_site_exposure ({columns})
+    #                     FROM /usr/src/app/PhysExpRef_MetroVan_v4.csv
+    #                         WITH
+    #                         CSV HEADER ;'""".format(**{
+    #                             'columns': columns})
+    # systemCall = ' '.join(systemCall.split())
+    # os.system(systemCall)
 
     # Copy VS30 Canada Site Model
     with open("/usr/src/app/site-vgrid_CA.csv") as f:

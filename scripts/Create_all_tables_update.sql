@@ -55,55 +55,55 @@ WHERE gentype = 'Manufactured ';
 
 /*Create_table_canada_site_exposure_ste.sql */
 -- add geometries field to enable PostGIS (WGS1984 SRID = 4326)
-ALTER TABLE exposure.metrovan_site_exposure ADD COLUMN geom_site geometry(Point,4326);
-UPDATE exposure.metrovan_site_exposure SET geom_site = st_setsrid(st_makepoint(sitelon,sitelat),4326);
+-- ALTER TABLE exposure.metrovan_site_exposure ADD COLUMN geom_site geometry(Point,4326);
+-- UPDATE exposure.metrovan_site_exposure SET geom_site = st_setsrid(st_makepoint(sitelon,sitelat),4326);
 
 -- add geometries field to enable PostGIS (WGS1984 SRID = 4326)
-ALTER TABLE exposure.metrovan_site_exposure ADD COLUMN geom_sauid geometry(Point,4326);
-UPDATE exposure.metrovan_site_exposure SET geom_sauid = st_setsrid(st_makepoint(sauidlon,sauidlat),4326);
+-- ALTER TABLE exposure.metrovan_site_exposure ADD COLUMN geom_sauid geometry(Point,4326);
+-- UPDATE exposure.metrovan_site_exposure SET geom_sauid = st_setsrid(st_makepoint(sauidlon,sauidlat),4326);
 
 -- create indexes on site exposure tables
-CREATE INDEX IF NOT EXISTS metrovan_site_exposure_id_idx ON exposure.metrovan_site_exposure("id");
+-- CREATE INDEX IF NOT EXISTS metrovan_site_exposure_id_idx ON exposure.metrovan_site_exposure("id");
 --CREATE INDEX IF NOT EXISTS metrovan_site_exposure_id_building_idx ON exposure.metrovan_site_exposure("id_building");
-CREATE INDEX IF NOT EXISTS metrovan_site_exposure_sauid_idx ON exposure.metrovan_site_exposure("sauidid");
-CREATE INDEX IF NOT EXISTS metrovan_site_exposure_geom_site_idx ON exposure.metrovan_site_exposure USING GIST("geom_site");
-CREATE INDEX IF NOT EXISTS metrovan_site_exposure_geom_sauid_idx ON exposure.metrovan_site_exposure USING GIST("geom_sauid");
+-- CREATE INDEX IF NOT EXISTS metrovan_site_exposure_sauid_idx ON exposure.metrovan_site_exposure("sauidid");
+-- CREATE INDEX IF NOT EXISTS metrovan_site_exposure_geom_site_idx ON exposure.metrovan_site_exposure USING GIST("geom_site");
+-- CREATE INDEX IF NOT EXISTS metrovan_site_exposure_geom_sauid_idx ON exposure.metrovan_site_exposure USING GIST("geom_sauid");
 
 -- drop columns that are not needed
-ALTER TABLE exposure.metrovan_site_exposure
-DROP COLUMN objectid_1,
-DROP COLUMN objectid_12,
-DROP COLUMN sauidt,
-DROP COLUMN sauidi,
-DROP COLUMN lon,
-DROP COLUMN lat,
-DROP COLUMN area_km2,
-DROP COLUMN area_ha,
-DROP COLUMN dauidt,
-DROP COLUMN dauidi,
-DROP COLUMN adauid_1,
-DROP COLUMN cfsauid,
-DROP COLUMN pruid_1,
-DROP COLUMN prname_1,
-DROP COLUMN csduid_1,
-DROP COLUMN csdname_1,
-DROP COLUMN csdtype,
-DROP COLUMN cduid_1,
-DROP COLUMN cdname_1,
-DROP COLUMN cdtype,
-DROP COLUMN ccsuid,
-DROP COLUMN ccsname,
-DROP COLUMN eruid_1,
-DROP COLUMN ername_1,
-DROP COLUMN saccode,
-DROP COLUMN sactype,
-DROP COLUMN cmauid,
-DROP COLUMN cmapuid,
-DROP COLUMN cmaname,
-DROP COLUMN cmatype,
-DROP COLUMN shape_leng,
-DROP COLUMN shape_length,
-DROP COLUMN shape_area;
+-- ALTER TABLE exposure.metrovan_site_exposure
+-- DROP COLUMN objectid_1,
+-- DROP COLUMN objectid_12,
+-- DROP COLUMN sauidt,
+-- DROP COLUMN sauidi,
+-- DROP COLUMN lon,
+-- DROP COLUMN lat,
+-- DROP COLUMN area_km2,
+-- DROP COLUMN area_ha,
+-- DROP COLUMN dauidt,
+-- DROP COLUMN dauidi,
+-- DROP COLUMN adauid_1,
+-- DROP COLUMN cfsauid,
+-- DROP COLUMN pruid_1,
+-- DROP COLUMN prname_1,
+-- DROP COLUMN csduid_1,
+-- DROP COLUMN csdname_1,
+-- DROP COLUMN csdtype,
+-- DROP COLUMN cduid_1,
+-- DROP COLUMN cdname_1,
+-- DROP COLUMN cdtype,
+-- DROP COLUMN ccsuid,
+-- DROP COLUMN ccsname,
+-- DROP COLUMN eruid_1,
+-- DROP COLUMN ername_1,
+-- DROP COLUMN saccode,
+-- DROP COLUMN sactype,
+-- DROP COLUMN cmauid,
+-- DROP COLUMN cmapuid,
+-- DROP COLUMN cmaname,
+-- DROP COLUMN cmatype,
+-- DROP COLUMN shape_leng,
+-- DROP COLUMN shape_length,
+-- DROP COLUMN shape_area;
 
 
 

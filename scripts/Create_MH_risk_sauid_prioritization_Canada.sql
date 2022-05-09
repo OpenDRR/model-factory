@@ -76,9 +76,9 @@ CASE
 
 -- population relative
 b."Et_PopNight" AS "CSD_PopNight",
-(a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) AS "Et_PopNight_rel", -- divide by zero error, set null
+(a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) AS "Et_PopNight_rel", -- divide by zero, set null
 CASE
-	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero error, set null
+	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero, set null
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) = 0 THEN 0
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) < 
 		(SELECT percentile_cont(0.25) WITHIN GROUP (ORDER BY (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)))
@@ -293,7 +293,7 @@ CASE
 	WHEN a."HTi_PGA500" < (SELECT pga_pp_to FROM mh.mh_ratings_thresholds WHERE impact_potential = 'High') THEN 4
 	WHEN a."HTi_PGA500" > (SELECT pga_pp_frm FROM mh.mh_ratings_thresholds WHERE impact_potential = 'Extreme') THEN 5
 	ELSE 0 END) * (CASE
-	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero error, set null
+	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero, set null
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) = 0 THEN 0
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) < 
 		(SELECT percentile_cont(0.25) WITHIN GROUP (ORDER BY (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)))
@@ -354,7 +354,7 @@ CASE
 	WHEN a."HTi_PGA500" < (SELECT pga_pp_to FROM mh.mh_ratings_thresholds WHERE impact_potential = 'High') THEN 4
 	WHEN a."HTi_PGA500" > (SELECT pga_pp_frm FROM mh.mh_ratings_thresholds WHERE impact_potential = 'Extreme') THEN 5
 	ELSE 0 END) * (CASE
-	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero error, set null
+	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero, set null
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) = 0 THEN 0
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) < 
 		(SELECT percentile_cont(0.25) WITHIN GROUP (ORDER BY (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)))
@@ -518,7 +518,7 @@ CASE
 	WHEN a."HTi_Fld500" < (SELECT fld_tsun_pp_to FROM mh.mh_ratings_thresholds WHERE impact_potential = 'High') THEN 4
 	WHEN a."HTi_Fld500" > (SELECT fld_tsun_pp_frm FROM mh.mh_ratings_thresholds WHERE impact_potential = 'Extreme') THEN 5
 	ELSE 0 END) * (CASE
-	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero error, set null
+	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero, set null
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) = 0 THEN 0
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) < 
 		(SELECT percentile_cont(0.25) WITHIN GROUP (ORDER BY (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)))
@@ -579,7 +579,7 @@ CASE
 	WHEN a."HTi_Fld500" < (SELECT fld_tsun_pp_to FROM mh.mh_ratings_thresholds WHERE impact_potential = 'High') THEN 4
 	WHEN a."HTi_Fld500" > (SELECT fld_tsun_pp_frm FROM mh.mh_ratings_thresholds WHERE impact_potential = 'Extreme') THEN 5
 	ELSE 0 END) * (CASE
-	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero error, set null
+	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero, set null
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) = 0 THEN 0
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) < 
 		(SELECT percentile_cont(0.25) WITHIN GROUP (ORDER BY (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)))
@@ -743,7 +743,7 @@ CASE
 	WHEN a."HTi_Wildfire" < (SELECT wildfire_pp_to FROM mh.mh_ratings_thresholds WHERE impact_potential = 'High') THEN 4
 	WHEN a."HTi_Wildfire" > (SELECT wildfire_pp_frm FROM mh.mh_ratings_thresholds WHERE impact_potential = 'Extreme') THEN 5
 	ELSE 0 END) * (CASE
-	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero error, set null
+	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero, set null
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) = 0 THEN 0
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) < 
 		(SELECT percentile_cont(0.25) WITHIN GROUP (ORDER BY (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)))
@@ -804,7 +804,7 @@ CASE
 	WHEN a."HTi_Wildfire" < (SELECT wildfire_pp_to FROM mh.mh_ratings_thresholds WHERE impact_potential = 'High') THEN 4
 	WHEN a."HTi_Wildfire" > (SELECT wildfire_pp_frm FROM mh.mh_ratings_thresholds WHERE impact_potential = 'Extreme') THEN 5
 	ELSE 0 END) * (CASE
-	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero error, set null
+	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero, set null
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) = 0 THEN 0
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) < 
 		(SELECT percentile_cont(0.25) WITHIN GROUP (ORDER BY (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)))
@@ -968,7 +968,7 @@ CASE
 	WHEN a."HTi_Cy500" < (SELECT cy_ppl_to FROM mh.mh_ratings_thresholds WHERE impact_potential = 'High') THEN 4
 	WHEN a."HTi_Cy500" > (SELECT cy_ppl_frm FROM mh.mh_ratings_thresholds WHERE impact_potential = 'Extreme') THEN 5
 	ELSE 0 END) * (CASE
-	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero error, set null
+	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero, set null
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) = 0 THEN 0
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) < 
 		(SELECT percentile_cont(0.25) WITHIN GROUP (ORDER BY (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)))
@@ -1029,7 +1029,7 @@ CASE
 	WHEN a."HTi_Cy500" < (SELECT cy_ppl_to FROM mh.mh_ratings_thresholds WHERE impact_potential = 'High') THEN 4
 	WHEN a."HTi_Cy500" > (SELECT cy_ppl_frm FROM mh.mh_ratings_thresholds WHERE impact_potential = 'Extreme') THEN 5
 	ELSE 0 END) * (CASE
-	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero error, set null
+	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) IS NULL THEN 0 -- catch null values from divide by zero, set null
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) = 0 THEN 0
 	WHEN (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)) < 
 		(SELECT percentile_cont(0.25) WITHIN GROUP (ORDER BY (a."Et_PopNight"/NULLIF(b."Et_PopNight",0)))
