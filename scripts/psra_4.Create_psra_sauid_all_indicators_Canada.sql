@@ -41,6 +41,143 @@ FULL JOIN psra_canada.psra_canada_agg_curves_q95 c ON a.return_period = c.return
 ORDER BY a.return_period,a.prname ASC;
 
 
+-- create psra view, aggregated eEL* indicator (combined structural, nonstructural, contents) at 50 year return period
+DROP VIEW IF EXISTS results_psra_national.psra_canada_expected_loss_50yr CASCADE;
+CREATE VIEW results_psra_national.psra_canada_expected_loss_50yr AS
+SELECT
+prname,
+"eEL_Period",
+SUM("eEL_b0") AS "eEL_b0",
+AVG("eELr_b0") AS "eELr_b0",
+SUM("eEL_r1") AS "eEL_r1",
+AVG("eELr_r1") AS "eELr_r1",
+SUM("e5L_b0") AS "e5L_b0",
+AVG("e5Lr_b0") AS "e5Lr_b0",
+SUM("e95L_b0") AS "e95L_b0",
+AVG("e95Lr_b0") AS "e95Lr_b0",
+geom
+
+FROM results_psra_national.psra_canada_expected_loss a
+LEFT JOIN boundaries."Geometry_PRUID" b ON a.prname = b."PRNAME"
+WHERE "eEL_Period" = '50'
+GROUP BY a.prname,"eEL_Period",b.geom
+ORDER BY a.prname ASC;
+
+
+-- create psra view, aggregated eEL* indicator (combined structural, nonstructural, contents) at 100 year return period
+DROP VIEW IF EXISTS results_psra_national.psra_canada_expected_loss_100yr CASCADE;
+CREATE VIEW results_psra_national.psra_canada_expected_loss_100yr AS
+SELECT
+prname,
+"eEL_Period",
+SUM("eEL_b0") AS "eEL_b0",
+AVG("eELr_b0") AS "eELr_b0",
+SUM("eEL_r1") AS "eEL_r1",
+AVG("eELr_r1") AS "eELr_r1",
+SUM("e5L_b0") AS "e5L_b0",
+AVG("e5Lr_b0") AS "e5Lr_b0",
+SUM("e95L_b0") AS "e95L_b0",
+AVG("e95Lr_b0") AS "e95Lr_b0",
+geom
+
+FROM results_psra_national.psra_canada_expected_loss a
+LEFT JOIN boundaries."Geometry_PRUID" b ON a.prname = b."PRNAME"
+WHERE "eEL_Period" = '100'
+GROUP BY a.prname,"eEL_Period",b.geom
+ORDER BY a.prname ASC;
+
+
+-- create psra view, aggregated eEL* indicator (combined structural, nonstructural, contents) at 250 year return period
+DROP VIEW IF EXISTS results_psra_national.psra_canada_expected_loss_250yr CASCADE;
+CREATE VIEW results_psra_national.psra_canada_expected_loss_250yr AS
+SELECT
+prname,
+"eEL_Period",
+SUM("eEL_b0") AS "eEL_b0",
+AVG("eELr_b0") AS "eELr_b0",
+SUM("eEL_r1") AS "eEL_r1",
+AVG("eELr_r1") AS "eELr_r1",
+SUM("e5L_b0") AS "e5L_b0",
+AVG("e5Lr_b0") AS "e5Lr_b0",
+SUM("e95L_b0") AS "e95L_b0",
+AVG("e95Lr_b0") AS "e95Lr_b0",
+geom
+
+FROM results_psra_national.psra_canada_expected_loss a
+LEFT JOIN boundaries."Geometry_PRUID" b ON a.prname = b."PRNAME"
+WHERE "eEL_Period" = '250'
+GROUP BY a.prname,"eEL_Period",b.geom
+ORDER BY a.prname ASC;
+
+
+-- create psra view, aggregated eEL* indicator (combined structural, nonstructural, contents) at 500 year return period
+DROP VIEW IF EXISTS results_psra_national.psra_canada_expected_loss_500yr CASCADE;
+CREATE VIEW results_psra_national.psra_canada_expected_loss_500yr AS
+SELECT
+prname,
+"eEL_Period",
+SUM("eEL_b0") AS "eEL_b0",
+AVG("eELr_b0") AS "eELr_b0",
+SUM("eEL_r1") AS "eEL_r1",
+AVG("eELr_r1") AS "eELr_r1",
+SUM("e5L_b0") AS "e5L_b0",
+AVG("e5Lr_b0") AS "e5Lr_b0",
+SUM("e95L_b0") AS "e95L_b0",
+AVG("e95Lr_b0") AS "e95Lr_b0",
+geom
+
+FROM results_psra_national.psra_canada_expected_loss a
+LEFT JOIN boundaries."Geometry_PRUID" b ON a.prname = b."PRNAME"
+WHERE "eEL_Period" = '500'
+GROUP BY a.prname,"eEL_Period",b.geom
+ORDER BY a.prname ASC;
+
+
+-- create psra view, aggregated eEL* indicator (combined structural, nonstructural, contents) at 1000 year return period
+DROP VIEW IF EXISTS results_psra_national.psra_canada_expected_loss_1000yr CASCADE;
+CREATE VIEW results_psra_national.psra_canada_expected_loss_1000yr AS
+SELECT
+prname,
+"eEL_Period",
+SUM("eEL_b0") AS "eEL_b0",
+AVG("eELr_b0") AS "eELr_b0",
+SUM("eEL_r1") AS "eEL_r1",
+AVG("eELr_r1") AS "eELr_r1",
+SUM("e5L_b0") AS "e5L_b0",
+AVG("e5Lr_b0") AS "e5Lr_b0",
+SUM("e95L_b0") AS "e95L_b0",
+AVG("e95Lr_b0") AS "e95Lr_b0",
+geom
+
+FROM results_psra_national.psra_canada_expected_loss a
+LEFT JOIN boundaries."Geometry_PRUID" b ON a.prname = b."PRNAME"
+WHERE "eEL_Period" = '1000'
+GROUP BY a.prname,"eEL_Period",b.geom
+ORDER BY a.prname ASC;
+
+
+-- create psra view, aggregated eEL* indicator (combined structural, nonstructural, contents) at 2500 year return period
+DROP VIEW IF EXISTS results_psra_national.psra_canada_expected_loss_2500yr CASCADE;
+CREATE VIEW results_psra_national.psra_canada_expected_loss_2500yr AS
+SELECT
+prname,
+"eEL_Period",
+SUM("eEL_b0") AS "eEL_b0",
+AVG("eELr_b0") AS "eELr_b0",
+SUM("eEL_r1") AS "eEL_r1",
+AVG("eELr_r1") AS "eELr_r1",
+SUM("e5L_b0") AS "e5L_b0",
+AVG("e5Lr_b0") AS "e5Lr_b0",
+SUM("e95L_b0") AS "e95L_b0",
+AVG("e95Lr_b0") AS "e95Lr_b0",
+geom
+
+FROM results_psra_national.psra_canada_expected_loss a
+LEFT JOIN boundaries."Geometry_PRUID" b ON a.prname = b."PRNAME"
+WHERE "eEL_Period" = '2500'
+GROUP BY a.prname,"eEL_Period",b.geom
+ORDER BY a.prname ASC;
+
 
 -- create psra indicators
 DROP VIEW IF EXISTS results_psra_canada.psra_canada_agg_loss CASCADE;
