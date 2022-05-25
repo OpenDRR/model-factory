@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS psra_canada.psra_canada_agg_curves_q05_b0, psra_canada.psra
 
 -- create table
 CREATE TABLE psra_canada.psra_canada_agg_curves_q05_b0(
-return_period varchar,
+return_period float,
 loss_value float,
 loss_type varchar,
 prname varchar,
@@ -18,7 +18,7 @@ annual_frequency_of_exceedence float
 
 -- create table
 CREATE TABLE psra_canada.psra_canada_agg_curves_q05_r1(
-return_period varchar,
+return_period float,
 loss_value float,
 loss_type varchar,
 prname varchar,
@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS psra_canada.psra_canada_agg_curves_q95_b0, psra_canada.psra
 
 -- create table
 CREATE TABLE psra_canada.psra_canada_agg_curves_q95_b0(
-return_period varchar,
+return_period float,
 loss_value float,
 loss_type varchar,
 prname varchar,
@@ -43,7 +43,7 @@ annual_frequency_of_exceedence float
 
 -- create table
 CREATE TABLE psra_canada.psra_canada_agg_curves_q95_r1(
-return_period varchar,
+return_period float,
 loss_value float,
 loss_type varchar,
 prname varchar,
@@ -57,7 +57,7 @@ DROP TABLE IF EXISTS psra_canada.psra_canada_agg_curves_stats_b0, psra_canada.ps
 
 -- create table
 CREATE TABLE psra_canada.psra_canada_agg_curves_stats_b0(
-return_period varchar,
+return_period float,
 loss_value float,
 loss_type varchar,
 prname varchar,
@@ -67,7 +67,7 @@ annual_frequency_of_exceedence float
 
 -- create table
 CREATE TABLE psra_canada.psra_canada_agg_curves_stats_r1(
-return_period varchar,
+return_period float,
 loss_value float,
 loss_type varchar,
 prname varchar,
