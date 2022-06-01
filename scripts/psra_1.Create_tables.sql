@@ -729,7 +729,7 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_q05_b0, psra_{prov}.psra
 
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q05_b0(
-return_period varchar,
+return_period float,
 loss_value float,
 loss_type varchar,
 fsauid varchar,
@@ -741,7 +741,7 @@ annual_frequency_of_exceedence float
 
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q05_r1(
-return_period varchar,
+return_period float,
 loss_value float,
 loss_type varchar,
 fsauid varchar,
@@ -758,7 +758,7 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_q95_b0, psra_{prov}.psra
 
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q95_b0(
-return_period varchar,
+return_period float,
 loss_value float,
 loss_type varchar,
 fsauid varchar,
@@ -770,7 +770,7 @@ annual_frequency_of_exceedence float
 
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_q95_r1(
-return_period varchar,
+return_period float,
 loss_value float,
 loss_type varchar,
 fsauid varchar,
@@ -786,7 +786,7 @@ DROP TABLE IF EXISTS psra_{prov}.psra_{prov}_agg_curves_stats_b0, psra_{prov}.ps
 
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_stats_b0(
-return_period varchar,
+return_period float,
 loss_value float,
 loss_type varchar,
 fsauid varchar,
@@ -799,7 +799,7 @@ region varchar
 
 -- create table
 CREATE TABLE psra_{prov}.psra_{prov}_agg_curves_stats_r1(
-return_period varchar,
+return_period float,
 loss_value float,
 loss_type varchar,
 fsauid varchar,

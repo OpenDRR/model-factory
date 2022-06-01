@@ -854,6 +854,17 @@ DROP VIEW IF EXISTS results_psra_national.psra_canada_agg_loss CASCADE;
 CREATE VIEW results_psra_national.psra_canada_agg_loss AS SELECT * FROM results_psra_national.psra_canada_agg_loss_tbl;
 
 
+-- add 50, 100, 250, 500, 1000, 2500 year psra canada-wide aggregate views
+DROP VIEW IF EXISTS results_psra_national.psra_canada_expected_loss_50yr, results_psra_national.psra_canada_expected_loss_100yr, results_psra_national.psra_canada_expected_loss_250yr,
+results_psra_national.psra_canada_expected_loss_500yr, results_psra_national.psra_canada_expected_loss_1000yr, results_psra_national.psra_canada_expected_loss_2500yr CASCADE;
+
+CREATE VIEW results_psra_national.psra_canada_expected_loss_50yr AS SELECT * FROM results_psra_canada.psra_canada_expected_loss_50yr;
+CREATE VIEW results_psra_national.psra_canada_expected_loss_100yr AS SELECT * FROM results_psra_canada.psra_canada_expected_loss_100yr;
+CREATE VIEW results_psra_national.psra_canada_expected_loss_250yr AS SELECT * FROM results_psra_canada.psra_canada_expected_loss_250yr;
+CREATE VIEW results_psra_national.psra_canada_expected_loss_500yr AS SELECT * FROM results_psra_canada.psra_canada_expected_loss_500yr;
+CREATE VIEW results_psra_national.psra_canada_expected_loss_1000yr AS SELECT * FROM results_psra_canada.psra_canada_expected_loss_1000yr;
+CREATE VIEW results_psra_national.psra_canada_expected_loss_2500yr AS SELECT * FROM results_psra_canada.psra_canada_expected_loss_2500yr;
+
 
 -- combine psra canada src_loss indicators 
 DROP TABLE IF EXISTS results_psra_national.psra_canada_src_loss_tbl CASCADE;
