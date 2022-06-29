@@ -34,6 +34,10 @@ ALTER TABLE boundaries."HexGrid_1km" ADD PRIMARY KEY ("gridid_1");
 CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_idx ON boundaries."HexGrid_1km"("gridid_1");
 CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_idx ON boundaries."HexGrid_1km" using GIST(geom);
 
+-- drop unused P/T tables
+DROP TABLE IF EXISTS boundaries."HexGrid_1km_AB",boundaries."HexGrid_1km_BC",boundaries."HexGrid_1km_MB",boundaries."HexGrid_1km_NB",boundaries."HexGrid_1km_NL",
+boundaries."HexGrid_1km_NS",boundaries."HexGrid_1km_NT",boundaries."HexGrid_1km_NT",boundaries."HexGrid_1km_NU",boundaries."HexGrid_1km_ON",boundaries."HexGrid_1km_PE",
+boundaries."HexGrid_1km_QC",boundaries."HexGrid_1km_SK",boundaries."HexGrid_1km_YT";
 
 
 -- union 1km hexgrid from P/T
@@ -71,3 +75,9 @@ ALTER TABLE boundaries."HexGrid_1km_unclipped" DROP CONSTRAINT IF EXISTS "HexGri
 ALTER TABLE boundaries."HexGrid_1km_unclipped" ADD PRIMARY KEY ("gridid_1");
 CREATE INDEX IF NOT EXISTS hexgrid_1km_gridid_1_unclipped_idx ON boundaries."HexGrid_1km_unclipped"("gridid_1");
 CREATE INDEX IF NOT EXISTS hexgrid_1km_geom_unclipped_idx ON boundaries."HexGrid_1km_unclipped" using GIST(geom);
+
+-- drop unused P/T tables
+DROP TABLE IF EXISTS boundaries."HexGrid_1km_AB_unclipped",boundaries."HexGrid_1km_BC_unclipped",boundaries."HexGrid_1km_MB_unclipped",boundaries."HexGrid_1km_NB_unclipped",
+boundaries."HexGrid_1km_NL_unclipped",boundaries."HexGrid_1km_NS_unclipped",boundaries."HexGrid_1km_NT_unclipped",boundaries."HexGrid_1km_NU_unclipped",
+boundaries."HexGrid_1km_ON_unclipped",boundaries."HexGrid_1km_PE_unclipped",boundaries."HexGrid_1km_QC_unclipped",boundaries."HexGrid_1km_SK_unclipped",
+boundaries."HexGrid_1km_YT_unclipped";
