@@ -119,133 +119,162 @@ LEFT JOIN results_psra_national.psra_sri_calc_sa b ON a."Sauid" = b."Sauid"
 
 
 -- update percentilerank, normalized score on P/T eqriskindex sauid table
+-- update percentilerank, normalized score on P/T eqriskindex sauid table
 UPDATE results_psra_ab.psra_ab_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 UPDATE results_psra_bc.psra_bc_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 UPDATE results_psra_mb.psra_mb_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 UPDATE results_psra_nb.psra_nb_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 UPDATE results_psra_nl.psra_nl_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 UPDATE results_psra_ns.psra_ns_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 UPDATE results_psra_nt.psra_nt_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 UPDATE results_psra_nu.psra_nu_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 UPDATE results_psra_on.psra_on_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 UPDATE results_psra_pe.psra_pe_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 UPDATE results_psra_qc.psra_qc_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 UPDATE results_psra_sk.psra_sk_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 UPDATE results_psra_yt.psra_yt_eqriskindex b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex a
-WHERE a.sauid = b.sauid;
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_sa a
+WHERE a."Sauid" = b.sauid;
 
 
 
@@ -358,129 +387,157 @@ LEFT JOIN results_psra_national.psra_sri_calc_csd c ON b.csduid = c.csduid
 
 -- update percentilerank, normalized score on P/T eqriskindex csd table
 UPDATE results_psra_ab.psra_ab_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_bc.psra_bc_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_mb.psra_mb_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_nb.psra_nb_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_nl.psra_nl_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_ns.psra_ns_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_nt.psra_nt_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_nu.psra_nu_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_on.psra_on_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_pe.psra_pe_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_qc.psra_qc_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_sk.psra_sk_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
 
 UPDATE results_psra_yt.psra_yt_eqriskindex_csd b
-SET eqri_abs_rank_b0 = a.eqri_abs_rank_b0,
-	eqri_norm_score_b0 = a.eqri_norm_score_b0,
-	eqri_norm_rank_b0 = a.eqri_norm_rank_b0,
-	eqri_abs_rank_r1 = a.eqri_abs_rank_r1,
-	eqri_norm_score_r1 = a.eqri_norm_score_r1,
-	eqri_norm_rank_r1 = a.eqri_norm_rank_r1
-FROM results_psra_national.psra_eqriskindex_csd a
+SET eqri_abs_score_b0 = a.eqri_abs_cbrt_minmax_b0,
+	eqri_abs_rank_b0 = a.eqri_abs_rating_b0,
+	eqri_norm_score_b0 = a.eqri_norm_cbrt_minmax_b0,
+	eqri_norm_rank_b0 = a.eqri_norm_rating_b0,
+	eqri_abs_score_r1 = a.eqri_abs_cbrt_minmax_r1,
+	eqri_abs_rank_r1 = a.eqri_abs_rating_r1,
+	eqri_norm_score_r1 = a.eqri_norm_cbrt_minmax_r1,
+	eqri_norm_rank_r1 = a.eqri_norm_rating_r1
+FROM results_psra_national.psra_sri_calc_csd a
 WHERE a.csduid = b.csduid;
