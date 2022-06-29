@@ -1,5 +1,47 @@
 CREATE SCHEMA IF NOT EXISTS results_psra_{prov};
 
+-- create empty table for sri at SA level to be populated after calculation at national scale
+DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqriskindex CASCADE;
+CREATE TABLE results_psra_{prov}.psra_{prov}_eqriskindex AS
+(
+SELECT
+b.sauid,
+b.csduid,
+0.00 AS "eqri_abs_score_b0",
+NULL AS "eqri_abs_rank_b0",
+0.00 AS "eqri_norm_score_b0",
+NULL AS "eqri_norm_rank_b0",
+0.00 AS "eqri_abs_score_r1",
+NULL AS "eqri_abs_rank_r1",
+0.00 AS "eqri_norm_score_r1",
+NULL AS "eqri_norm_rank_r1"
+
+FROM psra_{prov}.psra_{prov}_avg_losses_stats a
+LEFT JOIN exposure.canada_exposure b ON a.asset_id = b.id
+);
+
+
+
+-- create empty table for sri at SA level to be populated after calculation at national scale
+DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqriskindex_csd CASCADE;
+CREATE TABLE results_psra_{prov}.psra_{prov}_eqriskindex_csd AS
+(
+SELECT
+b.csduid,
+0.00 AS "eqri_abs_score_b0",
+NULL AS "eqri_abs_rank_b0",
+0.00 AS "eqri_norm_score_b0",
+NULL AS "eqri_norm_rank_b0",
+0.00 AS "eqri_abs_score_r1",
+NULL AS "eqri_abs_rank_r1",
+0.00 AS "eqri_norm_score_r1",
+NULL AS "eqri_norm_rank_r1"
+
+FROM psra_{prov}.psra_{prov}_avg_losses_stats a
+LEFT JOIN exposure.canada_exposure b ON a.asset_id = b.id
+GROUP BY b.csduid
+);
+
 
 -- create psra indicators
 DROP VIEW IF EXISTS results_psra_{prov}.psra_{prov}_indicators_s CASCADE;
@@ -133,6 +175,18 @@ CAST(CAST(ROUND(CAST(SUM(i.structural_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) A
 CAST(CAST(ROUND(CAST(SUM(i.nonstructural_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_NStr_r1",
 CAST(CAST(ROUND(CAST(SUM(i.contents_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Cont_r1",
 
+-- eq risk index - b0
+CAST(CAST(ROUND(CAST(j.eqri_abs_score_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_abs_score_b0",
+j.eqri_abs_rank_b0,
+CAST(CAST(ROUND(CAST(j.eqri_norm_score_b0 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_norm_score_b0",
+j.eqri_norm_rank_b0,
+
+-- eq risk index - r1
+CAST(CAST(ROUND(CAST(j.eqri_abs_score_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_abs_score_r1",
+j.eqri_abs_rank_r1,
+CAST(CAST(ROUND(CAST(j.eqri_norm_score_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eqri_norm_score_r1",
+j.eqri_norm_rank_r1,
+
 z."PRUID" AS "pruid",
 z."PRNAME" AS "prname",
 z."ERUID" AS "eruid",
@@ -154,14 +208,15 @@ LEFT JOIN lut.collapse_probability f ON a.bldgtype = f.eqbldgtype
 RIGHT JOIN psra_{prov}.psra_{prov}_ed_dmg_mean g ON a.id = g.asset_id
 LEFT JOIN mh.mh_intensity_canada h ON a.sauid = h.sauidt
 RIGHT JOIN psra_{prov}.psra_{prov}_avg_losses_stats i ON a.id = i.asset_id
-RIGHT JOIN results_psra_{prov}.psra_{prov}_eqriskindex j ON a.sauid = j.sauid
 LEFT JOIN psra_{prov}.psra_{prov}_ed_dmg_q05 k ON a.id = k.asset_id
+RIGHT JOIN results_psra_{prov}.psra_{prov}_eqriskindex j ON a.sauid = j.sauid
 LEFT JOIN psra_{prov}.psra_{prov}_ed_dmg_q95 l ON a.id = l.asset_id
 LEFT JOIN results_psra_{prov}.psra_{prov}_indicators_b m ON a.id = m."AssetID"
 LEFT JOIN boundaries."Geometry_SAUID" z ON a.sauid = z."SAUIDt"
 GROUP BY a.sauid,d."PGA_0.02",d."SA(0.1)_0.02",d."SA(0.2)_0.02",d."SA(0.3)_0.02",d."SA(0.5)_0.02",d."SA(0.6)_0.02",d."SA(1.0)_0.02",d."SA(2.0)_0.02",
 d."PGA_0.1",d."SA(0.1)_0.1",d."SA(0.2)_0.1",d."SA(0.3)_0.1",d."SA(0.5)_0.1",d."SA(0.6)_0.1",d."SA(1.0)_0.1",d."SA(2.0)_0.1",d."SA(5.0)_0.1",d."SA(10.0)_0.1",
-e.vs_lon,e.vs_lat,e.vs30,e.z1pt0,e.z2pt5,h.mmi6,h.mmi7,h.mmi8,z."PRUID",z."PRNAME",z."ERUID",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME",z."CFSAUID",z."DAUIDt",z."SACCODE",z."SACTYPE",z.geom;
+e.vs_lon,e.vs_lat,e.vs30,e.z1pt0,e.z2pt5,h.mmi6,h.mmi7,h.mmi8,j.eqri_abs_score_b0,j.eqri_abs_rank_b0,j.eqri_norm_score_b0,j.eqri_norm_rank_b0,j.eqri_abs_score_r1,j.eqri_abs_rank_r1,
+j.eqri_norm_score_r1,j.eqri_norm_rank_r1,z."PRUID",z."PRNAME",z."ERUID",z."CDUID",z."CDNAME",z."CSDUID",z."CSDNAME",z."CFSAUID",z."DAUIDt",z."SACCODE",z."SACTYPE",z.geom;
 
 
 
@@ -266,12 +321,22 @@ ROUND(SUM("eAALt_Str_r1"),6) AS "eAALt_Str_r1",
 ROUND(SUM("eAALt_NStr_r1"),6) AS "eAALt_NStr_r1",
 ROUND(SUM("eAALt_Cont_r1"),6) AS "eAALt_Cont_r1",
 
+-- placeholder for sri indicators to be updated
+ROUND(SUM(a.eqri_abs_score_b0),6) AS "eqri_abs_score_b0",
+c.eqri_abs_rank_b0,
+ROUND(AVG(a.eqri_norm_score_b0),6) AS "eqri_norm_score_b0",
+c.eqri_norm_rank_b0,
+ROUND(SUM(a.eqri_abs_score_r1),6) AS "eqri_abs_score_r1",
+c.eqri_abs_rank_r1,
+ROUND(AVG(a.eqri_norm_score_r1),6) AS "eqri_norm_score_r1",
+c.eqri_norm_rank_r1,
+
 b.geom
 
 FROM results_psra_{prov}.psra_{prov}_indicators_s a
 LEFT JOIN boundaries."Geometry_CSDUID" b ON a.csduid = b."CSDUID"
 LEFT JOIN results_psra_{prov}.psra_{prov}_eqriskindex_csd c ON a.csduid = c.csduid
-GROUP BY a.csduid,a.csdname,b.geom;
+GROUP BY a.csduid,a.csdname,c.eqri_abs_rank_b0,c.eqri_norm_rank_b0,c.eqri_abs_rank_r1,c.eqri_norm_rank_r1,b.geom;
 
 
 
