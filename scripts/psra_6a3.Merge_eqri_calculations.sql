@@ -378,10 +378,9 @@ CAST(CAST(ROUND(CAST(c.eqri_norm_cbrt_minmax_r1 AS NUMERIC),6) AS FLOAT) AS NUME
 c.eqri_norm_rating_r1 AS "eqri_norm_rank_r1",
 a.geom
 
-
 FROM boundaries."Geometry_CSDUID" a
 LEFT JOIN results_psra_national.psra_indicators_csd_tbl  b ON a."CSDUID" = b.csduid
-LEFT JOIN results_psra_national.psra_sri_calc_csd c ON b.csduid = c.csduid
+LEFT JOIN results_psra_national.psra_sri_calc_csd c ON b.csduid = c.csduid;
 
 
 
