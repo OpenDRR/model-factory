@@ -216,11 +216,11 @@ b.eqri_abs_b0,
 b.eqri_abs_cbrt_b0,
 c.eqri_abs_cbrt_minmax_b0,
 CASE
-	WHEN c.eqri_abs_cbrt_minmax_b0 >= 0 AND c.eqri_abs_cbrt_minmax_b0 <= 3.78 THEN 'Very Low Score'
-	WHEN c.eqri_abs_cbrt_minmax_b0 > 3.78 AND c.eqri_abs_cbrt_minmax_b0 <= 9.78 THEN 'Low Score'
-	WHEN c.eqri_abs_cbrt_minmax_b0 > 9.78 AND c.eqri_abs_cbrt_minmax_b0 <= 22.57 THEN 'Moderate Score'
-	WHEN c.eqri_abs_cbrt_minmax_b0 > 22.57 AND c.eqri_abs_cbrt_minmax_b0 <= 55.73 THEN 'High Score'
-	WHEN c.eqri_abs_cbrt_minmax_b0 > 55.73 AND c.eqri_abs_cbrt_minmax_b0 <= 100 THEN 'Very High Score'
+	WHEN c.eqri_abs_cbrt_minmax_b0 >= 0 AND c.eqri_abs_cbrt_minmax_b0 <= 3.95 THEN 'Very Low Score'
+	WHEN c.eqri_abs_cbrt_minmax_b0 > 3.95 AND c.eqri_abs_cbrt_minmax_b0 <= 11.37 THEN 'Low Score'
+	WHEN c.eqri_abs_cbrt_minmax_b0 > 11.37 AND c.eqri_abs_cbrt_minmax_b0 <= 26.64 THEN 'Moderate Score'
+	WHEN c.eqri_abs_cbrt_minmax_b0 > 26.64 AND c.eqri_abs_cbrt_minmax_b0 <= 55.54 THEN 'High Score'
+	WHEN c.eqri_abs_cbrt_minmax_b0 > 55.54 AND c.eqri_abs_cbrt_minmax_b0 <= 100 THEN 'Very High Score'
 END AS "eqri_abs_rating_b0",
 	
 -- eqri norm b0
@@ -232,11 +232,11 @@ c.eqri_norm_b0,
 c.eqri_norm_cbrt_b0,
 d.eqri_norm_cbrt_minmax_b0,
 CASE
-	WHEN d.eqri_norm_cbrt_minmax_b0 >= 0 AND d.eqri_norm_cbrt_minmax_b0 <= 6.83 THEN 'Very Low Score'
-	WHEN d.eqri_norm_cbrt_minmax_b0 > 6.83 AND d.eqri_norm_cbrt_minmax_b0 <= 12.64 THEN 'Relatively Low Score'
-	WHEN d.eqri_norm_cbrt_minmax_b0 > 12.64 AND d.eqri_norm_cbrt_minmax_b0 <= 21.44 THEN 'Relatively Moderate Score'
-	WHEN d.eqri_norm_cbrt_minmax_b0 > 21.44 AND d.eqri_norm_cbrt_minmax_b0 <= 35.82 THEN 'Relatively High Score'
-	WHEN d.eqri_norm_cbrt_minmax_b0 > 35.82 AND d.eqri_norm_cbrt_minmax_b0 <= 100 THEN 'Very High Score'
+	WHEN d.eqri_norm_cbrt_minmax_b0 >= 0 AND d.eqri_norm_cbrt_minmax_b0 <= 9.81 THEN 'Very Low Score'
+	WHEN d.eqri_norm_cbrt_minmax_b0 > 9.81 AND d.eqri_norm_cbrt_minmax_b0 <= 17.40 THEN 'Relatively Low Score'
+	WHEN d.eqri_norm_cbrt_minmax_b0 > 17.40 AND d.eqri_norm_cbrt_minmax_b0 <= 31.02 THEN 'Relatively Moderate Score'
+	WHEN d.eqri_norm_cbrt_minmax_b0 > 31.02 AND d.eqri_norm_cbrt_minmax_b0 <= 49.99 THEN 'Relatively High Score'
+	WHEN d.eqri_norm_cbrt_minmax_b0 > 49.99 AND d.eqri_norm_cbrt_minmax_b0 <= 100 THEN 'Very High Score'
 END AS "eqri_norm_rating_b0",
 	
 -- EQ risk r1
@@ -260,11 +260,11 @@ b.eqri_abs_r1,
 b.eqri_abs_cbrt_r1,
 c.eqri_abs_cbrt_minmax_r1,
 CASE
-	WHEN c.eqri_abs_cbrt_minmax_b0 >= 0 AND c.eqri_abs_cbrt_minmax_b0 <= 3.78 THEN 'Very Low Score'
-	WHEN c.eqri_abs_cbrt_minmax_b0 > 3.78 AND c.eqri_abs_cbrt_minmax_b0 <= 9.78 THEN 'Low Score'
-	WHEN c.eqri_abs_cbrt_minmax_b0 > 9.78 AND c.eqri_abs_cbrt_minmax_b0 <= 22.57 THEN 'Moderate Score'
-	WHEN c.eqri_abs_cbrt_minmax_b0 > 22.57 AND c.eqri_abs_cbrt_minmax_b0 <= 55.73 THEN 'High Score'
-	WHEN c.eqri_abs_cbrt_minmax_b0 > 55.73 AND c.eqri_abs_cbrt_minmax_b0 <= 100 THEN 'Very High Score'
+	WHEN c.eqri_abs_cbrt_minmax_b0 >= 0 AND c.eqri_abs_cbrt_minmax_b0 <= 4.48 THEN 'Very Low Score'
+	WHEN c.eqri_abs_cbrt_minmax_b0 > 4.48 AND c.eqri_abs_cbrt_minmax_b0 <= 13.51 THEN 'Low Score'
+	WHEN c.eqri_abs_cbrt_minmax_b0 > 13.51 AND c.eqri_abs_cbrt_minmax_b0 <= 28.83 THEN 'Moderate Score'
+	WHEN c.eqri_abs_cbrt_minmax_b0 > 28.83 AND c.eqri_abs_cbrt_minmax_b0 <= 54.23 THEN 'High Score'
+	WHEN c.eqri_abs_cbrt_minmax_b0 > 54.23 AND c.eqri_abs_cbrt_minmax_b0 <= 100 THEN 'Very High Score'
 END AS "eqri_abs_rating_r1",
 	
 -- eqri norm r1
@@ -276,11 +276,11 @@ c.eqri_norm_r1,
 c.eqri_norm_cbrt_r1,
 d.eqri_norm_cbrt_minmax_r1,
 CASE
-	WHEN d.eqri_norm_cbrt_minmax_b0 >= 0 AND d.eqri_norm_cbrt_minmax_b0 <= 6.83 THEN 'Very Low Score'
-	WHEN d.eqri_norm_cbrt_minmax_b0 > 6.83 AND d.eqri_norm_cbrt_minmax_b0 <= 12.64 THEN 'Relatively Low Score'
-	WHEN d.eqri_norm_cbrt_minmax_b0 > 12.64 AND d.eqri_norm_cbrt_minmax_b0 <= 21.44 THEN 'Relatively Moderate Score'
-	WHEN d.eqri_norm_cbrt_minmax_b0 > 21.44 AND d.eqri_norm_cbrt_minmax_b0 <= 35.82 THEN 'Relatively High Score'
-	WHEN d.eqri_norm_cbrt_minmax_b0 > 35.82 AND d.eqri_norm_cbrt_minmax_b0 <= 100 THEN 'Very High Score'
+	WHEN d.eqri_norm_cbrt_minmax_b0 >= 0 AND d.eqri_norm_cbrt_minmax_b0 <= 10.85 THEN 'Very Low Score'
+	WHEN d.eqri_norm_cbrt_minmax_b0 > 10.85 AND d.eqri_norm_cbrt_minmax_b0 <= 21.86 THEN 'Relatively Low Score'
+	WHEN d.eqri_norm_cbrt_minmax_b0 > 21.86 AND d.eqri_norm_cbrt_minmax_b0 <= 39.02 THEN 'Relatively Moderate Score'
+	WHEN d.eqri_norm_cbrt_minmax_b0 > 39.02 AND d.eqri_norm_cbrt_minmax_b0 <= 64.33 THEN 'Relatively High Score'
+	WHEN d.eqri_norm_cbrt_minmax_b0 > 64.33 AND d.eqri_norm_cbrt_minmax_b0 <= 100 THEN 'Very High Score'
 END AS "eqri_norm_rating_r1"
 -- e.geom
 
