@@ -1,111 +1,46 @@
 CREATE SCHEMA IF NOT EXISTS results_psra_{prov};
 
-
-
--- calculate new EQRiskIndex indicator for PSRA
-DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqriskindex_calc CASCADE;
-CREATE TABLE results_psra_{prov}.psra_{prov}_eqriskindex_calc AS
+-- create empty table for sri at SA level to be populated after calculation at national scale
+DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqriskindex CASCADE;
+CREATE TABLE results_psra_{prov}.psra_{prov}_eqriskindex AS
 (
 SELECT
-a.asset_id,
 b.sauid,
-a.structural_b0,
-a.nonstructural_b0,
-a.contents_b0,
-a.occupants_b0 AS "lifeloss_b0",
-a.contents_b0 + a.nonstructural_b0 + a.structural_b0 AS "asset_loss_b0",
-a.structural_r1,
-a.nonstructural_r1,
-a.contents_r1,
-a.occupants_r1 AS "lifeloss_r1",
-a.contents_r1 + a.nonstructural_r1 + a.structural_r1 AS "asset_loss_r1",
-b.structural,
-b.nonstructural,
-b.contents,
-b.structural + b.nonstructural + b.contents AS "asset_value",
-b.night,
-COALESCE((a.contents_b0 + a.nonstructural_b0 + a.structural_b0)/NULLIF((b.structural + b.nonstructural + b.contents),0),0) AS "bldglossratio_b0",
-COALESCE((a.contents_r1 + a.nonstructural_b0 + a.structural_r1)/NULLIF((b.structural + b.nonstructural + b.contents),0),0) AS "bldglossratio_r1",
-COALESCE(a.occupants_b0/NULLIF(b.night,0),0) AS "lifelossratio_b0",
-COALESCE(a.occupants_r1/NULLIF(b.night,0),0) AS "lifelossratio_r1"
+b.csduid,
+0.00 AS "eqri_abs_score_b0",
+NULL AS "eqri_abs_rank_b0",
+0.00 AS "eqri_norm_score_b0",
+NULL AS "eqri_norm_rank_b0",
+0.00 AS "eqri_abs_score_r1",
+NULL AS "eqri_abs_rank_r1",
+0.00 AS "eqri_norm_score_r1",
+NULL AS "eqri_norm_rank_r1"
 
 FROM psra_{prov}.psra_{prov}_avg_losses_stats a
---FROM psra_{prov}.psra_{prov}_avg_losses_stats a
 LEFT JOIN exposure.canada_exposure b ON a.asset_id = b.id
 );
 
 
 
-DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqriskindex CASCADE;
-CREATE TABLE results_psra_{prov}.psra_{prov}_eqriskindex AS
-(
-SELECT
-a.sauid,
-SUM(a.asset_loss_b0) AS "asset_loss_b0",
-SUM(a.asset_loss_r1) AS "asset_loss_r1",
-SUM(a.lifeloss_b0) AS "lifeloss_b0",
-SUM(a.lifeloss_r1) AS "lifeloss_r1",
-SUM(a.lifeloss_b0 * 8343390) AS "lifelosscost_b0",
-SUM(a.lifeloss_r1 * 8343390) AS "lifelosscost_r1",
-AVG(a.bldglossratio_b0) AS "bldglossratio_b0",
-AVG(a.bldglossratio_r1) AS "bldglossratio_r1",
-AVG(a.lifelossratio_b0) AS "lifelossratio_b0",
-AVG(a.lifelossratio_r1) AS "lifelossratio_r1",
-AVG(a.lifelossratio_b0 * 8343390) AS "lifelossratiocost_b0",
-AVG(a.lifelossratio_r1 * 8343390) AS "lifelossratiocost_r1",
-b."SVlt_Score" + 1 AS "SVlt_Score_translated",
-
---EQ Risk Index calculations
-(SUM(a.asset_loss_b0) + SUM(a.lifeloss_b0 * 8343390)) * (b."SVlt_Score" + 1) AS "eqri_abs_score_b0",
-'null' AS "eqri_abs_rank_b0",
-(AVG(a.bldglossratio_b0) + AVG(a.lifelossratio_b0 * 8343390)) * (b."SVlt_Score" + 1) AS "eqri_norm_score_b0",
-'null' AS "eqri_norm_rank_b0",
-(SUM(a.asset_loss_r1) + SUM(a.lifeloss_r1 * 8343390)) * (b."SVlt_Score" + 1) AS "eqri_abs_score_r1",
-'null' AS "eqri_abs_rank_r1",
-(AVG(a.bldglossratio_r1) + AVG(a.lifelossratio_r1 * 8343390)) * (b."SVlt_Score" + 1) AS "eqri_norm_score_r1",
-'null' AS "eqri_norm_rank_r1"
-
-FROM results_psra_{prov}.psra_{prov}_eqriskindex_calc a
---FROM results_psra_{prov}.psra_{prov}_eqriskindex_calcs a
-LEFT JOIN results_nhsl_social_fabric.nhsl_social_fabric_indicators_s b ON a.sauid = b."Sauid"
-GROUP BY a.sauid,b."SVlt_Score"
-);
-
-
-
+-- create empty table for sri at SA level to be populated after calculation at national scale
 DROP TABLE IF EXISTS results_psra_{prov}.psra_{prov}_eqriskindex_csd CASCADE;
 CREATE TABLE results_psra_{prov}.psra_{prov}_eqriskindex_csd AS
 (
 SELECT
 b.csduid,
-SUM(a.asset_loss_b0) AS "asset_loss_b0",
-SUM(asset_loss_r1) AS "asset_loss_r1",
-SUM(lifeloss_b0) AS "lifeloss_b0",
-SUM(lifeloss_r1) AS "lifeloss_r1",
-SUM(lifelosscost_b0) AS "lifelosscost_b0",
-SUM(lifelosscost_r1) AS "lifelosscost_r1",
-AVG(bldglossratio_b0) AS "bldglossratio_b0",
-AVG(bldglossratio_r1) AS "bldglossratio_r1",
-AVG(lifelossratio_b0) AS "lifelossratio_b0",
-AVG(lifelossratio_r1) AS "lifelossratio_r1",
-AVG(lifelossratiocost_b0) AS "lifelossratiocost_b0",
-AVG(lifelossratiocost_r1) AS "lifelossratiocost_r1",
-SUM("SVlt_Score_translated") AS "SVlt_Score_translated",
-SUM(eqri_abs_score_b0) AS "eqri_abs_score_b0",
-'null' AS "eqri_abs_rank_b0",
-AVG(eqri_norm_score_b0) AS "eqri_norm_score_b0",
-'null' AS "eqri_norm_rank_b0",
-SUM(eqri_abs_score_r1) AS "eqri_abs_score_r1",
-'null' AS "eqri_abs_rank_r1",
-AVG(eqri_norm_score_r1) AS "eqri_norm_score_r1",
-'null' AS "eqri_norm_rank_r1"
+0.00 AS "eqri_abs_score_b0",
+NULL AS "eqri_abs_rank_b0",
+0.00 AS "eqri_norm_score_b0",
+NULL AS "eqri_norm_rank_b0",
+0.00 AS "eqri_abs_score_r1",
+NULL AS "eqri_abs_rank_r1",
+0.00 AS "eqri_norm_score_r1",
+NULL AS "eqri_norm_rank_r1"
 
-FROM results_psra_{prov}.psra_{prov}_eqriskindex a
-LEFT JOIN results_psra_{prov}.psra_{prov}_indicators_b b ON a.sauid = b."Sauid"
+FROM psra_{prov}.psra_{prov}_avg_losses_stats a
+LEFT JOIN exposure.canada_exposure b ON a.asset_id = b.id
 GROUP BY b.csduid
 );
-
-
 
 
 -- create psra indicators
@@ -273,8 +208,8 @@ LEFT JOIN lut.collapse_probability f ON a.bldgtype = f.eqbldgtype
 RIGHT JOIN psra_{prov}.psra_{prov}_ed_dmg_mean g ON a.id = g.asset_id
 LEFT JOIN mh.mh_intensity_canada h ON a.sauid = h.sauidt
 RIGHT JOIN psra_{prov}.psra_{prov}_avg_losses_stats i ON a.id = i.asset_id
-RIGHT JOIN results_psra_{prov}.psra_{prov}_eqriskindex j ON a.sauid = j.sauid
 LEFT JOIN psra_{prov}.psra_{prov}_ed_dmg_q05 k ON a.id = k.asset_id
+RIGHT JOIN results_psra_{prov}.psra_{prov}_eqriskindex j ON a.sauid = j.sauid
 LEFT JOIN psra_{prov}.psra_{prov}_ed_dmg_q95 l ON a.id = l.asset_id
 LEFT JOIN results_psra_{prov}.psra_{prov}_indicators_b m ON a.id = m."AssetID"
 LEFT JOIN boundaries."Geometry_SAUID" z ON a.sauid = z."SAUIDt"
@@ -386,6 +321,7 @@ ROUND(SUM("eAALt_Str_r1"),6) AS "eAALt_Str_r1",
 ROUND(SUM("eAALt_NStr_r1"),6) AS "eAALt_NStr_r1",
 ROUND(SUM("eAALt_Cont_r1"),6) AS "eAALt_Cont_r1",
 
+-- placeholder for sri indicators to be updated
 ROUND(SUM(a.eqri_abs_score_b0),6) AS "eqri_abs_score_b0",
 c.eqri_abs_rank_b0,
 ROUND(AVG(a.eqri_norm_score_b0),6) AS "eqri_norm_score_b0",
