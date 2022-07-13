@@ -10,8 +10,8 @@ b.gridid_100,
 AVG("SVlt_Score" * b.area_ratio) AS "SVlt_Score"
 
 FROM results_nhsl_social_fabric.nhsl_social_fabric_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_100km_intersect_unclipped" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_100km_unclipped" c ON b.gridid_100 = c.gridid_100
+LEFT JOIN boundaries."SAUID_HexGrid_100km_intersect_unclipped_900913" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_100km_unclipped_900913" c ON b.gridid_100 = c.gridid_100
 GROUP BY b.gridid_100,c.geom
 );
 
@@ -44,8 +44,8 @@ SUM("eAALt_NStr_r1" * b.area_ratio) AS "eAALt_NStr_r1",
 SUM("eAALt_Cont_r1" * b.area_ratio) AS "eAALt_Cont_r1"
 
 FROM results_psra_national.psra_indicators_s_tbl a
-LEFT JOIN boundaries."SAUID_HexGrid_100km_intersect_unclipped" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_100km_unclipped" c ON b.gridid_100 = c.gridid_100
+LEFT JOIN boundaries."SAUID_HexGrid_100km_intersect_unclipped_900913" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_100km_unclipped_900913" c ON b.gridid_100 = c.gridid_100
 GROUP BY c.gridid_100
 );
 
@@ -115,7 +115,7 @@ b."eCtr_Fatality_b0" AS "AAF_Ratio_b0",
 b."eAALm_Asset_r1" AS "AAL_Ratio_r1",
 b."eCtr_Fatality_r1" AS "AAF_Ratio_r1"
 
-FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_100km_uc_4326 a
+FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_100km_uc a
 LEFT JOIN results_psra_national.psra_sri_var_hg_100km_uc b ON a.gridid_100 = b.gridid_100
 LEFT JOIN results_psra_national.psra_sri_social_fabric_score_hg_100km_uc c ON a.gridid_100 = c.gridid_100
 );
@@ -178,8 +178,8 @@ FROM results_psra_national.psra_sri_calc3_hg_100km_uc
 
 
 -- sri calc table final
-DROP TABLE IF EXISTS results_psra_national.psra_sri_calc_hg_100km_uc_4326 CASCADE;
-CREATE TABLE results_psra_national.psra_sri_calc_hg_100km_uc_4326 AS
+DROP TABLE IF EXISTS results_psra_national.psra_sri_calc_hg_100km_uc CASCADE;
+CREATE TABLE results_psra_national.psra_sri_calc_hg_100km_uc AS
 (
 SELECT
 a."gridid_100",

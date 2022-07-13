@@ -115,7 +115,7 @@ b."eCtr_Fatality_b0" AS "AAF_Ratio_b0",
 b."eAALm_Asset_r1" AS "AAL_Ratio_r1",
 b."eCtr_Fatality_r1" AS "AAF_Ratio_r1"
 
-FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km_4326 a
+FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km a
 LEFT JOIN results_psra_national.psra_sri_var_hg_1km b ON a.gridid_1 = b.gridid_1
 LEFT JOIN results_psra_national.psra_sri_social_fabric_score_hg_1km c ON a.gridid_1 = c.gridid_1
 );
@@ -192,8 +192,8 @@ FROM results_psra_national.psra_sri_calc3_hg_1km
 
 
 -- sri calc table final
-DROP TABLE IF EXISTS results_psra_national.psra_sri_calc_hg_1km_4326 CASCADE;
-CREATE TABLE results_psra_national.psra_sri_calc_hg_1km_4326 AS
+DROP TABLE IF EXISTS results_psra_national.psra_sri_calc_hg_1km CASCADE;
+CREATE TABLE results_psra_national.psra_sri_calc_hg_1km AS
 (
 SELECT
 a."gridid_1",

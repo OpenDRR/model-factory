@@ -1,8 +1,8 @@
 -- test hexgrid aggregation for psra national level
 
 -- 1km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_1km_uc CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexgrid_1km_uc AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_1km_uc_4326 CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_1km_uc_4326 AS
 SELECT 
 c.gridid_1,
 SUM(a."eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -110,14 +110,14 @@ c.geom
 FROM results_psra_national.psra_indicators_s_tbl a
 LEFT JOIN boundaries."SAUID_HexGrid_1km_intersect_unclipped" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_1km_unclipped" c ON b.gridid_1 = c.gridid_1
-LEFT JOIN results_psra_national.psra_sri_calc_hg_1km_uc d ON b.gridid_1 = d.gridid_1
+LEFT JOIN results_psra_national.psra_sri_calc_hg_1km_uc_4326 d ON b.gridid_1 = d.gridid_1
 GROUP BY c.gridid_1,d.eqri_abs_cbrt_minmax_b0,d.eqri_abs_rating_b0,d.eqri_norm_cbrt_minmax_b0,eqri_norm_rating_b0,d.eqri_abs_cbrt_minmax_r1,d.eqri_abs_rating_r1,d.eqri_norm_cbrt_minmax_r1,d.eqri_norm_rating_r1,c.geom;
 
 
 
 -- 5km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_5km_uc CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexgrid_5km_uc AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_5km_uc_4326 CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_5km_uc_4326 AS
 SELECT 
 c.gridid_5,
 SUM(a."eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -225,14 +225,14 @@ c.geom
 FROM results_psra_national.psra_indicators_s_tbl a
 LEFT JOIN boundaries."SAUID_HexGrid_5km_intersect_unclipped" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_5km_unclipped" c ON b.gridid_5 = c.gridid_5
-LEFT JOIN results_psra_national.psra_sri_calc_hg_5km_uc d ON b.gridid_5 = d.gridid_5
+LEFT JOIN results_psra_national.psra_sri_calc_hg_5km_uc_4326 d ON b.gridid_5 = d.gridid_5
 GROUP BY c.gridid_5,d.eqri_abs_cbrt_minmax_b0,d.eqri_abs_rating_b0,d.eqri_norm_cbrt_minmax_b0,eqri_norm_rating_b0,d.eqri_abs_cbrt_minmax_r1,d.eqri_abs_rating_r1,d.eqri_norm_cbrt_minmax_r1,d.eqri_norm_rating_r1,c.geom;
 
 
 
 -- 10km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_10km_uc CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexgrid_10km_uc AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_10km_uc_4326 CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_10km_uc_4326 AS
 SELECT 
 c.gridid_10,
 SUM(a."eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -340,13 +340,13 @@ c.geom
 FROM results_psra_national.psra_indicators_s_tbl a
 LEFT JOIN boundaries."SAUID_HexGrid_10km_intersect_unclipped" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_10km_unclipped" c ON b.gridid_10 = c.gridid_10
-LEFT JOIN results_psra_national.psra_sri_calc_hg_10km_uc d ON b.gridid_10 = d.gridid_10
+LEFT JOIN results_psra_national.psra_sri_calc_hg_10km_uc_4326 d ON b.gridid_10 = d.gridid_10
 GROUP BY c.gridid_10,d.eqri_abs_cbrt_minmax_b0,d.eqri_abs_rating_b0,d.eqri_norm_cbrt_minmax_b0,eqri_norm_rating_b0,d.eqri_abs_cbrt_minmax_r1,d.eqri_abs_rating_r1,d.eqri_norm_cbrt_minmax_r1,d.eqri_norm_rating_r1,c.geom;
 
 
 -- 25km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_25km_uc CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexgrid_25km_uc AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_25km_uc_4326 CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_25km_uc_4326 AS
 SELECT 
 c.gridid_25,
 SUM(a."eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -454,14 +454,14 @@ c.geom
 FROM results_psra_national.psra_indicators_s_tbl a
 LEFT JOIN boundaries."SAUID_HexGrid_25km_intersect_unclipped" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_25km_unclipped" c ON b.gridid_25 = c.gridid_25
-LEFT JOIN results_psra_national.psra_sri_calc_hg_25km_uc d ON b.gridid_25 = d.gridid_25
+LEFT JOIN results_psra_national.psra_sri_calc_hg_25km_uc_4326 d ON b.gridid_25 = d.gridid_25
 GROUP BY c.gridid_25,d.eqri_abs_cbrt_minmax_b0,d.eqri_abs_rating_b0,d.eqri_norm_cbrt_minmax_b0,eqri_norm_rating_b0,d.eqri_abs_cbrt_minmax_r1,d.eqri_abs_rating_r1,d.eqri_norm_cbrt_minmax_r1,d.eqri_norm_rating_r1,c.geom;
 
 
 
 -- 50km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_50km_uc CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexgrid_50km_uc AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_50km_uc_4326 CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_50km_uc_4326 AS
 SELECT 
 c.gridid_50,
 SUM(a."eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -569,14 +569,14 @@ c.geom
 FROM results_psra_national.psra_indicators_s_tbl a
 LEFT JOIN boundaries."SAUID_HexGrid_50km_intersect_unclipped" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_50km_unclipped" c ON b.gridid_50 = c.gridid_50
-LEFT JOIN results_psra_national.psra_sri_calc_hg_50km_uc d ON b.gridid_50 = d.gridid_50
+LEFT JOIN results_psra_national.psra_sri_calc_hg_50km_uc_4326 d ON b.gridid_50 = d.gridid_50
 GROUP BY c.gridid_50,d.eqri_abs_cbrt_minmax_b0,d.eqri_abs_rating_b0,d.eqri_norm_cbrt_minmax_b0,eqri_norm_rating_b0,d.eqri_abs_cbrt_minmax_r1,d.eqri_abs_rating_r1,d.eqri_norm_cbrt_minmax_r1,d.eqri_norm_rating_r1,c.geom;
 
 
 
 -- 100km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_100km_uc CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexgrid_100km_uc AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_100km_uc_4326 CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_100km_uc_4326 AS
 SELECT 
 c.gridid_100,
 SUM(a."eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -684,5 +684,5 @@ c.geom
 FROM results_psra_national.psra_indicators_s_tbl a
 LEFT JOIN boundaries."SAUID_HexGrid_100km_intersect_unclipped" b ON a."Sauid" = b.sauid
 LEFT JOIN boundaries."HexGrid_100km_unclipped" c ON b.gridid_100 = c.gridid_100
-LEFT JOIN results_psra_national.psra_sri_calc_hg_100km_uc d ON b.gridid_100 = d.gridid_100
+LEFT JOIN results_psra_national.psra_sri_calc_hg_100km_uc_4326 d ON b.gridid_100 = d.gridid_100
 GROUP BY c.gridid_100,d.eqri_abs_cbrt_minmax_b0,d.eqri_abs_rating_b0,d.eqri_norm_cbrt_minmax_b0,eqri_norm_rating_b0,d.eqri_abs_cbrt_minmax_r1,d.eqri_abs_rating_r1,d.eqri_norm_cbrt_minmax_r1,d.eqri_norm_rating_r1,c.geom;

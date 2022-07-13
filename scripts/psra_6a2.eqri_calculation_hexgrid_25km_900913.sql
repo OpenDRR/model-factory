@@ -10,8 +10,8 @@ b.gridid_25,
 AVG("SVlt_Score" * b.area_ratio) AS "SVlt_Score"
 
 FROM results_nhsl_social_fabric.nhsl_social_fabric_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_25km_intersect" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_25km" c ON b.gridid_25 = c.gridid_25
+LEFT JOIN boundaries."SAUID_HexGrid_25km_intersect_900913" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_25km_900913" c ON b.gridid_25 = c.gridid_25
 GROUP BY b.gridid_25,c.geom
 );
 
@@ -44,8 +44,8 @@ SUM("eAALt_NStr_r1" * b.area_ratio) AS "eAALt_NStr_r1",
 SUM("eAALt_Cont_r1" * b.area_ratio) AS "eAALt_Cont_r1"
 
 FROM results_psra_national.psra_indicators_s_tbl a
-LEFT JOIN boundaries."SAUID_HexGrid_25km_intersect" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_25km" c ON b.gridid_25 = c.gridid_25
+LEFT JOIN boundaries."SAUID_HexGrid_25km_intersect_900913" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_25km_900913" c ON b.gridid_25 = c.gridid_25
 GROUP BY c.gridid_25
 );
 
@@ -115,7 +115,7 @@ b."eCtr_Fatality_b0" AS "AAF_Ratio_b0",
 b."eAALm_Asset_r1" AS "AAL_Ratio_r1",
 b."eCtr_Fatality_r1" AS "AAF_Ratio_r1"
 
-FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km_4326 a
+FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km a
 LEFT JOIN results_psra_national.psra_sri_var_hg_25km b ON a.gridid_25 = b.gridid_25
 LEFT JOIN results_psra_national.psra_sri_social_fabric_score_hg_25km c ON a.gridid_25 = c.gridid_25
 );
@@ -192,8 +192,8 @@ FROM results_psra_national.psra_sri_calc3_hg_25km
 
 
 -- sri calc table final
-DROP TABLE IF EXISTS results_psra_national.psra_sri_calc_hg_25km_4326 CASCADE;
-CREATE TABLE results_psra_national.psra_sri_calc_hg_25km_4326 AS
+DROP TABLE IF EXISTS results_psra_national.psra_sri_calc_hg_25km CASCADE;
+CREATE TABLE results_psra_national.psra_sri_calc_hg_25km AS
 (
 SELECT
 a."gridid_25",
