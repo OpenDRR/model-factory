@@ -10,8 +10,8 @@ b.gridid_1,
 AVG("SVlt_Score" * b.area_ratio) AS "SVlt_Score"
 
 FROM results_nhsl_social_fabric.nhsl_social_fabric_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_1km_intersect_900913" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_1km_900913" c ON b.gridid_1 = c.gridid_1
+LEFT JOIN boundaries."SAUID_HexGrid_1km_intersect_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_1km_3857" c ON b.gridid_1 = c.gridid_1
 GROUP BY b.gridid_1,c.geom
 );
 
@@ -44,8 +44,8 @@ SUM("eAALt_NStr_r1" * b.area_ratio) AS "eAALt_NStr_r1",
 SUM("eAALt_Cont_r1" * b.area_ratio) AS "eAALt_Cont_r1"
 
 FROM results_psra_national.psra_indicators_s_tbl a
-LEFT JOIN boundaries."SAUID_HexGrid_1km_intersect_900913" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_1km_900913" c ON b.gridid_1 = c.gridid_1
+LEFT JOIN boundaries."SAUID_HexGrid_1km_intersect_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_1km_3857" c ON b.gridid_1 = c.gridid_1
 GROUP BY c.gridid_1
 );
 
