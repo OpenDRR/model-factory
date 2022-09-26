@@ -63,7 +63,7 @@ def main():
         dfsr ={}
         for retrofit, retrofitPrefix in zip(listRetrofit, listRetrofitPrefix):
             # retrofit Realization dataframe 
-            dfsr[retrofit] = GetDataframeForScenario(url, repo_list, retrofitPrefix, eqscenario, columnConfigParser, auth)
+            dfsr[retrofit] = GetDataframeForScenario(url, branch, repo_list, retrofitPrefix, eqscenario, columnConfigParser, auth)
             # Process conditional fields for retrofit realization dataframe
         
         # Merge retrofit dataframes for a realization
@@ -85,7 +85,7 @@ def main():
     return
 
 
-def GetDataframeForScenario(url, repo_list, retrofitPrefix, eqscenario, columnConfigParser, auth):
+def GetDataframeForScenario(url, branch, repo_list, retrofitPrefix, eqscenario, columnConfigParser, auth):
     # Get file names. If there is more than one match this should grab the one with the higher increment value
     consequenceFile = [s for s in repo_list if "s_consequences_{}_{}".format(eqscenario, retrofitPrefix) in s][-1]
     damageFile = [s for s in repo_list if "s_dmgbyasset_{}_{}".format(eqscenario, retrofitPrefix) in s][-1]
