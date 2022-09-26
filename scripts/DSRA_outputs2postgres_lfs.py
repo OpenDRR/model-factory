@@ -43,6 +43,7 @@ def main():
     engine = db.create_engine('postgresql://{}:{}@{}'.format(auth.get('rds', 'postgres_un'), auth.get('rds', 'postgres_pw'), auth.get('rds', 'postgres_address')), echo=True)
 
     url = args.dsraModelDir.replace('https://github.com', 'https://api.github.com/repos').replace('tree/master', 'contents')
+    branch = args.dsraModelDirBranch
     try:
         response = requests.get(url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
         response.raise_for_status()
@@ -92,7 +93,7 @@ def GetDataframeForScenario(url, repo_list, retrofitPrefix, eqscenario, columnCo
     
     # Create dataframes
     #Consequence DataFrame
-    item_url="{}/{}".format(url, consequenceFile)
+    item_url="{}/{}?ref={}".format(url, consequenceFile, branch)
     response = requests.get(item_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
     item_dict = json.loads(response.content)
     response = requests.get(item_dict['download_url'], headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
@@ -112,7 +113,7 @@ def GetDataframeForScenario(url, repo_list, retrofitPrefix, eqscenario, columnCo
     dfConsequence.rename(columns={"AssetID_{}".format(retrofitPrefix):"AssetID"}, inplace=True)
 
     #Damage dataframe,
-    item_url="{}/{}".format(url, damageFile)
+    item_url="{}/{}?ref={}".format(url, damageFile, branch)
     response = requests.get(item_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
     item_dict = json.loads(response.content)
     response = requests.get(item_dict['download_url'], headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
@@ -130,7 +131,7 @@ def GetDataframeForScenario(url, repo_list, retrofitPrefix, eqscenario, columnCo
     dfDamage.rename(columns={"AssetID_{}".format(retrofitPrefix):"AssetID"}, inplace=True)
 
     #Losses Dataframe
-    item_url="{}/{}".format(url, lossesFile)
+    item_url="{}/{}?ref={}".format(url, lossesFile, branch)
     response = requests.get(item_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
     item_dict = json.loads(response.content)
     response = requests.get(item_dict['download_url'], headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
@@ -147,7 +148,8 @@ def GetDataframeForScenario(url, repo_list, retrofitPrefix, eqscenario, columnCo
     dfLosses = dfLosses.add_suffix("_{}".format(retrofitPrefix))
     dfLosses.rename(columns={"AssetID_{}".format(retrofitPrefix):"AssetID"}, inplace=True)
 
-    eq_url = f'https://raw.githubusercontent.com/OpenDRR/earthquake-scenarios/master/initializations/s_Hazard_{eqscenario}.ini'
+    eq_url = args.dsraModelDir.replace('https://github.com', 'https://raw.githubusercontent.com').replace('FINISHED','{}/initializations/s_Hazard_{}.ini'.format(branch, eqscenario))
+
     response = requests.get(eq_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))}).text
     segment = response[response.index('gsim_logic_tree_file'):]
     gmpe_model_value = segment[segment.index('LogicTree/') + 10:segment.index('.xml')]
@@ -199,6 +201,7 @@ def str2bool(v):
 def parse_args():
     parser = argparse.ArgumentParser(description='Pull DSRA Output data from Github repository and copy into PostGreSQL on AWS RDS')
     parser.add_argument('--dsraModelDir', type=str, help='Path to DSRA Model repo', required=True)
+    parser.add_argument('--dsraModelDirBranch', type=str, help='Name of the DSRA repo branch', required=True)
     parser.add_argument('--columnsINI', type=str, help='DSRA_outputs2postgres.ini', required=True, default='DSRA_outputs2postgres.ini')
     parser.add_argument('--logging', type=str2bool, help='True/False - Logging Enabled by Default. Set to False to disble logging', default=True)
     parser.add_argument('--eqScenario', type=str, help='Specify Earthquake Scenario. Use "All" for all scenarios in DSRA_outputs2postgres.ini', default="All")
