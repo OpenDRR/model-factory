@@ -45,7 +45,7 @@ def main():
     url = args.dsraModelDir.replace('https://github.com', 'https://api.github.com/repos').replace('tree/master', 'contents')
     branch = args.dsraModelDirBranch
     try:
-        response = requests.get(url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
+        response = requests.get('{}?ref={}'.format(url, branch), headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
         response.raise_for_status()
         repo_dict = json.loads(response.content)
         repo_list = []
@@ -53,44 +53,44 @@ def main():
         for item in repo_dict:
             if item['type'] == 'file':
                 repo_list.append(item['name'])
-    
+
     except requests.exceptions.RequestException as e:
         logging.error(e)
         sys.exit()
 
     for eqscenario in listeqScenario:
-            
+
         dfsr ={}
         for retrofit, retrofitPrefix in zip(listRetrofit, listRetrofitPrefix):
-            # retrofit Realization dataframe 
-            dfsr[retrofit] = GetDataframeForScenario(url, branch, repo_list, retrofitPrefix, eqscenario, columnConfigParser, auth)
+            # retrofit Realization dataframe
+            dfsr[retrofit] = GetDataframeForScenario(url, branch, repo_list, retrofitPrefix, eqscenario, columnConfigParser, auth, args)
             # Process conditional fields for retrofit realization dataframe
-        
+
         # Merge retrofit dataframes for a realization
         dfs = []
         for i in listRetrofit:
             dfs.append(dfsr[i])
         dffinal = reduce(pd.merge, dfs)
-        
+
         # add in ordered output code
         dffinalout = dffinal
-        
+
         # Output assembled dataframe to database
         dffinalout.to_sql("dsra_{}".format(eqscenario.lower()),
                             engine,
                             if_exists='replace',
                             method=psql_insert_copy,
-                            schema='dsra')   
+                            schema='dsra')
 
     return
 
 
-def GetDataframeForScenario(url, branch, repo_list, retrofitPrefix, eqscenario, columnConfigParser, auth):
+def GetDataframeForScenario(url, branch, repo_list, retrofitPrefix, eqscenario, columnConfigParser, auth, args):
     # Get file names. If there is more than one match this should grab the one with the higher increment value
     consequenceFile = [s for s in repo_list if "s_consequences_{}_{}".format(eqscenario, retrofitPrefix) in s][-1]
     damageFile = [s for s in repo_list if "s_dmgbyasset_{}_{}".format(eqscenario, retrofitPrefix) in s][-1]
     lossesFile = [s for s in repo_list if "s_lossesbyasset_{}_{}".format(eqscenario, retrofitPrefix) in s][-1]
-    
+
     # Create dataframes
     #Consequence DataFrame
     item_url="{}/{}?ref={}".format(url, consequenceFile, branch)
@@ -148,19 +148,19 @@ def GetDataframeForScenario(url, branch, repo_list, retrofitPrefix, eqscenario, 
     dfLosses = dfLosses.add_suffix("_{}".format(retrofitPrefix))
     dfLosses.rename(columns={"AssetID_{}".format(retrofitPrefix):"AssetID"}, inplace=True)
 
-    eq_url = args.dsraModelDir.replace('https://github.com', 'https://raw.githubusercontent.com').replace('FINISHED','{}/initializations/s_Hazard_{}.ini'.format(branch, eqscenario))
+    eq_url = args.dsraModelDir.replace('https://github.com', 'https://raw.githubusercontent.com').replace('contents/FINISHED', '{}/initializations/s_Hazard_{}.ini'.format(branch, eqscenario))
 
     response = requests.get(eq_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))}).text
     segment = response[response.index('gsim_logic_tree_file'):]
     gmpe_model_value = segment[segment.index('LogicTree/') + 10:segment.index('.xml')]
-    
+
     # Merge dataframes
     dfMerge = reduce(lambda left,right: pd.merge(left,right,on='AssetID'), [dfDamage, dfConsequence, dfLosses])
     dfMerge.insert(loc=0, column='Rupture_Abbr', value=eqscenario)
     dfMerge.insert(loc=1, column='gmpe_Model', value=gmpe_model_value)
     return dfMerge
-    
-   
+
+
 def psql_insert_copy(table, conn, keys, data_iter):
     # This fuction was copied from the Pandas documentation
     # gets a DBAPI connection that can provide a cursor
@@ -206,7 +206,7 @@ def parse_args():
     parser.add_argument('--logging', type=str2bool, help='True/False - Logging Enabled by Default. Set to False to disble logging', default=True)
     parser.add_argument('--eqScenario', type=str, help='Specify Earthquake Scenario. Use "All" for all scenarios in DSRA_outputs2postgres.ini', default="All")
     args = parser.parse_args()
-    
+
     return args
 
 if __name__ == '__main__':
