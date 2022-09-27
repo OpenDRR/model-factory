@@ -17,15 +17,15 @@ from io import StringIO
 
 
 '''
-Script to ingest OpenQuake outputs in csv format from GtHub to single PostGreSQL database. The Script can be run in the following form by 
+Script to ingest OpenQuake outputs in csv format from GtHub to single PostGreSQL database. The Script can be run in the following form by
 changing the filepaths as appropriate
-python DSRA_ruptures2postgres.py --dsraRuptureDir="https://github.com/OpenDRR/opendrr-data-store/tree/master/sample-datasets/scenario-risk/model-inputs" 
+python DSRA_ruptures2postgres.py --dsraRuptureDir="https://github.com/OpenDRR/opendrr-data-store/tree/master/sample-datasets/scenario-risk/model-inputs"
 '''
 
 #Main Function
 def main ():
     logging.basicConfig(level=logging.INFO,
-                        format='%(asctime)s - %(levelname)s - %(message)s', 
+                        format='%(asctime)s - %(levelname)s - %(message)s',
                         handlers=[logging.FileHandler('{}.log'.format(os.path.splitext(sys.argv[0])[0])),
                                   logging.StreamHandler()])
     args = parse_args()
@@ -34,7 +34,9 @@ def main ():
 
     engine = db.create_engine('postgresql://{}:{}@{}'.format(auth.get('rds', 'postgres_un'), auth.get('rds', 'postgres_pw'), auth.get('rds', 'postgres_address')), echo=False)
 
-    url = args.dsraRuptureDir.replace('https://github.com', 'https://api.github.com/repos').replace('tree/master', 'contents')
+    # url = args.dsraRuptureDir.replace('https://github.com', 'https://api.github.com/repos').replace('tree/master', 'contents')
+    url = args.dsraRuptureDir.replace('https://github.com', 'https://api.github.com/repos')
+    url = '{}/contents/ruptures?ref={}'.format(url, args.dsraRuptureBranch)
     logging.info(url)
     try:
         response = requests.get(url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
@@ -50,8 +52,8 @@ def main ():
     except requests.exceptions.RequestException as e:
         logging.error(e)
         sys.exit()
-    
-    processRuptureXML(repo_list, engine, auth, url)
+
+    processRuptureXML(repo_list, engine, auth, url, args)
 
     return
 
@@ -67,14 +69,15 @@ def get_config_params(args):
 def parse_args():
     parser = argparse.ArgumentParser(description="'Pull Rupture input data from Github repository and copy into PostGreSQL on AWS RDS'")
     parser.add_argument("--dsraRuptureDir", type=str, help='DSRA Rupture repo directory address', required=True)
+    parser.add_argument("--dsraRuptureBranch", type=str, help='DSRA Rupture branch name', required=True)
     args = parser.parse_args()
     return args
 
-def processRuptureXML(repo_list, engine, auth, url):
+def processRuptureXML(repo_list, engine, auth, url, args):
     for ruptureFile in repo_list:
         logging.info("processing: {}".format(ruptureFile))
         item_url="{}/{}".format(url, ruptureFile)
-        item_url = item_url.replace('api.github.com/repos', 'raw.githubusercontent.com').replace('/contents/','/master/')
+        item_url = item_url.replace('api.github.com/repos', 'raw.githubusercontent.com').replace('contents', args.dsraRuptureBranch).replace('?ref={}'.format(args.dsraRuptureBranch), '')
         response = requests.get(item_url, headers={'Authorization': 'token {}'.format(auth.get('auth', 'github_token'))})
         df_cols = ["source_type", "rupture_name", "magnitude", "rake", "lon", "lat", "depth"]
         rows = []
