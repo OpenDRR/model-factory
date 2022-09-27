@@ -14,5 +14,5 @@ CREATE TABLE lut.retrofit_costs(
     "RetrofitCost_pc_Total" float,
     "USD_RetrofitCost_Bldg" float,
     "CAD_RetrofitCost_Bldg" float
-     
+
 );

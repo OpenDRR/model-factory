@@ -7,5 +7,5 @@ CREATE TABLE lut.collapse_probability(
     "typology" varchar,
     "eqbldgtype" varchar,
     "collapse_pc" float
-     
+
 );

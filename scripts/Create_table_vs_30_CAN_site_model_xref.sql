@@ -13,5 +13,5 @@ CREATE TABLE vs30.vs30_can_site_model_xref(
     z2pt5 float,
     vs_lon float,
     vs_lat float,
-    distance float 
+    distance float
 );

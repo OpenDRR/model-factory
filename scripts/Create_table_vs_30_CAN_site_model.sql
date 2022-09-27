@@ -9,5 +9,5 @@ CREATE TABLE vs30.vs30_can_site_model(
     lat float,
     vs30 float,
     z1pt0 float,
-    z2pt5 float   
+    z2pt5 float
 );
