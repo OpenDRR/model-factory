@@ -1,2 +1,4 @@
 [sqlfluff]
 dialect = postgres
+exclude_rules = L014
+large_file_skip_byte_limit = 100000
