@@ -18,6 +18,7 @@ NULL AS "eqri_norm_rank_r1"
 
 FROM psra_{prov}.psra_{prov}_avg_losses_stats a
 LEFT JOIN exposure.canada_exposure b ON a.asset_id = b.id
+GROUP BY b.sauid,b.csduid
 );
 
 
