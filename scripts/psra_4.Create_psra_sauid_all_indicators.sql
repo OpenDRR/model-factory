@@ -300,11 +300,11 @@ ROUND(SUM("eDt_Collapse95_r1"),6) AS "eDt_Collapse95_r1",
 ROUND(AVG("eDtr_Collapse95_r1"),6) AS "eDtr_Collapse95_r1",
 SUM("eDt_Fail_Collapse95_r1") AS "eDt_Fail_Collapse95_r1",
 
-ROUND(SUM("eCt_Fatality_b0"),6) AS "eC_Fatality_b0",
-ROUND(AVG("eCtr_Fatality_b0"),6) AS "eCr_Fatality_b0",
+ROUND(SUM("eCt_Fatality_b0"),10) AS "eC_Fatality_b0",
+ROUND(AVG("eCtr_Fatality_b0"),10) AS "eCr_Fatality_b0",
 
-ROUND(SUM("eCt_Fatality_r1"),6) AS "eC_Fatality_r1",
-ROUND(AVG("eCtr_Fatality_r1"),6) AS "eCr_Fatality_r1",
+ROUND(SUM("eCt_Fatality_r1"),10) AS "eC_Fatality_r1",
+ROUND(AVG("eCtr_Fatality_r1"),10) AS "eCr_Fatality_r1",
 
 ROUND(SUM("eAALt_Asset_b0"),6) AS "eAALt_Asset_b0",
 ROUND(AVG("eAALm_Asset_b0"),6) AS "eAALm_Asset_b0",
