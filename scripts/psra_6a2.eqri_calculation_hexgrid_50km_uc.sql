@@ -219,7 +219,7 @@ CASE
 	WHEN c.eqri_abs_cbrt_minmax_b0 >= 0 AND c.eqri_abs_cbrt_minmax_b0 <= 4.05 THEN 'Very Low Score'
 	WHEN c.eqri_abs_cbrt_minmax_b0 > 4.04 AND c.eqri_abs_cbrt_minmax_b0 <= 11.37 THEN 'Low Score'
 	WHEN c.eqri_abs_cbrt_minmax_b0 > 11.37 AND c.eqri_abs_cbrt_minmax_b0 <= 25.96 THEN 'Moderate Score'
-	WHEN c.eqri_abs_cbrt_minmax_b0 > 25.96AND c.eqri_abs_cbrt_minmax_b0 <= 52.33 THEN 'High Score'
+	WHEN c.eqri_abs_cbrt_minmax_b0 > 25.96 AND c.eqri_abs_cbrt_minmax_b0 <= 52.33 THEN 'High Score'
 	WHEN c.eqri_abs_cbrt_minmax_b0 > 52.33 AND c.eqri_abs_cbrt_minmax_b0 <= 100 THEN 'Very High Score'
 END AS "eqri_abs_rating_b0",
 	
