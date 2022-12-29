@@ -59,7 +59,7 @@ geom
 
 FROM results_psra_canada.psra_canada_expected_loss a
 LEFT JOIN boundaries."Geometry_PRUID" b ON a.prname = b."PRNAME"
-WHERE "eEL_Period" = '50'
+WHERE "eEL_Period" = '50' AND prname <> '*total*'
 GROUP BY a.prname,"eEL_Period",b.geom
 ORDER BY a.prname ASC;
 
@@ -82,7 +82,7 @@ geom
 
 FROM results_psra_canada.psra_canada_expected_loss a
 LEFT JOIN boundaries."Geometry_PRUID" b ON a.prname = b."PRNAME"
-WHERE "eEL_Period" = '100'
+WHERE "eEL_Period" = '100' AND prname <> '*total*'
 GROUP BY a.prname,"eEL_Period",b.geom
 ORDER BY a.prname ASC;
 
@@ -105,7 +105,7 @@ geom
 
 FROM results_psra_canada.psra_canada_expected_loss a
 LEFT JOIN boundaries."Geometry_PRUID" b ON a.prname = b."PRNAME"
-WHERE "eEL_Period" = '250'
+WHERE "eEL_Period" = '250' AND prname <> '*total*'
 GROUP BY a.prname,"eEL_Period",b.geom
 ORDER BY a.prname ASC;
 
@@ -128,7 +128,7 @@ geom
 
 FROM results_psra_canada.psra_canada_expected_loss a
 LEFT JOIN boundaries."Geometry_PRUID" b ON a.prname = b."PRNAME"
-WHERE "eEL_Period" = '500'
+WHERE "eEL_Period" = '500' AND prname <> '*total*'
 GROUP BY a.prname,"eEL_Period",b.geom
 ORDER BY a.prname ASC;
 
@@ -151,7 +151,7 @@ geom
 
 FROM results_psra_canada.psra_canada_expected_loss a
 LEFT JOIN boundaries."Geometry_PRUID" b ON a.prname = b."PRNAME"
-WHERE "eEL_Period" = '1000'
+WHERE "eEL_Period" = '1000' AND prname <> '*total*'
 GROUP BY a.prname,"eEL_Period",b.geom
 ORDER BY a.prname ASC;
 
@@ -174,7 +174,7 @@ geom
 
 FROM results_psra_canada.psra_canada_expected_loss a
 LEFT JOIN boundaries."Geometry_PRUID" b ON a.prname = b."PRNAME"
-WHERE "eEL_Period" = '2500'
+WHERE "eEL_Period" = '2500' AND prname <> '*total*'
 GROUP BY a.prname,"eEL_Period",b.geom
 ORDER BY a.prname ASC;
 
