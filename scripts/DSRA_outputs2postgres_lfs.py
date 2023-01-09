@@ -51,7 +51,7 @@ def main():
                               echo=True)
 
     # url = args.dsraRepo.replace('https://github.com', 'https://api.github.com/repos').replace('tree/master', 'contents')
-    url = f'https://api.github.com/repos/{args.dsraRepo}/contents/'
+    url = f'https://api.github.com/repos/{args.dsraRepo}/contents/FINISHED'
     dsraRepo = args.dsraRepo
     branch = args.dsraRepoBranch
     try:
