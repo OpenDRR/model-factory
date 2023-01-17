@@ -54,19 +54,14 @@ def main():
         # logging.info(response.content)
         response.raise_for_status()
         repo_dict = json.loads(response.content)
-        repo_list = []
 
         for item in repo_dict:
-            if (item['type'] == 'file' and
-                    'rupture' in item['name'] and
-                    'xml' in item['name']):
-                repo_list.append(item['name'])
-        logging.info(repo_list)
+            logging.info(item['name'])
     except requests.exceptions.RequestException as e:
         logging.error(e)
         sys.exit()
 
-    processRuptureXML(repo_list, engine, auth, url, args)
+    processRuptureXML(repo_dict, engine, auth)
 
     return
 
@@ -96,12 +91,10 @@ def parse_args():
     return args
 
 
-def processRuptureXML(repo_list, engine, auth, url, args):
-    for ruptureFile in repo_list:
-        logging.info("processing: {}".format(ruptureFile))
-        item_url = (f'https://raw.githubusercontent.com/'
-                    f'{args.dsraRuptureRepo}/'
-                    f'{args.dsraRuptureBranch}/{ruptureFile}')
+def processRuptureXML(repo_dict, engine, auth):
+    for ruptureFile in repo_dict:
+        logging.info("processing: {}".format(ruptureFile['name']))
+        item_url = ruptureFile['download_url']
         ghToken = auth.get('auth', 'github_token')
         response = requests.get(item_url,
                                 headers={'Authorization': f'token {ghToken}'})
@@ -116,7 +109,7 @@ def processRuptureXML(repo_list, engine, auth, url, args):
         xroot = et.ElementTree(et.fromstring(response.content)).getroot()
         xmlns = '{http://openquake.org/xmlns/nrml/0.4}'
         source_type = xroot[0].tag.replace(f'{xmlns}', '')
-        rupture_name = os.path.splitext(ruptureFile)[0].replace('rupture_', '')
+        rupture_name = os.path.splitext(ruptureFile['name'])[0].replace('rupture_', '')
         magnitude = float(xroot[0].find(f"{xmlns}magnitude").text)
         rake = xroot[0].find(f"{xmlns}rake").text
         lon = xroot[0].find(f"{xmlns}hypocenter").attrib.get('lon')
