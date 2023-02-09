@@ -16,6 +16,7 @@ import csv
 import json
 import logging
 import os
+import re
 import sys
 import xml.etree.ElementTree as et
 from io import StringIO
@@ -103,6 +104,12 @@ def parse_args():
 
 def process_rupture_xml(repo_dict, engine, auth):
     for rupture_file in repo_dict:
+        if not (
+            rupture_file["type"] == "file"
+            and re.fullmatch(r"rupture_.*\.xml", rupture_file["name"])
+        ):
+            logging.warning("skipping: %s", rupture_file["name"])
+            continue
         logging.info("processing: %s", rupture_file["name"])
         item_url = rupture_file["download_url"]
         gh_token = auth.get("auth", "github_token")
