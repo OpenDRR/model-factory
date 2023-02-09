@@ -1,5 +1,14 @@
-# Template Python Script
-# !/usr/bin/env python
+#!/usr/bin/env python3
+
+"""
+Script to ingest OpenQuake DSRA rupture outputs in XML format from GitHub
+to a single PostgreSQL database. The Script can be run in the following form
+by changing the parameters as appropriate:
+
+python3 DSRA_ruptures2postgres.py --dsraRuptureRepo="OpenDRR/DSRA-processing" \
+                                  --dsraRuptureBranch=${DSRA_BRANCH}
+"""
+
 # Import statements
 import argparse
 import configparser
@@ -7,30 +16,22 @@ import csv
 import json
 import logging
 import os
-import pandas as pd
-import requests
-import sqlalchemy as db
 import sys
 import xml.etree.ElementTree as et
 from io import StringIO
 
-
-"""
-Script to ingest OpenQuake outputs in csv format from GtHub to single
-PostGreSQL database. The Script can be run in the following form by
-changing the filepaths as appropriate
-python DSRA_ruptures2postgres.py --dsraRuptureRepo="OpenDRR/DSRA-processing" \
-                                 --dsraRuptureBranch=${DSRA_BRANCH}
-"""
+import pandas as pd
+import requests
+import sqlalchemy as db
 
 
 # Main Function
 def main():
-    logFileName = f"{os.path.splitext(sys.argv[0])[0]}.log"
+    log_file_name = f"{os.path.splitext(sys.argv[0])[0]}.log"
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(message)s",
-        handlers=[logging.FileHandler(logFileName), logging.StreamHandler()],
+        handlers=[logging.FileHandler(log_file_name), logging.StreamHandler()],
     )
     args = parse_args()
     os.chdir(sys.path[0])
@@ -51,8 +52,10 @@ def main():
     )
     logging.info(url)
     try:
-        ghToken = auth.get("auth", "github_token")
-        response = requests.get(url, headers={"Authorization": f"token {ghToken}"})
+        gh_token = auth.get("auth", "github_token")
+        response = requests.get(
+            url, timeout=30, headers={"Authorization": f"token {gh_token}"}
+        )
         # logging.info(response.content)
         response.raise_for_status()
         repo_dict = json.loads(response.content)
@@ -63,9 +66,7 @@ def main():
         logging.error(e)
         sys.exit()
 
-    processRuptureXML(repo_dict, engine, auth)
-
-    return
+    process_rupture_xml(repo_dict, engine, auth)
 
 
 # Support Functions
@@ -73,36 +74,41 @@ def get_config_params(args):
     """
     Parse Input/Output columns from supplied *.ini file
     """
-    configParseObj = configparser.ConfigParser()
-    configParseObj.read(args)
-    return configParseObj
+    config_parse_obj = configparser.ConfigParser()
+    config_parse_obj.read(args)
+    return config_parse_obj
 
 
 def parse_args():
     parser = argparse.ArgumentParser(
         description=(
-            "Pull Rupture data from " "Github repository and " "copy into PostGreSQL"
+            "Pull Rupture data from GitHub repository and copy into PostgreSQL"
         )
     )
     parser.add_argument(
         "--dsraRuptureRepo",
         type=str,
-        help="DSRA Rupture repo directory address",
+        help="DSRA Rupture repository, e.g. OpenDRR/earthquake-scenarios",
         required=True,
     )
     parser.add_argument(
-        "--dsraRuptureBranch", type=str, help="DSRA Rupture branch name", required=True
+        "--dsraRuptureBranch",
+        type=str,
+        help="DSRA Rupture branch name, e.g. master",
+        required=True,
     )
     args = parser.parse_args()
     return args
 
 
-def processRuptureXML(repo_dict, engine, auth):
-    for ruptureFile in repo_dict:
-        logging.info("processing: {}".format(ruptureFile["name"]))
-        item_url = ruptureFile["download_url"]
-        ghToken = auth.get("auth", "github_token")
-        response = requests.get(item_url, headers={"Authorization": f"token {ghToken}"})
+def process_rupture_xml(repo_dict, engine, auth):
+    for rupture_file in repo_dict:
+        logging.info("processing: %s", rupture_file["name"])
+        item_url = rupture_file["download_url"]
+        gh_token = auth.get("auth", "github_token")
+        response = requests.get(
+            item_url, timeout=30, headers={"Authorization": f"token {gh_token}"}
+        )
         df_cols = [
             "source_type",
             "rupture_name",
@@ -116,7 +122,7 @@ def processRuptureXML(repo_dict, engine, auth):
         xroot = et.ElementTree(et.fromstring(response.content)).getroot()
         xmlns = "{http://openquake.org/xmlns/nrml/0.4}"
         source_type = xroot[0].tag.replace(f"{xmlns}", "")
-        rupture_name = os.path.splitext(ruptureFile["name"])[0].replace("rupture_", "")
+        rupture_name = os.path.splitext(rupture_file["name"])[0].replace("rupture_", "")
         magnitude = float(xroot[0].find(f"{xmlns}magnitude").text)
         rake = xroot[0].find(f"{xmlns}rake").text
         lon = xroot[0].find(f"{xmlns}hypocenter").attrib.get("lon")
@@ -141,7 +147,6 @@ def processRuptureXML(repo_dict, engine, auth):
             method=psql_insert_copy,
             schema="ruptures",
         )
-    return
 
 
 def psql_insert_copy(table, conn, keys, data_iter):
