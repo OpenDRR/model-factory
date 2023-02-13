@@ -14,20 +14,26 @@ Refer to the releases section (https://github.com/OpenDRR/model-factory/releases
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/openquake.engine)
 
-exigences.txt
-- liste des modules et des versions à installer.
+requirements.txt
+- list of modules and versions required to be installed.
 `$ pip install -r requirements.txt`
 
+## documentation
+- RiskProfileTaxonomy.xls
+		- Documentation of v1.0 risk profile indicators for review and comments
+- [opendrr.drawio](https://github.com/OpenDRR/opendrr-data-store/blob/master/scripts/Diagrams/opendrr.drawio)
+	- diagram of current opendrr postgis database, created in draw.io 
+	
 ## scripts
-- Série de scripts python et sql qui sont utilisés dans le repo opendrr-api.
+- Series of python and sql scripts that are used in opendrr-api repo.
 
-### Comment le script fonctionne
-- La plupart des scripts de ce dépôt sont exécutés avec des arguments sous forme de mots-clés.
+### How the script works
+- Most scripts in this repository are run with keyword arguments.
 
-Exemple :
+Example:
 ```
 $ python3 DSRA_outputs2postgres.py --dsraModelDir="https://github.com/OpenDRR/openquake-models/tree/master/deterministic/outputs" --columnsINI="DSRA_outputs2postgres.ini"
 ```
-Ou demandez de l'aide aux scripts pour savoir comment les exécuter :
+Or ask scripts for help on how to run them:
 ```
 $ python3 DSRA_outputs2postgres.py --help
