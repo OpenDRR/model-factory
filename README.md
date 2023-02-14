@@ -1,16 +1,16 @@
-
 # model-factory
 
-model-factory is a repo used in conjunction with [opendrr-api](https://github.com/OpenDRR/opendrr-api) repository (https://github.com/OpenDRR/opendrr-api).
+model-factory is a repository used in conjunction with [opendrr-api](https://github.com/OpenDRR/opendrr-api) repository.
 It contains documentation, and scripts (python and sql) to transform opendrr source data (exposure, census, and OpenQuake outputs etc.) into risk profile indicators for:
 
- - National Human Settlement Layer (https://github.com/OpenDRR/national-human-settlement)
-		 - Physical Exposure
-		 - Social Fabric
-- Earthquake Scenarios (https://github.com/OpenDRR/earthquake-scenarios)
-- Probabilistic Earthquake Risk (https://github.com/OpenDRR/seismic-risk-model)
+ - [National Human Settlement Layer](https://github.com/OpenDRR/national-human-settlement) 
+		 - [Physical Exposure](https://github.com/OpenDRR/national-human-settlement/tree/main/physical-exposure)
+		 - [Social Fabric](https://github.com/OpenDRR/national-human-settlement/tree/main/social-fabric)
+- [Earthquake Scenarios](https://github.com/OpenDRR/earthquake-scenarios) 
+- [Probabilistic Earthquake Risk](https://github.com/OpenDRR/seismic-risk-model)
 
-Refer to the releases section (https://github.com/OpenDRR/model-factory/releases) for latest version changes.
+Refer to the [releases section](https://github.com/OpenDRR/model-factory/releases) for latest version changes.
+
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/openquake.engine)
 
@@ -21,7 +21,7 @@ requirements.txt
 ## documentation
 - RiskProfileTaxonomy.xls
 		- Documentation of v1.0 risk profile indicators for review and comments
-- [opendrr.drawio](https://github.com/OpenDRR/opendrr-data-store/blob/master/scripts/Diagrams/opendrr.drawio)
+- [opendrr.drawio](https://github.com/OpenDRR/opendrr-data-store/blob/master/scripts/Diagrams)
 	- diagram of current opendrr postgis database, created in draw.io 
 	
 ## scripts
