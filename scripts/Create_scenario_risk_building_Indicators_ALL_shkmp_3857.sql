@@ -71,6 +71,379 @@ SET geom = ST_BUFFER(geom,0.0001) WHERE scenario = '{eqScenario}';
 
 -- clipped
 -- create shakemap in hexgrid for display - 5km
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5 CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5 AS
+
+SELECT
+b.gridid_5,
+AVG("sH_PGA") AS "sH_PGA_avg",
+MIN("sH_PGA") as "sH_PGA_min",
+MAX("sH_PGA") as "sH_PGA_max",
+b.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
+JOIN boundaries."HexGrid_5km_3857" b ON ST_INTERSECTS(a.geom,ST_TRANSFORM(b.geom,4326))
+GROUP BY b.gridid_5;
+
+-- create shakemap in hexgrid for display - 10km
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_10 CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_10 AS
+
+SELECT
+b.gridid_10,
+AVG("sH_PGA") AS "sH_PGA_avg",
+MIN("sH_PGA") as "sH_PGA_min",
+MAX("sH_PGA") as "sH_PGA_max",
+b.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
+JOIN boundaries."HexGrid_10km_3857" b ON ST_INTERSECTS(a.geom,ST_TRANSFORM(b.geom,4326))
+GROUP BY b.gridid_10,b.geom;
+
+
+
+-- create shakemap in hexgrid for display - 25km
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_25 CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_25 AS
+
+SELECT
+b.gridid_25,
+AVG("sH_PGA") AS "sH_PGA_avg",
+MIN("sH_PGA") as "sH_PGA_min",
+MAX("sH_PGA") as "sH_PGA_max",
+b.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
+JOIN boundaries."HexGrid_25km_3857" b ON ST_INTERSECTS(a.geom,ST_TRANSFORM(b.geom,4326))
+GROUP BY b.gridid_25,b.geom;
+
+
+
+-- create shakemap in hexgrid for display - 1km
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_f;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_f AS
+SELECT
+a.gridid_1,
+a.geom
+
+FROM boundaries."HexGrid_1km_3857" a
+JOIN gmf.shakemap_scenario_extents_temp b ON ST_INTERSECTS(ST_TRANSFORM(a.geom,4326),b.geom)
+WHERE b.scenario = '{eqScenario}';
+
+-- calculate avg, min, max pga of shakemap points within 1km hexgrid
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_t CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_t AS
+
+SELECT
+b.gridid_1,
+AVG("sH_PGA") AS "sH_PGA_avg",
+MIN("sH_PGA") as "sH_PGA_min",
+MAX("sH_PGA") as "sH_PGA_max",
+b.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
+JOIN boundaries."HexGrid_1km_3857" b ON ST_INTERSECTS(a.geom,ST_TRANSFORM(b.geom,4326))
+GROUP BY b.gridid_1,b.geom;
+
+-- create dsra scenario shakemap 1km hexgrid and assign PGA value based on nearest shakemap ID
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_t1 CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_t1 AS
+SELECT
+a.gridid_1,
+0.00 AS "sH_PGA_avg",
+0.00 AS "sH_PGA_min",
+b."sH_PGA" AS "sH_PGA_max",
+a.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_f a
+CROSS JOIN LATERAL 
+(
+SELECT
+"sH_PGA",
+geom
+	
+FROM results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl
+ORDER BY ST_TRANSFORM(a.geom,4326) <-> geom
+LIMIT 1
+) AS b;
+
+-- update dsra shakeap 1km hexgrid with calculated max PGA values
+UPDATE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_t1 b
+SET "sH_PGA_max" = a."sH_PGA_max",
+"sH_PGA_min" = a."sH_PGA_min",
+"sH_PGA_avg" = a."sH_PGA_avg"
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_t a
+WHERE a.gridid_1 = b.gridid_1;
+
+-- remove duplicate gridid_1 values from selection
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_tbl CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_tbl AS
+SELECT
+DISTINCT(gridid_1),
+"sH_PGA_avg",
+"sH_PGA_min",
+"sH_PGA_max",
+geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_t1;
+
+-- update assigned 0.00 to null
+UPDATE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_tbl
+SET "sH_PGA_avg" = NULL WHERE "sH_PGA_avg" = 0.00;
+UPDATE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_tbl
+SET "sH_PGA_min" = NULL WHERE "sH_PGA_min" = 0.00;
+
+-- drop t
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_t,
+results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_t1,
+results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_f CASCADE;
+
+-- create view
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1 AS SELECT * FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_tbl;
+
+
+
+-- unclipped
+-- create shakemap in hexgrid for display - 5km
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_f;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_f AS
+SELECT
+a.gridid_5,
+a.geom
+
+FROM boundaries."HexGrid_5km_unclipped_3857" a
+JOIN gmf.shakemap_scenario_extents_temp b ON ST_INTERSECTS(ST_TRANSFORM(a.geom,4326),b.geom)
+WHERE b.scenario = '{eqScenario}';
+
+
+-- calculate avg, min, max pga of shakemap points within 5km hexgrid
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_t CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_t AS
+
+SELECT
+b.gridid_5,
+AVG("sH_PGA") AS "sH_PGA_avg",
+MIN("sH_PGA") as "sH_PGA_min",
+MAX("sH_PGA") as "sH_PGA_max",
+b.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
+JOIN boundaries."HexGrid_5km_unclipped_3857" b ON ST_INTERSECTS(a.geom,ST_TRANSFORM(b.geom,4326))
+GROUP BY b.gridid_5,b.geom;
+
+
+-- create dsra scenario shakemap 5km hexgrid and assign PGA value based on nearest shakemap ID
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_5_uc_t1 CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_t1 AS
+SELECT
+a.gridid_5,
+0.00 AS "sH_PGA_avg",
+0.00 AS "sH_PGA_min",
+b."sH_PGA" AS "sH_PGA_max",
+a.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_f a
+CROSS JOIN LATERAL 
+(
+SELECT
+"sH_PGA",
+geom
+	
+FROM results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl
+ORDER BY ST_TRANSFORM(a.geom,4326) <-> geom
+LIMIT 1
+) AS b;
+
+-- update dsra shakeap 5km hexgrid with calculated max PGA values
+UPDATE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_t1 b
+SET "sH_PGA_max" = a."sH_PGA_max",
+"sH_PGA_min" = a."sH_PGA_min",
+"sH_PGA_avg" = a."sH_PGA_avg"
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_t a
+WHERE a.gridid_5 = b.gridid_5;
+
+-- remove duplicate gridid_5 values from selection
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_tbl CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_tbl AS
+SELECT
+DISTINCT(gridid_5),
+"sH_PGA_avg",
+"sH_PGA_min",
+"sH_PGA_max",
+geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_t1;
+
+-- update assigned 0.00 to null
+UPDATE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_tbl
+SET "sH_PGA_avg" = NULL WHERE "sH_PGA_avg" = 0.00;
+UPDATE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_tbl
+SET "sH_PGA_min" = NULL WHERE "sH_PGA_min" = 0.00;
+
+-- drop t
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_t,
+results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_t1,
+results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_f CASCADE;
+
+-- create view
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc AS SELECT * FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_uc_tbl;
+
+
+
+-- create shakemap in hexgrid for display - 10km
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_10_uc CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_10_uc AS
+
+SELECT
+b.gridid_10,
+AVG("sH_PGA") AS "sH_PGA_avg",
+MIN("sH_PGA") as "sH_PGA_min",
+MAX("sH_PGA") as "sH_PGA_max",
+b.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
+JOIN boundaries."HexGrid_10km_unclipped_3857" b ON ST_INTERSECTS(a.geom,ST_TRANSFORM(b.geom,4326))
+GROUP BY b.gridid_10,b.geom;
+
+
+
+-- create shakemap in hexgrid for display - 25km
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_25_uc CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_25_uc AS
+
+SELECT
+b.gridid_25,
+AVG("sH_PGA") AS "sH_PGA_avg",
+MIN("sH_PGA") as "sH_PGA_min",
+MAX("sH_PGA") as "sH_PGA_max",
+b.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
+JOIN boundaries."HexGrid_25km_unclipped_3857" b ON ST_INTERSECTS(a.geom,ST_TRANSFORM(b.geom,4326))
+GROUP BY b.gridid_25,b.geom;
+
+
+-- create shakemap in hexgrid for display - 50km
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_50_uc CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_50_uc AS
+
+SELECT
+b.gridid_50,
+AVG("sH_PGA") AS "sH_PGA_avg",
+MIN("sH_PGA") as "sH_PGA_min",
+MAX("sH_PGA") as "sH_PGA_max",
+b.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
+JOIN boundaries."HexGrid_50km_unclipped_3857" b ON ST_INTERSECTS(a.geom,ST_TRANSFORM(b.geom,4326))
+GROUP BY b.gridid_50,b.geom;
+
+-- create shakemap in hexgrid for display - 100km
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_100_uc CASCADE;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_100_uc AS
+
+SELECT
+b.gridid_100,
+AVG("sH_PGA") AS "sH_PGA_avg",
+MIN("sH_PGA") as "sH_PGA_min",
+MAX("sH_PGA") as "sH_PGA_max",
+b.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
+JOIN boundaries."HexGrid_100km_unclipped_3857" b ON ST_INTERSECTS(a.geom,ST_TRANSFORM(b.geom,4326))
+GROUP BY b.gridid_100,b.geom;
+
+
+
+-- create shakemap in hexgrid for display - 1km
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_f;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_f AS
+SELECT
+a.gridid_1,
+a.geom
+
+FROM boundaries."HexGrid_1km_unclipped_3857" a
+JOIN gmf.shakemap_scenario_extents_temp b ON ST_INTERSECTS(ST_TRANSFORM(a.geom,4326),b.geom)
+WHERE b.scenario = '{eqScenario}';
+
+-- calculate avg, min, max pga of shakemap points within 1km hexgrid
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_t CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_t AS
+
+SELECT
+b.gridid_1,
+AVG("sH_PGA") AS "sH_PGA_avg",
+MIN("sH_PGA") as "sH_PGA_min",
+MAX("sH_PGA") as "sH_PGA_max",
+b.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_shakemap a
+JOIN boundaries."HexGrid_1km_unclipped_3857" b ON ST_INTERSECTS(a.geom,ST_TRANSFORM(b.geom,4326))
+GROUP BY b.gridid_1,b.geom;
+
+-- create dsra scenario shakemap 1km hexgrid and assign PGA value based on nearest shakemap ID
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_t1 CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_t1 AS
+SELECT
+a.gridid_1,
+0.00 AS "sH_PGA_avg",
+0.00 AS "sH_PGA_min",
+b."sH_PGA" AS "sH_PGA_max",
+a.geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_f a
+CROSS JOIN LATERAL 
+(
+SELECT
+"sH_PGA",
+geom
+	
+FROM results_dsra_{eqScenario}.{eqScenario}_shakemap_tbl
+ORDER BY ST_TRANSFORM(a.geom,4326) <-> geom
+LIMIT 1
+) AS b;
+
+-- update dsra shakeap 1km hexgrid with calculated max PGA values
+UPDATE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_t1 b
+SET "sH_PGA_max" = a."sH_PGA_max",
+"sH_PGA_min" = a."sH_PGA_min",
+"sH_PGA_avg" = a."sH_PGA_avg"
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_t a
+WHERE a.gridid_1 = b.gridid_1;
+
+-- remove duplicate gridid_1 values from selection
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_tbl CASCADE;
+CREATE TABLE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_tbl AS
+SELECT
+DISTINCT(gridid_1),
+"sH_PGA_avg",
+"sH_PGA_min",
+"sH_PGA_max",
+geom
+
+FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_t1;
+
+-- update assigned 0.00 to null
+UPDATE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_tbl
+SET "sH_PGA_avg" = NULL WHERE "sH_PGA_avg" = 0.00;
+UPDATE results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_tbl
+SET "sH_PGA_min" = NULL WHERE "sH_PGA_min" = 0.00;
+
+-- drop t
+DROP TABLE IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_t,
+results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_t1,
+results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_f CASCADE;
+
+-- create view
+DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc;
+CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc AS SELECT * FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_tbl;
+
+
+-- create hexgrid 4326
+-- clipped
+-- create shakemap in hexgrid for display - 5km
 DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_4326 CASCADE;
 CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_5_4326 AS
 
@@ -439,7 +812,6 @@ results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_f_4326 CASCADE;
 -- create view
 DROP VIEW IF EXISTS results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_4326;
 CREATE VIEW results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_4326 AS SELECT * FROM results_dsra_{eqScenario}.dsra_{eqScenario}_sm_hg_1_uc_tbl_4326;
-
 
 
 -- create index

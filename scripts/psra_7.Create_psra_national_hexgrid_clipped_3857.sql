@@ -1,8 +1,8 @@
 -- test hexgrid aggregation for psra national level
 
 -- 1km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_1km_4326 CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexgrid_1km_4326 AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_1km CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_1km AS
 SELECT 
 c.gridid_1,
 SUM(a."eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -108,16 +108,16 @@ d.eqri_norm_rating_r1 AS "eqri_norm_rank_r1",
 c.geom
 
 FROM results_psra_national.psra_indicators_s_tbl a
-LEFT JOIN boundaries."SAUID_HexGrid_1km_intersect" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_1km" c ON b.gridid_1 = c.gridid_1
-LEFT JOIN results_psra_national.psra_sri_calc_hg_1km_4326 d ON b.gridid_1 = d.gridid_1
+LEFT JOIN boundaries."SAUID_HexGrid_1km_intersect_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_1km_3857" c ON b.gridid_1 = c.gridid_1
+LEFT JOIN results_psra_national.psra_sri_calc_hg_1km d ON b.gridid_1 = d.gridid_1
 GROUP BY c.gridid_1,d.eqri_abs_cbrt_minmax_b0,d.eqri_abs_rating_b0,d.eqri_norm_cbrt_minmax_b0,eqri_norm_rating_b0,d.eqri_abs_cbrt_minmax_r1,d.eqri_abs_rating_r1,d.eqri_norm_cbrt_minmax_r1,d.eqri_norm_rating_r1,c.geom;
 
 
 
 -- 5km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_5km_4326 CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexgrid_5km_4326 AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_5km CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_5km AS
 SELECT 
 c.gridid_5,
 SUM(a."eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -223,16 +223,16 @@ d.eqri_norm_rating_r1 AS "eqri_norm_rank_r1",
 c.geom
 
 FROM results_psra_national.psra_indicators_s_tbl a
-LEFT JOIN boundaries."SAUID_HexGrid_5km_intersect" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_5km" c ON b.gridid_5 = c.gridid_5
-LEFT JOIN results_psra_national.psra_sri_calc_hg_5km_4326 d ON b.gridid_5 = d.gridid_5
+LEFT JOIN boundaries."SAUID_HexGrid_5km_intersect_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_5km_3857" c ON b.gridid_5 = c.gridid_5
+LEFT JOIN results_psra_national.psra_sri_calc_hg_5km d ON b.gridid_5 = d.gridid_5
 GROUP BY c.gridid_5,d.eqri_abs_cbrt_minmax_b0,d.eqri_abs_rating_b0,d.eqri_norm_cbrt_minmax_b0,eqri_norm_rating_b0,d.eqri_abs_cbrt_minmax_r1,d.eqri_abs_rating_r1,d.eqri_norm_cbrt_minmax_r1,d.eqri_norm_rating_r1,c.geom;
 
 
 
 -- 10km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_10km_4326 CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexgrid_10km_4326 AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_10km CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_10km AS
 SELECT 
 c.gridid_10,
 SUM(a."eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -338,15 +338,15 @@ d.eqri_norm_rating_r1 AS "eqri_norm_rank_r1",
 c.geom
 
 FROM results_psra_national.psra_indicators_s_tbl a
-LEFT JOIN boundaries."SAUID_HexGrid_10km_intersect" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_10km" c ON b.gridid_10 = c.gridid_10
-LEFT JOIN results_psra_national.psra_sri_calc_hg_10km_4326 d ON b.gridid_10 = d.gridid_10
+LEFT JOIN boundaries."SAUID_HexGrid_10km_intersect_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_10km_3857" c ON b.gridid_10 = c.gridid_10
+LEFT JOIN results_psra_national.psra_sri_calc_hg_10km d ON b.gridid_10 = d.gridid_10
 GROUP BY c.gridid_10,d.eqri_abs_cbrt_minmax_b0,d.eqri_abs_rating_b0,d.eqri_norm_cbrt_minmax_b0,eqri_norm_rating_b0,d.eqri_abs_cbrt_minmax_r1,d.eqri_abs_rating_r1,d.eqri_norm_cbrt_minmax_r1,d.eqri_norm_rating_r1,c.geom;
 
 
 -- 25km
-DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_25km_4326 CASCADE;
-CREATE VIEW results_psra_national.psra_indicators_hexgrid_25km_4326 AS
+DROP VIEW IF EXISTS results_psra_national.psra_indicators_hexgrid_25km CASCADE;
+CREATE VIEW results_psra_national.psra_indicators_hexgrid_25km AS
 SELECT 
 c.gridid_25,
 SUM(a."eDt_Slight_b0" * b.area_ratio) AS "eDt_Slight_b0",
@@ -452,7 +452,7 @@ d.eqri_norm_rating_r1 AS "eqri_norm_rank_r1",
 c.geom
 
 FROM results_psra_national.psra_indicators_s_tbl a
-LEFT JOIN boundaries."SAUID_HexGrid_25km_intersect" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_25km" c ON b.gridid_25 = c.gridid_25
-LEFT JOIN results_psra_national.psra_sri_calc_hg_25km_4326 d ON b.gridid_25 = d.gridid_25
+LEFT JOIN boundaries."SAUID_HexGrid_25km_intersect_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_25km_3857" c ON b.gridid_25 = c.gridid_25
+LEFT JOIN results_psra_national.psra_sri_calc_hg_25km d ON b.gridid_25 = d.gridid_25
 GROUP BY c.gridid_25,d.eqri_abs_cbrt_minmax_b0,d.eqri_abs_rating_b0,d.eqri_norm_cbrt_minmax_b0,eqri_norm_rating_b0,d.eqri_abs_cbrt_minmax_r1,d.eqri_abs_rating_r1,d.eqri_norm_cbrt_minmax_r1,d.eqri_norm_rating_r1,c.geom;

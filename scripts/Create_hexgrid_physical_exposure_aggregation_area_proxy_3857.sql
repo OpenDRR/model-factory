@@ -2,8 +2,8 @@
 
 -- clipped
 --1km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km_4326 CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km_4326 AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km AS 
 
 SELECT
 c.gridid_1,
@@ -53,15 +53,15 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 c.geom
 
 FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_1km_intersect" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_1km" c ON b.gridid_1 = c.gridid_1
+LEFT JOIN boundaries."SAUID_HexGrid_1km_intersect_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_1km_3857" c ON b.gridid_1 = c.gridid_1
 GROUP BY c.gridid_1,c.geom;
 
 
 
 --5km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_5km_4326 CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_5km_4326 AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_5km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_5km AS 
 
 SELECT
 c.gridid_5,
@@ -111,15 +111,15 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 c.geom
 
 FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_5km_intersect" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_5km" c ON b.gridid_5 = c.gridid_5
+LEFT JOIN boundaries."SAUID_HexGrid_5km_intersect_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_5km_3857" c ON b.gridid_5 = c.gridid_5
 GROUP BY c.gridid_5,c.geom;
 
 
 
 --10km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_10km_4326 CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_10km_4326 AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_10km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_10km AS 
 
 SELECT
 c.gridid_10,
@@ -169,15 +169,15 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 c.geom
 
 FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_10km_intersect" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_10km" c ON b.gridid_10 = c.gridid_10
+LEFT JOIN boundaries."SAUID_HexGrid_10km_intersect_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_10km_3857" c ON b.gridid_10 = c.gridid_10
 GROUP BY c.gridid_10,c.geom;
 
 
 
 --25km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km_4326 CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km_4326 AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km AS 
 
 SELECT
 c.gridid_25,
@@ -226,8 +226,8 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 c.geom
 
 FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_25km_intersect" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_25km" c ON b.gridid_25 = c.gridid_25
+LEFT JOIN boundaries."SAUID_HexGrid_25km_intersect_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_25km_3857" c ON b.gridid_25 = c.gridid_25
 GROUP BY c.gridid_25,c.geom;
 
 
@@ -291,8 +291,8 @@ GROUP BY c.gridid,c.geom;
 
 --unclipped
 --1km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km_uc_4326 CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km_uc_4326 AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km_uc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_1km_uc AS 
 
 SELECT
 c.gridid_1,
@@ -342,15 +342,15 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 c.geom
 
 FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_1km_intersect_unclipped" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_1km_unclipped" c ON b.gridid_1 = c.gridid_1
+LEFT JOIN boundaries."SAUID_HexGrid_1km_intersect_unclipped_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_1km_unclipped_3857" c ON b.gridid_1 = c.gridid_1
 GROUP BY c.gridid_1,c.geom;
 
 
 
 --5km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_5km_uc_4326 CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_5km_uc_4326 AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_5km_uc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_5km_uc AS 
 
 SELECT
 c.gridid_5,
@@ -400,15 +400,15 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 c.geom
 
 FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_5km_intersect_unclipped" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_5km_unclipped" c ON b.gridid_5 = c.gridid_5
+LEFT JOIN boundaries."SAUID_HexGrid_5km_intersect_unclipped_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_5km_unclipped_3857" c ON b.gridid_5 = c.gridid_5
 GROUP BY c.gridid_5,c.geom;
 
 
 
 --10km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_10km_uc_4326 CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_10km_uc_4326 AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_10km_uc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_10km_uc AS 
 
 SELECT
 c.gridid_10,
@@ -458,15 +458,15 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 c.geom
 
 FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_10km_intersect_unclipped" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_10km_unclipped" c ON b.gridid_10 = c.gridid_10
+LEFT JOIN boundaries."SAUID_HexGrid_10km_intersect_unclipped_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_10km_unclipped_3857" c ON b.gridid_10 = c.gridid_10
 GROUP BY c.gridid_10,c.geom;
 
 
 
 --25km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km_uc_4326 CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km_uc_4326 AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km_uc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_25km_uc AS 
 
 SELECT
 c.gridid_25,
@@ -515,13 +515,13 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 c.geom
 
 FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_25km_intersect_unclipped" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_25km_unclipped" c ON b.gridid_25 = c.gridid_25
+LEFT JOIN boundaries."SAUID_HexGrid_25km_intersect_unclipped_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_25km_unclipped_3857" c ON b.gridid_25 = c.gridid_25
 GROUP BY c.gridid_25,c.geom;
 
 --50km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_50km_uc_4326 CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_50km_uc_4326 AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_50km_uc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_50km_uc AS 
 
 SELECT
 c.gridid_50,
@@ -571,15 +571,15 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 c.geom
 
 FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_50km_intersect_unclipped" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_50km_unclipped" c ON b.gridid_50 = c.gridid_50
+LEFT JOIN boundaries."SAUID_HexGrid_50km_intersect_unclipped_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_50km_unclipped_3857" c ON b.gridid_50 = c.gridid_50
 GROUP BY c.gridid_50,c.geom;
 
 
 
 --100km
-DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_100km_uc_4326 CASCADE;
-CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_100km_uc_4326 AS 
+DROP VIEW IF EXISTS results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_100km_uc CASCADE;
+CREATE VIEW results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_hexgrid_100km_uc AS 
 
 SELECT
 c.gridid_100,
@@ -629,6 +629,6 @@ SUM(a."Et_ContValue" * b.area_ratio) AS "Et_ContValue",
 c.geom
 
 FROM results_nhsl_physical_exposure.nhsl_physical_exposure_indicators_s a
-LEFT JOIN boundaries."SAUID_HexGrid_100km_intersect_unclipped" b ON a."Sauid" = b.sauid
-LEFT JOIN boundaries."HexGrid_100km_unclipped" c ON b.gridid_100 = c.gridid_100
+LEFT JOIN boundaries."SAUID_HexGrid_100km_intersect_unclipped_3857" b ON a."Sauid" = b.sauid
+LEFT JOIN boundaries."HexGrid_100km_unclipped_3857" c ON b.gridid_100 = c.gridid_100
 GROUP BY c.gridid_100,c.geom;

@@ -101,14 +101,14 @@ CASE WHEN ((k.structural_complete_r1/a.number) * f.collapse_pc) >0.01 THEN a.num
 -- 2.3.1 Life Safety - b0
 -- CAST(CAST(ROUND(CAST((occupants_b0/0.000001) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eC_Fatality_b0",
 -- CAST(CAST(ROUND(CAST(COALESCE(occupants_b0/NULLIF(a.transit,0),0)/0.000001 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCr_Fatality_b0",
-CAST(CAST(ROUND(CAST((occupants_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eC_Fatality_b0",
-CAST(CAST(ROUND(CAST(COALESCE(occupants_b0/NULLIF(a.transit,0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCr_Fatality_b0",
+CAST(CAST(ROUND(CAST((occupants_b0) AS NUMERIC),10) AS FLOAT) AS NUMERIC) AS "eC_Fatality_b0",
+CAST(CAST(ROUND(CAST(COALESCE(occupants_b0/NULLIF(a.transit,0),10) AS NUMERIC),10) AS FLOAT) AS NUMERIC) AS "eCr_Fatality_b0",
 
 -- 2.3.1 Life Safety - r1
 -- CAST(CAST(ROUND(CAST(occupants_r1/0.000001 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eC_Fatality_r1",
 -- CAST(CAST(ROUND(CAST(COALESCE(occupants_r1/NULLIF(a.transit,0),0)/0.000001 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCr_Fatality_r1",
-CAST(CAST(ROUND(CAST(occupants_r1 AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eC_Fatality_r1",
-CAST(CAST(ROUND(CAST(COALESCE(occupants_r1/NULLIF(a.transit,0),0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCr_Fatality_r1",
+CAST(CAST(ROUND(CAST(occupants_r1 AS NUMERIC),10) AS FLOAT) AS NUMERIC) AS "eC_Fatality_r1",
+CAST(CAST(ROUND(CAST(COALESCE(occupants_r1/NULLIF(a.transit,0),10) AS NUMERIC),10) AS FLOAT) AS NUMERIC) AS "eCr_Fatality_r1",
 
 
 -- 2.4.1 Economic Loss - b0

@@ -18,6 +18,7 @@ NULL AS "eqri_norm_rank_r1"
 
 FROM psra_{prov}.psra_{prov}_avg_losses_stats a
 LEFT JOIN exposure.canada_exposure b ON a.asset_id = b.id
+GROUP BY b.sauid,b.csduid
 );
 
 
@@ -147,14 +148,14 @@ CAST(CAST(ROUND(CAST(SUM(m."eD_Fail_Collapse95_r1") AS NUMERIC),6) AS FLOAT) AS 
 -- 2.3.1 Life Safety - b0
 -- CAST(CAST(ROUND(CAST(SUM(occupants_b0/0.000001) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCt_Fatality_b0",
 -- CAST(CAST(ROUND(CAST(AVG(COALESCE(occupants_b0/NULLIF(a.transit,0),0)/0.000001) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCtr_Fatality_b0",
-CAST(CAST(ROUND(CAST(SUM(occupants_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCt_Fatality_b0",
-CAST(CAST(ROUND(CAST(AVG(COALESCE(occupants_b0/NULLIF(a.transit,0),0)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCtr_Fatality_b0",
+CAST(CAST(ROUND(CAST(SUM(occupants_b0) AS NUMERIC),10) AS FLOAT) AS NUMERIC) AS "eCt_Fatality_b0",
+CAST(CAST(ROUND(CAST(AVG(COALESCE(occupants_b0/NULLIF(a.transit,0),10)) AS NUMERIC),10) AS FLOAT) AS NUMERIC) AS "eCtr_Fatality_b0",
 
 -- 2.3.1 Life Safety - r1
 -- CAST(CAST(ROUND(CAST(SUM(occupants_r1/0.000001) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCt_Fatality_r1",
 -- CAST(CAST(ROUND(CAST(AVG(COALESCE(occupants_r1/NULLIF(a.transit,0),0)/0.000001) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCtr_Fatality_r1",
-CAST(CAST(ROUND(CAST(SUM(occupants_r1) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCt_Fatality_r1",
-CAST(CAST(ROUND(CAST(AVG(COALESCE(occupants_r1/NULLIF(a.transit,0),0)) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eCtr_Fatality_r1",
+CAST(CAST(ROUND(CAST(SUM(occupants_r1) AS NUMERIC),10) AS FLOAT) AS NUMERIC) AS "eCt_Fatality_r1",
+CAST(CAST(ROUND(CAST(AVG(COALESCE(occupants_r1/NULLIF(a.transit,0),10)) AS NUMERIC),10) AS FLOAT) AS NUMERIC) AS "eCtr_Fatality_r1",
 
 -- 2.4.1 Average Annual Loss - b0
 CAST(CAST(ROUND(CAST(SUM(i.structural_b0 + i.nonstructural_b0 + i.contents_b0) AS NUMERIC),6) AS FLOAT) AS NUMERIC) AS "eAALt_Asset_b0",
@@ -299,11 +300,11 @@ ROUND(SUM("eDt_Collapse95_r1"),6) AS "eDt_Collapse95_r1",
 ROUND(AVG("eDtr_Collapse95_r1"),6) AS "eDtr_Collapse95_r1",
 SUM("eDt_Fail_Collapse95_r1") AS "eDt_Fail_Collapse95_r1",
 
-ROUND(SUM("eCt_Fatality_b0"),6) AS "eC_Fatality_b0",
-ROUND(AVG("eCtr_Fatality_b0"),6) AS "eCr_Fatality_b0",
+ROUND(SUM("eCt_Fatality_b0"),10) AS "eC_Fatality_b0",
+ROUND(AVG("eCtr_Fatality_b0"),10) AS "eCr_Fatality_b0",
 
-ROUND(SUM("eCt_Fatality_r1"),6) AS "eC_Fatality_r1",
-ROUND(AVG("eCtr_Fatality_r1"),6) AS "eCr_Fatality_r1",
+ROUND(SUM("eCt_Fatality_r1"),10) AS "eC_Fatality_r1",
+ROUND(AVG("eCtr_Fatality_r1"),10) AS "eCr_Fatality_r1",
 
 ROUND(SUM("eAALt_Asset_b0"),6) AS "eAALt_Asset_b0",
 ROUND(AVG("eAALm_Asset_b0"),6) AS "eAALm_Asset_b0",

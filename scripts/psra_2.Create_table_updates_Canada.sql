@@ -17,7 +17,7 @@ LEFT JOIN psra_canada.psra_canada_agg_curves_q05_r1 b ON a.return_period = b.ret
 AND a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence);
 
 -- delete *total* rows from table
-DELETE FROM psra_canada.psra_canada_agg_curves_q05 WHERE prname = '*total*';
+-- DELETE FROM psra_canada.psra_canada_agg_curves_q05 WHERE prname = '*total*';
 
 DROP TABLE IF EXISTS psra_canada.psra_canada_agg_curves_q05_b0, psra_canada.psra_canada_agg_curves_q05_r1;
 
@@ -38,7 +38,7 @@ LEFT JOIN psra_canada.psra_canada_agg_curves_q95_r1 b ON a.return_period = b.ret
 AND a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence);
 
 -- delete *total* rows from table
-DELETE FROM psra_canada.psra_canada_agg_curves_q95 WHERE prname = '*total*';
+-- DELETE FROM psra_canada.psra_canada_agg_curves_q95 WHERE prname = '*total*';
 
 DROP TABLE IF EXISTS psra_canada.psra_canada_agg_curves_q95_b0, psra_canada.psra_canada_agg_curves_q95_r1;
 
@@ -61,7 +61,7 @@ LEFT JOIN psra_canada.psra_canada_agg_curves_stats_r1 b ON a.return_period = b.r
 AND a.annual_frequency_of_exceedence = b.annual_frequency_of_exceedence);
 
 -- delete *total* rows from table
-DELETE FROM psra_canada.psra_canada_agg_curves_stats WHERE prname = '*total*';
+-- DELETE FROM psra_canada.psra_canada_agg_curves_stats WHERE prname = '*total*';
 
 DROP TABLE IF EXISTS psra_canada.psra_canada_agg_curves_stats_b0, psra_canada.psra_canada_agg_curves_stats_r1;
 
@@ -84,7 +84,7 @@ FROM psra_canada.psra_canada_agg_losses_q05_b0 a
 LEFT JOIN psra_canada.psra_canada_agg_losses_q05_r1 b ON a.loss_type = b.loss_type AND a.prname = b.prname;
 
 -- delete *total* rows from table
-DELETE FROM psra_canada.psra_canada_agg_losses_q05 WHERE prname = '*total*';
+-- DELETE FROM psra_canada.psra_canada_agg_losses_q05 WHERE prname = '*total*';
 
 DROP TABLE IF EXISTS psra_canada.psra_canada_agg_losses_q05_b0, psra_canada.psra_canada_agg_losses_q05_r1 CASCADE;
 
@@ -106,7 +106,7 @@ FROM psra_canada.psra_canada_agg_losses_q95_b0 a
 LEFT JOIN psra_canada.psra_canada_agg_losses_q95_r1 b ON a.loss_type = b.loss_type AND a.prname = b.prname;
 
 -- delete *total* rows from table
-DELETE FROM psra_canada.psra_canada_agg_losses_q95 WHERE prname = '*total*';
+-- DELETE FROM psra_canada.psra_canada_agg_losses_q95 WHERE prname = '*total*';
 
 DROP TABLE IF EXISTS psra_canada.psra_canada_agg_losses_q95_b0, psra_canada.psra_canada_agg_losses_q95_r1 CASCADE;
 
@@ -127,7 +127,7 @@ FROM psra_canada.psra_canada_agg_losses_stats_b0 a
 LEFT JOIN psra_canada.psra_canada_agg_losses_stats_r1 b ON a.loss_type = b.loss_type AND a.prname = b.prname;
 
 -- delete *total* rows from table
-DELETE FROM psra_canada.psra_canada_agg_losses_stats WHERE prname = '*total*';
+-- DELETE FROM psra_canada.psra_canada_agg_losses_stats WHERE prname = '*total*';
 
 DROP TABLE IF EXISTS psra_canada.psra_canada_agg_losses_stats_b0, psra_canada.psra_canada_agg_losses_stats_r1 CASCADE;
 
