@@ -1,0 +1,133 @@
+## Schemas
+
+- ### boundaries
+	- #### Notes
+	    -   Schema containing all geometry and reference tables related to the OpenDRR project. More details can be found in [https://github.com/OpenDRR/boundaries](https://github.com/OpenDRR/boundaries)
+	   -   All census related geometries are adapted from Statistics Canada, 2016 Census Boundary files, 2020
+	    -   Settled Area geometry development can be found in [Physical exposure to natural hazards in Canada](https://publications.gc.ca/collections/collection_2022/rncan-nrcan/m183-2/M183-2-8892-eng.pdf)
+	    -   All tables with geometries are in EPSG 4326 unless specified with a suffix _3857, which signifies EPSG 3857
+	    -   Table count: 53
+	- ####    Tables
+	    -   Geometry_ADAUID
+		    -   Aggregate dissemination area geometry
+	    -   Geometry_CANADA
+		    -   Canada outline geometry
+	    -   Geometry_CDUID
+		    -   Census Division geometry
+	    -   Geometry_CSDUID
+		    -   Census Subdivision geometry, simplified polygon at 0.005 degrees
+		- Geometry_DAUID
+			 -   Dissemination Area geometry
+	    -   Geometry_ERUID
+		    -   Economic Region geometry
+	    -   Geometry_FSAUID
+		    -   Forward Sortation Area geometry
+	    -   Geometry_PRUID
+		    -   Province geometry
+	    -   Geometry_SAUID
+		    -   Settled area geometry, contains 2 sets of geometries, point and polygon.
+	    -   HexGrid_1km
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.01 degrees(1km)
+	    -   HexGrid_1km_3857
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.01 degrees(1km) EPSG 3857
+	    -   HexGrid_1km_unclipped
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.01 degrees(1km)
+	    -   HexGrid_1km_unclipped_3857
+		    - Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km) EPSG 3857
+	    -   HexGrid_5km
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km)
+	    -   HexGrid_5km_3857
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km) EPSG 3857
+	    -   HexGrid_5km_unclipped
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km)
+	    -   HexGrid_5km_unclipped_3857
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km) EPSG 3857
+	    -   HexGrid_10km
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km)
+	    -   HexGrid_10km_3857
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km) EPSG 3857
+	    -   HexGrid_10km_unclipped
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km)
+	    -   HexGrid_10km_unclipped_3857
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km) EPSG 3857
+	    -   HexGrid_25km
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km)
+	    -   HexGrid_25km_3857
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km) EPSG 3857
+	    -   HexGrid_25km_unclipped
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km)
+	    -   HexGrid_25km_unclipped_3857
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km) EPSG 3857
+	    -   HexGrid_50km_unclipped
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.50 degrees(50km)
+	    -   HexGrid_50km_unclipped_3857
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.50 degrees(50km) EPSG 3857
+	    -   HexGrid_100km_unclipped
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 1 degrees(100km)
+	    -   HexGrid_100km_unclipped_3857
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 1 degrees(100km) EPSG 3857
+	    -   HexGrid_GlobalFabric
+		    -   Hexagonal geometry extents of Canada based off GEM’s global fabric hex grid
+	    -   SAUID_HexGrid
+		    -   Table referencing the centroid of each settled area id (SAUID) to the various HexGrid geometries (5km,10km,25km,50km,100km) used for aggregation purposes.
+	    -   SAUID_HexGrid_1km_intersect
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_1km_intersect_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_1km_intersect_unclipped
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km_unclipped geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_1km_intersect_unclipped_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km_unclipped_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_5km_intersect
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_5km geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_5km_intersect_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to 	HexGrid_5km_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_5km_intersect_unclipped
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_5km_unclipped geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_5km_intersect_unclipped_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_5km_unclipped_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_10km_intersect
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_10km_intersect_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_10km_intersect_unclipped
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km_unclipped geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_10km_intersect_unclipped_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km_unclipped_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_25km_intersect
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_25km_intersect_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_25km_intersect_unclipped
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km_unclipped geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_25km_intersect_unclipped_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km_unclipped_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_50km_intersect_unclipped
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_50km_unclipped geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_50km_intersect_unclipped_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_50km_unclipped_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_100km_intersect_unclipped
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_100km_unclipped geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_100km_intersect_unclipped_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_100km_unclipped_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_GlobalFabric_intersect
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_GlobalFabric geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_Unclipped
+		    -   Table referencing the centroid of each settled area id (SAUID) to the various unclipped HexGrid geometries (5km,10km,25km,50km,100km) used for aggregation purposes.
+    
+
+-   ### census
+	- #### Notes
+	-   census-attributes-2016.csv
+		-   2016 Census attribute source table of Canada
+		- [https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv)
+		- Tables count: 1
+    - ####    Tables
+		-   census_2016_canada
+			-   Table containing relevant processed indicators from the 2016 census.
+-   ### db_check
+	-  #### Notes
+		- Tables count: 1
+    - ####    Tables
+	   -   table_view_checkrow
+		   -   Table showing all the schema, table names, table type (table, view etc), and row count in the opendrr database. Useful for QA/QC check at the end of stackbuild to see if any issues arise (ie missing tables, row_count of 0 etc).
