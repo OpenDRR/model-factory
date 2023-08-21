@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://github.com/wkhchow/model-factory/schemas/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Schemas - OpenDRR Model Factory</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Schemas";
+        var mkdocs_page_input_path = "schemas.md";
+        var mkdocs_page_url = "/wkhchow/model-factory/schemas/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OpenDRR Model Factory
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">OpenDRR Database/SQL Documentation</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Schemas</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#boundaries">boundaries</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#census">census</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_1">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_1">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#db_check">db_check</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_2">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_2">Tables</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OpenDRR Model Factory</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li class="breadcrumb-item active">Schemas</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="schemas">Schemas</h2>
+<ul>
+<li>
+<h3 id="boundaries">boundaries</h3>
+<ul>
+<li>
+<h4 id="notes">Notes</h4>
+<ul>
+<li>Schema containing all geometry and reference tables related to the OpenDRR project. More details can be found in <a href="https://github.com/OpenDRR/boundaries">https://github.com/OpenDRR/boundaries</a></li>
+</ul>
+</li>
+<li>All census related geometries are adapted from Statistics Canada, 2016 Census Boundary files, 2020<ul>
+<li>Settled Area geometry development can be found in <a href="https://publications.gc.ca/collections/collection_2022/rncan-nrcan/m183-2/M183-2-8892-eng.pdf">Physical exposure to natural hazards in Canada</a></li>
+<li>All tables with geometries are in EPSG 4326 unless specified with a suffix _3857, which signifies EPSG 3857</li>
+<li>Table count: 53</li>
+</ul>
+</li>
+<li>
+<h4 id="tables">Tables</h4>
+<ul>
+<li>Geometry_ADAUID<ul>
+<li>Aggregate dissemination area geometry</li>
+</ul>
+</li>
+<li>Geometry_CANADA<ul>
+<li>Canada outline geometry</li>
+</ul>
+</li>
+<li>Geometry_CDUID<ul>
+<li>Census Division geometry</li>
+</ul>
+</li>
+<li>Geometry_CSDUID<ul>
+<li>Census Subdivision geometry, simplified polygon at 0.005 degrees</li>
+</ul>
+</li>
+<li>Geometry_DAUID<ul>
+<li>Dissemination Area geometry</li>
+</ul>
+</li>
+<li>Geometry_ERUID<ul>
+<li>Economic Region geometry</li>
+</ul>
+</li>
+<li>Geometry_FSAUID<ul>
+<li>Forward Sortation Area geometry</li>
+</ul>
+</li>
+<li>Geometry_PRUID<ul>
+<li>Province geometry</li>
+</ul>
+</li>
+<li>Geometry_SAUID<ul>
+<li>Settled area geometry, contains 2 sets of geometries, point and polygon.</li>
+</ul>
+</li>
+<li>HexGrid_1km<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.01 degrees(1km)</li>
+</ul>
+</li>
+<li>HexGrid_1km_3857<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.01 degrees(1km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_1km_unclipped<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.01 degrees(1km)</li>
+</ul>
+</li>
+<li>HexGrid_1km_unclipped_3857<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_5km<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km)</li>
+</ul>
+</li>
+<li>HexGrid_5km_3857<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_5km_unclipped<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km)</li>
+</ul>
+</li>
+<li>HexGrid_5km_unclipped_3857<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_10km<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km)</li>
+</ul>
+</li>
+<li>HexGrid_10km_3857<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_10km_unclipped<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km)</li>
+</ul>
+</li>
+<li>HexGrid_10km_unclipped_3857<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_25km<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km)</li>
+</ul>
+</li>
+<li>HexGrid_25km_3857<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_25km_unclipped<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km)</li>
+</ul>
+</li>
+<li>HexGrid_25km_unclipped_3857<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_50km_unclipped<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.50 degrees(50km)</li>
+</ul>
+</li>
+<li>HexGrid_50km_unclipped_3857<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.50 degrees(50km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_100km_unclipped<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 1 degrees(100km)</li>
+</ul>
+</li>
+<li>HexGrid_100km_unclipped_3857<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 1 degrees(100km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_GlobalFabric<ul>
+<li>Hexagonal geometry extents of Canada based off GEM’s global fabric hex grid</li>
+</ul>
+</li>
+<li>SAUID_HexGrid<ul>
+<li>Table referencing the centroid of each settled area id (SAUID) to the various HexGrid geometries (5km,10km,25km,50km,100km) used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_1km_intersect<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_1km_intersect_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_1km_intersect_unclipped<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km_unclipped geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_1km_intersect_unclipped_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km_unclipped_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_5km_intersect<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_5km geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_5km_intersect_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to    HexGrid_5km_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_5km_intersect_unclipped<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_5km_unclipped geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_5km_intersect_unclipped_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_5km_unclipped_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_10km_intersect<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_10km_intersect_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_10km_intersect_unclipped<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km_unclipped geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_10km_intersect_unclipped_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km_unclipped_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_25km_intersect<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_25km_intersect_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_25km_intersect_unclipped<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km_unclipped geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_25km_intersect_unclipped_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km_unclipped_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_50km_intersect_unclipped<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_50km_unclipped geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_50km_intersect_unclipped_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_50km_unclipped_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_100km_intersect_unclipped<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_100km_unclipped geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_100km_intersect_unclipped_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_100km_unclipped_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_GlobalFabric_intersect<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_GlobalFabric geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_Unclipped<ul>
+<li>Table referencing the centroid of each settled area id (SAUID) to the various unclipped HexGrid geometries (5km,10km,25km,50km,100km) used for aggregation purposes.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="census">census</h3>
+<ul>
+<li>
+<h4 id="notes_1">Notes</h4>
+</li>
+<li>census-attributes-2016.csv<ul>
+<li>2016 Census attribute source table of Canada</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv</a></li>
+<li>Tables count: 1</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_1">Tables</h4>
+<ul>
+<li>census_2016_canada<ul>
+<li>Table containing relevant processed indicators from the 2016 census.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="db_check">db_check</h3>
+<ul>
+<li>
+<h4 id="notes_2">Notes</h4>
+<ul>
+<li>Tables count: 1</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_2">Tables</h4>
+</li>
+<li>table_view_checkrow<ul>
+<li>Table showing all the schema, table names, table type (table, view etc), and row count in the opendrr database. Useful for QA/QC check at the end of stackbuild to see if any issues arise (ie missing tables, row_count of 0 etc).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../intro/" class="btn btn-neutral float-left" title="OpenDRR Database/SQL Documentation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../intro/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
