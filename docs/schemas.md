@@ -122,12 +122,247 @@
 		-   2016 Census attribute source table of Canada
 		- [https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv)
 		- Tables count: 1
-    - ####    Tables
+    - #### Tables
 		-   census_2016_canada
 			-   Table containing relevant processed indicators from the 2016 census.
+
+
 -   ### db_check
 	-  #### Notes
 		- Tables count: 1
-    - ####    Tables
+    - #### Tables
 	   -   table_view_checkrow
 		   -   Table showing all the schema, table names, table type (table, view etc), and row count in the opendrr database. Useful for QA/QC check at the end of stackbuild to see if any issues arise (ie missing tables, row_count of 0 etc).
+
+
+- ### exposure
+	- #### Notes
+		- Tables count: 1
+    - #### Tables
+    	- canada_exposure
+        	- Table containing initial source indicators for physical exposure.
+        	- BldgExpRef_CA_master_v3p2.csv
+            	- Physical exposure source table of Canada
+            	- [https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/general-building-stock/BldgExpRef_CA_master_v3p2.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/general-building-stock/BldgExpRef_CA_master_v3p2.csv)
+    	- Table processed from 
+[https://github.com/OpenDRR/openquake-inputs/](https://github.com/OpenDRR/openquake-inputs/)
+
+
+- ### ghsl
+	- #### Notes
+		- Tables count: 1
+    - #### Tables
+    	- ghsl_mh_intensity_ghsl
+        	- Table containing initial source indicators for _risk dynamics (not used)_.
+        	- mh-intensity-ghsl.csv
+        		- source table for risk dynamics
+        		- [https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/mh-intensity-ghsl.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/mh-intensity-ghsl.csv)
+
+
+- ### gmf
+	- #### Notes
+		- Tables count: 46, 1 view
+    - #### Tables
+	    - shakemap_{EqScenario}
+			- Table containing shakemap indicators for each earthquake scenario.
+		- shakemap_{EqScenario}_xref
+    		- shakemap_{EqScenario} cross referenced to the closest assetID lon/lat. 
+		- shakemap_scenario_extents_temp
+    		- Temp table showing scenario and geometry extents of each earthquake scenario in the opendrr db.
+		- shakemap_scenario_extents_tbl
+    		- Table showing the various shakemap indicators including geometry extents of each earthquake scenario in the opendrr db.
+		- shakemap_scenario_extents (view)
+    		- View of shakemap_scenario_extents_tbl
+
+
+- ### lut
+	- #### Notes
+		- Tables count: 2
+	- #### Tables
+    	- collapse_probability
+        	- Lookup table showing collapse probability rates.
+			- Table processed from
+                [https://github.com/OpenDRR/openquake-inputs](https://github.com/OpenDRR/openquake-inputs)
+    	- psra_source_types
+        	- Lookup table showing the psra source types.
+            - Table processed from
+[https://github.com/OpenDRR/seismic-risk-model](https://github.com/OpenDRR/seismic-risk-model)
+
+
+- ### mh
+	- #### Notes
+		- Tables count: 3
+	- #### Tables
+    	- mh_intensity_canada
+        	- Table containing initial source indicators for multi hazard.
+        	- HTi_sauid.csv
+            	- Source hazard threat indicators
+            	- [https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_sauid.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_sauid.csv)
+    	- mh_ratings_thresholds
+        	- hazard_threat_rating_thresholds.csv
+            	- precalculated threshold values for hazard threat (table #2)
+            	- [https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/hazard_threat_rating_thresholds.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/hazard_threat_rating_thresholds.csv)
+    	- mh_thresholds
+        	- HTi_thresholds.csv
+            	- precalculated threshold values for hazard threat (table #1)
+            	- [https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_thresholds.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_thresholds.csv)
+
+
+- ### psra_{P/T}
+	- #### Notes
+		- Various source psra tables for the each province/territory 
+		- Tables count: 22
+	- #### Tables
+        - Aggregate curves/average losses tables at various quantiles. 
+            - psra_{P/T}_agg_curves_q05
+            - psra_{P/T}_agg_curves_q95
+            - psra_{P/T}_agg_curves_stats
+            - psra_{P/T}_agg_losses_q05
+            - psra_{P/T}_agg_losses_q95
+            - psra_{P/T}_agg_losses_stats
+            - psra_{P/T}_avg_losses_stats
+        - Damage tables at various quantiles.
+            - psra_{P/T}_ed_dmg_mean
+            - psra_{P/T}_ed_dmg_q05
+            - psra_{P/T}_ed_dmg_q95
+        - Hazard curve tables for pga and various spectral acceleration periods.
+            - psra_{P/T}_hcurves_pga
+            - psra_{P/T}_hcurves_sa0p1
+            - psra_{P/T}_hcurves_sa0p2
+            - psra_{P/T}_hcurves_sa0p3
+            - psra_{P/T}_hcurves_sa0p5
+            - psra_{P/T}_hcurves_sa0p6
+            - psra_{P/T}_hcurves_sa1p0
+            - psra_{P/T}_hcurves_sa2p0	
+		- hazard maps
+    		- psra_{P/T}_hmaps
+            - psra_{P/T}_hmaps_xref
+                - cross reference to closest assetID lon/lat 
+        - psra_{P/T}_uhs
+        - source loss
+            - psra_{P/T}_src_loss
+    	- All tables processed from 
+[https://github.com/OpenDRR/seismic-risk-model](https://github.com/OpenDRR/seismic-risk-model)
+
+
+- ### psra_canada
+	- #### Notes
+		- Various source psra tables for Canada 
+		- Tables count: 7
+	- #### Tables
+	    - aggregate curves/average losses tables at various quantiles. 
+    	    - psra_canada_agg_curves_q05
+        	- psra_canada_agg_curves_q95
+        	- psra_canada_agg_curves_stats
+        	- psra_canada_agg_losses_q05
+        	- psra_canada_agg_losses_q95
+        	- psra_canada_agg_losses_stats
+    	- source loss
+        	- psra_canada_src_loss
+    	- All tables processed from
+[https://github.com/OpenDRR/seismic-risk-model](https://github.com/OpenDRR/seismic-risk-model)
+
+
+- ### results_nhsl_physical_exposure
+	- #### Notes
+		- Results for physical exposure.
+		- Tables count: 49 views
+	- #### Tables
+	    - nhsl_physical_exposure_indicators_b
+    	    - Physical exposure indicators at the building level for all of Canada.
+    	- nhsl_physical_exposure_indicators_b_ab
+        	- Physical exposure indicators at the building level for AB.
+    	- nhsl_physical_exposure_indicators_b_bc
+        	- Physical exposure indicators at the building level for BC.
+    	- nhsl_physical_exposure_indicators_b_mb
+        	- Physical exposure indicators at the building level for MB.
+    	- nhsl_physical_exposure_indicators_b_nb
+        	- Physical exposure indicators at the building level for NB.
+    	- nhsl_physical_exposure_indicators_b_nl
+        	- Physical exposure indicators at the building level for NL.
+    	- nhsl_physical_exposure_indicators_b_ns
+        	- Physical exposure indicators at the building level for NS.
+    	- nhsl_physical_exposure_indicators_b_nt
+        	- Physical exposure indicators at the building level for NT.
+    	- nhsl_physical_exposure_indicators_b_nu
+        	- Physical exposure indicators at the building level for NU.
+    	- nhsl_physical_exposure_indicators_b_on
+        	- Physical exposure indicators at the building level for ON.
+    	- nhsl_physical_exposure_indicators_b_pe
+        	- Physical exposure indicators at the building level for PE.
+    	- nhsl_physical_exposure_indicators_b_qc
+        	- Physical exposure indicators at the building level for QC.
+    	- nhsl_physical_exposure_indicators_b_sk
+        	- Physical exposure indicators at the building level for SK.
+    	- nhsl_physical_exposure_indicators_b_yt
+        	- Physical exposure indicators at the building level for YT.
+    	- nhsl_physical_exposure_indicators_s
+        	- Physical exposure indicators at the sauid level for all of Canada.
+    	- nhsl_physical_exposure_indicators_hexgrid_100km_uc
+        	- Physical exposure indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_100km_uc_4326
+        	- Physical exposure indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_10km
+        	- Physical exposure indicators aggregated/proxied at the 10km hexgrid level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_10km_4326
+        	- Physical exposure indicators aggregated/proxied at the 10km hexgrid level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_10km_uc
+        	- Physical exposure indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_10km_uc_4326
+        	- Physical exposure indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_1km
+        	- Physical exposure indicators aggregated/proxied at the 1km hexgrid level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_1km_4326
+        	- Physical exposure indicators aggregated/proxied at the 1km hexgrid level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_1km_uc
+        	- Physical exposure indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_1km_uc_4326
+        	- Physical exposure indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_25km
+        	- Physical exposure indicators aggregated/proxied at the 25km hexgrid level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_25km_4326
+        	- Physical exposure indicators aggregated/proxied at the 25km hexgrid level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_25km_uc
+        	- Physical exposure indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_25km_uc_4326
+        	- Physical exposure indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_50km_uc
+        	- Physical exposure indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_50km_uc_4326
+        	- Physical exposure indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_5km
+        	- Physical exposure indicators aggregated/proxied at the 5km hexgrid level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_5km_4326
+        	- Physical exposure indicators aggregated/proxied at the 5km hexgrid level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_5km_uc
+        	- Physical exposure indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_5km_uc_4326
+        	- Physical exposure indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_global_fabric
+        	- Physical exposure indicators aggregated/proxied to GEM’s global fabric hexgrids.
+    	- nhsl_physical_exposure_indicators_s_ab
+        	- Physical exposure indicators at the sauid level for AB.
+    	- nhsl_physical_exposure_indicators_s_bc
+        	- Physical exposure indicators at the sauid level for BC.
+    	- nhsl_physical_exposure_indicators_s_mb
+        	- Physical exposure indicators at the sauid level for MB.
+    	- nhsl_physical_exposure_indicators_s_nb
+        	- Physical exposure indicators at the sauid level for NB.
+    	- nhsl_physical_exposure_indicators_s_nl
+        	- Physical exposure indicators at the sauid level for NL.
+    	- nhsl_physical_exposure_indicators_s_ns
+        	- Physical exposure indicators at the sauid level for NS.
+    	- nhsl_physical_exposure_indicators_s_nt
+        	- Physical exposure indicators at the sauid level for NT.
+    	- nhsl_physical_exposure_indicators_s_nu
+        	- Physical exposure indicators at the sauid level for NU.
+    	- nhsl_physical_exposure_indicators_s_on
+        	- Physical exposure indicators at the sauid level for ON.
+    	- nhsl_physical_exposure_indicators_s_pe
+        	- Physical exposure indicators at the sauid level for PE.
+    	- nhsl_physical_exposure_indicators_s_qc
+        	- Physical exposure indicators at the sauid level for QC.
+    	- nhsl_physical_exposure_indicators_s_sk
+        	- Physical exposure indicators at the sauid level for SK.
+    	- nhsl_physical_exposure_indicators_s_yt
+        	- Physical exposure indicators at the sauid level for YT.

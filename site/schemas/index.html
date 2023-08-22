@@ -47,6 +47,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="../intro/">OpenDRR Database/SQL Documentation</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../nhsl/">National Human Settlement Layers</a>
+                </li>
+              </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="./">Schemas</a>
     <ul class="current">
@@ -71,6 +75,70 @@
     <li class="toctree-l3"><a class="reference internal" href="#notes_2">Notes</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#tables_2">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#exposure">exposure</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_3">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_3">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ghsl">ghsl</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_4">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_4">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#gmf">gmf</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_5">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_5">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#lut">lut</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_6">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_6">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mh">mh</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_7">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_7">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#psra_pt">psra_{P/T}</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_8">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_8">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#psra_canada">psra_canada</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_9">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_9">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#results_nhsl_physical_exposure">results_nhsl_physical_exposure</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_10">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_10">Tables</a>
     </li>
         </ul>
     </li>
@@ -377,12 +445,473 @@
 </li>
 </ul>
 </li>
+<li>
+<h3 id="exposure">exposure</h3>
+<ul>
+<li>
+<h4 id="notes_3">Notes</h4>
+<ul>
+<li>Tables count: 1</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_3">Tables</h4>
+<ul>
+<li>canada_exposure<ul>
+<li>Table containing initial source indicators for physical exposure.</li>
+<li>BldgExpRef_CA_master_v3p2.csv<ul>
+<li>Physical exposure source table of Canada</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/general-building-stock/BldgExpRef_CA_master_v3p2.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/general-building-stock/BldgExpRef_CA_master_v3p2.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Table processed from 
+<a href="https://github.com/OpenDRR/openquake-inputs/">https://github.com/OpenDRR/openquake-inputs/</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="ghsl">ghsl</h3>
+<ul>
+<li>
+<h4 id="notes_4">Notes</h4>
+<ul>
+<li>Tables count: 1</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_4">Tables</h4>
+<ul>
+<li>ghsl_mh_intensity_ghsl<ul>
+<li>Table containing initial source indicators for <em>risk dynamics (not used)</em>.</li>
+<li>mh-intensity-ghsl.csv<ul>
+<li>source table for risk dynamics</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/mh-intensity-ghsl.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/mh-intensity-ghsl.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="gmf">gmf</h3>
+<ul>
+<li>
+<h4 id="notes_5">Notes</h4>
+<ul>
+<li>Tables count: 46, 1 view</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_5">Tables</h4>
+<ul>
+<li>shakemap_{EqScenario}<ul>
+<li>Table containing shakemap indicators for each earthquake scenario.</li>
+</ul>
+</li>
+<li>shakemap_{EqScenario}_xref<ul>
+<li>shakemap_{EqScenario} cross referenced to the closest assetID lon/lat. </li>
+</ul>
+</li>
+<li>shakemap_scenario_extents_temp<ul>
+<li>Temp table showing scenario and geometry extents of each earthquake scenario in the opendrr db.</li>
+</ul>
+</li>
+<li>shakemap_scenario_extents_tbl<ul>
+<li>Table showing the various shakemap indicators including geometry extents of each earthquake scenario in the opendrr db.</li>
+</ul>
+</li>
+<li>shakemap_scenario_extents (view)<ul>
+<li>View of shakemap_scenario_extents_tbl</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="lut">lut</h3>
+<ul>
+<li>
+<h4 id="notes_6">Notes</h4>
+<ul>
+<li>Tables count: 2</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_6">Tables</h4>
+<ul>
+<li>collapse_probability<ul>
+<li>Lookup table showing collapse probability rates.</li>
+<li>Table processed from
+    <a href="https://github.com/OpenDRR/openquake-inputs">https://github.com/OpenDRR/openquake-inputs</a></li>
+</ul>
+</li>
+<li>psra_source_types<ul>
+<li>Lookup table showing the psra source types.</li>
+<li>Table processed from
+<a href="https://github.com/OpenDRR/seismic-risk-model">https://github.com/OpenDRR/seismic-risk-model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="mh">mh</h3>
+<ul>
+<li>
+<h4 id="notes_7">Notes</h4>
+<ul>
+<li>Tables count: 3</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_7">Tables</h4>
+<ul>
+<li>mh_intensity_canada<ul>
+<li>Table containing initial source indicators for multi hazard.</li>
+<li>HTi_sauid.csv<ul>
+<li>Source hazard threat indicators</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_sauid.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_sauid.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>mh_ratings_thresholds<ul>
+<li>hazard_threat_rating_thresholds.csv<ul>
+<li>precalculated threshold values for hazard threat (table #2)</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/hazard_threat_rating_thresholds.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/hazard_threat_rating_thresholds.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>mh_thresholds<ul>
+<li>HTi_thresholds.csv<ul>
+<li>precalculated threshold values for hazard threat (table #1)</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_thresholds.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_thresholds.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="psra_pt">psra_{P/T}</h3>
+<ul>
+<li>
+<h4 id="notes_8">Notes</h4>
+<ul>
+<li>Various source psra tables for the each province/territory </li>
+<li>Tables count: 22</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_8">Tables</h4>
+<ul>
+<li>Aggregate curves/average losses tables at various quantiles. <ul>
+<li>psra_{P/T}_agg_curves_q05</li>
+<li>psra_{P/T}_agg_curves_q95</li>
+<li>psra_{P/T}_agg_curves_stats</li>
+<li>psra_{P/T}_agg_losses_q05</li>
+<li>psra_{P/T}_agg_losses_q95</li>
+<li>psra_{P/T}_agg_losses_stats</li>
+<li>psra_{P/T}_avg_losses_stats</li>
+</ul>
+</li>
+<li>Damage tables at various quantiles.<ul>
+<li>psra_{P/T}_ed_dmg_mean</li>
+<li>psra_{P/T}_ed_dmg_q05</li>
+<li>psra_{P/T}_ed_dmg_q95</li>
+</ul>
+</li>
+<li>Hazard curve tables for pga and various spectral acceleration periods.<ul>
+<li>psra_{P/T}_hcurves_pga</li>
+<li>psra_{P/T}_hcurves_sa0p1</li>
+<li>psra_{P/T}_hcurves_sa0p2</li>
+<li>psra_{P/T}_hcurves_sa0p3</li>
+<li>psra_{P/T}_hcurves_sa0p5</li>
+<li>psra_{P/T}_hcurves_sa0p6</li>
+<li>psra_{P/T}_hcurves_sa1p0</li>
+<li>psra_{P/T}_hcurves_sa2p0  </li>
+</ul>
+</li>
+<li>hazard maps<ul>
+<li>psra_{P/T}_hmaps</li>
+<li>psra_{P/T}_hmaps_xref<ul>
+<li>cross reference to closest assetID lon/lat </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>psra_{P/T}_uhs</li>
+<li>source loss<ul>
+<li>psra_{P/T}_src_loss</li>
+</ul>
+</li>
+<li>All tables processed from 
+<a href="https://github.com/OpenDRR/seismic-risk-model">https://github.com/OpenDRR/seismic-risk-model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="psra_canada">psra_canada</h3>
+<ul>
+<li>
+<h4 id="notes_9">Notes</h4>
+<ul>
+<li>Various source psra tables for Canada </li>
+<li>Tables count: 7</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_9">Tables</h4>
+<ul>
+<li>aggregate curves/average losses tables at various quantiles. <ul>
+<li>psra_canada_agg_curves_q05</li>
+<li>psra_canada_agg_curves_q95</li>
+<li>psra_canada_agg_curves_stats</li>
+<li>psra_canada_agg_losses_q05</li>
+<li>psra_canada_agg_losses_q95</li>
+<li>psra_canada_agg_losses_stats</li>
+</ul>
+</li>
+<li>source loss<ul>
+<li>psra_canada_src_loss</li>
+</ul>
+</li>
+<li>All tables processed from
+<a href="https://github.com/OpenDRR/seismic-risk-model">https://github.com/OpenDRR/seismic-risk-model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="results_nhsl_physical_exposure">results_nhsl_physical_exposure</h3>
+<ul>
+<li>
+<h4 id="notes_10">Notes</h4>
+<ul>
+<li>Results for physical exposure.</li>
+<li>Tables count: 49 views</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_10">Tables</h4>
+<ul>
+<li>nhsl_physical_exposure_indicators_b<ul>
+<li>Physical exposure indicators at the building level for all of Canada.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_ab<ul>
+<li>Physical exposure indicators at the building level for AB.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_bc<ul>
+<li>Physical exposure indicators at the building level for BC.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_mb<ul>
+<li>Physical exposure indicators at the building level for MB.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_nb<ul>
+<li>Physical exposure indicators at the building level for NB.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_nl<ul>
+<li>Physical exposure indicators at the building level for NL.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_ns<ul>
+<li>Physical exposure indicators at the building level for NS.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_nt<ul>
+<li>Physical exposure indicators at the building level for NT.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_nu<ul>
+<li>Physical exposure indicators at the building level for NU.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_on<ul>
+<li>Physical exposure indicators at the building level for ON.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_pe<ul>
+<li>Physical exposure indicators at the building level for PE.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_qc<ul>
+<li>Physical exposure indicators at the building level for QC.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_sk<ul>
+<li>Physical exposure indicators at the building level for SK.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_yt<ul>
+<li>Physical exposure indicators at the building level for YT.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s<ul>
+<li>Physical exposure indicators at the sauid level for all of Canada.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_100km_uc<ul>
+<li>Physical exposure indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_100km_uc_4326<ul>
+<li>Physical exposure indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_10km<ul>
+<li>Physical exposure indicators aggregated/proxied at the 10km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_10km_4326<ul>
+<li>Physical exposure indicators aggregated/proxied at the 10km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_10km_uc<ul>
+<li>Physical exposure indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_10km_uc_4326<ul>
+<li>Physical exposure indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_1km<ul>
+<li>Physical exposure indicators aggregated/proxied at the 1km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_1km_4326<ul>
+<li>Physical exposure indicators aggregated/proxied at the 1km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_1km_uc<ul>
+<li>Physical exposure indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_1km_uc_4326<ul>
+<li>Physical exposure indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_25km<ul>
+<li>Physical exposure indicators aggregated/proxied at the 25km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_25km_4326<ul>
+<li>Physical exposure indicators aggregated/proxied at the 25km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_25km_uc<ul>
+<li>Physical exposure indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_25km_uc_4326<ul>
+<li>Physical exposure indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_50km_uc<ul>
+<li>Physical exposure indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_50km_uc_4326<ul>
+<li>Physical exposure indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_5km<ul>
+<li>Physical exposure indicators aggregated/proxied at the 5km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_5km_4326<ul>
+<li>Physical exposure indicators aggregated/proxied at the 5km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_5km_uc<ul>
+<li>Physical exposure indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_5km_uc_4326<ul>
+<li>Physical exposure indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_global_fabric<ul>
+<li>Physical exposure indicators aggregated/proxied to GEM’s global fabric hexgrids.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_ab<ul>
+<li>Physical exposure indicators at the sauid level for AB.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_bc<ul>
+<li>Physical exposure indicators at the sauid level for BC.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_mb<ul>
+<li>Physical exposure indicators at the sauid level for MB.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_nb<ul>
+<li>Physical exposure indicators at the sauid level for NB.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_nl<ul>
+<li>Physical exposure indicators at the sauid level for NL.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_ns<ul>
+<li>Physical exposure indicators at the sauid level for NS.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_nt<ul>
+<li>Physical exposure indicators at the sauid level for NT.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_nu<ul>
+<li>Physical exposure indicators at the sauid level for NU.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_on<ul>
+<li>Physical exposure indicators at the sauid level for ON.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_pe<ul>
+<li>Physical exposure indicators at the sauid level for PE.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_qc<ul>
+<li>Physical exposure indicators at the sauid level for QC.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_sk<ul>
+<li>Physical exposure indicators at the sauid level for SK.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_yt<ul>
+<li>Physical exposure indicators at the sauid level for YT.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../intro/" class="btn btn-neutral float-left" title="OpenDRR Database/SQL Documentation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../nhsl/" class="btn btn-neutral float-left" title="National Human Settlement Layers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -405,7 +934,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../intro/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../nhsl/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>
