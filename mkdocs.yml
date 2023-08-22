@@ -4,6 +4,7 @@ site_url: https://github.com/wkhchow/model-factory
 nav:
 - Home: index.md
 - 'OpenDRR Database/SQL Documentation': intro.md
+- 'National Human Settlement Layer': nhsl.md
 - 'Schemas': schemas.md
 # - 'test':/testdir/test.md
 theme: readthedocs
