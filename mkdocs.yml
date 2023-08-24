@@ -1,16 +1,9 @@
 site_name: OpenDRR Model Factory
 site_url: https://github.com/wkhchow/model-factory
-# site_author: 'OpenDRR Team, EMS, GSC Pacific, NRCan'
+
 nav:
 - Home: index.md
 - 'OpenDRR Database/SQL Documentation': intro.md
 - 'National Human Settlement Layers': nhsl.md
 - 'Schemas': schemas.md
-# - 'test':/testdir/test.md
 theme: readthedocs
-# Repository
-# repo_name: OpenDRR/model-factory
-# repo_url: hhttps://github.com/opendrr/model-factory
-# repo_url: https://github.com/wkhchow/model-factory
-# docs_dir: docs
-# edit_uri: edit/master/docs/
