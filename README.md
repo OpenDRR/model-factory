@@ -16,6 +16,10 @@ It contains documentation, and scripts (python and sql) to transform opendrr sou
 		 -  Documentation of v1.0 risk profile indicators for review and comments.
 	- [opendrr.drawio](https://github.com/OpenDRR/opendrr-data-store/blob/master/scripts/Diagrams)
 		- diagram of current opendrr postgis database, created in draw.io 
+
+	- OpenDRR Database/SQL Documentation:
+		- [Github Page](https://wkhchow.github.io/model-factory/)
+		- [Read the Docs page](https://model-factory.readthedocs.io/en/latest/)
 - **scripts/**
 	- Series of python and sql scripts that are used in opendrr-api repository to build the PostGIS database.
 - requirements.txt
