@@ -1,4 +1,4 @@
-## Schemas
+# Schemas
 
 - ### boundaries
 	- #### Notes
@@ -737,3 +737,37 @@
 			- Psra indicators aggregated to the unclipped 100km hexgrid level (EPSG 3857).
 		- psra_indicators_hexgrid_100km_uc_4326 (view)
 			- Psra indicators aggregated to the unclipped 25km hexgrid level (EPSG 4326).
+
+
+ - ### ruptures
+	- #### Notes
+		- Schema to store ruptures information for DSRA use.
+	 	- Tables count: 1
+    - #### Tables
+		- rupture_table
+			- Table storing rupture information from each earthquake scenario.
+				- [https://github.com/OpenDRR/earthquake-scenarios/tree/master/ruptures](https://github.com/OpenDRR/earthquake-scenarios/tree/master/ruptures)
+
+
+- ### sovi
+	- #### Notes
+		- Schema storing source social fabric data.
+		- Tables count: 1
+	- #### Tables
+		- sovi_sauid_nov2021
+			- Table containing source indicators for social fabric.
+				- [https://github.com/OpenDRR/openquake-inputs/blob/main/social-vulnerability/sovi_sauid_nov2021.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/social-vulnerability/sovi_sauid_nov2021.csv)
+
+- ### vs30
+- #### Notes
+	- Schema storing vs30 tables.
+	- Tables count: 2
+- #### Tables
+	- vs30_can_site_model
+		- Table containing vs30, z1pt0, z2pt5 values for all of Canada.
+		- [https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/site-vgrid_CA.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/site-vgrid_CA.csv)
+	- vs30_can_site_model_xref
+		- Vs30_can_site_model cross reference to exposure assetID lon/lat.
+		- [https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/vs30_CAN_site_model_xref.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/vs30_CAN_site_model_xref.csv)
+
+

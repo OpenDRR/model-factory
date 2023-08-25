@@ -190,6 +190,30 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ruptures">ruptures</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_17">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_17">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sovi">sovi</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_18">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_18">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vs30">vs30</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_19">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_19">Tables</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -216,7 +240,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="schemas">Schemas</h2>
+                <h1 id="schemas">Schemas</h1>
 <ul>
 <li>
 <h3 id="boundaries">boundaries</h3>
@@ -1705,6 +1729,79 @@
 <li>Psra indicators aggregated to the unclipped 25km hexgrid level (EPSG 4326).</li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="ruptures">ruptures</h3>
+<ul>
+<li>
+<h4 id="notes_17">Notes</h4>
+<ul>
+<li>Schema to store ruptures information for DSRA use.</li>
+<li>Tables count: 1</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_17">Tables</h4>
+<ul>
+<li>rupture_table<ul>
+<li>Table storing rupture information from each earthquake scenario.<ul>
+<li><a href="https://github.com/OpenDRR/earthquake-scenarios/tree/master/ruptures">https://github.com/OpenDRR/earthquake-scenarios/tree/master/ruptures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="sovi">sovi</h3>
+<ul>
+<li>
+<h4 id="notes_18">Notes</h4>
+<ul>
+<li>Schema storing source social fabric data.</li>
+<li>Tables count: 1</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_18">Tables</h4>
+<ul>
+<li>sovi_sauid_nov2021<ul>
+<li>Table containing source indicators for social fabric.<ul>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/social-vulnerability/sovi_sauid_nov2021.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/social-vulnerability/sovi_sauid_nov2021.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="vs30">vs30</h3>
+</li>
+<li>
+<h4 id="notes_19">Notes</h4>
+<ul>
+<li>Schema storing vs30 tables.</li>
+<li>Tables count: 2</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_19">Tables</h4>
+<ul>
+<li>vs30_can_site_model<ul>
+<li>Table containing vs30, z1pt0, z2pt5 values for all of Canada.</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/site-vgrid_CA.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/site-vgrid_CA.csv</a></li>
+</ul>
+</li>
+<li>vs30_can_site_model_xref<ul>
+<li>Vs30_can_site_model cross reference to exposure assetID lon/lat.</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/vs30_CAN_site_model_xref.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/vs30_CAN_site_model_xref.csv</a></li>
 </ul>
 </li>
 </ul>

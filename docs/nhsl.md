@@ -249,7 +249,7 @@
 #### [exposure](schemas.md#exposure)
 - canada_exposure
 
-#### [vs30](scheams.md#vs30)
+#### [vs30](schemas.md#vs30)
 - vs30_can_site_model_xref
 
 #### [results_nhsl_physical_exposure](schemas.md#results_nhsl_physical_exposure)
@@ -319,7 +319,7 @@
 - collapse_probability
 - psra_source_types
 
-#### [mh](scheams.md#mh)
+#### [mh](schemas.md#mh)
 - mh_intensity_canada
 
 #### [psra_{P/T}](schemas.md#psra_pt)
@@ -337,7 +337,7 @@
 #### [results_psra_national](schemas.md#results_psra_national)
 - All tables/views in this schema are results of seismic risk model. Results from results_psra_{P/T} are merged in this schema.
 
-#### [vs30](scheams.md#vs30)
+#### [vs30](schemas.md#vs30)
 - vs30_can_site_model_xref
 
 
