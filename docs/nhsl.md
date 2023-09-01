@@ -6,10 +6,10 @@
 	    - [https://opendrr.github.io/national-human-settlement/en/#nhsl_physical_exposure_indicators-a](https://opendrr.github.io/national-human-settlement/en/#nhsl_physical_exposure_indicators-a)
 	- **Github page**
 	    - [https://opendrr.github.io/national-human-settlement/en/index.html](https://opendrr.github.io/national-human-settlement/en/index.html)
-	-	**working notes** (google sheet)
+	-	**working notes**
 		- 2_physical-exposure-schema.xlsx
-			- Worksheet where initial phase of indicators were drafted.
-			- [https://docs.google.com/spreadsheets/d/1dsVOAbUAp-V0Xu-dINVbchUzyQZ6EmE_/edit?usp=sharing&ouid=108110519296938878163&rtpof=true&sd=true](https://docs.google.com/spreadsheets/d/1dsVOAbUAp-V0Xu-dINVbchUzyQZ6EmE_/edit?usp=sharing&ouid=108110519296938878163&rtpof=true&sd=true)
+			- [Excel spreadsheet](../documentation/2_physical-exposure-schema.xlsx) where initial phase of indicators were drafted.
+
 
 ### Source / Output tab (views) 
 - This section lists the schemas involved with the creation of the final results, and specific tables involved. Refer to [schemas](schemas.md) section for more schema details. 
@@ -66,10 +66,10 @@
 		    - [https://opendrr.github.io/national-human-settlement/en/#nhsl_social_fabric_indicators-a](https://opendrr.github.io/national-human-settlement/en/#nhsl_social_fabric_indicators-a)
 	- **Github page**
 		- [https://opendrr.github.io/national-human-settlement/en/index.html](https://opendrr.github.io/national-human-settlement/en/index.html)
-	-	**working notes** (google sheet)
+	-	**working notes**
 		- social-vulnerability-schema.xlsx
-			- Worksheet where initial phase of indicators were drafted.
-			- [https://docs.google.com/spreadsheets/d/1t2VRUVZ6RKKNWdTw4TNvekZzjIoJRpxS/edit?usp=sharing&ouid=108110519296938878163&rtpof=true&sd=true](https://docs.google.com/spreadsheets/d/1t2VRUVZ6RKKNWdTw4TNvekZzjIoJRpxS/edit?usp=sharing&ouid=108110519296938878163&rtpof=true&sd=true)
+			- [Excel spreadsheet](../documentation/4_social-vulnerability-schema.xlsx) where initial phase of indicators were drafted.
+
 
 ### Source / Output tables (views) 
 - This section lists the schemas involved with the creation of the final results, and specific tables involved. Refer to [schemas](schemas.md) section for more schema details. 
@@ -140,10 +140,10 @@
 - ### Notes
     - Draft indicators were generated but not released, and are not intended for the public.
     - The Hazard threat value contains scores based on different hazards, and pregenerated threshold lookup tables. Using source information from multi hazard, physical exposure indicators, social fabric indicators, and census a series of calculations are made (prereq tables). These values are compared against the threshold lookup tables and assigned scores.
-    - **working notes** (google sheet)
+    - **working notes**
         - 3_multi-hazard-threat-schema.xlsx
-        - worksheet where initial phase of indicators were drafted
-        - [https://docs.google.com/spreadsheets/d/1bSJGmk4O8iwV-UJGdN1D6sHOZjfEzVtO/edit?usp=sharing&ouid=108110519296938878163&rtpof=true&sd=true](https://docs.google.com/spreadsheets/d/1bSJGmk4O8iwV-UJGdN1D6sHOZjfEzVtO/edit?usp=sharing&ouid=108110519296938878163&rtpof=true&sd=true)
+	        - [Excel spreadsheet](../documentation/3_multi-hazard-threat-schema.xlsx) where initial phase of indicators were drafted
+
 
 ### Source / Output tables (views) 
 - This section lists the schemas involved with the creation of the final results, and specific tables involved. Refer to [schemas](schemas.md) section for more schema details. 
@@ -206,12 +206,11 @@
 	    - [https://opendrr.github.io/national-human-settlement/en/#nhsl_physical_exposure_indicators-a](https://opendrr.github.io/national-human-settlement/en/#nhsl_physical_exposure_indicators-a)
 	- **Github page**
 	    - [https://opendrr.github.io/earthquake-scenarios/en/index.html](https://opendrr.github.io/earthquake-scenarios/en/index.html)
-	-	**working notes** (google sheet)
-		-  3_multi-hazard-threat-schema.xlsx
-			- Worksheet where initial phase of indicators were drafted.
-			- [https://docs.google.com/spreadsheets/d/1bSJGmk4O8iwV-UJGdN1D6sHOZjfEzVtO/edit?usp=sharing&ouid=108110519296938878163&rtpof=true&sd=true](https://docs.google.com/spreadsheets/d/1bSJGmk4O8iwV-UJGdN1D6sHOZjfEzVtO/edit?usp=sharing&ouid=108110519296938878163&rtpof=true&sd=true)
+	-	**working notes**
+		-  1_scenario-risk-schema_v1.1.xlsx
+			- [Excel spreadsheet](../documentation/1_scenario-risk-schema_v1.1.xlsx) where initial phase of indicators were drafted.
 		- mapping Sendai Indicators DSRA/PSRA
-			- [https://docs.google.com/spreadsheets/d/12nacK6YtvJ0ABwpL9OpV8kwjnZi-PRXLlYjcLnR-x2c/edit#gid=0](https://docs.google.com/spreadsheets/d/12nacK6YtvJ0ABwpL9OpV8kwjnZi-PRXLlYjcLnR-x2c/edit#gid=0)
+			- [Excel spreadsheet](../documentation/mapping%20Sendai%20Indicators%20DSRA_PSRA.xlsx) with draft indicators.
 
 ### Source / Output tables (views) 
 - This section lists the schemas involved with the creation of the final results, and specific tables involved. Refer to [schemas](schemas.md) section for more schema details. 
@@ -286,9 +285,8 @@
 			- [https://github.com/OpenDRR/seismic-risk-model](https://github.com/OpenDRR/seismic-risk-model)
 	- **Github page**
 	    - [https://opendrr.github.io/seismic-risk-model/en/](https://opendrr.github.io/seismic-risk-model/en/)
-	-	**working notes** (google sheet)
-		- mapping Sendai Indicators DSRA/PSRA
-		- [https://docs.google.com/spreadsheets/d/12nacK6YtvJ0ABwpL9OpV8kwjnZi-PRXLlYjcLnR-x2c/edit#gid=0](https://docs.google.com/spreadsheets/d/12nacK6YtvJ0ABwpL9OpV8kwjnZi-PRXLlYjcLnR-x2c/edit#gid=0)
+	-	**working notes**
+		- [Excel spreadsheet](../documentation/mapping%20Sendai%20Indicators%20DSRA_PSRA.xlsx) with draft indicators.
 
 ### Source / Output tables (views) 
 - This section lists the schemas involved with the creation of the final results, and specific tables involved. Refer to [schemas](schemas.md) section for more schema details. 

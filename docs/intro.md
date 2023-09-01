@@ -7,5 +7,4 @@
 	- [https://github.com/OpenDRR/opendrr-data-store/blob/master/scripts/Diagrams/opendrr.drawio](https://github.com/OpenDRR/opendrr-data-store/blob/master/scripts/Diagrams/opendrr.drawio)
 
 - 2_risk-profile-indicators
-	- Google sheet containing indicators for each schema.
-	- [https://docs.google.com/spreadsheets/d/1roIinl5BVe-7IX1QaXPICxiFd_mke7rUwM71rGk_Nmw/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1roIinl5BVe-7IX1QaXPICxiFd_mke7rUwM71rGk_Nmw/edit?usp=sharing)
+	- [Excel spreadsheet](../documentation/2_risk-profile-indicators.xlsx) containing indicators for each schema.
