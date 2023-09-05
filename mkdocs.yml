@@ -1,9 +1,13 @@
 site_name: OpenDRR Model Factory
 site_url: https://github.com/wkhchow/model-factory
+repo_url: https://github.com/wkhchow/model-factory
+
 
 nav:
 - Home: index.md
 - 'OpenDRR Database/SQL Documentation': intro.md
 - 'National Human Settlement Layers': nhsl.md
+- 'Earthquake Scenarios (DSRA)': dsra.md
+- 'Seismic Risk Model (PSRA)': psra.md
 - 'Schemas': schemas.md
 theme: readthedocs

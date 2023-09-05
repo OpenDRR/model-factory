@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://github.com/wkhchow/model-factory/psra/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Seismic Risk Model (PSRA) - OpenDRR Model Factory</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Seismic Risk Model (PSRA)";
+        var mkdocs_page_input_path = "psra.md";
+        var mkdocs_page_url = "/wkhchow/model-factory/psra/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OpenDRR Model Factory
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">OpenDRR Database/SQL Documentation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../nhsl/">National Human Settlement Layers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../dsra/">Earthquake Scenarios (DSRA)</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Seismic Risk Model (PSRA)</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#source-output-tables-views">Source / Output tables (views)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#boundaries">boundaries</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exposure">exposure</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lut">lut</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mh">mh</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#psra_pt">psra_{P/T}</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#psra_canada">psra_canada</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#results_psra_pt">results_psra_{P/T}</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#results_psra_canada">results_psra_canada</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#results_psra_national">results_psra_national</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#vs30">vs30</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sql-scripts">SQL scripts</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../schemas/">Schemas</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OpenDRR Model Factory</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li class="breadcrumb-item active">Seismic Risk Model (PSRA)</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/wkhchow/model-factory/edit/master/docs/psra.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="seismic-risk-model-psra">Seismic Risk Model (PSRA)</h2>
+<ul>
+<li>
+<h3 id="notes">Notes</h3>
+<ul>
+<li><strong>Github Repo</strong><ul>
+<li>Latest geopackages, data dictionary, documentation etc.<ul>
+<li><a href="https://github.com/OpenDRR/seismic-risk-model">https://github.com/OpenDRR/seismic-risk-model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Github page</strong><ul>
+<li><a href="https://opendrr.github.io/seismic-risk-model/en/">https://opendrr.github.io/seismic-risk-model/en/</a></li>
+</ul>
+</li>
+<li><strong>working notes</strong><ul>
+<li>mapping Sendai Indicators DSRA/PSRA<ul>
+<li><a href="https://github.com/wkhchow/model-factory/blob/master/documentation/mapping%20Sendai%20Indicators%20DSRA_PSRA.xlsx">Excel spreadsheet</a> with draft indicators.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="source-output-tables-views">Source / Output tables (views)</h3>
+<ul>
+<li>This section lists the schemas involved with the creation of the final results, and specific tables involved. Refer to <a href="../schemas/">schemas</a> section for more schema details. </li>
+<li>All source csv files are from the seismic risk model repo in various output repos.<ul>
+<li><a href="https://github.com/OpenDRR/seismic-risk-model/tree/master">https://github.com/OpenDRR/seismic-risk-model/tree/master</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="boundaries"><a href="../schemas/#boundaries">boundaries</a></h4>
+<ul>
+<li>Geometry_SAUID</li>
+<li>HexGrid_1km(_3857), HexGrid_1km_unclipped(_3857)</li>
+<li>HexGrid_5km(_3857), HexGrid_5km_unclipped(_3857)</li>
+<li>HexGrid_10km(_3857), HexGrid_10km_unclipped(_3857) </li>
+<li>HexGrid_25km(_3857), HexGrid_25km_unclipped(_3857) </li>
+<li>HexGrid_50km_unclipped(_3857)</li>
+<li>HexGrid_100km_unclipped(_3857)</li>
+<li>SAUID_HexGrid_1km_intersect(_3857), SAUID_HexGrid_1km_intersect_unclipped(_3857), </li>
+<li>SAUID_HexGrid_5km_intersect(_3857), SAUID_HexGrid_5km_intersect_unclipped(_3857), </li>
+<li>SAUID_HexGrid_10km_intersect(_3857), SAUID_HexGrid_10km_intersect_unclipped(_3857), </li>
+<li>SAUID_HexGrid_25km_intersect(_3857), SAUID_HexGrid_25km_intersect_unclipped(_3857), </li>
+<li>SAUID_HexGrid_50km_intersect_unclipped(_3857), </li>
+<li>SAUID_HexGrid_100km_intersect_unclipped(_3857), </li>
+<li>HexGrid_GlobalFabric,</li>
+<li>Sauid_HexGrid_GlobalFabric_intersect</li>
+</ul>
+<h4 id="exposure"><a href="../schemas/#exposure">exposure</a></h4>
+<ul>
+<li>canada_exposure</li>
+</ul>
+<h4 id="lut"><a href="../schemas/#lut">lut</a></h4>
+<ul>
+<li>collapse_probability</li>
+<li>psra_source_types</li>
+</ul>
+<h4 id="mh"><a href="../schemas/#mh">mh</a></h4>
+<ul>
+<li>mh_intensity_canada</li>
+</ul>
+<h4 id="psra_pt"><a href="../schemas/#psra_pt">psra_{P/T}</a></h4>
+<ul>
+<li>All tables in this schema are used for results_psra_{P/T}.</li>
+</ul>
+<h4 id="psra_canada"><a href="../schemas/#psra_canada">psra_canada</a></h4>
+<ul>
+<li>All tables in this schema are used for results_psra_canada.</li>
+</ul>
+<h4 id="results_psra_pt"><a href="../schemas/#results_psra_pt">results_psra_{P/T}</a></h4>
+<ul>
+<li>All tables/views in this schema are results of seismic risk model.</li>
+</ul>
+<h4 id="results_psra_canada"><a href="../schemas/#results_psra_canada">results_psra_canada</a></h4>
+<ul>
+<li>All tables/views in this schema are results of seismic risk model.</li>
+</ul>
+<h4 id="results_psra_national"><a href="../schemas/#results_psra_national">results_psra_national</a></h4>
+<ul>
+<li>All tables/views in this schema are results of seismic risk model. Results from results_psra_{P/T} are merged in this schema.</li>
+</ul>
+<h4 id="vs30"><a href="../schemas/#vs30">vs30</a></h4>
+<ul>
+<li>vs30_can_site_model_xref</li>
+</ul>
+<h3 id="sql-scripts">SQL scripts</h3>
+<ul>
+<li>psra_0.create_psra_schema.sql<ul>
+<li>Create default psra_{P/T}, psra_canada schemas.</li>
+</ul>
+</li>
+<li>psra_1.Create_tables_Canada.sql<ul>
+<li>Create default empty psra_canada schema tables to be loaded. These tables are direct copies from seismic risk model repo.</li>
+</ul>
+</li>
+<li>psra_1.Create_tables.sql<ul>
+<li>Create default empty psra_{P/T} schema tables to be loaded. These tables are direct copies from seismic risk model repo.</li>
+</ul>
+</li>
+<li>psra_2.Create_table_updates_Canada.sql<ul>
+<li>Creates finalized tables from tables loaded in psra_1.Create_tables_Canada.sql. Previous tables are deleted.</li>
+</ul>
+</li>
+<li>psra_2.Create_table_updates.sql<ul>
+<li>Creates finalized tables from tables loaded in psra_1.Create_tables.sql. Previous tables are deleted.</li>
+</ul>
+</li>
+<li>psra_3.Create_psra_building_all_indicators.sql<ul>
+<li>Create finalized building level indicators for each result_psra_{P/T} schema.</li>
+</ul>
+</li>
+<li>psra_4.Create_psra_sauid_all_indicators_Canada.sql<ul>
+<li>Create finalized sauid level indicators for results_psra_canada schema.</li>
+</ul>
+</li>
+<li>psra_4.Create_psra_sauid_all_indicators.sql</li>
+<li>psra_5.Create_psra_sauid_references_indicators.sql<ul>
+<li>Create finalized reference indicators psra_{P/T}_src_loss for each result_psra_{P/T} schema.</li>
+</ul>
+</li>
+<li>psra_6.Create_psra_merge_into_national_indicators.sql<ul>
+<li>National indicators are results from the various results_psra_{P/T} schema, including psra_{P/T}_indicators_b, psra_{P/T}_indicators_s, psra_{P/T}_indicators_csd, psra_{P/T}_expected_loss_fsa, psra_{P/T}<em>agg_loss_fsa, and psra</em>{P/T}_src_loss tables that are merged together into a one national table for each of the tables above. After merging, earthquake risk index calculations are made for indicators_s, and indicators_csd tables and updated. The EQRI values are then updated in the corresponding results_psra_{P/T} as well.</li>
+</ul>
+</li>
+<li>psra_6a.eqri_calculation_sa.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for settled area.</li>
+</ul>
+</li>
+<li>psra_6a1.eqri_calculation_csd.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for csd.</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_1km_3857.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 1km hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_1km_uc_3857.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 1km hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_1km_uc.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 1km unclipped hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_1km.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 1km unclipped hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_5km_3857.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 5km hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_5km_uc_3857.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 5km hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_5km_uc.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 5km unclipped hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_5km.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 5km unclipped hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_10km_3857.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 10km hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_10km_uc_3857.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 10km unclipped hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_10km_uc.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 10km unclipped hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_10km.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 10km hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_25km_3857.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 25km hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_25km_uc_3857.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 25km unclipped hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_25km_uc.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 25km unclipped hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_25km.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 25km hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_50km_uc_3857.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 50km unclipped hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_50km_uc.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 50km unclipped hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_100km_uc_3857.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 100km unclipped hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_6a2.eqri_calculation_hexgrid_100km_uc.sql<ul>
+<li>Create seismic risk index (eqri) calculations used for 100km unclipped hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../dsra/" class="btn btn-neutral float-left" title="Earthquake Scenarios (DSRA)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../schemas/" class="btn btn-neutral float-right" title="Schemas">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/wkhchow/model-factory" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../dsra/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../schemas/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
