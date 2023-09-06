@@ -1,0 +1,773 @@
+# Schemas
+
+- ### boundaries
+	- #### Notes
+	    -   Schema containing all geometry and reference tables related to the OpenDRR project. More details can be found in [https://github.com/OpenDRR/boundaries](https://github.com/OpenDRR/boundaries)
+	   -   All census related geometries are adapted from Statistics Canada, 2016 Census Boundary files, 2020
+	    -   Settled Area geometry development can be found in [Physical exposure to natural hazards in Canada](https://publications.gc.ca/collections/collection_2022/rncan-nrcan/m183-2/M183-2-8892-eng.pdf)
+	    -   All tables with geometries are in EPSG 4326 unless specified with a suffix _3857, which signifies EPSG 3857
+	    -   Table count: 53
+	- ####    Tables
+	    -   Geometry_ADAUID
+		    -   Aggregate dissemination area geometry
+	    -   Geometry_CANADA
+		    -   Canada outline geometry
+	    -   Geometry_CDUID
+		    -   Census Division geometry
+	    -   Geometry_CSDUID
+		    -   Census Subdivision geometry, simplified polygon at 0.005 degrees
+		- Geometry_DAUID
+			 -   Dissemination Area geometry
+	    -   Geometry_ERUID
+		    -   Economic Region geometry
+	    -   Geometry_FSAUID
+		    -   Forward Sortation Area geometry
+	    -   Geometry_PRUID
+		    -   Province geometry
+	    -   Geometry_SAUID
+		    -   Settled area geometry, contains 2 sets of geometries, point and polygon.
+	    -   HexGrid_1km
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.01 degrees(1km)
+	    -   HexGrid_1km_3857
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.01 degrees(1km) EPSG 3857
+	    -   HexGrid_1km_unclipped
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.01 degrees(1km)
+	    -   HexGrid_1km_unclipped_3857
+		    - Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km) EPSG 3857
+	    -   HexGrid_5km
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km)
+	    -   HexGrid_5km_3857
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km) EPSG 3857
+	    -   HexGrid_5km_unclipped
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km)
+	    -   HexGrid_5km_unclipped_3857
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km) EPSG 3857
+	    -   HexGrid_10km
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km)
+	    -   HexGrid_10km_3857
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km) EPSG 3857
+	    -   HexGrid_10km_unclipped
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km)
+	    -   HexGrid_10km_unclipped_3857
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km) EPSG 3857
+	    -   HexGrid_25km
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km)
+	    -   HexGrid_25km_3857
+		    -   Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km) EPSG 3857
+	    -   HexGrid_25km_unclipped
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km)
+	    -   HexGrid_25km_unclipped_3857
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km) EPSG 3857
+	    -   HexGrid_50km_unclipped
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.50 degrees(50km)
+	    -   HexGrid_50km_unclipped_3857
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.50 degrees(50km) EPSG 3857
+	    -   HexGrid_100km_unclipped
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 1 degrees(100km)
+	    -   HexGrid_100km_unclipped_3857
+		    -   Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 1 degrees(100km) EPSG 3857
+	    -   HexGrid_GlobalFabric
+		    -   Hexagonal geometry extents of Canada based off GEM’s global fabric hex grid
+	    -   SAUID_HexGrid
+		    -   Table referencing the centroid of each settled area id (SAUID) to the various HexGrid geometries (5km,10km,25km,50km,100km) used for aggregation purposes.
+	    -   SAUID_HexGrid_1km_intersect
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_1km_intersect_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_1km_intersect_unclipped
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km_unclipped geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_1km_intersect_unclipped_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km_unclipped_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_5km_intersect
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_5km geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_5km_intersect_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to 	HexGrid_5km_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_5km_intersect_unclipped
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_5km_unclipped geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_5km_intersect_unclipped_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_5km_unclipped_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_10km_intersect
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_10km_intersect_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_10km_intersect_unclipped
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km_unclipped geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_10km_intersect_unclipped_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km_unclipped_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_25km_intersect
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_25km_intersect_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_25km_intersect_unclipped
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km_unclipped geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_25km_intersect_unclipped_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km_unclipped_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_50km_intersect_unclipped
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_50km_unclipped geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_50km_intersect_unclipped_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_50km_unclipped_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_100km_intersect_unclipped
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_100km_unclipped geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_100km_intersect_unclipped_3857
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_100km_unclipped_3857 geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_GlobalFabric_intersect
+		    -   Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_GlobalFabric geometry used for aggregation purposes.
+	    -   SAUID_HexGrid_Unclipped
+		    -   Table referencing the centroid of each settled area id (SAUID) to the various unclipped HexGrid geometries (5km,10km,25km,50km,100km) used for aggregation purposes.
+    
+
+-   ### census
+	- #### Notes
+	- Schema to store source 2016 census data.
+	-   census-attributes-2016.csv
+		-   2016 Census attribute source table of Canada
+		- [https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv)
+		- Tables count: 1
+    - #### Tables
+		-   census_2016_canada
+			-   Table containing relevant processed indicators from the 2016 census.
+
+
+-   ### db_check
+	-  #### Notes
+		- Schema for QA/QC of tables and views in the database.
+		- Tables count: 1
+    - #### Tables
+	   -   table_view_checkrow
+		   -   Table showing all the schema, table names, table type (table, view etc), and row count in the opendrr database. Useful for QA/QC check at the end of stackbuild to see if any issues arise (ie missing tables, row_count of 0 etc).
+
+
+- ### exposure
+	- #### Notes
+		- Schema to store source exposure data.
+		- Tables count: 1
+    - #### Tables
+    	- canada_exposure
+        	- Table containing initial source indicators for physical exposure.
+        	- BldgExpRef_CA_master_v3p2.csv
+            	- Physical exposure source table of Canada
+            	- [https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/general-building-stock/BldgExpRef_CA_master_v3p2.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/general-building-stock/BldgExpRef_CA_master_v3p2.csv)
+    	- Table processed from 
+[https://github.com/OpenDRR/openquake-inputs/](https://github.com/OpenDRR/openquake-inputs/)
+
+
+- ### ghsl
+	- #### Notes
+		- Schema to store source risk dynamics data.
+		- Tables count: 1
+    - #### Tables
+    	- ghsl_mh_intensity_ghsl
+        	- Table containing initial source indicators for _risk dynamics (not used)_.
+        	- mh-intensity-ghsl.csv
+        		- source table for risk dynamics
+        		- [https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/mh-intensity-ghsl.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/mh-intensity-ghsl.csv)
+
+
+- ### gmf
+	- #### Notes
+		- Schema to store source dsra shakemap data.
+		- Tables count: 46, 1 view
+    - #### Tables
+	    - shakemap_{EqScenario}
+			- Table containing shakemap indicators for each earthquake scenario.
+		- shakemap_{EqScenario}_xref
+    		- shakemap_{EqScenario} cross referenced to the closest assetID lon/lat. 
+		- shakemap_scenario_extents_temp
+    		- Temp table showing scenario and geometry extents of each earthquake scenario in the opendrr db.
+		- shakemap_scenario_extents_tbl
+    		- Table showing the various shakemap indicators including geometry extents of each earthquake scenario in the opendrr db.
+		- shakemap_scenario_extents (view)
+    		- View of shakemap_scenario_extents_tbl
+
+
+- ### lut
+	- #### Notes
+		- Schema to store lookup tables.
+		- Tables count: 2
+	- #### Tables
+    	- collapse_probability
+        	- Lookup table showing collapse probability rates.
+			- Table processed from
+                [https://github.com/OpenDRR/openquake-inputs](https://github.com/OpenDRR/openquake-inputs)
+    	- psra_source_types
+        	- Lookup table showing the psra source types.
+            - Table processed from
+[https://github.com/OpenDRR/seismic-risk-model](https://github.com/OpenDRR/seismic-risk-model)
+
+
+- ### mh
+	- #### Notes
+		- Schema to store multi hazard threat source tables.
+		- Tables count: 3
+	- #### Tables
+    	- mh_intensity_canada
+        	- Table containing initial source indicators for multi hazard.
+        	- HTi_sauid.csv
+            	- Source hazard threat indicators
+            	- [https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_sauid.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_sauid.csv)
+    	- mh_ratings_thresholds
+        	- hazard_threat_rating_thresholds.csv
+            	- precalculated threshold values for hazard threat (table #2)
+            	- [https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/hazard_threat_rating_thresholds.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/hazard_threat_rating_thresholds.csv)
+    	- mh_thresholds
+        	- HTi_thresholds.csv
+            	- precalculated threshold values for hazard threat (table #1)
+            	- [https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_thresholds.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_thresholds.csv)
+
+
+- ### psra_{P/T}
+	- #### Notes
+		- Schema to store various source psra tables for the each province/territory. In total there are 12 psra_{P/T} schemas, where {P/T} represents the province/territory 2 character abbreviations (pruid) used by Statistics Canada. 
+		- Tables count: 22
+	- #### Tables
+        - Aggregate curves/average losses tables at various quantiles. 
+            - psra_{P/T}_agg_curves_q05
+            - psra_{P/T}_agg_curves_q95
+            - psra_{P/T}_agg_curves_stats
+            - psra_{P/T}_agg_losses_q05
+            - psra_{P/T}_agg_losses_q95
+            - psra_{P/T}_agg_losses_stats
+            - psra_{P/T}_avg_losses_stats
+        - Damage tables at various quantiles.
+            - psra_{P/T}_ed_dmg_mean
+            - psra_{P/T}_ed_dmg_q05
+            - psra_{P/T}_ed_dmg_q95
+        - Hazard curve tables for pga and various spectral acceleration periods.
+            - psra_{P/T}_hcurves_pga
+            - psra_{P/T}_hcurves_sa0p1
+            - psra_{P/T}_hcurves_sa0p2
+            - psra_{P/T}_hcurves_sa0p3
+            - psra_{P/T}_hcurves_sa0p5
+            - psra_{P/T}_hcurves_sa0p6
+            - psra_{P/T}_hcurves_sa1p0
+            - psra_{P/T}_hcurves_sa2p0	
+		- hazard maps
+    		- psra_{P/T}_hmaps
+            - psra_{P/T}_hmaps_xref
+                - cross reference to closest assetID lon/lat 
+        - psra_{P/T}_uhs
+        - source loss
+            - psra_{P/T}_src_loss
+    	- All tables processed from 
+[https://github.com/OpenDRR/seismic-risk-model](https://github.com/OpenDRR/seismic-risk-model)
+
+
+- ### psra_canada
+	- #### Notes
+		- Schema to store various source psra tables for Canada. 
+		- Tables count: 7
+	- #### Tables
+	    - aggregate curves/average losses tables at various quantiles. 
+    	    - psra_canada_agg_curves_q05
+        	- psra_canada_agg_curves_q95
+        	- psra_canada_agg_curves_stats
+        	- psra_canada_agg_losses_q05
+        	- psra_canada_agg_losses_q95
+        	- psra_canada_agg_losses_stats
+    	- source loss
+        	- psra_canada_src_loss
+    	- All tables processed from
+[https://github.com/OpenDRR/seismic-risk-model](https://github.com/OpenDRR/seismic-risk-model)
+
+
+- ### results_nhsl_hazard_threat
+	- #### Notes
+		- Schema to store results of multi hazard threat.
+		- Tables count: 4 tables, 23 views
+	- #### Tables
+		- nhsl_hazard_threat_prioritization_csd_tbl
+			- Table showing hazard threat indicators at the csd level.
+        - nhsl_hazard_threat_indicators_s
+			- Table showing hazard threat indicators at the sauid level.
+		- nhsl_hazard_threat_prioritization_csd (view)
+			- View of nhsl_hazard_threat_prioritization_csd_tbl.
+		- nhsl_hazard_threat_prioritization_hexgrid_100km_uc (view)
+			- Hazard threat indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 3857.
+		- nhsl_hazard_threat_prioritization_hexgrid_100km_uc_4326 (view)
+			- Hazard threat indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 4326.
+		- nhsl_hazard_threat_prioritization_hexgrid_10km (view)
+			- Hazard threat indicators aggregated/proxied at the 10km hexgrid level EPSG 3857.
+		- nhsl_hazard_threat_prioritization_hexgrid_10km_4326 (view)
+			- Hazard threat indicators aggregated/proxied at the 10km hexgrid level EPSG 4326.
+		- nhsl_hazard_threat_prioritization_hexgrid_10km_uc (view)
+			- Hazard threat indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 3857.
+		- nhsl_hazard_threat_prioritization_hexgrid_10km_uc_4326 (view)
+			- Hazard threat indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 4326.
+		- nhsl_hazard_threat_prioritization_hexgrid_1km (view)
+			- Hazard threat indicators aggregated/proxied at the 1km hexgrid level EPSG 3857.
+		- nhsl_hazard_threat_prioritization_hexgrid_1km_4326 (view)
+			- Hazard threat indicators aggregated/proxied at the 1km hexgrid level EPSG 4326.
+		- nhsl_hazard_threat_prioritization_hexgrid_1km_uc (view)
+        - Hazard threat indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 3857.
+		- nhsl_hazard_threat_prioritization_hexgrid_1km_uc_4326 (view)
+			- Hazard threat indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 4326.
+		- nhsl_hazard_threat_prioritization_hexgrid_25km (view)
+			- Hazard threat indicators aggregated/proxied at the 25km hexgrid level EPSG 3857.
+		- nhsl_hazard_threat_prioritization_hexgrid_25km_4326 (view)
+			- Hazard threat indicators aggregated/proxied at the 25km hexgrid level EPSG 4326.
+		- nhsl_hazard_threat_prioritization_hexgrid_25km_uc (view)
+			- Hazard threat indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 3857.
+		- nhsl_hazard_threat_prioritization_hexgrid_25km_uc_4326 (view)
+			- Hazard threat indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 4326.
+		- nhsl_hazard_threat_prioritization_hexgrid_50km_uc (view)
+			- Hazard threat indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 3857.
+		- nhsl_hazard_threat_prioritization_hexgrid_50km_uc_4326 (view)
+			- Hazard threat indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 4326.
+		- nhsl_hazard_threat_prioritization_hexgrid_5km (view)
+			- Hazard threat indicators aggregated/proxied at the 5km hexgrid level EPSG 3857.
+		- nhsl_hazard_threat_prioritization_hexgrid_5km_4326 (view)
+			- Hazard threat indicators aggregated/proxied at the 5km hexgrid level EPSG 4326.
+		- nhsl_hazard_threat_prioritization_hexgrid_5km_uc (view)
+			- Hazard threat indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 3857.
+		- nhsl_hazard_threat_prioritization_hexgrid_5km_uc_4326 (view)
+			- Hazard threat indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 4326.
+		- nhsl_hazard_threat_prioritization_hexgrid_global_fabric (view)
+			- Hazard threat indicators aggregated/proxied to GEM’s global fabric hexgrids.
+		- nhsl_hazard_threat_indicators_s_tbl
+			- Table showing hazard threat indicators at the sauid level.
+		- hazard_threat_values_s
+			- Table showing calculated values used in nhsl_hazard_threat_indicators_s.
+		- hazard_threat_values_csd
+			- Table showing calculated values used in nhsl_hazard_threat_indicators_csd.
+
+
+- ### results_nhsl_physical_exposure
+	- #### Notes
+		- Schema to store results for physical exposure.
+		- Tables count: 49 views
+	- #### Tables
+	    - nhsl_physical_exposure_indicators_b (view)
+    	    - Physical exposure indicators at the building level for all of Canada.
+    	- nhsl_physical_exposure_indicators_b_ab (view)
+        	- Physical exposure indicators at the building level for AB.
+    	- nhsl_physical_exposure_indicators_b_bc (view)
+        	- Physical exposure indicators at the building level for BC.
+    	- nhsl_physical_exposure_indicators_b_mb (view)
+        	- Physical exposure indicators at the building level for MB.
+    	- nhsl_physical_exposure_indicators_b_nb (view)
+        	- Physical exposure indicators at the building level for NB.
+    	- nhsl_physical_exposure_indicators_b_nl (view)
+        	- Physical exposure indicators at the building level for NL.
+    	- nhsl_physical_exposure_indicators_b_ns (view)
+        	- Physical exposure indicators at the building level for NS.
+    	- nhsl_physical_exposure_indicators_b_nt (view)
+        	- Physical exposure indicators at the building level for NT.
+    	- nhsl_physical_exposure_indicators_b_nu (view)
+        	- Physical exposure indicators at the building level for NU.
+    	- nhsl_physical_exposure_indicators_b_on (view)
+        	- Physical exposure indicators at the building level for ON.
+    	- nhsl_physical_exposure_indicators_b_pe (view)
+        	- Physical exposure indicators at the building level for PE.
+    	- nhsl_physical_exposure_indicators_b_qc (view)
+        	- Physical exposure indicators at the building level for QC.
+    	- nhsl_physical_exposure_indicators_b_sk (view)
+        	- Physical exposure indicators at the building level for SK.
+    	- nhsl_physical_exposure_indicators_b_yt (view)
+        	- Physical exposure indicators at the building level for YT.
+    	- nhsl_physical_exposure_indicators_s (view)
+        	- Physical exposure indicators at the sauid level for all of Canada.
+    	- nhsl_physical_exposure_indicators_hexgrid_100km_uc (view)
+        	- Physical exposure indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_100km_uc_4326 (view)
+        	- Physical exposure indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_10km (view)
+        	- Physical exposure indicators aggregated/proxied at the 10km hexgrid level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_10km_4326 (view)
+        	- Physical exposure indicators aggregated/proxied at the 10km hexgrid level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_10km_uc (view)
+        	- Physical exposure indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_10km_uc_4326 (view)
+        	- Physical exposure indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_1km (view)
+        	- Physical exposure indicators aggregated/proxied at the 1km hexgrid level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_1km_4326 (view)
+        	- Physical exposure indicators aggregated/proxied at the 1km hexgrid level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_1km_uc (view)
+        	- Physical exposure indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_1km_uc_4326 (view)
+        	- Physical exposure indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_25km (view)
+        	- Physical exposure indicators aggregated/proxied at the 25km hexgrid level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_25km_4326 (view)
+        	- Physical exposure indicators aggregated/proxied at the 25km hexgrid level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_25km_uc (view)
+        	- Physical exposure indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_25km_uc_4326 (view)
+        	- Physical exposure indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_50km_uc (view)
+        	- Physical exposure indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_50km_uc_4326 (view)
+        	- Physical exposure indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_5km (view)
+        	- Physical exposure indicators aggregated/proxied at the 5km hexgrid level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_5km_4326 (view)
+        	- Physical exposure indicators aggregated/proxied at the 5km hexgrid level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_5km_uc (view)
+        	- Physical exposure indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 3857.
+    	- nhsl_physical_exposure_indicators_hexgrid_5km_uc_4326 (view)
+        	- Physical exposure indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 4326.
+    	- nhsl_physical_exposure_indicators_hexgrid_global_fabric (view)
+        	- Physical exposure indicators aggregated/proxied to GEM’s global fabric hexgrids.
+    	- nhsl_physical_exposure_indicators_s_ab (view)
+        	- Physical exposure indicators at the sauid level for AB.
+    	- nhsl_physical_exposure_indicators_s_bc (view)
+        	- Physical exposure indicators at the sauid level for BC.
+    	- nhsl_physical_exposure_indicators_s_mb (view)
+        	- Physical exposure indicators at the sauid level for MB.
+    	- nhsl_physical_exposure_indicators_s_nb (view)
+        	- Physical exposure indicators at the sauid level for NB.
+    	- nhsl_physical_exposure_indicators_s_nl (view)
+        	- Physical exposure indicators at the sauid level for NL.
+    	- nhsl_physical_exposure_indicators_s_ns (view)
+        	- Physical exposure indicators at the sauid level for NS.
+    	- nhsl_physical_exposure_indicators_s_nt (view)
+        	- Physical exposure indicators at the sauid level for NT.
+    	- nhsl_physical_exposure_indicators_s_nu (view)
+        	- Physical exposure indicators at the sauid level for NU.
+    	- nhsl_physical_exposure_indicators_s_on (view)
+        	- Physical exposure indicators at the sauid level for ON.
+    	- nhsl_physical_exposure_indicators_s_pe (view)
+        	- Physical exposure indicators at the sauid level for PE.
+    	- nhsl_physical_exposure_indicators_s_qc (view)
+        	- Physical exposure indicators at the sauid level for QC.
+    	- nhsl_physical_exposure_indicators_s_sk (view)
+        	- Physical exposure indicators at the sauid level for SK.
+    	- nhsl_physical_exposure_indicators_s_yt (view)
+        	- Physical exposure indicators at the sauid level for YT.
+
+- ### results_nhsl_risk_dynamics
+	- #### Notes
+		- Schema to store results for risk dynamics.
+		- Tables count: 14 views
+    - #### Tables
+		- nhsl_risk_dynamics_indicators (view)
+			- Risk dynamics indicators for all of Canada.
+    - nhsl_risk_dynamics_indicators_ab (view)
+        - Risk dynamics indicators for AB.
+    - nhsl_risk_dynamics_indicators_bc (view)
+        - Risk dynamics indicators for BC.
+    - nhsl_risk_dynamics_indicators_mb (view)
+        - Risk dynamics indicators for MB.
+    - nhsl_risk_dynamics_indicators_nb (view)
+        - Risk dynamics indicators for NB.
+    - nhsl_risk_dynamics_indicators_nl (view)
+        - Risk dynamics indicators for NL.
+    - nhsl_risk_dynamics_indicators_ns (view)
+        - Risk dynamics indicators for NS.
+    - nhsl_risk_dynamics_indicators_nt (view)
+        - Risk dynamics indicators for NT.
+    - nhsl_risk_dynamics_indicators_nu (view)
+        - Risk dynamics indicators for NU.
+    - nhsl_risk_dynamics_indicators_on (view)
+        - Risk dynamics indicators for ON.
+    - nhsl_risk_dynamics_indicators_pe (view)
+        - Risk dynamics indicators for PE.
+    - nhsl_risk_dynamics_indicators_qc (view)
+        - Risk dynamics indicators for QC.
+    - nhsl_risk_dynamics_indicators_sk (view)
+        - Risk dynamics indicators for SK.
+    - nhsl_risk_dynamics_indicators_yt (view)
+        - Risk dynamics indicators for YT.
+
+
+- ### results_nhsl_social_fabric
+	- #### Notes
+		- Schema to store results for social fabric.
+		- Tables count: 35 views
+    - #### Tables
+		- nhsl_social_fabric_indicators_s (view)
+			- Social fabric indicators at the sauid level for all of Canada.
+		- nhsl_social_fabric_indicators_hexgrid_100km_uc (view)
+			- Social fabric indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 3857.
+		- nhsl_social_fabric_indicators_hexgrid_100km_uc_4326 (view)
+			- Social fabric indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 4326.
+		- nhsl_social_fabric_indicators_hexgrid_10km (view)
+			- Social fabric indicators aggregated/proxied at the 10km hexgrid level EPSG 3857.
+		- nhsl_social_fabric_indicators_hexgrid_10km_4326 (view)
+			- Social fabric indicators aggregated/proxied at the 10km hexgrid level EPSG 4326.
+		- nhsl_social_fabric_indicators_hexgrid_10km_uc (view)
+			- Social fabric indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 3857.
+		- nhsl_social_fabric_indicators_hexgrid_10km_uc_4326 (view)
+			- Social fabric indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 4326.
+		- nhsl_social_fabric_indicators_hexgrid_1km (view)
+			- Social fabric indicators aggregated/proxied at the 1km hexgrid level EPSG 3857.
+		- nhsl_social_fabric_indicators_hexgrid_1km_4326 (view)
+			- Social fabric indicators aggregated/proxied at the 1km hexgrid level EPSG 4326.
+		- nhsl_social_fabric_indicators_hexgrid_1km_uc (view)
+			- Social fabric indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 3857.
+		- nhsl_social_fabric_indicators_hexgrid_1km_uc_4326 (view)
+			- Social fabric indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 4326.
+		- nhsl_social_fabric_indicators_hexgrid_25km (view)
+			- Social fabric indicators aggregated/proxied at the 25km hexgrid level EPSG 3857.
+		- nhsl_social_fabric_indicators_hexgrid_25km_4326 (view)
+			- Social fabric indicators aggregated/proxied at the 25km hexgrid level EPSG 4326.
+		- nhsl_social_fabric_indicators_hexgrid_25km_uc (view)
+			- Social fabric indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 3857.
+		- nhsl_social_fabric_indicators_hexgrid_25km_uc_4326 (view)
+			- Social fabric indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 4326.
+		- nhsl_social_fabric_indicators_hexgrid_50km_uc (view)
+			- Social fabric indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 3857.
+		- nhsl_social_fabric_indicators_hexgrid_50km_uc_4326 (view)
+			- Social fabric indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 4326.
+		- nhsl_social_fabric_indicators_hexgrid_5km (view)
+			- Social fabric indicators aggregated/proxied at the 5km hexgrid level EPSG 3857.
+		- nhsl_social_fabric_indicators_hexgrid_5km_4326 (view)
+			- Social fabric indicators aggregated/proxied at the 5km hexgrid level EPSG 4326.
+		- nhsl_social_fabric_indicators_hexgrid_5km_uc (view)
+			- Social fabric indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 3857.
+		- nhsl_social_fabric_indicators_hexgrid_5km_uc_4326 (view)
+			- Social fabric indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 4326.
+		- nhsl_social_fabric_indicators_hexgrid_global_fabric (view)
+			- Social fabric indicators aggregated/proxied to GEM’s global fabric hexgrid.
+		- nhsl_social_fabric_indicators_s_ab (view)
+			- Social fabric indicators at the sauid level for AB.
+		- nhsl_social_fabric_indicators_s_bc (view)
+			- Social fabric indicators at the sauid level for BC.
+		- nhsl_social_fabric_indicators_s_mb (view)
+			- Social fabric indicators at the sauid level for MB.
+		- nhsl_social_fabric_indicators_s_nb (view)
+			- Social fabric indicators at the sauid level for NB.
+		- nhsl_social_fabric_indicators_s_nl (view)
+			- Social fabric indicators at the sauid level for NL.
+		- nhsl_social_fabric_indicators_s_ns (view)
+			- Social fabric indicators at the sauid level for NS.
+		- nhsl_social_fabric_indicators_s_nt (view)
+			- Social fabric indicators at the sauid level for NT.
+		- nhsl_social_fabric_indicators_s_nu (view)
+			- Social fabric indicators at the sauid level for NU.
+		- nhsl_social_fabric_indicators_s_on (view)
+			- Social fabric indicators at the sauid level for ON.
+		- nhsl_social_fabric_indicators_s_pe (view)
+			- Social fabric indicators at the sauid level for PE.
+		- nhsl_social_fabric_indicators_s_qc (view)
+			- Social fabric indicators at the sauid level for QC.
+		- nhsl_social_fabric_indicators_s_sk (view)
+			- Social fabric indicators at the sauid level for SK.
+		- nhsl_social_fabric_indicators_s_yt (view)
+			- Social fabric indicators at the sauid level for YT.
+
+- ### results_psra_{P/T}
+	- #### Notes
+		- Schema to store psra results for each province/territory. In total there are 12 results_psra_{P/T} schemas, where {P/T} represents the province/territory 2 character abbreviations (pruid) used by Statistics Canada. 
+		- Tables count: 3 tables, 6 views
+    - #### Tables
+		- psra_{P/T}_indicators_b (view)
+			- Psra indicators at the building level for each province/territory.
+		- psra_{P/T}_eqriskindex
+			- Table with calculations for risk index, used in psra_{P/T}_indicators_s.
+		- psra_{P/T}_eqriskindex_csd
+			- Table with calculations for risk index, used in psra_{P/T}_indicators_csd.
+		- psra_{P/T}_indicators_s (view)
+			- Psra indicators at the sauid level for each province/territory.
+		- psra_{P/T}_indicators_csd (view)
+			- Psra indicators at the csd level for each province/territory.
+		- psra_{P/T}_expected_loss_fsa (view)
+			- Psra expected loss values at fsa level for each province/territory.
+		- psra_{P/T}_agg_loss_fsa (view)
+			- Psra aggregated loss values at fsa level for each province/territory.
+		- psra_{P/T}_src_loss_tbl
+			- Psra source loss table  for each province/territory.
+		- psra_{P/T}_src_loss (view)
+			- View of psra_{P/T}_src_loss_tbl.
+
+	
+- ### results_psra_canada
+	- #### Notes
+		- Schema showing results for psra canada.
+		- Tables count: 1 table, 9 views
+    - #### Tables
+		- psra_canada_expected_loss (view)
+			- Expected loss values for Canada for all periods.
+		- psra_canada_expected_loss_50yr (view)
+			- Expected loss values for Canada for 50 year period.
+		- psra_canada_expected_loss_100yr (view)
+			- Expected loss values for Canada for 100 year period.
+		- psra_canada_expected_loss_250yr (view)
+			- Expected loss values for Canada for 250 year period.
+		- psra_canada_expected_loss_500yr (view)
+			- Expected loss values for Canada for 500 year period.
+		- psra_canada_expected_loss_1000yr (view)
+			- Expected loss values for Canada for 1000 year period.
+		- psra_canada_expected_loss_2500yr (view)
+			- Expected loss values for Canada for 2500 year period.
+		- psra_canada_agg_loss (view)
+			- Aggregated loss values for Canada.
+		- psra_canada_src_loss_tbl
+			- Source loss table for Canada. 
+		- psra_canada_src_loss (view)
+			- View of psra_canada_src_loss_tbl.
+
+
+- ### results_psra_national
+	- #### Notes
+		- Schema showing results for psra national. National indicators are results from the various results_psra_{P/T} schema, including psra_{P/T}\_indicators_b, psra_{P/T}\_indicators_s, psra_{P/T}\_indicators_csd, psra_{P/T}\_expected_loss_fsa, psra_{P/T}\_agg_loss_fsa, and psra_{P/T}\_src_loss tables that are merged together into a one national table for each of the tables above. After merging, earthquake risk index calculations are made for indicators_s, and indicators_csd tables and updated. The EQRI values are then updated in the corresponding results_psra_{P/T}.
+		- Tables count: 31 tables, 35 views
+    - #### Tables
+	    - psra_indicators_b_tbl
+			- Psra indicators at the building level for all of Canada merged from all psra_indicators_b from all results_psra_{P/T} schemas.
+		- psra_indicators_b (view)
+			- View of psra_indicators_b_tbl.
+		- psra_indicators_s_tbl
+			- Psra indicators at the settled area level for all of Canada merged from all psra_indicators_s from all results_psra_{P/T} schemas.
+		- psra_indicators_s (view)
+			- View of psra_indicators_s_tbl.
+		- psra_indicators_csd_tbl
+			- Psra indicators at the csd level for all of Canada merged from all psra_indicators_csd from all results_psra_{P/T} schemas.
+		- psra_indicators_csd (view)
+			- View of psra_indicators_csd_tbl.
+		- psra_expected_loss_fsa_tbl
+			- Psra expected loss values at fsa level for all of Canada merged from all psra_expected_loss from all results_psra_{P/T} schemas.
+		- psra_agg_loss_fsa_tbl 
+			- Psra agg loss values at fsa level for all of Canada merged from all psra_agg_loss from all results_psra_{P/T} schemas.
+		- psra_expected_loss_fsa (view)
+			- View of psra_agg_loss_fsa_tbl.
+		- psra_src_loss_tbl
+			- Psra agg loss values at fsa level for all of Canada merged from all psra_src_loss from all results_psra_{P/T} schemas.
+		- psra_src_loss
+			- View of psra_src_loss_tbl.
+		- psra_agg_loss_fsa_tbl
+			- Psra agg loss values at fsa level for all of Canada merged from all psra_agg_loss from all results_psra_{P/T} schemas.
+		- psra_agg_loss_fsa_tbl
+			- View of psra_agg_loss_fsa_tbl.
+		- psra_canada_agg_loss_tbl
+			- Psra agg loss values copied from psra_canada_agg_loss  from results_psra_canada schema.
+		- psra_canada_agg_loss (view)
+			- View of psra_canada_agg_loss_tbl.
+		- psra_canada_expected_loss_tbl
+			- Psra expected loss values copied from psra_canada_expected_loss (view) from results_psra_canada schema.
+		- psra_canada_expected_loss
+			- View of psra_canada_expected_loss_tbl.
+		- psra_canada_expected_loss_50yr (view)
+			- View of psra_canada_expected_loss_50yr from results_psra_canada schema.
+		- psra_canada_expected_loss_100yr (view)
+			- View of psra_canada_expected_loss_100yr from results_psra_canada schema.
+		- psra_canada_expected_loss_250yr (view)
+			- View of psra_canada_expected_loss_250yr from results_psra_canada schema.
+		- psra_canada_expected_loss_500yr (view)
+			- View of psra_canada_expected_loss_500yr from results_psra_canada schema.
+		- psra_canada_expected_loss_1000yr (view)
+			- View of psra_canada_expected_loss_1000yr from results_psra_canada schema.
+		- psra_canada_expected_loss_2500yr (view)
+			- View of psra_canada_expected_loss_2500yr from results_psra_canada schema.
+		- psra_canada_src_loss_tbl
+			- Psra source loss values copied from psra_canada_src_loss from results_psra_canada schema.
+		- psra_canada_src_loss
+			- View of psra_canada_src_loss_tbl.
+		- psra_sri_calc_sa
+			- Seismic risk index (eqri) calculations used for settled area.
+		- psra_sri_calc_csd
+			- Seismic risk index (eqri) calculations used for csd.
+		- psra_sri_calc_hg_1km
+			- Seismic risk index (eqri) calculations used for 1km hexgrid (EPSG 3857).
+		- psra_sri_calc_hg_1km_4326
+			- Seismic risk index (eqri) calculations used for 1km hexgrid (EPSG 4326).
+		- psra_sri_calc_hg_1km_uc
+			- Seismic risk index (eqri) calculations used for 1km unclipped hexgrid (EPSG 3857).
+		- psra_sri_calc_hg_1km_uc_4326
+			- Seismic risk index (eqri) calculations used for 1km unclipped hexgrid (EPSG 4326).
+		- psra_sri_calc_hg_5km
+			- Seismic risk index (eqri) calculations used for 5km hexgrid (EPSG 3857).
+		- psra_sri_calc_hg_5km_4326
+			- Seismic risk index (eqri) calculations used for 5km hexgrid (EPSG 4326).
+		- psra_sri_calc_hg_5km_uc
+			- Seismic risk index (eqri) calculations used for 5km unclipped hexgrid (EPSG 3857).
+		- psra_sri_calc_hg_5km_uc_4326
+			- Seismic risk index (eqri) calculations used for 5km unclipped hexgrid (EPSG 4326).
+		- psra_sri_calc_hg_10km
+			- Seismic risk index (eqri) calculations used for 10km hexgrid (EPSG 3857).
+		- psra_sri_calc_hg_10km_4326
+			- Seismic risk index (eqri) calculations used for 10km hexgrid (EPSG 4326).
+		- psra_sri_calc_hg_10km_uc
+			- Seismic risk index (eqri) calculations used for 10km unclipped hexgrid (EPSG 3857).
+		- psra_sri_calc_hg_10km_uc_4326
+			- Seismic risk index (eqri) calculations used for 10km unclipped hexgrid (EPSG 4326).
+		- psra_sri_calc_hg_25km
+			- Seismic risk index (eqri) calculations used for 25km hexgrid (EPSG 3857).
+		- psra_sri_calc_hg_25km_4326
+			- Seismic risk index (eqri) calculations used for 25km hexgrid (EPSG 4326).
+		- psra_sri_calc_hg_25km_uc
+			- Seismic risk index (eqri) calculations used for 25km unclipped hexgrid (EPSG 3857).
+		- psra_sri_calc_hg_25km_uc_4326
+			- Seismic risk index (eqri) calculations used for 25km unclipped hexgrid (EPSG 4326).
+		- psra_sri_calc_hg_50km_uc
+			- Seismic risk index (eqri) calculations used for 50km unclipped hexgrid (EPSG 3857).
+		- psra_sri_calc_hg_50km_uc_4326
+			- Seismic risk index (eqri) calculations used for 50km unclipped hexgrid (EPSG 4326).
+		- psra_sri_calc_hg_100km_uc
+			- Seismic risk index (eqri) calculations used for 100km unclipped hexgrid (EPSG 3857).
+		- psra_sri_calc_hg_100km_uc_4326
+			- Seismic risk index (eqri) calculations used for 100km unclipped hexgrid (EPSG 4326).
+		- psra_indicators_hexgrid_1km (view)
+			- Psra indicators aggregated to the 1km hexgrid level (EPSG 3857).
+		- psra_indicators_hexgrid_1km_uc (view)
+			- Psra indicators aggregated to the unclipped 1km hexgrid level (EPSG 3857).
+		- psra_indicators_hexgrid_1km_4326 (view)
+			- Psra indicators aggregated to the 1km hexgrid level (EPSG 4326).
+		- psra_indicators_hexgrid_1km_uc_4326 (view)
+			- Psra indicators aggregated to the unclipped 1km hexgrid level (EPSG 4326).
+		- psra_indicators_hexgrid_5km (view)
+			- Psra indicators aggregated to the 5km hexgrid level (EPSG 3857).
+		- psra_indicators_hexgrid_5km_uc (view)
+			- Psra indicators aggregated to the unclipped 5km hexgrid level (EPSG 3857).
+		- psra_indicators_hexgrid_5km_4326 (view)
+			- Psra indicators aggregated to the 5km hexgrid level (EPSG 4326).
+		- psra_indicators_hexgrid_5km_uc_4326 (view)
+			- Psra indicators aggregated to the unclipped 5km hexgrid level (EPSG 4326).
+		- psra_indicators_hexgrid_10km (view)
+			- Psra indicators aggregated to the 10km hexgrid level (EPSG 3857).
+		- psra_indicators_hexgrid_10km_uc (view)
+			- Psra indicators aggregated to the unclipped 10km hexgrid level (EPSG 3857).
+		- psra_indicators_hexgrid_10km_4326 (view)
+			- Psra indicators aggregated to the 10km hexgrid level (EPSG 4326).
+		- psra_indicators_hexgrid_10km_uc_4326 (view)
+			- Psra indicators aggregated to the unclipped 10km hexgrid level (EPSG 4326).
+		- psra_indicators_hexgrid_25km (view)
+			- Psra indicators aggregated to the 25km hexgrid level (EPSG 3857).
+		- psra_indicators_hexgrid_25km_uc (view)
+			- Psra indicators aggregated to the unclipped 25km hexgrid level (EPSG 3857).
+		- psra_indicators_hexgrid_25km_4326 (view)
+			- Psra indicators aggregated to the 25km hexgrid level (EPSG 4326).
+		- psra_indicators_hexgrid_25km_uc_4326 (view)
+			- Psra indicators aggregated to the unclipped 25km hexgrid level (EPSG 4326).
+		- psra_indicators_hexgrid_50km_uc (view)
+			- Psra indicators aggregated to the unclipped 50km hexgrid level (EPSG 3857).
+		- psra_indicators_hexgrid_50km_uc_4326 (view)
+			- Psra indicators aggregated to the unclipped 25km hexgrid level (EPSG 4326).
+		- psra_indicators_hexgrid_100km_uc (view)
+			- Psra indicators aggregated to the unclipped 100km hexgrid level (EPSG 3857).
+		- psra_indicators_hexgrid_100km_uc_4326 (view)
+			- Psra indicators aggregated to the unclipped 25km hexgrid level (EPSG 4326).
+
+
+ - ### ruptures
+	- #### Notes
+		- Schema to store ruptures information for DSRA use.
+	 	- Tables count: 1
+    - #### Tables
+		- rupture_table
+			- Table storing rupture information from each earthquake scenario.
+				- [https://github.com/OpenDRR/earthquake-scenarios/tree/master/ruptures](https://github.com/OpenDRR/earthquake-scenarios/tree/master/ruptures)
+
+
+- ### sovi
+	- #### Notes
+		- Schema storing source social fabric data.
+		- Tables count: 1
+	- #### Tables
+		- sovi_sauid_nov2021
+			- Table containing source indicators for social fabric.
+				- [https://github.com/OpenDRR/openquake-inputs/blob/main/social-vulnerability/sovi_sauid_nov2021.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/social-vulnerability/sovi_sauid_nov2021.csv)
+
+- ### vs30
+- #### Notes
+	- Schema storing vs30 tables.
+	- Tables count: 2
+- #### Tables
+	- vs30_can_site_model
+		- Table containing vs30, z1pt0, z2pt5 values for all of Canada.
+		- [https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/site-vgrid_CA.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/site-vgrid_CA.csv)
+	- vs30_can_site_model_xref
+		- Vs30_can_site_model cross reference to exposure assetID lon/lat.
+		- [https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/vs30_CAN_site_model_xref.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/vs30_CAN_site_model_xref.csv)
+
+
