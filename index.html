@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" /><link rel="canonical" href="https://github.com/wkhchow/model-factory/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>OpenDRR Model Factory</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Home";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/wkhchow/model-factory/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> OpenDRR Model Factory
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">Home</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#how-the-script-works">How the script works</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="intro/">OpenDRR Database/SQL Documentation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="nhsl/">National Human Settlement Layers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="dsra/">Earthquake Scenarios (DSRA)</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="psra/">Seismic Risk Model (PSRA)</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="schemas/">Schemas</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">OpenDRR Model Factory</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li class="breadcrumb-item active">Home</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/wkhchow/model-factory/edit/master/docs/index.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="model-factory">model-factory</h1>
+<p><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/openquake.engine" /></p>
+<p>model-factory is a repository used in conjunction with <a href="https://github.com/OpenDRR/opendrr-api">opendrr-api</a> repository.
+It contains documentation, and scripts (python and sql) to transform opendrr source data (exposure, census, and OpenQuake outputs etc.) into risk profile indicators for:</p>
+<ul>
+<li><a href="https://github.com/OpenDRR/national-human-settlement">National Human Settlement Layer</a> 
+         - <a href="https://github.com/OpenDRR/national-human-settlement/tree/main/physical-exposure">Physical Exposure</a>
+         - <a href="https://github.com/OpenDRR/national-human-settlement/tree/main/social-fabric">Social Fabric</a></li>
+<li><a href="https://github.com/OpenDRR/earthquake-scenarios">Earthquake Scenarios</a> </li>
+<li>
+<p><a href="https://github.com/OpenDRR/seismic-risk-model">Probabilistic Earthquake Risk</a></p>
+</li>
+<li>
+<p><strong>documentation/</strong></p>
+<ul>
+<li>RiskProfileTaxonomy.xls<ul>
+<li>Documentation of v1.0 risk profile indicators for review and comments.</li>
+</ul>
+</li>
+<li><a href="https://github.com/OpenDRR/opendrr-data-store/blob/master/scripts/Diagrams">opendrr.drawio</a><ul>
+<li>diagram of current opendrr postgis database, created in draw.io </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>scripts/</strong><ul>
+<li>Series of python and sql scripts that are used in opendrr-api repository to build the PostGIS database.</li>
+</ul>
+</li>
+<li>requirements.txt<ul>
+<li>list of modules and versions required to be installed.  <code>$ pip install -r requirements.txt</code></li>
+</ul>
+</li>
+</ul>
+<p>Refer to the <a href="https://github.com/OpenDRR/model-factory/releases">releases section</a> for latest version changes.</p>
+<h3 id="how-the-script-works">How the script works</h3>
+<ul>
+<li>Most scripts in this repository are run with keyword arguments.</li>
+</ul>
+<p>Example:</p>
+<pre><code>$ python3 DSRA_outputs2postgres.py --dsraModelDir=&quot;https://github.com/OpenDRR/openquake-models/tree/master/deterministic/outputs&quot; --columnsINI=&quot;DSRA_outputs2postgres.ini&quot;
+</code></pre>
+<p>Or ask scripts for help on how to run them:
+```
+$ python3 DSRA_outputs2postgres.py --help</p>
+<!-- # Welcome to MkDocs
+
+For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+
+## Commands
+
+* `mkdocs new [dir-name]` - Create a new project.
+* `mkdocs serve` - Start the live-reloading docs server.
+* `mkdocs build` - Build the documentation site.
+* `mkdocs -h` - Print help message and exit.
+
+## Project layout
+
+    mkdocs.yml    # The configuration file.
+    docs/
+        index.md  # The documentation homepage.
+        ...       # Other markdown pages, images and other files. -->
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="intro/" class="btn btn-neutral float-right" title="OpenDRR Database/SQL Documentation">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/wkhchow/model-factory" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+      <span><a href="intro/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.5.2
+Build Date UTC : 2023-09-06 17:38:55.055975+00:00
+-->

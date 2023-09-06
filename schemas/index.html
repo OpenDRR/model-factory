@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://github.com/wkhchow/model-factory/schemas/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Schemas - OpenDRR Model Factory</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Schemas";
+        var mkdocs_page_input_path = "schemas.md";
+        var mkdocs_page_url = "/wkhchow/model-factory/schemas/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OpenDRR Model Factory
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">OpenDRR Database/SQL Documentation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../nhsl/">National Human Settlement Layers</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../dsra/">Earthquake Scenarios (DSRA)</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../psra/">Seismic Risk Model (PSRA)</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Schemas</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#boundaries">boundaries</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#census">census</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_1">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_1">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#db_check">db_check</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_2">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_2">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#exposure">exposure</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_3">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_3">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ghsl">ghsl</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_4">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_4">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#gmf">gmf</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_5">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_5">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#lut">lut</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_6">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_6">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mh">mh</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_7">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_7">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#psra_pt">psra_{P/T}</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_8">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_8">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#psra_canada">psra_canada</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_9">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_9">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#results_nhsl_hazard_threat">results_nhsl_hazard_threat</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_10">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_10">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#results_nhsl_physical_exposure">results_nhsl_physical_exposure</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_11">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_11">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#results_nhsl_risk_dynamics">results_nhsl_risk_dynamics</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_12">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_12">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#results_nhsl_social_fabric">results_nhsl_social_fabric</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_13">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_13">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#results_psra_pt">results_psra_{P/T}</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_14">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_14">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#results_psra_canada">results_psra_canada</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_15">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_15">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#results_psra_national">results_psra_national</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_16">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_16">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ruptures">ruptures</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_17">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_17">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sovi">sovi</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_18">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_18">Tables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vs30">vs30</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_19">Notes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tables_19">Tables</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OpenDRR Model Factory</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li class="breadcrumb-item active">Schemas</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/wkhchow/model-factory/edit/master/docs/schemas.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="schemas">Schemas</h1>
+<ul>
+<li>
+<h3 id="boundaries">boundaries</h3>
+<ul>
+<li>
+<h4 id="notes">Notes</h4>
+<ul>
+<li>Schema containing all geometry and reference tables related to the OpenDRR project. More details can be found in <a href="https://github.com/OpenDRR/boundaries">https://github.com/OpenDRR/boundaries</a></li>
+</ul>
+</li>
+<li>All census related geometries are adapted from Statistics Canada, 2016 Census Boundary files, 2020<ul>
+<li>Settled Area geometry development can be found in <a href="https://publications.gc.ca/collections/collection_2022/rncan-nrcan/m183-2/M183-2-8892-eng.pdf">Physical exposure to natural hazards in Canada</a></li>
+<li>All tables with geometries are in EPSG 4326 unless specified with a suffix _3857, which signifies EPSG 3857</li>
+<li>Table count: 53</li>
+</ul>
+</li>
+<li>
+<h4 id="tables">Tables</h4>
+<ul>
+<li>Geometry_ADAUID<ul>
+<li>Aggregate dissemination area geometry</li>
+</ul>
+</li>
+<li>Geometry_CANADA<ul>
+<li>Canada outline geometry</li>
+</ul>
+</li>
+<li>Geometry_CDUID<ul>
+<li>Census Division geometry</li>
+</ul>
+</li>
+<li>Geometry_CSDUID<ul>
+<li>Census Subdivision geometry, simplified polygon at 0.005 degrees</li>
+</ul>
+</li>
+<li>Geometry_DAUID<ul>
+<li>Dissemination Area geometry</li>
+</ul>
+</li>
+<li>Geometry_ERUID<ul>
+<li>Economic Region geometry</li>
+</ul>
+</li>
+<li>Geometry_FSAUID<ul>
+<li>Forward Sortation Area geometry</li>
+</ul>
+</li>
+<li>Geometry_PRUID<ul>
+<li>Province geometry</li>
+</ul>
+</li>
+<li>Geometry_SAUID<ul>
+<li>Settled area geometry, contains 2 sets of geometries, point and polygon.</li>
+</ul>
+</li>
+<li>HexGrid_1km<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.01 degrees(1km)</li>
+</ul>
+</li>
+<li>HexGrid_1km_3857<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.01 degrees(1km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_1km_unclipped<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.01 degrees(1km)</li>
+</ul>
+</li>
+<li>HexGrid_1km_unclipped_3857<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_5km<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km)</li>
+</ul>
+</li>
+<li>HexGrid_5km_3857<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_5km_unclipped<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km)</li>
+</ul>
+</li>
+<li>HexGrid_5km_unclipped_3857<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.05 degrees(5km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_10km<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km)</li>
+</ul>
+</li>
+<li>HexGrid_10km_3857<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_10km_unclipped<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km)</li>
+</ul>
+</li>
+<li>HexGrid_10km_unclipped_3857<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.1 degrees(10km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_25km<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km)</li>
+</ul>
+</li>
+<li>HexGrid_25km_3857<ul>
+<li>Clipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_25km_unclipped<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km)</li>
+</ul>
+</li>
+<li>HexGrid_25km_unclipped_3857<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.25 degrees(25km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_50km_unclipped<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.50 degrees(50km)</li>
+</ul>
+</li>
+<li>HexGrid_50km_unclipped_3857<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 0.50 degrees(50km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_100km_unclipped<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 1 degrees(100km)</li>
+</ul>
+</li>
+<li>HexGrid_100km_unclipped_3857<ul>
+<li>Unclipped hexagonal geometry of Canada based on x grid spacing of approximately 1 degrees(100km) EPSG 3857</li>
+</ul>
+</li>
+<li>HexGrid_GlobalFabric<ul>
+<li>Hexagonal geometry extents of Canada based off GEM’s global fabric hex grid</li>
+</ul>
+</li>
+<li>SAUID_HexGrid<ul>
+<li>Table referencing the centroid of each settled area id (SAUID) to the various HexGrid geometries (5km,10km,25km,50km,100km) used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_1km_intersect<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_1km_intersect_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_1km_intersect_unclipped<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km_unclipped geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_1km_intersect_unclipped_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_1km_unclipped_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_5km_intersect<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_5km geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_5km_intersect_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to    HexGrid_5km_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_5km_intersect_unclipped<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_5km_unclipped geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_5km_intersect_unclipped_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_5km_unclipped_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_10km_intersect<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_10km_intersect_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_10km_intersect_unclipped<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km_unclipped geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_10km_intersect_unclipped_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_10km_unclipped_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_25km_intersect<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_25km_intersect_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_25km_intersect_unclipped<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km_unclipped geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_25km_intersect_unclipped_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_25km_unclipped_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_50km_intersect_unclipped<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_50km_unclipped geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_50km_intersect_unclipped_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_50km_unclipped_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_100km_intersect_unclipped<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_100km_unclipped geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_100km_intersect_unclipped_3857<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_100km_unclipped_3857 geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_GlobalFabric_intersect<ul>
+<li>Table referencing the settled area id (SAUID) area, and its percentage of area intersect with respect to HexGrid_GlobalFabric geometry used for aggregation purposes.</li>
+</ul>
+</li>
+<li>SAUID_HexGrid_Unclipped<ul>
+<li>Table referencing the centroid of each settled area id (SAUID) to the various unclipped HexGrid geometries (5km,10km,25km,50km,100km) used for aggregation purposes.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="census">census</h3>
+<ul>
+<li>
+<h4 id="notes_1">Notes</h4>
+</li>
+<li>Schema to store source 2016 census data.</li>
+<li>census-attributes-2016.csv<ul>
+<li>2016 Census attribute source table of Canada</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv</a></li>
+<li>Tables count: 1</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_1">Tables</h4>
+<ul>
+<li>census_2016_canada<ul>
+<li>Table containing relevant processed indicators from the 2016 census.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="db_check">db_check</h3>
+<ul>
+<li>
+<h4 id="notes_2">Notes</h4>
+<ul>
+<li>Schema for QA/QC of tables and views in the database.</li>
+<li>Tables count: 1</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_2">Tables</h4>
+</li>
+<li>table_view_checkrow<ul>
+<li>Table showing all the schema, table names, table type (table, view etc), and row count in the opendrr database. Useful for QA/QC check at the end of stackbuild to see if any issues arise (ie missing tables, row_count of 0 etc).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="exposure">exposure</h3>
+<ul>
+<li>
+<h4 id="notes_3">Notes</h4>
+<ul>
+<li>Schema to store source exposure data.</li>
+<li>Tables count: 1</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_3">Tables</h4>
+<ul>
+<li>canada_exposure<ul>
+<li>Table containing initial source indicators for physical exposure.</li>
+<li>BldgExpRef_CA_master_v3p2.csv<ul>
+<li>Physical exposure source table of Canada</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/general-building-stock/BldgExpRef_CA_master_v3p2.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/general-building-stock/BldgExpRef_CA_master_v3p2.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Table processed from 
+<a href="https://github.com/OpenDRR/openquake-inputs/">https://github.com/OpenDRR/openquake-inputs/</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="ghsl">ghsl</h3>
+<ul>
+<li>
+<h4 id="notes_4">Notes</h4>
+<ul>
+<li>Schema to store source risk dynamics data.</li>
+<li>Tables count: 1</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_4">Tables</h4>
+<ul>
+<li>ghsl_mh_intensity_ghsl<ul>
+<li>Table containing initial source indicators for <em>risk dynamics (not used)</em>.</li>
+<li>mh-intensity-ghsl.csv<ul>
+<li>source table for risk dynamics</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/mh-intensity-ghsl.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/mh-intensity-ghsl.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="gmf">gmf</h3>
+<ul>
+<li>
+<h4 id="notes_5">Notes</h4>
+<ul>
+<li>Schema to store source dsra shakemap data.</li>
+<li>Tables count: 46, 1 view</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_5">Tables</h4>
+<ul>
+<li>shakemap_{EqScenario}<ul>
+<li>Table containing shakemap indicators for each earthquake scenario.</li>
+</ul>
+</li>
+<li>shakemap_{EqScenario}_xref<ul>
+<li>shakemap_{EqScenario} cross referenced to the closest assetID lon/lat. </li>
+</ul>
+</li>
+<li>shakemap_scenario_extents_temp<ul>
+<li>Temp table showing scenario and geometry extents of each earthquake scenario in the opendrr db.</li>
+</ul>
+</li>
+<li>shakemap_scenario_extents_tbl<ul>
+<li>Table showing the various shakemap indicators including geometry extents of each earthquake scenario in the opendrr db.</li>
+</ul>
+</li>
+<li>shakemap_scenario_extents (view)<ul>
+<li>View of shakemap_scenario_extents_tbl</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="lut">lut</h3>
+<ul>
+<li>
+<h4 id="notes_6">Notes</h4>
+<ul>
+<li>Schema to store lookup tables.</li>
+<li>Tables count: 2</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_6">Tables</h4>
+<ul>
+<li>collapse_probability<ul>
+<li>Lookup table showing collapse probability rates.</li>
+<li>Table processed from
+    <a href="https://github.com/OpenDRR/openquake-inputs">https://github.com/OpenDRR/openquake-inputs</a></li>
+</ul>
+</li>
+<li>psra_source_types<ul>
+<li>Lookup table showing the psra source types.</li>
+<li>Table processed from
+<a href="https://github.com/OpenDRR/seismic-risk-model">https://github.com/OpenDRR/seismic-risk-model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="mh">mh</h3>
+<ul>
+<li>
+<h4 id="notes_7">Notes</h4>
+<ul>
+<li>Schema to store multi hazard threat source tables.</li>
+<li>Tables count: 3</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_7">Tables</h4>
+<ul>
+<li>mh_intensity_canada<ul>
+<li>Table containing initial source indicators for multi hazard.</li>
+<li>HTi_sauid.csv<ul>
+<li>Source hazard threat indicators</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_sauid.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_sauid.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>mh_ratings_thresholds<ul>
+<li>hazard_threat_rating_thresholds.csv<ul>
+<li>precalculated threshold values for hazard threat (table #2)</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/hazard_threat_rating_thresholds.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/hazard_threat_rating_thresholds.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>mh_thresholds<ul>
+<li>HTi_thresholds.csv<ul>
+<li>precalculated threshold values for hazard threat (table #1)</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_thresholds.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_thresholds.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="psra_pt">psra_{P/T}</h3>
+<ul>
+<li>
+<h4 id="notes_8">Notes</h4>
+<ul>
+<li>Schema to store various source psra tables for the each province/territory. In total there are 12 psra_{P/T} schemas, where {P/T} represents the province/territory 2 character abbreviations (pruid) used by Statistics Canada. </li>
+<li>Tables count: 22</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_8">Tables</h4>
+<ul>
+<li>Aggregate curves/average losses tables at various quantiles. <ul>
+<li>psra_{P/T}_agg_curves_q05</li>
+<li>psra_{P/T}_agg_curves_q95</li>
+<li>psra_{P/T}_agg_curves_stats</li>
+<li>psra_{P/T}_agg_losses_q05</li>
+<li>psra_{P/T}_agg_losses_q95</li>
+<li>psra_{P/T}_agg_losses_stats</li>
+<li>psra_{P/T}_avg_losses_stats</li>
+</ul>
+</li>
+<li>Damage tables at various quantiles.<ul>
+<li>psra_{P/T}_ed_dmg_mean</li>
+<li>psra_{P/T}_ed_dmg_q05</li>
+<li>psra_{P/T}_ed_dmg_q95</li>
+</ul>
+</li>
+<li>Hazard curve tables for pga and various spectral acceleration periods.<ul>
+<li>psra_{P/T}_hcurves_pga</li>
+<li>psra_{P/T}_hcurves_sa0p1</li>
+<li>psra_{P/T}_hcurves_sa0p2</li>
+<li>psra_{P/T}_hcurves_sa0p3</li>
+<li>psra_{P/T}_hcurves_sa0p5</li>
+<li>psra_{P/T}_hcurves_sa0p6</li>
+<li>psra_{P/T}_hcurves_sa1p0</li>
+<li>psra_{P/T}_hcurves_sa2p0  </li>
+</ul>
+</li>
+<li>hazard maps<ul>
+<li>psra_{P/T}_hmaps</li>
+<li>psra_{P/T}_hmaps_xref<ul>
+<li>cross reference to closest assetID lon/lat </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>psra_{P/T}_uhs</li>
+<li>source loss<ul>
+<li>psra_{P/T}_src_loss</li>
+</ul>
+</li>
+<li>All tables processed from 
+<a href="https://github.com/OpenDRR/seismic-risk-model">https://github.com/OpenDRR/seismic-risk-model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="psra_canada">psra_canada</h3>
+<ul>
+<li>
+<h4 id="notes_9">Notes</h4>
+<ul>
+<li>Schema to store various source psra tables for Canada. </li>
+<li>Tables count: 7</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_9">Tables</h4>
+<ul>
+<li>aggregate curves/average losses tables at various quantiles. <ul>
+<li>psra_canada_agg_curves_q05</li>
+<li>psra_canada_agg_curves_q95</li>
+<li>psra_canada_agg_curves_stats</li>
+<li>psra_canada_agg_losses_q05</li>
+<li>psra_canada_agg_losses_q95</li>
+<li>psra_canada_agg_losses_stats</li>
+</ul>
+</li>
+<li>source loss<ul>
+<li>psra_canada_src_loss</li>
+</ul>
+</li>
+<li>All tables processed from
+<a href="https://github.com/OpenDRR/seismic-risk-model">https://github.com/OpenDRR/seismic-risk-model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="results_nhsl_hazard_threat">results_nhsl_hazard_threat</h3>
+<ul>
+<li>
+<h4 id="notes_10">Notes</h4>
+<ul>
+<li>Schema to store results of multi hazard threat.</li>
+<li>Tables count: 4 tables, 23 views</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_10">Tables</h4>
+<ul>
+<li>nhsl_hazard_threat_prioritization_csd_tbl<ul>
+<li>Table showing hazard threat indicators at the csd level.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_indicators_s<ul>
+<li>Table showing hazard threat indicators at the sauid level.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_csd (view)<ul>
+<li>View of nhsl_hazard_threat_prioritization_csd_tbl.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_100km_uc (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_100km_uc_4326 (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_10km (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 10km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_10km_4326 (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 10km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_10km_uc (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_10km_uc_4326 (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_1km (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 1km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_1km_4326 (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 1km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_1km_uc (view)</li>
+<li>Hazard threat indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 3857.</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_1km_uc_4326 (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_25km (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 25km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_25km_4326 (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 25km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_25km_uc (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_25km_uc_4326 (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_50km_uc (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_50km_uc_4326 (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_5km (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 5km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_5km_4326 (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 5km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_5km_uc (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_5km_uc_4326 (view)<ul>
+<li>Hazard threat indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_prioritization_hexgrid_global_fabric (view)<ul>
+<li>Hazard threat indicators aggregated/proxied to GEM’s global fabric hexgrids.</li>
+</ul>
+</li>
+<li>nhsl_hazard_threat_indicators_s_tbl<ul>
+<li>Table showing hazard threat indicators at the sauid level.</li>
+</ul>
+</li>
+<li>hazard_threat_values_s<ul>
+<li>Table showing calculated values used in nhsl_hazard_threat_indicators_s.</li>
+</ul>
+</li>
+<li>hazard_threat_values_csd<ul>
+<li>Table showing calculated values used in nhsl_hazard_threat_indicators_csd.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="results_nhsl_physical_exposure">results_nhsl_physical_exposure</h3>
+<ul>
+<li>
+<h4 id="notes_11">Notes</h4>
+<ul>
+<li>Schema to store results for physical exposure.</li>
+<li>Tables count: 49 views</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_11">Tables</h4>
+<ul>
+<li>nhsl_physical_exposure_indicators_b (view)<ul>
+<li>Physical exposure indicators at the building level for all of Canada.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_ab (view)<ul>
+<li>Physical exposure indicators at the building level for AB.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_bc (view)<ul>
+<li>Physical exposure indicators at the building level for BC.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_mb (view)<ul>
+<li>Physical exposure indicators at the building level for MB.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_nb (view)<ul>
+<li>Physical exposure indicators at the building level for NB.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_nl (view)<ul>
+<li>Physical exposure indicators at the building level for NL.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_ns (view)<ul>
+<li>Physical exposure indicators at the building level for NS.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_nt (view)<ul>
+<li>Physical exposure indicators at the building level for NT.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_nu (view)<ul>
+<li>Physical exposure indicators at the building level for NU.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_on (view)<ul>
+<li>Physical exposure indicators at the building level for ON.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_pe (view)<ul>
+<li>Physical exposure indicators at the building level for PE.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_qc (view)<ul>
+<li>Physical exposure indicators at the building level for QC.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_sk (view)<ul>
+<li>Physical exposure indicators at the building level for SK.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_b_yt (view)<ul>
+<li>Physical exposure indicators at the building level for YT.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s (view)<ul>
+<li>Physical exposure indicators at the sauid level for all of Canada.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_100km_uc (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_100km_uc_4326 (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_10km (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 10km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_10km_4326 (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 10km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_10km_uc (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_10km_uc_4326 (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_1km (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 1km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_1km_4326 (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 1km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_1km_uc (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_1km_uc_4326 (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_25km (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 25km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_25km_4326 (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 25km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_25km_uc (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_25km_uc_4326 (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_50km_uc (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_50km_uc_4326 (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_5km (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 5km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_5km_4326 (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 5km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_5km_uc (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_5km_uc_4326 (view)<ul>
+<li>Physical exposure indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_hexgrid_global_fabric (view)<ul>
+<li>Physical exposure indicators aggregated/proxied to GEM’s global fabric hexgrids.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_ab (view)<ul>
+<li>Physical exposure indicators at the sauid level for AB.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_bc (view)<ul>
+<li>Physical exposure indicators at the sauid level for BC.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_mb (view)<ul>
+<li>Physical exposure indicators at the sauid level for MB.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_nb (view)<ul>
+<li>Physical exposure indicators at the sauid level for NB.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_nl (view)<ul>
+<li>Physical exposure indicators at the sauid level for NL.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_ns (view)<ul>
+<li>Physical exposure indicators at the sauid level for NS.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_nt (view)<ul>
+<li>Physical exposure indicators at the sauid level for NT.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_nu (view)<ul>
+<li>Physical exposure indicators at the sauid level for NU.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_on (view)<ul>
+<li>Physical exposure indicators at the sauid level for ON.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_pe (view)<ul>
+<li>Physical exposure indicators at the sauid level for PE.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_qc (view)<ul>
+<li>Physical exposure indicators at the sauid level for QC.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_sk (view)<ul>
+<li>Physical exposure indicators at the sauid level for SK.</li>
+</ul>
+</li>
+<li>nhsl_physical_exposure_indicators_s_yt (view)<ul>
+<li>Physical exposure indicators at the sauid level for YT.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="results_nhsl_risk_dynamics">results_nhsl_risk_dynamics</h3>
+<ul>
+<li>
+<h4 id="notes_12">Notes</h4>
+<ul>
+<li>Schema to store results for risk dynamics.</li>
+<li>Tables count: 14 views</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_12">Tables</h4>
+<ul>
+<li>nhsl_risk_dynamics_indicators (view)<ul>
+<li>Risk dynamics indicators for all of Canada.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_ab (view)<ul>
+<li>Risk dynamics indicators for AB.</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_bc (view)<ul>
+<li>Risk dynamics indicators for BC.</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_mb (view)<ul>
+<li>Risk dynamics indicators for MB.</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_nb (view)<ul>
+<li>Risk dynamics indicators for NB.</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_nl (view)<ul>
+<li>Risk dynamics indicators for NL.</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_ns (view)<ul>
+<li>Risk dynamics indicators for NS.</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_nt (view)<ul>
+<li>Risk dynamics indicators for NT.</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_nu (view)<ul>
+<li>Risk dynamics indicators for NU.</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_on (view)<ul>
+<li>Risk dynamics indicators for ON.</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_pe (view)<ul>
+<li>Risk dynamics indicators for PE.</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_qc (view)<ul>
+<li>Risk dynamics indicators for QC.</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_sk (view)<ul>
+<li>Risk dynamics indicators for SK.</li>
+</ul>
+</li>
+<li>nhsl_risk_dynamics_indicators_yt (view)<ul>
+<li>Risk dynamics indicators for YT.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="results_nhsl_social_fabric">results_nhsl_social_fabric</h3>
+<ul>
+<li>
+<h4 id="notes_13">Notes</h4>
+<ul>
+<li>Schema to store results for social fabric.</li>
+<li>Tables count: 35 views</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_13">Tables</h4>
+<ul>
+<li>nhsl_social_fabric_indicators_s (view)<ul>
+<li>Social fabric indicators at the sauid level for all of Canada.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_100km_uc (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_100km_uc_4326 (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 100km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_10km (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 10km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_10km_4326 (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 10km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_10km_uc (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_10km_uc_4326 (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 10km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_1km (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 1km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_1km_4326 (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 1km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_1km_uc (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_1km_uc_4326 (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 1km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_25km (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 25km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_25km_4326 (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 25km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_25km_uc (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_25km_uc_4326 (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 25km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_50km_uc (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_50km_uc_4326 (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 50km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_5km (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 5km hexgrid level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_5km_4326 (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 5km hexgrid level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_5km_uc (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 3857.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_5km_uc_4326 (view)<ul>
+<li>Social fabric indicators aggregated/proxied at the 5km hexgrid unclipped level EPSG 4326.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_hexgrid_global_fabric (view)<ul>
+<li>Social fabric indicators aggregated/proxied to GEM’s global fabric hexgrid.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_ab (view)<ul>
+<li>Social fabric indicators at the sauid level for AB.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_bc (view)<ul>
+<li>Social fabric indicators at the sauid level for BC.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_mb (view)<ul>
+<li>Social fabric indicators at the sauid level for MB.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_nb (view)<ul>
+<li>Social fabric indicators at the sauid level for NB.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_nl (view)<ul>
+<li>Social fabric indicators at the sauid level for NL.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_ns (view)<ul>
+<li>Social fabric indicators at the sauid level for NS.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_nt (view)<ul>
+<li>Social fabric indicators at the sauid level for NT.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_nu (view)<ul>
+<li>Social fabric indicators at the sauid level for NU.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_on (view)<ul>
+<li>Social fabric indicators at the sauid level for ON.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_pe (view)<ul>
+<li>Social fabric indicators at the sauid level for PE.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_qc (view)<ul>
+<li>Social fabric indicators at the sauid level for QC.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_sk (view)<ul>
+<li>Social fabric indicators at the sauid level for SK.</li>
+</ul>
+</li>
+<li>nhsl_social_fabric_indicators_s_yt (view)<ul>
+<li>Social fabric indicators at the sauid level for YT.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="results_psra_pt">results_psra_{P/T}</h3>
+<ul>
+<li>
+<h4 id="notes_14">Notes</h4>
+<ul>
+<li>Schema to store psra results for each province/territory. In total there are 12 results_psra_{P/T} schemas, where {P/T} represents the province/territory 2 character abbreviations (pruid) used by Statistics Canada. </li>
+<li>Tables count: 3 tables, 6 views</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_14">Tables</h4>
+<ul>
+<li>psra_{P/T}_indicators_b (view)<ul>
+<li>Psra indicators at the building level for each province/territory.</li>
+</ul>
+</li>
+<li>psra_{P/T}_eqriskindex<ul>
+<li>Table with calculations for risk index, used in psra_{P/T}_indicators_s.</li>
+</ul>
+</li>
+<li>psra_{P/T}_eqriskindex_csd<ul>
+<li>Table with calculations for risk index, used in psra_{P/T}_indicators_csd.</li>
+</ul>
+</li>
+<li>psra_{P/T}_indicators_s (view)<ul>
+<li>Psra indicators at the sauid level for each province/territory.</li>
+</ul>
+</li>
+<li>psra_{P/T}_indicators_csd (view)<ul>
+<li>Psra indicators at the csd level for each province/territory.</li>
+</ul>
+</li>
+<li>psra_{P/T}_expected_loss_fsa (view)<ul>
+<li>Psra expected loss values at fsa level for each province/territory.</li>
+</ul>
+</li>
+<li>psra_{P/T}_agg_loss_fsa (view)<ul>
+<li>Psra aggregated loss values at fsa level for each province/territory.</li>
+</ul>
+</li>
+<li>psra_{P/T}_src_loss_tbl<ul>
+<li>Psra source loss table  for each province/territory.</li>
+</ul>
+</li>
+<li>psra_{P/T}_src_loss (view)<ul>
+<li>View of psra_{P/T}_src_loss_tbl.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="results_psra_canada">results_psra_canada</h3>
+<ul>
+<li>
+<h4 id="notes_15">Notes</h4>
+<ul>
+<li>Schema showing results for psra canada.</li>
+<li>Tables count: 1 table, 9 views</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_15">Tables</h4>
+<ul>
+<li>psra_canada_expected_loss (view)<ul>
+<li>Expected loss values for Canada for all periods.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_50yr (view)<ul>
+<li>Expected loss values for Canada for 50 year period.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_100yr (view)<ul>
+<li>Expected loss values for Canada for 100 year period.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_250yr (view)<ul>
+<li>Expected loss values for Canada for 250 year period.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_500yr (view)<ul>
+<li>Expected loss values for Canada for 500 year period.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_1000yr (view)<ul>
+<li>Expected loss values for Canada for 1000 year period.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_2500yr (view)<ul>
+<li>Expected loss values for Canada for 2500 year period.</li>
+</ul>
+</li>
+<li>psra_canada_agg_loss (view)<ul>
+<li>Aggregated loss values for Canada.</li>
+</ul>
+</li>
+<li>psra_canada_src_loss_tbl<ul>
+<li>Source loss table for Canada. </li>
+</ul>
+</li>
+<li>psra_canada_src_loss (view)<ul>
+<li>View of psra_canada_src_loss_tbl.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="results_psra_national">results_psra_national</h3>
+<ul>
+<li>
+<h4 id="notes_16">Notes</h4>
+<ul>
+<li>Schema showing results for psra national. National indicators are results from the various results_psra_{P/T} schema, including psra_{P/T}_indicators_b, psra_{P/T}_indicators_s, psra_{P/T}_indicators_csd, psra_{P/T}_expected_loss_fsa, psra_{P/T}_agg_loss_fsa, and psra_{P/T}_src_loss tables that are merged together into a one national table for each of the tables above. After merging, earthquake risk index calculations are made for indicators_s, and indicators_csd tables and updated. The EQRI values are then updated in the corresponding results_psra_{P/T}.</li>
+<li>Tables count: 31 tables, 35 views</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_16">Tables</h4>
+<ul>
+<li>psra_indicators_b_tbl<ul>
+<li>Psra indicators at the building level for all of Canada merged from all psra_indicators_b from all results_psra_{P/T} schemas.</li>
+</ul>
+</li>
+<li>psra_indicators_b (view)<ul>
+<li>View of psra_indicators_b_tbl.</li>
+</ul>
+</li>
+<li>psra_indicators_s_tbl<ul>
+<li>Psra indicators at the settled area level for all of Canada merged from all psra_indicators_s from all results_psra_{P/T} schemas.</li>
+</ul>
+</li>
+<li>psra_indicators_s (view)<ul>
+<li>View of psra_indicators_s_tbl.</li>
+</ul>
+</li>
+<li>psra_indicators_csd_tbl<ul>
+<li>Psra indicators at the csd level for all of Canada merged from all psra_indicators_csd from all results_psra_{P/T} schemas.</li>
+</ul>
+</li>
+<li>psra_indicators_csd (view)<ul>
+<li>View of psra_indicators_csd_tbl.</li>
+</ul>
+</li>
+<li>psra_expected_loss_fsa_tbl<ul>
+<li>Psra expected loss values at fsa level for all of Canada merged from all psra_expected_loss from all results_psra_{P/T} schemas.</li>
+</ul>
+</li>
+<li>psra_agg_loss_fsa_tbl <ul>
+<li>Psra agg loss values at fsa level for all of Canada merged from all psra_agg_loss from all results_psra_{P/T} schemas.</li>
+</ul>
+</li>
+<li>psra_expected_loss_fsa (view)<ul>
+<li>View of psra_agg_loss_fsa_tbl.</li>
+</ul>
+</li>
+<li>psra_src_loss_tbl<ul>
+<li>Psra agg loss values at fsa level for all of Canada merged from all psra_src_loss from all results_psra_{P/T} schemas.</li>
+</ul>
+</li>
+<li>psra_src_loss<ul>
+<li>View of psra_src_loss_tbl.</li>
+</ul>
+</li>
+<li>psra_agg_loss_fsa_tbl<ul>
+<li>Psra agg loss values at fsa level for all of Canada merged from all psra_agg_loss from all results_psra_{P/T} schemas.</li>
+</ul>
+</li>
+<li>psra_agg_loss_fsa_tbl<ul>
+<li>View of psra_agg_loss_fsa_tbl.</li>
+</ul>
+</li>
+<li>psra_canada_agg_loss_tbl<ul>
+<li>Psra agg loss values copied from psra_canada_agg_loss  from results_psra_canada schema.</li>
+</ul>
+</li>
+<li>psra_canada_agg_loss (view)<ul>
+<li>View of psra_canada_agg_loss_tbl.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_tbl<ul>
+<li>Psra expected loss values copied from psra_canada_expected_loss (view) from results_psra_canada schema.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss<ul>
+<li>View of psra_canada_expected_loss_tbl.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_50yr (view)<ul>
+<li>View of psra_canada_expected_loss_50yr from results_psra_canada schema.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_100yr (view)<ul>
+<li>View of psra_canada_expected_loss_100yr from results_psra_canada schema.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_250yr (view)<ul>
+<li>View of psra_canada_expected_loss_250yr from results_psra_canada schema.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_500yr (view)<ul>
+<li>View of psra_canada_expected_loss_500yr from results_psra_canada schema.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_1000yr (view)<ul>
+<li>View of psra_canada_expected_loss_1000yr from results_psra_canada schema.</li>
+</ul>
+</li>
+<li>psra_canada_expected_loss_2500yr (view)<ul>
+<li>View of psra_canada_expected_loss_2500yr from results_psra_canada schema.</li>
+</ul>
+</li>
+<li>psra_canada_src_loss_tbl<ul>
+<li>Psra source loss values copied from psra_canada_src_loss from results_psra_canada schema.</li>
+</ul>
+</li>
+<li>psra_canada_src_loss<ul>
+<li>View of psra_canada_src_loss_tbl.</li>
+</ul>
+</li>
+<li>psra_sri_calc_sa<ul>
+<li>Seismic risk index (eqri) calculations used for settled area.</li>
+</ul>
+</li>
+<li>psra_sri_calc_csd<ul>
+<li>Seismic risk index (eqri) calculations used for csd.</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_1km<ul>
+<li>Seismic risk index (eqri) calculations used for 1km hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_1km_4326<ul>
+<li>Seismic risk index (eqri) calculations used for 1km hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_1km_uc<ul>
+<li>Seismic risk index (eqri) calculations used for 1km unclipped hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_1km_uc_4326<ul>
+<li>Seismic risk index (eqri) calculations used for 1km unclipped hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_5km<ul>
+<li>Seismic risk index (eqri) calculations used for 5km hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_5km_4326<ul>
+<li>Seismic risk index (eqri) calculations used for 5km hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_5km_uc<ul>
+<li>Seismic risk index (eqri) calculations used for 5km unclipped hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_5km_uc_4326<ul>
+<li>Seismic risk index (eqri) calculations used for 5km unclipped hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_10km<ul>
+<li>Seismic risk index (eqri) calculations used for 10km hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_10km_4326<ul>
+<li>Seismic risk index (eqri) calculations used for 10km hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_10km_uc<ul>
+<li>Seismic risk index (eqri) calculations used for 10km unclipped hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_10km_uc_4326<ul>
+<li>Seismic risk index (eqri) calculations used for 10km unclipped hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_25km<ul>
+<li>Seismic risk index (eqri) calculations used for 25km hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_25km_4326<ul>
+<li>Seismic risk index (eqri) calculations used for 25km hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_25km_uc<ul>
+<li>Seismic risk index (eqri) calculations used for 25km unclipped hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_25km_uc_4326<ul>
+<li>Seismic risk index (eqri) calculations used for 25km unclipped hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_50km_uc<ul>
+<li>Seismic risk index (eqri) calculations used for 50km unclipped hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_50km_uc_4326<ul>
+<li>Seismic risk index (eqri) calculations used for 50km unclipped hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_100km_uc<ul>
+<li>Seismic risk index (eqri) calculations used for 100km unclipped hexgrid (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_sri_calc_hg_100km_uc_4326<ul>
+<li>Seismic risk index (eqri) calculations used for 100km unclipped hexgrid (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_1km (view)<ul>
+<li>Psra indicators aggregated to the 1km hexgrid level (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_1km_uc (view)<ul>
+<li>Psra indicators aggregated to the unclipped 1km hexgrid level (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_1km_4326 (view)<ul>
+<li>Psra indicators aggregated to the 1km hexgrid level (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_1km_uc_4326 (view)<ul>
+<li>Psra indicators aggregated to the unclipped 1km hexgrid level (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_5km (view)<ul>
+<li>Psra indicators aggregated to the 5km hexgrid level (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_5km_uc (view)<ul>
+<li>Psra indicators aggregated to the unclipped 5km hexgrid level (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_5km_4326 (view)<ul>
+<li>Psra indicators aggregated to the 5km hexgrid level (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_5km_uc_4326 (view)<ul>
+<li>Psra indicators aggregated to the unclipped 5km hexgrid level (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_10km (view)<ul>
+<li>Psra indicators aggregated to the 10km hexgrid level (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_10km_uc (view)<ul>
+<li>Psra indicators aggregated to the unclipped 10km hexgrid level (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_10km_4326 (view)<ul>
+<li>Psra indicators aggregated to the 10km hexgrid level (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_10km_uc_4326 (view)<ul>
+<li>Psra indicators aggregated to the unclipped 10km hexgrid level (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_25km (view)<ul>
+<li>Psra indicators aggregated to the 25km hexgrid level (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_25km_uc (view)<ul>
+<li>Psra indicators aggregated to the unclipped 25km hexgrid level (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_25km_4326 (view)<ul>
+<li>Psra indicators aggregated to the 25km hexgrid level (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_25km_uc_4326 (view)<ul>
+<li>Psra indicators aggregated to the unclipped 25km hexgrid level (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_50km_uc (view)<ul>
+<li>Psra indicators aggregated to the unclipped 50km hexgrid level (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_50km_uc_4326 (view)<ul>
+<li>Psra indicators aggregated to the unclipped 25km hexgrid level (EPSG 4326).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_100km_uc (view)<ul>
+<li>Psra indicators aggregated to the unclipped 100km hexgrid level (EPSG 3857).</li>
+</ul>
+</li>
+<li>psra_indicators_hexgrid_100km_uc_4326 (view)<ul>
+<li>Psra indicators aggregated to the unclipped 25km hexgrid level (EPSG 4326).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="ruptures">ruptures</h3>
+<ul>
+<li>
+<h4 id="notes_17">Notes</h4>
+<ul>
+<li>Schema to store ruptures information for DSRA use.</li>
+<li>Tables count: 1</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_17">Tables</h4>
+<ul>
+<li>rupture_table<ul>
+<li>Table storing rupture information from each earthquake scenario.<ul>
+<li><a href="https://github.com/OpenDRR/earthquake-scenarios/tree/master/ruptures">https://github.com/OpenDRR/earthquake-scenarios/tree/master/ruptures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="sovi">sovi</h3>
+<ul>
+<li>
+<h4 id="notes_18">Notes</h4>
+<ul>
+<li>Schema storing source social fabric data.</li>
+<li>Tables count: 1</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_18">Tables</h4>
+<ul>
+<li>sovi_sauid_nov2021<ul>
+<li>Table containing source indicators for social fabric.<ul>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/social-vulnerability/sovi_sauid_nov2021.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/social-vulnerability/sovi_sauid_nov2021.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="vs30">vs30</h3>
+</li>
+<li>
+<h4 id="notes_19">Notes</h4>
+<ul>
+<li>Schema storing vs30 tables.</li>
+<li>Tables count: 2</li>
+</ul>
+</li>
+<li>
+<h4 id="tables_19">Tables</h4>
+<ul>
+<li>vs30_can_site_model<ul>
+<li>Table containing vs30, z1pt0, z2pt5 values for all of Canada.</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/site-vgrid_CA.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/site-vgrid_CA.csv</a></li>
+</ul>
+</li>
+<li>vs30_can_site_model_xref<ul>
+<li>Vs30_can_site_model cross reference to exposure assetID lon/lat.</li>
+<li><a href="https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/vs30_CAN_site_model_xref.csv">https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/vs30_CAN_site_model_xref.csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../psra/" class="btn btn-neutral float-left" title="Seismic Risk Model (PSRA)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/wkhchow/model-factory" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../psra/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
