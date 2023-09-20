@@ -1,14 +1,16 @@
 # National Human Settlement Layers
 ## Physical Exposure
 - ### Notes
-	- **Github Repo**
+	- **GitHub Repo**
 	    - Latest geopackages, data dictionary, documentation etc.
-	    - [https://opendrr.github.io/national-human-settlement/en/#nhsl_physical_exposure_indicators-a](https://opendrr.github.io/national-human-settlement/en/#nhsl_physical_exposure_indicators-a)
-	- **Github page**
-	    - [https://opendrr.github.io/national-human-settlement/en/index.html](https://opendrr.github.io/national-human-settlement/en/index.html)
+	    - [OpenDRR National Human Settlement Repo](https://github.com/OpenDRR/national-human-settlement)    
+		- [OpenDRR National Human Settlement Repo - Physical Exposure](https://github.com/OpenDRR/national-human-settlement/tree/main/physical-exposure)
+	- **GitHub Page**
+	    - [OpenDRR National Human Settlement Page](https://opendrr.github.io/national-human-settlement/en/index.html)
+		- [OpenDRR National Human Settlement Page - Physical Exposure](https://opendrr.github.io/national-human-settlement/en/index.html#nhsl_physical_exposure_indicators-a)
 	-	**working notes**
 		- 2_physical-exposure-schema
-			- [Excel spreadsheet](https://github.com/wkhchow/model-factory/blob/master/documentation/2_physical-exposure-schema.xlsx) where initial phase of indicators were drafted.
+			- [Excel spreadsheet](https://github.com/OpenDRR/model-factory/blob/master/documentation/2_physical-exposure-schema.xlsx) where initial phase of indicators were drafted.
 
 
 ### Source / Output tab (views) 
@@ -61,11 +63,13 @@
 
 ## Social Fabric
 - ### Notes
-	- **Github Repo**
+	- **GitHub Repo**
 		- Latest geopackages, data dictionary, documentation etc.
-		    - [https://opendrr.github.io/national-human-settlement/en/#nhsl_social_fabric_indicators-a](https://opendrr.github.io/national-human-settlement/en/#nhsl_social_fabric_indicators-a)
-	- **Github page**
-		- [https://opendrr.github.io/national-human-settlement/en/index.html](https://opendrr.github.io/national-human-settlement/en/index.html)
+			- [OpenDRR National Human Settlement Repo](https://github.com/OpenDRR/national-human-settlement)    
+			- [OpenDRR National Human Settlement Repo - Social Fabric](https://github.com/OpenDRR/national-human-settlement/tree/main/social-fabric)
+	- **GitHub Page**
+		- [OpenDRR National Human Settlement Page](https://opendrr.github.io/national-human-settlement/en/index.html)
+		- [OpenDRR National Human Settlement Page - Social Fabric](https://opendrr.github.io/national-human-settlement/en/index.html#nhsl_social_fabric_indicators-a)
 	-	**working notes**
 		- social-vulnerability-schema
 			- [Excel spreadsheet](https://github.com/wkhchow/model-factory/blob/master/documentation/4_social-vulnerability-schema.xlsx) where initial phase of indicators were drafted.
@@ -114,7 +118,7 @@
 
 ## Risk Dynamics (not used)
 - ### Notes
-    - Draft indicators were generated but not released, and are not intended for the public.
+    - Draft indicators were generated but not released for use.
     - Risk Dynamics contains population growth, land use change indicators for 1975, 1990, 2000, and 2015 for all of Canada over a 250m population grid.
 
 ### Source / Output tables (views) 
@@ -138,11 +142,11 @@
 ## Multi Hazard Threat (not used)
 
 - ### Notes
-    - Draft indicators were generated but not released, and are not intended for the public.
+    - Draft indicators were generated but not released fpr use.
     - The Hazard threat value contains scores based on different hazards, and pregenerated threshold lookup tables. Using source information from multi hazard, physical exposure indicators, social fabric indicators, and census a series of calculations are made (prereq tables). These values are compared against the threshold lookup tables and assigned scores.
     - **working notes**
         - 3_multi-hazard-threat-schema
-	        - [Excel spreadsheet](https://github.com/wkhchow/model-factory/blob/master/documentation/3_multi-hazard-threat-schema.xlsx) where initial phase of indicators were drafted
+	        - [Excel spreadsheet](https://github.com/OpenDRR/model-factory/blob/master/documentation/3_multi-hazard-threat-schema.xlsx) where initial phase of indicators were drafted
 
 
 ### Source / Output tables (views) 

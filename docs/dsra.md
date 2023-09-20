@@ -1,20 +1,19 @@
 ## Earthquake Scenarios (DSRA)
 - ### Notes
-	- **Github Repo**
+	- **GitHub Repo**
 	    - Latest geopackages, data dictionary, documentation etc.
-	    - [https://opendrr.github.io/national-human-settlement/en/#nhsl_physical_exposure_indicators-a](https://opendrr.github.io/national-human-settlement/en/#nhsl_physical_exposure_indicators-a)
-	- **Github page**
-	    - [https://opendrr.github.io/earthquake-scenarios/en/index.html](https://opendrr.github.io/earthquake-scenarios/en/index.html)
+	    - [OpenDRR Earthquake Scenarios Repo](https://github.com/OpenDRR/earthquake-scenarios)
+	- **GitHub Page**
+	    - [OpenDRR Earthquake Scenarios Page](https://opendrr.github.io/earthquake-scenarios/en/index.html)
 	-	**working notes**
 		-  1_scenario-risk-schema_v1.1
-			- [Excel spreadsheet](https://github.com/wkhchow/model-factory/blob/master/documentation/1_scenario-risk-schema_v1.1.xlsx) where initial phase of indicators were drafted.
+			- [Excel spreadsheet](https://github.com/OpenDRR/model-factory/blob/master/documentation/1_scenario-risk-schema_v1.1.xlsx) where initial phase of indicators were drafted.
 		- mapping Sendai Indicators DSRA/PSRA
-			- [Excel spreadsheet](https://github.com/wkhchow/model-factory/blob/master/documentation/mapping%20Sendai%20Indicators%20DSRA_PSRA.xlsx) with draft indicators.
+			- [Excel spreadsheet](https://github.com/OpenDRR/model-factory/blob/master/documentation/mapping%20Sendai%20Indicators%20DSRA_PSRA.xlsx) with draft indicators.
 
 ### Source / Output tables (views) 
 - This section lists the schemas involved with the creation of the final results, and specific tables involved. Refer to [schemas](schemas.md) section for more schema details. 
-- All source csv files are from the earthquake scenario finished folder.
-	- [https://github.com/OpenDRR/earthquake-scenarios/tree/master/FINISHED](https://github.com/OpenDRR/earthquake-scenarios/tree/master/FINISHED)
+- All source csv files are from the earthquake scenario [finished folder](https://github.com/OpenDRR/earthquake-scenarios/tree/master/FINISHED).
 
 #### [boundaries](schemas.md#boundaries)
 - Geometry_SAUID

@@ -2,7 +2,7 @@
 
 - ### boundaries
 	- #### Notes
-	    -   Schema containing all geometry and reference tables related to the OpenDRR project. More details can be found in [https://github.com/OpenDRR/boundaries](https://github.com/OpenDRR/boundaries)
+	    -   Schema containing all geometry and reference tables related to the OpenDRR project. More details can be found in [OpenDRR Boundaries Repo](https://github.com/OpenDRR/boundaries).
 	   -   All census related geometries are adapted from Statistics Canada, 2016 Census Boundary files, 2020
 	    -   Settled Area geometry development can be found in [Physical exposure to natural hazards in Canada](https://publications.gc.ca/collections/collection_2022/rncan-nrcan/m183-2/M183-2-8892-eng.pdf)
 	    -   All tables with geometries are in EPSG 4326 unless specified with a suffix _3857, which signifies EPSG 3857
@@ -120,8 +120,7 @@
 	- #### Notes
 	- Schema to store source 2016 census data.
 	-   census-attributes-2016.csv
-		-   2016 Census attribute source table of Canada
-		- [https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv)
+		- [2016 Census attribute source table of Canada](https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/census-ref-sauid/census-attributes-2016.csv)
 		- Tables count: 1
     - #### Tables
 		-   census_2016_canada
@@ -144,11 +143,8 @@
     - #### Tables
     	- canada_exposure
         	- Table containing initial source indicators for physical exposure.
-        	- BldgExpRef_CA_master_v3p2.csv
+        	- [BldgExpRef_CA_master_v3p2.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/general-building-stock/BldgExpRef_CA_master_v3p2.csv)
             	- Physical exposure source table of Canada
-            	- [https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/general-building-stock/BldgExpRef_CA_master_v3p2.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/exposure/general-building-stock/BldgExpRef_CA_master_v3p2.csv)
-    	- Table processed from 
-[https://github.com/OpenDRR/openquake-inputs/](https://github.com/OpenDRR/openquake-inputs/)
 
 
 - ### ghsl
@@ -158,9 +154,8 @@
     - #### Tables
     	- ghsl_mh_intensity_ghsl
         	- Table containing initial source indicators for _risk dynamics (not used)_.
-        	- mh-intensity-ghsl.csv
+        	- [mh-intensity-ghsl.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/mh-intensity-ghsl.csv)
         		- source table for risk dynamics
-        		- [https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/mh-intensity-ghsl.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/mh-intensity-ghsl.csv)
 
 
 - ### gmf
@@ -187,12 +182,10 @@
 	- #### Tables
     	- collapse_probability
         	- Lookup table showing collapse probability rates.
-			- Table processed from
-                [https://github.com/OpenDRR/openquake-inputs](https://github.com/OpenDRR/openquake-inputs)
+			- Table processed from [OpenDRR Openquake Inputs](https://github.com/OpenDRR/openquake-inputs).
     	- psra_source_types
         	- Lookup table showing the psra source types.
-            - Table processed from
-[https://github.com/OpenDRR/seismic-risk-model](https://github.com/OpenDRR/seismic-risk-model)
+            - Table processed from [OpenDRR Seismic Risk Model](https://github.com/OpenDRR/seismic-risk-model).
 
 
 - ### mh
@@ -202,17 +195,14 @@
 	- #### Tables
     	- mh_intensity_canada
         	- Table containing initial source indicators for multi hazard.
-        	- HTi_sauid.csv
+        	- [HTi_sauid.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_sauid.csv)
             	- Source hazard threat indicators
-            	- [https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_sauid.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_sauid.csv)
     	- mh_ratings_thresholds
-        	- hazard_threat_rating_thresholds.csv
-            	- precalculated threshold values for hazard threat (table #2)
-            	- [https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/hazard_threat_rating_thresholds.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/hazard_threat_rating_thresholds.csv)
+        	- [hazard_threat_rating_thresholds.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/hazard_threat_rating_thresholds.csv)
+				- precalculated threshold values for hazard threat (table #2)
     	- mh_thresholds
-        	- HTi_thresholds.csv
+        	- [HTi_thresholds.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_thresholds.csv)
             	- precalculated threshold values for hazard threat (table #1)
-            	- [https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_thresholds.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/natural-hazards/HTi_thresholds.csv)
 
 
 - ### psra_{P/T}
@@ -248,8 +238,8 @@
         - psra_{P/T}_uhs
         - source loss
             - psra_{P/T}_src_loss
-    	- All tables processed from 
-[https://github.com/OpenDRR/seismic-risk-model](https://github.com/OpenDRR/seismic-risk-model)
+    	- All tables processed from [OpenDRR Seismic Risk Model](https://github.com/OpenDRR/seismic-risk-model).
+
 
 
 - ### psra_canada
@@ -266,8 +256,7 @@
         	- psra_canada_agg_losses_stats
     	- source loss
         	- psra_canada_src_loss
-    	- All tables processed from
-[https://github.com/OpenDRR/seismic-risk-model](https://github.com/OpenDRR/seismic-risk-model)
+- All tables processed from [OpenDRR Seismic Risk Model](https://github.com/OpenDRR/seismic-risk-model).    
 
 
 - ### results_nhsl_hazard_threat
@@ -435,6 +424,7 @@
     	- nhsl_physical_exposure_indicators_s_yt (view)
         	- Physical exposure indicators at the sauid level for YT.
 
+
 - ### results_nhsl_risk_dynamics
 	- #### Notes
 		- Schema to store results for risk dynamics.
@@ -545,6 +535,7 @@
 			- Social fabric indicators at the sauid level for SK.
 		- nhsl_social_fabric_indicators_s_yt (view)
 			- Social fabric indicators at the sauid level for YT.
+
 
 - ### results_psra_{P/T}
 	- #### Notes
@@ -744,9 +735,9 @@
 		- Schema to store ruptures information for DSRA use.
 	 	- Tables count: 1
     - #### Tables
-		- rupture_table
+		- [rupture_table](https://github.com/OpenDRR/earthquake-scenarios/tree/master/ruptures)
 			- Table storing rupture information from each earthquake scenario.
-				- [https://github.com/OpenDRR/earthquake-scenarios/tree/master/ruptures](https://github.com/OpenDRR/earthquake-scenarios/tree/master/ruptures)
+
 
 
 - ### sovi
@@ -755,8 +746,9 @@
 		- Tables count: 1
 	- #### Tables
 		- sovi_sauid_nov2021
+			- [sovi_sauid_nov2021.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/social-vulnerability/sovi_sauid_nov2021.csv)
 			- Table containing source indicators for social fabric.
-				- [https://github.com/OpenDRR/openquake-inputs/blob/main/social-vulnerability/sovi_sauid_nov2021.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/social-vulnerability/sovi_sauid_nov2021.csv)
+
 
 - ### vs30
 - #### Notes
@@ -764,10 +756,9 @@
 	- Tables count: 2
 - #### Tables
 	- vs30_can_site_model
+		- [site-vgrid_CA.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/site-vgrid_CA.csv)
 		- Table containing vs30, z1pt0, z2pt5 values for all of Canada.
-		- [https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/site-vgrid_CA.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/site-vgrid_CA.csv)
+
 	- vs30_can_site_model_xref
+		- [vs30_CAN_site_model_xref.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/vs30_CAN_site_model_xref.csv)
 		- Vs30_can_site_model cross reference to exposure assetID lon/lat.
-		- [https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/vs30_CAN_site_model_xref.csv](https://github.com/OpenDRR/openquake-inputs/blob/main/earthquake/sites/regions/vs30_CAN_site_model_xref.csv)
-
-

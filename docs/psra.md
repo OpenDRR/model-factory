@@ -2,17 +2,16 @@
 - ### Notes
 	- **Github Repo**
 	    - Latest geopackages, data dictionary, documentation etc.
-			- [https://github.com/OpenDRR/seismic-risk-model](https://github.com/OpenDRR/seismic-risk-model)
+			- [OpenDRR Seismic Risk Model Repo](https://github.com/OpenDRR/seismic-risk-model)
 	- **Github page**
-	    - [https://opendrr.github.io/seismic-risk-model/en/](https://opendrr.github.io/seismic-risk-model/en/)
+	    - [OpenDRR Seismic Risk Model Page](https://opendrr.github.io/seismic-risk-model/en/)
 	-	**working notes**
 		- mapping Sendai Indicators DSRA/PSRA
-			- [Excel spreadsheet](https://github.com/wkhchow/model-factory/blob/master/documentation/mapping%20Sendai%20Indicators%20DSRA_PSRA.xlsx) with draft indicators.
+			- [Excel spreadsheet](https://github.com/OpenDRR/model-factory/blob/master/documentation/mapping%20Sendai%20Indicators%20DSRA_PSRA.xlsx) with draft indicators.
 
 ### Source / Output tables (views) 
 - This section lists the schemas involved with the creation of the final results, and specific tables involved. Refer to [schemas](schemas.md) section for more schema details. 
--  All source csv files are from the seismic risk model repo in various output repos.
-	- [https://github.com/OpenDRR/seismic-risk-model/tree/master](https://github.com/OpenDRR/seismic-risk-model/tree/master)
+-  All source csv files are from the seismic risk model repo in various [output repos](https://github.com/OpenDRR/seismic-risk-model/tree/master).
 
 #### [boundaries](schemas.md#boundaries)
 - Geometry_SAUID
