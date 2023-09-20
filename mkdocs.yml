@@ -1,6 +1,6 @@
 site_name: OpenDRR Model Factory
-site_url: https://github.com/wkhchow/model-factory
-repo_url: https://github.com/wkhchow/model-factory
+site_url: https://github.com/OpenDRR/model-factory/tree/master
+# repo_url: https://github.com/OpenDRR/model-factory/tree/sql_docs_addon
 
 
 nav:
