@@ -7,10 +7,12 @@ It contains documentation, and scripts (python and sql) to transform opendrr sou
  - [National Human Settlement Layer](https://github.com/OpenDRR/national-human-settlement) 
 		 
 	- [Physical Exposure](https://github.com/OpenDRR/national-human-settlement/tree/main/physical-exposure)
-
 	- [Social Fabric](https://github.com/OpenDRR/national-human-settlement/tree/main/social-fabric)
 - [Earthquake Scenarios](https://github.com/OpenDRR/earthquake-scenarios) 
 - [Probabilistic Earthquake Risk](https://github.com/OpenDRR/seismic-risk-model)
+- A detailed documentation on the SQL workflow can be found on either:
+	- [OpenDRR Model Factory GitHub Page](https://opendrr.github.io/model-factory/)
+	- [OpenDRR Model Factory Read the Docs Page](https://opendrr-model-factory.readthedocs.io/en/latest/)
 
 
  - **documentation/**

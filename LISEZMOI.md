@@ -11,7 +11,9 @@ Il contient de la documentation, et des scripts (python et sql) pour transformer
 	- [Tissu social](https://github.com/OpenDRR/national-human-settlement/tree/main/social-fabric)
 - [Scénarios de tremblement de terre](https://github.com/OpenDRR/earthquake-scenarios) 
 - [Risque sismique probabiliste](https://github.com/OpenDRR/seismic-risk-model)
-
+- Une documentation détaillée sur le flux de travail SQL peut être trouvée sur l'une ou l'autre des pages suivantes :
+	- [OpenDRR Model Factory GitHub Page](https://opendrr.github.io/model-factory/)
+	- [OpenDRR Model Factory Read the Docs Page](https://opendrr-model-factory.readthedocs.io/en/latest/)
 
 - **documentation/**
 	 - RiskProfileTaxonomy.xls
