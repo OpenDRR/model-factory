@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://github.com/wkhchow/model-factory/</loc>
+         <loc>https://github.com/OpenDRR/model-factory/tree/master/</loc>
          <lastmod>2023-09-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/wkhchow/model-factory/dsra/</loc>
+         <loc>https://github.com/OpenDRR/model-factory/tree/master/dsra/</loc>
          <lastmod>2023-09-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/wkhchow/model-factory/intro/</loc>
+         <loc>https://github.com/OpenDRR/model-factory/tree/master/intro/</loc>
          <lastmod>2023-09-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/wkhchow/model-factory/nhsl/</loc>
+         <loc>https://github.com/OpenDRR/model-factory/tree/master/nhsl/</loc>
          <lastmod>2023-09-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/wkhchow/model-factory/psra/</loc>
+         <loc>https://github.com/OpenDRR/model-factory/tree/master/psra/</loc>
          <lastmod>2023-09-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/wkhchow/model-factory/schemas/</loc>
+         <loc>https://github.com/OpenDRR/model-factory/tree/master/schemas/</loc>
          <lastmod>2023-09-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
