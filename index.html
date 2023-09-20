@@ -96,9 +96,11 @@
 <p>model-factory is a repository used in conjunction with <a href="https://github.com/OpenDRR/opendrr-api">opendrr-api</a> repository.
 It contains documentation, and scripts (python and sql) to transform opendrr source data (exposure, census, and OpenQuake outputs etc.) into risk profile indicators for:</p>
 <ul>
-<li><a href="https://github.com/OpenDRR/national-human-settlement">National Human Settlement Layer</a> 
-         - <a href="https://github.com/OpenDRR/national-human-settlement/tree/main/physical-exposure">Physical Exposure</a>
-         - <a href="https://github.com/OpenDRR/national-human-settlement/tree/main/social-fabric">Social Fabric</a></li>
+<li><a href="https://github.com/OpenDRR/national-human-settlement">National Human Settlement Layer</a> <ul>
+<li><a href="https://github.com/OpenDRR/national-human-settlement/tree/main/physical-exposure">Physical Exposure</a></li>
+<li><a href="https://github.com/OpenDRR/national-human-settlement/tree/main/social-fabric">Social Fabric</a></li>
+</ul>
+</li>
 <li><a href="https://github.com/OpenDRR/earthquake-scenarios">Earthquake Scenarios</a> </li>
 <li>
 <p><a href="https://github.com/OpenDRR/seismic-risk-model">Probabilistic Earthquake Risk</a></p>
@@ -110,8 +112,32 @@ It contains documentation, and scripts (python and sql) to transform opendrr sou
 <li>Documentation of v1.0 risk profile indicators for review and comments.</li>
 </ul>
 </li>
-<li><a href="https://github.com/OpenDRR/opendrr-data-store/blob/master/scripts/Diagrams">opendrr.drawio</a><ul>
-<li>diagram of current opendrr postgis database, created in draw.io </li>
+<li>1_scenario-risk-schema_v1.1.xlsx<ul>
+<li>Excel spreadsheet where initial phase of indicators (seismic risk) were drafted.</li>
+</ul>
+</li>
+<li>2_physical-exposure-schema.xlsx<ul>
+<li>Excel spreadsheet where initial phase of indicators (physical exposure) were drafted.</li>
+</ul>
+</li>
+<li>2_risk-profile-indicators.xlsx<ul>
+<li>Excel spreadsheet containing indicators for each Physical Exposure, Social Fabric, Earthquake Scenarios (DSRA), and Seismic Risk Model (PSRA).</li>
+</ul>
+</li>
+<li>3_multi-hazard-threat-schema.xlsx<ul>
+<li>Excel spreadsheet where initial phase of indicators (multi hazard) were drafted</li>
+</ul>
+</li>
+<li>4_social-vulnerability-schema.xlsx<ul>
+<li>Excel spreadsheet where initial phase of indicators (social fabric) were drafted.</li>
+</ul>
+</li>
+<li>mapping Sendai Indicators DSRA_PSRA.xlsx<ul>
+<li>Excel spreadsheet with draft indicators.</li>
+</ul>
+</li>
+<li>opendrr.drawio<ul>
+<li>Breakdown of each schema and all the tables,table columns etc can be found in opendrr.drawio diagram.</li>
 </ul>
 </li>
 </ul>
@@ -136,23 +162,6 @@ It contains documentation, and scripts (python and sql) to transform opendrr sou
 <p>Or ask scripts for help on how to run them:
 ```
 $ python3 DSRA_outputs2postgres.py --help</p>
-<!-- # Welcome to MkDocs
-
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
-
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files. -->
               
             </div>
           </div><footer>
@@ -205,5 +214,5 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
 <!--
 MkDocs version : 1.5.2
-Build Date UTC : 2023-09-18 19:36:30.799822+00:00
+Build Date UTC : 2023-09-20 00:06:49.558918+00:00
 -->
